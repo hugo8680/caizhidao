@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { videos } from '@/lib/library';
 
 export const metadata: Metadata = {
-  title: '中英文视频课程 · 财识',
+  title: '中英文视频课程 · 财知道',
   description: '精选中文、英文与中文字幕金融公开课，覆盖金融市场、财务分析、估值、投资与经济学。',
 };
 

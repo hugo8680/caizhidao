@@ -5,20 +5,23 @@ import './globals.css';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://caishi.yrchr.com'),
-  title: '财识 · 一站式财经学习平台',
-  description: '财经知识库、8 套系统课程、12 个金融工具、全站检索、图书、双语视频和小游戏。',
+  title: {
+    default: '财知道 · 财经金融经济学科普知识库',
+    template: '%s',
+  },
+  description: '连接经济学、金融学、会计与个人财务的科普知识体系：12 个学科、240 个知识节点、双语百科、专题路线、课程、工具与资源。',
   openGraph: {
-    title: '财识 · 一站式财经学习平台',
-    description: '知识、课程、工具、图书与视频，在同一张财经学习地图中互相连接。',
+    title: '财知道 · 财经金融经济学科普知识库',
+    description: '看懂钱如何流动、市场为何波动、世界怎样做选择。',
     type: 'website',
     locale: 'zh_CN',
-    siteName: '财识',
-    images: [{ url: '/og.png', width: 1200, height: 630, alt: '财识 · 一站式财经学习平台' }],
+    siteName: '财知道',
+    images: [{ url: '/og.png', width: 1200, height: 630, alt: '财知道 · 财经金融经济学科普知识库' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: '财识 · 一站式财经学习平台',
-    description: '知识、课程、工具、图书与视频，在同一张财经学习地图中互相连接。',
+    title: '财知道 · 财经金融经济学科普知识库',
+    description: '看懂钱如何流动、市场为何波动、世界怎样做选择。',
     images: ['/og.png'],
   },
 };

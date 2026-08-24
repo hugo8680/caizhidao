@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { courses } from '@/lib/courses';
 
 export const metadata: Metadata = {
-  title: '系统课程 · 财识',
+  title: '系统课程 · 财知道',
   description: '8 套金融与财经课程、64 节课，从金融通识、个人理财到估值、宏观与全球风险。',
 };
 

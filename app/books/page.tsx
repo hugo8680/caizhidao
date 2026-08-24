@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { books } from '@/lib/library';
 
 export const metadata: Metadata = {
-  title: '财经图书馆 · 财识',
+  title: '财经图书馆 · 财知道',
   description: '精选中文与英文财经书籍，汇总书名、作者、ISBN、出版社、页数、版本、参考价格和资料链接。',
 };
 

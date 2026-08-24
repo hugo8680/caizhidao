@@ -3,8 +3,8 @@
 import { useEffect, useMemo, useState } from 'react';
 import { searchContent, searchRecords, type SearchKind } from '@/lib/search';
 
-const kinds: Array<SearchKind | '全部'> = ['全部', '知识', '课程', '工具', '图书', '视频'];
-const suggestions = ['复利', '现金流', 'ETF', '通胀', '风险', '退休', '估值', '英文课程'];
+const kinds: Array<SearchKind | '全部'> = ['全部', '知识', '学科', '专题', '课程', '工具', '图书', '视频', '历史'];
+const suggestions = ['供需', '货币', '经济周期', '现金流', 'ETF', '通胀', '退休', '估值'];
 
 export function SearchExperience() {
   const [query, setQuery] = useState('');
@@ -34,7 +34,7 @@ export function SearchExperience() {
       <div className="search-tabs" role="tablist" aria-label="结果类型">
         {kinds.map((item) => <button type="button" role="tab" aria-selected={kind === item} className={kind === item ? 'active' : ''} onClick={() => setKind(item)} key={item}><span>{item}</span><b>{counts[item]}</b></button>)}
       </div>
-      <div className="search-results-head"><p>{query ? <>“{query}” 的检索结果</> : <>浏览全部内容</>}<b>{results.length}</b></p><small>标题与中英文精确匹配优先，其次匹配主题、摘要与课程内容。</small></div>
+      <div className="search-results-head"><p>{query ? <>“{query}” 的检索结果</> : <>浏览全站知识网络</>}<b>{results.length}</b></p><small>深度百科与标题精确匹配优先，其次匹配学科、主题、摘要、课程与资源。</small></div>
       <div className="search-page-results">
         {results.slice(0, query ? 80 : 36).map(({ record }) => (
           <a href={record.href} key={record.id}>

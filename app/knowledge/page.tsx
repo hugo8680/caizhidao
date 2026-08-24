@@ -3,7 +3,7 @@ import { ConceptVisual } from '@/components/concept-visual';
 import { knowledgeCategories, knowledgeTerms } from '@/lib/content';
 
 export const metadata: Metadata = {
-  title: '财经知识库 · 财识',
+  title: '财经知识库 · 财知道',
   description: '中英双语财经名词解释、概念图解、公式与学习趣闻。',
 };
 

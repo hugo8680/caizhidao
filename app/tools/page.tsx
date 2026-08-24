@@ -3,7 +3,7 @@ import { FinanceTools } from '@/components/finance-tools';
 import { toolCatalog } from '@/lib/library';
 
 export const metadata: Metadata = {
-  title: '金融小工具 · 财识',
+  title: '金融小工具 · 财知道',
   description: '12 个金融计算器：复利、实际收益、贷款、储蓄、养老、DCF、债券、仓位与费用影响。',
 };
 

@@ -13,7 +13,7 @@ export async function generateMetadata({ params }: TermPageProps): Promise<Metad
   const term = getKnowledgeTerm((await params).slug);
   if (!term) return {};
   return {
-    title: `${term.zh}（${term.en}）· 财识知识库`,
+    title: `${term.zh}（${term.en}）· 财知道知识库`,
     description: term.summary,
     openGraph: { title: `${term.zh} · ${term.en}`, description: term.summary, images: [] },
     twitter: { title: `${term.zh} · ${term.en}`, description: term.summary, images: [] },

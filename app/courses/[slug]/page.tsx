@@ -13,7 +13,7 @@ export async function generateMetadata({ params }: CoursePageProps): Promise<Met
   const course = getCourse((await params).slug);
   if (!course) return {};
   return {
-    title: `${course.title} · 财识课程`, description: course.description,
+    title: `${course.title} · 财知道课程`, description: course.description,
     openGraph: { title: `${course.title} · ${course.en}`, description: course.description, images: [] },
     twitter: { title: `${course.title} · ${course.en}`, description: course.description, images: [] },
   };
