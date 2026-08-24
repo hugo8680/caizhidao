@@ -142,17 +142,24 @@ export const disciplines: Discipline[] = [
 export const popularQuestions = [
   { domain: '宏观经济', question: '为什么工资涨了，我却没有觉得更富？', answer: '真正影响生活的是实际购买力：名义工资要扣除物价变化，还要看住房、教育等个人消费篮子。', href: '/knowledge/inflation/' },
   { domain: '货币银行', question: '央行加息，为什么房价和股价也会受影响？', answer: '利率既改变借钱成本，也改变未来现金流的折现率和投资者愿意承担风险的程度。', href: '/knowledge/interest-rate/' },
-  { domain: '微观经济', question: '演唱会门票为什么越抢越贵？', answer: '短期供给几乎固定，需求突然增加时，价格会承担稀缺资源的分配功能。', href: '/atlas/#microeconomics' },
+  { domain: '微观经济', question: '演唱会门票为什么越抢越贵？', answer: '短期供给几乎固定，需求突然增加时，价格会承担稀缺资源的分配功能。', href: '/atlas/microeconomics/' },
   { domain: '金融市场', question: '股票为什么每天都在涨跌？', answer: '价格不断吸收盈利预期、利率、风险偏好和新信息，交易的是未来而不只是今天。', href: '/knowledge/stock/' },
   { domain: '公司金融', question: '好公司为什么不一定是好投资？', answer: '公司质量只是价值的一部分；如果买入价格已经包含过高预期，未来回报仍可能很低。', href: '/knowledge/pe-ratio/' },
   { domain: '会计报表', question: '公司有利润，为什么还会缺现金？', answer: '赊销、囤货和资本支出都可能让利润暂时不能转化为可用现金。', href: '/knowledge/cash-flow-statement/' },
   { domain: '投资组合', question: '买了很多基金，为什么还是没有分散？', answer: '名称不同不等于风险不同；多只基金可能重复持有同一批股票或受同一市场驱动。', href: '/knowledge/diversification/' },
-  { domain: '个人财务', question: '提前还贷还是继续投资？', answer: '需要比较确定性利息节省、税费、替代投资的风险后回报、流动性与心理压力。', href: '/tools/#early-repay' },
-  { domain: '公共财政', question: '政府为什么不能无限印钱？', answer: '货币能改变名义购买力的分配，却不能凭空创造真实商品、服务和生产能力。', href: '/atlas/#public-finance' },
+  { domain: '个人财务', question: '提前还贷还是继续投资？', answer: '需要比较确定性利息节省、税费、替代投资的风险后回报、流动性与心理压力。', href: '/tools/early-repay/' },
+  { domain: '公共财政', question: '政府为什么不能无限印钱？', answer: '货币能改变名义购买力的分配，却不能凭空创造真实商品、服务和生产能力。', href: '/atlas/public-finance/' },
   { domain: '国际经济', question: '汇率上涨，到底是谁升值了？', answer: '先确认报价方向；一种货币的升值必然是相对另一种货币而言。', href: '/knowledge/exchange-rate/' },
-  { domain: '行为经济', question: '亏损后为什么更容易做出冒险决定？', answer: '损失厌恶与参照点会让人试图“翻本”，从而接受原本不会承担的风险。', href: '/atlas/#behavioral-economics' },
+  { domain: '行为经济', question: '亏损后为什么更容易做出冒险决定？', answer: '损失厌恶与参照点会让人试图“翻本”，从而接受原本不会承担的风险。', href: '/atlas/behavioral-economics/' },
   { domain: '金融科技', question: '技术更先进，金融产品就更安全吗？', answer: '技术能提高效率，也会新增模型、托管、网络与平台集中风险；经济约束不会因界面更漂亮而消失。', href: '/knowledge/systemic-risk/' },
 ];
+
+export type LearningStep = {
+  title: string;
+  note: string;
+  explanation: string;
+  example: string;
+};
 
 export type LearningRoute = {
   slug: string;
@@ -162,33 +169,65 @@ export type LearningRoute = {
   question: string;
   description: string;
   minutes: number;
-  steps: Array<{ title: string; note: string; href: string }>;
+  steps: LearningStep[];
 };
 
 export const learningRoutes: LearningRoute[] = [
   { slug: 'money-is-born', no: '01', title: '钱是怎样诞生的', en: 'How Money Works', question: '从一张纸币走进现代信用体系', description: '理解货币职能、银行放贷、央行与利率如何共同塑造我们使用的钱。', minutes: 42, steps: [
-    { title: '货币为什么被接受', note: '交换、记账与储值', href: '/atlas/#money-banking' }, { title: '银行怎样创造信用', note: '资产负债表与贷款', href: '/atlas/#money-banking' }, { title: '利率为何是钱的价格', note: '时间、风险与通胀', href: '/knowledge/interest-rate/' }, { title: '央行如何影响经济', note: '政策传导与预期', href: '/knowledge/monetary-policy/' }, { title: '通胀如何改变购买力', note: '名义与实际世界', href: '/knowledge/inflation/' },
+    { title: '货币为什么被接受', note: '交换、记账与储值', explanation: '货币不一定有很高的自身用途，关键是大家相信它能继续被别人接受。它同时提供交易媒介、计价单位和储值工具，让陌生人之间不必以物易物。', example: '一张纸币能买到早餐，不是因为纸张值这个价，而是商家相信下一位交易者也会接受它。' },
+    { title: '银行怎样创造信用', note: '资产负债表与贷款', explanation: '商业银行发放贷款时，会同时形成一项贷款资产和借款人账户中的存款负债。信用因此扩张，但并非没有约束：资本、流动性、借款人质量与监管都会限制放贷。', example: '银行批准 100 万元住房贷款后，购房者账户出现可支付存款，银行则持有未来收回本息的债权。' },
+    { title: '利率为何是钱的价格', note: '时间、风险与通胀', explanation: '利率补偿出借者放弃当前使用资金的机会，也反映通胀、违约和期限风险。不同借款人、不同期限的资金不会只有一个统一价格。', example: '同样借 10 万元，信用更弱或期限更长的借款人通常要支付更高利率。' },
+    { title: '央行如何影响经济', note: '政策传导与预期', explanation: '央行通过政策利率、公开市场操作和预期沟通改变金融机构的资金成本。影响会沿着存贷款利率、资产价格、汇率与信心逐步传到消费和投资。', example: '加息不会直接命令房价下跌，但会提高按揭成本并提高估值折现率，从而改变需求。' },
+    { title: '通胀如何改变购买力', note: '名义与实际世界', explanation: '货币数量增长并不自动创造更多真实商品。当名义需求增长快于供给能力时，价格可能上升，同样金额能购买的东西变少。', example: '工资上涨 5% 而个人生活成本上涨 7% 时，名义收入增加，实际购买力仍下降。' },
   ] },
   { slug: 'price-mystery', no: '02', title: '价格背后的秘密', en: 'Why Prices Move', question: '从咖啡、房租到演唱会门票', description: '用供需、弹性、竞争与市场失灵解释日常价格，而不是只把涨跌归结为“资本”。', minutes: 38, steps: [
-    { title: '稀缺迫使人选择', note: '机会成本', href: '/atlas/#microeconomics' }, { title: '需求与供给相遇', note: '均衡价格', href: '/atlas/#microeconomics' }, { title: '谁对价格更敏感', note: '弹性', href: '/atlas/#microeconomics' }, { title: '竞争如何改变价格', note: '市场结构', href: '/atlas/#microeconomics' }, { title: '市场何时会失灵', note: '外部性与信息差', href: '/atlas/#microeconomics' },
+    { title: '稀缺迫使人选择', note: '机会成本', explanation: '资源、时间和预算都有限，选择一项用途就意味着放弃另一项用途。经济成本因此不只包括付出去的钱，也包括被放弃的最好机会。', example: '用周末加班赚 800 元的机会成本，可能是休息、陪伴家人或学习新技能。' },
+    { title: '需求与供给相遇', note: '均衡价格', explanation: '买方愿意购买的数量和卖方愿意提供的数量会随价格变化。价格并非由单方随意决定，而是在约束与议价能力下协调双方行动。', example: '演唱会座位短期固定，而想入场的人突然增加，有限门票会承受更强的涨价压力。' },
+    { title: '谁对价格更敏感', note: '弹性', explanation: '弹性描述数量对价格变化的反应程度。替代品多、可以推迟购买的商品，需求通常更敏感；急需品在短期内往往不敏感。', example: '咖啡涨价后可以换店，需求可能下降；急救药即使涨价，短期需求也难大幅减少。' },
+    { title: '竞争如何改变价格', note: '市场结构', explanation: '卖家数量、进入壁垒、产品差异和信息透明度决定企业有多大定价能力。竞争越充分，企业通常越难长期维持超额利润。', example: '同质化餐饮街价格接近，而拥有独家专利的药品在保护期内可能拥有更强定价权。' },
+    { title: '市场何时会失灵', note: '外部性与信息差', explanation: '如果交易影响到没有参与的人，或买卖双方掌握的信息严重不对称，市场价格就可能没有包含全部社会成本和风险。', example: '污染成本由周边居民承担时，企业产品价格可能低于真实社会成本，需要规则进行校正。' },
   ] },
   { slug: 'economic-cycle', no: '03', title: '一轮经济周期', en: 'The Economic Cycle', question: '经济为什么会繁荣、过热、衰退再复苏', description: '把 GDP、就业、通胀、政策与收益率曲线放在同一条时间线上。', minutes: 55, steps: [
-    { title: 'GDP 记录了什么', note: '产出与支出', href: '/knowledge/gdp/' }, { title: '增长来自哪里', note: '资本与生产率', href: '/atlas/#macroeconomics' }, { title: '通胀和就业怎样变化', note: '冷热信号', href: '/knowledge/cpi/' }, { title: '政策如何逆周期', note: '货币与财政', href: '/knowledge/fiscal-policy/' }, { title: '市场提前交易什么', note: '收益率曲线', href: '/knowledge/yield-curve/' },
+    { title: 'GDP 记录了什么', note: '产出与支出', explanation: 'GDP 统计一定时期内最终商品与服务的市场价值，可从生产、收入或支出角度核算。它衡量经济活动规模，但不等于居民幸福、财富存量或分配公平。', example: '灾后重建会增加当期 GDP，却不代表灾害让社会更富。' },
+    { title: '增长来自哪里', note: '资本与生产率', explanation: '长期增长依靠劳动、资本、人力资本和技术进步。仅靠增加投入会遇到边际回报下降，持续提高生活水平更依赖生产率。', example: '同样人数和工时，用更好的设备、流程与知识生产更多产品，体现生产率提高。' },
+    { title: '通胀和就业怎样变化', note: '冷热信号', explanation: '扩张阶段需求增强、就业改善，产能紧张后价格压力可能上升；衰退时需求回落、失业增加，但供给冲击可能让通胀与疲弱增长同时出现。', example: '能源价格冲击可能一边推高物价，一边压缩企业和家庭的实际支出能力。' },
+    { title: '政策如何逆周期', note: '货币与财政', explanation: '货币政策主要改变金融条件，财政政策直接影响政府支出、税收和转移支付。两者都有时滞，并会受到债务、通胀和政策可信度约束。', example: '降息可能刺激贷款和投资，但若企业对未来极度悲观，低利率也未必立刻带来扩张。' },
+    { title: '市场提前交易什么', note: '收益率曲线', explanation: '市场价格反映参与者对未来政策、增长和风险的预期，因此常在经济数据确认转折前变化。但信号会出错，不能把曲线形态当作精确时钟。', example: '收益率曲线倒挂可能反映未来降息预期，却无法单独确定衰退何时开始。' },
   ] },
   { slug: 'read-a-company', no: '04', title: '看懂一家公司', en: 'Read a Business', question: '从商业模式一路走到企业价值', description: '用三张报表验证经营，用现金流和资本成本理解公司为什么值钱。', minutes: 68, steps: [
-    { title: '企业如何赚钱', note: '客户、成本与竞争', href: '/atlas/#corporate-finance' }, { title: '利润表看经营过程', note: '收入与利润', href: '/knowledge/income-statement/' }, { title: '资产负债表看家底', note: '资产、负债与权益', href: '/knowledge/balance-sheet/' }, { title: '现金流验证利润', note: '现金含金量', href: '/knowledge/free-cash-flow/' }, { title: '未来现金流决定价值', note: 'DCF 与安全边际', href: '/knowledge/dcf/' },
+    { title: '企业如何赚钱', note: '客户、成本与竞争', explanation: '先回答客户为什么付钱、企业靠什么持续交付、成本随规模怎样变化。报表数字只有放回商业模式，才能判断利润是可持续能力还是短期偶然。', example: '订阅业务收入更稳定，但要检查获客成本、续费率和服务成本是否支持增长。' },
+    { title: '利润表看经营过程', note: '收入与利润', explanation: '利润表从收入依次扣除成本、费用、利息和税，展示一段期间的经营结果。需要区分主营改善、成本波动、一次性收益和会计估计。', example: '净利润增长可能来自出售资产，而不是主营产品卖得更好。' },
+    { title: '资产负债表看家底', note: '资产、负债与权益', explanation: '资产负债表是某个时点的资源与资金来源快照。资产质量、负债期限和表外承诺，比总资产数字本身更重要。', example: '大量应收账款看似是资产，但如果客户迟迟不付款，质量就值得怀疑。' },
+    { title: '现金流验证利润', note: '现金含金量', explanation: '现金流量表解释现金从经营、投资和融资三类活动如何变化。长期利润无法转成经营现金，常意味着回款、存货或确认方式需要追问。', example: '企业赊销确认收入与利润，但客户尚未付款，现金可能没有同步增加。' },
+    { title: '未来现金流决定价值', note: 'DCF 与安全边际', explanation: '企业价值来自未来可分配现金流的现值。增长率、资本投入和风险共同决定价值，支付价格还要为预测错误保留缓冲。', example: '好公司若买入价格已经包含极高增长预期，也可能成为回报很差的投资。' },
   ] },
   { slug: 'invest-without-noise', no: '05', title: '投资不被噪声带走', en: 'Investing with Clarity', question: '从目标出发，而不是从热门产品出发', description: '建立风险、配置、费用、行为与再平衡组成的长期投资框架。', minutes: 61, steps: [
-    { title: '先定义目标与期限', note: '投资政策书', href: '/atlas/#investment' }, { title: '理解风险收益交换', note: '不存在免费回报', href: '/knowledge/risk-return/' }, { title: '用相关性实现分散', note: '风险来源', href: '/knowledge/correlation/' }, { title: '让费用少吃掉复利', note: '长期成本', href: '/knowledge/expense-ratio/' }, { title: '按规则做再平衡', note: '恢复风险水平', href: '/knowledge/rebalancing/' },
+    { title: '先定义目标与期限', note: '投资政策书', explanation: '目标决定资金何时使用、允许多大损失和需要多少流动性。先写清边界，能避免市场热闹时让产品反过来定义目标。', example: '两年后要用的首付款，与二十年后的退休金不应采用同一风险配置。' },
+    { title: '理解风险收益交换', note: '不存在免费回报', explanation: '高预期回报通常来自承担价格波动、违约、流动性或不确定现金流。分析收益时要能明确说出“我因承担什么风险获得补偿”。', example: '高收益债券的额外利息，是对更高违约风险和较差流动性的补偿。' },
+    { title: '用相关性实现分散', note: '风险来源', explanation: '有效分散来自不同风险驱动，而不是产品数量。还要观察压力时期相关性是否上升，以及底层持仓是否重复。', example: '五只都重仓同一批科技股的基金，名称不同也不能提供真正分散。' },
+    { title: '让费用少吃掉复利', note: '长期成本', explanation: '管理费、交易成本和税收会直接减少当期资产，也减少未来可复利的本金。费用是少数可以在投资前较确定比较的变量。', example: '相同市场暴露下，年费率差 1% 经过二十年会形成显著终值差异。' },
+    { title: '按规则做再平衡', note: '恢复风险水平', explanation: '资产涨跌会让组合偏离原定风险。按时间或偏离阈值再平衡，是把风险恢复到目标水平，而不是预测下一类资产谁会涨。', example: '股票上涨后占比从 60% 变成 72%，按规则卖出部分股票并补充低风险资产。' },
   ] },
   { slug: 'family-finance', no: '06', title: '建立家庭财务系统', en: 'Household Finance', question: '安全感不是一个余额，而是一套系统', description: '让现金流、安全垫、债务、保险和退休目标互相配合。', minutes: 47, steps: [
-    { title: '看清净资产与现金流', note: '财务起点', href: '/atlas/#personal-finance' }, { title: '建立应急安全垫', note: '现金选择权', href: '/knowledge/emergency-fund/' }, { title: '给债务排优先级', note: '成本与期限', href: '/knowledge/debt-to-income/' }, { title: '只转移承受不起的风险', note: '保险边界', href: '/knowledge/insurance/' }, { title: '用实际购买力规划退休', note: '长期缺口', href: '/tools/#retirement' },
+    { title: '看清净资产与现金流', note: '财务起点', explanation: '净资产说明家庭积累了多少，现金流说明每月资金怎样流动。二者要一起看：资产不少但现金流紧张，仍可能在突发事件中被迫借款。', example: '房产价值很高但几乎没有现金储备的家庭，短期支付能力可能并不强。' },
+    { title: '建立应急安全垫', note: '现金选择权', explanation: '应急金用来承接失业、疾病和紧急维修等未知事件。它追求安全和随时可用，而不是最高收益。', example: '收入稳定的双职工可从 3—6 个月必要支出起步，收入波动大的家庭需要更长覆盖。' },
+    { title: '给债务排优先级', note: '成本与期限', explanation: '债务要比较实际利率、剩余期限、违约后果和是否可提前偿还。高息消费债通常优先处理，但不能因此耗尽应急金。', example: '信用卡循环利息往往高于住房贷款，应先停止新增并制定高息债清偿顺序。' },
+    { title: '只转移承受不起的风险', note: '保险边界', explanation: '保险适合转移低概率但会破坏家庭资产负债表的大额损失。小额、频繁且可自行承担的支出，未必值得通过高成本保险覆盖。', example: '家庭收入支柱的身故风险通常比手机屏幕损坏更需要优先保障。' },
+    { title: '用实际购买力规划退休', note: '长期缺口', explanation: '退休规划要把今天的生活费用按通胀推到未来，再考虑养老金、已有资产、投资回报和提取风险。越早开始，越多依靠时间而非高收益假设。', example: '今天每月 1 万元的生活标准，二十多年后需要的名义金额通常远高于 1 万元。' },
   ] },
   { slug: 'global-money', no: '07', title: '全球的钱如何流动', en: 'Money Across Borders', question: '贸易、汇率与资本流动如何互相牵动', description: '从比较优势走到美元周期、主权债务和跨境金融传染。', minutes: 58, steps: [
-    { title: '贸易为何能创造收益', note: '比较优势', href: '/atlas/#international-economics' }, { title: '汇率是一种相对价格', note: '货币的两面', href: '/knowledge/exchange-rate/' }, { title: '国际收支记录跨境往来', note: '经常与金融账户', href: '/atlas/#international-economics' }, { title: '资本为什么突然撤离', note: '风险与流动性', href: '/knowledge/liquidity/' }, { title: '局部冲击怎样扩散', note: '系统性风险', href: '/knowledge/systemic-risk/' },
+    { title: '贸易为何能创造收益', note: '比较优势', explanation: '即使一方在所有产品上都更高效，双方仍可能通过专注相对机会成本更低的领域获得总产出收益。收益如何分配则取决于价格、制度与谈判能力。', example: '贸易的总收益可以为正，但某些行业和劳动者仍可能承担转型成本。' },
+    { title: '汇率是一种相对价格', note: '货币的两面', explanation: '汇率表示一种货币用另一种货币计价的价格。讨论升值或贬值前必须先确认报价方向，否则同一次变化会被说成相反结论。', example: '美元兑人民币从 7.0 到 7.2，表示一美元换更多人民币，即美元相对人民币升值。' },
+    { title: '国际收支记录跨境往来', note: '经常与金融账户', explanation: '经常账户记录商品、服务和收入往来，金融账户记录资产与负债变化。一个国家的贸易与跨境融资并非两套互不相关的故事。', example: '经常账户逆差需要由资本流入、储备变化或其他金融项目对应。' },
+    { title: '资本为什么突然撤离', note: '风险与流动性', explanation: '当利差、汇率预期、信用风险或全球风险偏好改变时，跨境资金可能迅速重新配置。短期外币债务会放大这种压力。', example: '本币贬值会抬高外币债务的本币负担，进一步削弱偿付信心并推动资本外流。' },
+    { title: '局部冲击怎样扩散', note: '系统性风险', explanation: '金融机构通过共同持仓、融资市场、支付清算和信心相互连接。局部损失若触发保证金、挤兑和被迫卖出，就可能变成系统事件。', example: '某类资产下跌导致抵押品缩水，机构卖出其他资产补充保证金，压力因此跨市场传播。' },
   ] },
   { slug: 'mind-and-money', no: '08', title: '大脑与金钱的博弈', en: 'Mind & Money', question: '为什么知道道理，仍然做错决定', description: '识别损失厌恶、锚定、从众和心理账户，并为自己设计决策护栏。', minutes: 44, steps: [
-    { title: '大脑依赖快速判断', note: '启发式', href: '/atlas/#behavioral-economics' }, { title: '损失比收益更刺痛', note: '参照点', href: '/atlas/#behavioral-economics' }, { title: '过去投入不应绑架未来', note: '沉没成本', href: '/atlas/#microeconomics' }, { title: '群体会放大叙事', note: '从众与泡沫', href: '/atlas/#behavioral-economics' }, { title: '用规则保护未来的自己', note: '承诺机制', href: '/atlas/#behavioral-economics' },
+    { title: '大脑依赖快速判断', note: '启发式', explanation: '面对复杂和不完整信息时，人会用经验捷径快速判断。这些捷径节省精力，却可能让近期事件、显眼数字和生动故事获得过高权重。', example: '看到某资产连续上涨后，人容易认为上涨会继续，而忽略更长历史和基本条件。' },
+    { title: '损失比收益更刺痛', note: '参照点', explanation: '人们常以买入价或近期高点作为参照，并对同等金额的损失感受更强。参照点会改变风险偏好，让亏损状态下更愿意冒险“翻本”。', example: '投资从 100 元跌到 80 元后，拒绝重新评估，只等价格回到买入价。' },
+    { title: '过去投入不应绑架未来', note: '沉没成本', explanation: '已经发生且无法收回的成本，不应影响下一步是否继续。正确问题是：从现在开始，新增投入与未来收益是否仍值得。', example: '一门不适合的课程已经付费，不代表必须继续投入更多时间才能“回本”。' },
+    { title: '群体会放大叙事', note: '从众与泡沫', explanation: '当价格上涨与他人赚钱的故事相互强化时，从众会让叙事看似得到价格验证。参与者越多，逆向判断的心理和职业成本越高。', example: '投资者因为“大家都在买”而入场，却说不清资产现金流或退出条件。' },
+    { title: '用规则保护未来的自己', note: '承诺机制', explanation: '决策护栏是在情绪平静时预先写下投入上限、再平衡条件和冷静期，让未来的自己不必在压力中重新发明规则。', example: '规定任何单一高风险资产不超过组合 5%，加仓前等待 48 小时并写下反方理由。' },
   ] },
 ];
 

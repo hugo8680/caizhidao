@@ -17,12 +17,12 @@ export default function BooksPage() {
             <header><span>{language === '中文' ? 'CHINESE EDITIONS' : 'ENGLISH EDITIONS'}</span><h2>{language}精选</h2><small>{books.filter((book) => book.language === language).length} 本</small></header>
             <div className="book-grid">
               {books.filter((book) => book.language === language).map((book, index) => (
-                <article id={book.id} className="book-card" key={book.id}>
+                <article className="book-card" key={book.id}>
                   <div className="book-spine"><span>{String(index + 1).padStart(2, '0')}</span><b>{book.topic}</b><i>{book.level}</i></div>
                   <div className="book-info">
-                    <span>{book.language} · {book.level}</span><h3>{book.title}</h3>{book.originalTitle && <h4>{book.originalTitle}</h4>}<p>{book.intro}</p>
+                    <span>{book.language} · {book.level}</span><a className="book-title-link" href={`/books/${book.id}/`}><h3>{book.title}</h3>{book.originalTitle && <h4>{book.originalTitle}</h4>}</a><p>{book.intro}</p>
                     <dl><div><dt>作者</dt><dd>{book.author}</dd></div><div><dt>出版社</dt><dd>{book.publisher}</dd></div><div><dt>年份</dt><dd>{book.year}</dd></div><div><dt>ISBN</dt><dd>{book.isbn}</dd></div><div><dt>页数</dt><dd>{book.pages}</dd></div><div><dt>参考价</dt><dd>{book.price}</dd></div></dl>
-                    <footer><a href={book.sourceUrl} target="_blank" rel="noreferrer">版本资料 ↗</a><a href={book.shopUrl} target="_blank" rel="noreferrer">购书检索 ↗</a></footer>
+                    <footer><a href={`/books/${book.id}/`}>阅读选书指南 →</a><a href={book.sourceUrl} target="_blank" rel="noreferrer">版本资料 ↗</a></footer>
                   </div>
                 </article>
               ))}

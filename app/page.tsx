@@ -36,7 +36,7 @@ export default function Home() {
           <header><span>KNOWLEDGE SYSTEM · 01</span><b>知识体系总览</b></header>
           <div className="system-core"><i /><div><small>一切经济问题的起点</small><strong>稀缺之下<br />如何选择？</strong></div></div>
           <div className="discipline-grid">
-            {disciplines.map((discipline) => <a href={`/atlas/#${discipline.slug}`} key={discipline.slug}><span>{discipline.no}</span><b>{discipline.name}</b><small>{discipline.en}</small></a>)}
+            {disciplines.map((discipline) => <a href={`/atlas/${discipline.slug}/`} key={discipline.slug}><span>{discipline.no}</span><b>{discipline.name}</b><small>{discipline.en}</small></a>)}
           </div>
           <footer><span><b>{disciplines.length}</b>个学科入口</span><span><b>{knowledgeNodeCount}</b>个体系节点</span><span><b>{knowledgeTerms.length}</b>篇深度百科</span></footer>
         </aside>
@@ -49,7 +49,7 @@ export default function Home() {
         </div>
         <div className="home-discipline-grid">
           {disciplines.map((discipline) => (
-            <a className={`home-discipline tone-${discipline.tone}`} href={`/atlas/#${discipline.slug}`} key={discipline.slug}>
+            <a className={`home-discipline tone-${discipline.tone}`} href={`/atlas/${discipline.slug}/`} key={discipline.slug}>
               <header><span>{discipline.no}</span><small>{discipline.en}</small></header>
               <h3>{discipline.name}</h3>
               <b>{discipline.question}</b>
@@ -100,7 +100,7 @@ export default function Home() {
           <p>财经制度往往是在危机后被重新设计。沿着时间轴看思想、技术、政策与市场如何彼此塑造。</p>
         </div>
         <div className="history-line">
-          {featuredTimeline.map((event) => <a href={`/timeline/#event-${event.year}`} key={event.year}><span>{event.year}</span><i /><small>{event.kind}</small><h3>{event.title}</h3><p>{event.impact}</p></a>)}
+          {featuredTimeline.map((event) => <a href={`/timeline/${event.year}/`} key={event.year}><span>{event.year}</span><i /><small>{event.kind}</small><h3>{event.title}</h3><p>{event.impact}</p></a>)}
         </div>
         <a className="dark-wide-link" href="/timeline/"><span>打开财经发展简史</span><b>{timelineEvents.length} 个关键节点</b><i>→</i></a>
       </section>

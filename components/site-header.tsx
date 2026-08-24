@@ -13,7 +13,7 @@ export function SiteHeader() {
   return (
     <header className="platform-header">
       <a className="platform-brand" href="/" aria-label="财知道首页">
-        <span>知</span>
+        <span>财</span>
         <b>财知道<small>ECONOMY KNOWLEDGE ATLAS</small></b>
       </a>
       <nav aria-label="主要导航">

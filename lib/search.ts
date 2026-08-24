@@ -27,7 +27,7 @@ const disciplineRecords: SearchRecord[] = disciplines.flatMap((discipline) => [
     english: discipline.en,
     description: discipline.summary,
     keywords: `${discipline.question} ${discipline.topics.map((topic) => `${topic.title} ${topic.en} ${topic.concepts.join(' ')}`).join(' ')}`,
-    href: `/atlas/#${discipline.slug}`,
+    href: `/atlas/${discipline.slug}/`,
     priority: 9,
   },
   ...discipline.topics.map((topic, topicIndex) => ({
@@ -37,7 +37,7 @@ const disciplineRecords: SearchRecord[] = disciplines.flatMap((discipline) => [
     english: `${topic.en} · ${discipline.en}`,
     description: topic.summary,
     keywords: `${discipline.name} ${discipline.question} ${topic.concepts.join(' ')}`,
-    href: `/atlas/#${discipline.slug}`,
+    href: `/atlas/${discipline.slug}/`,
     priority: 7,
   })),
 ]);
@@ -52,7 +52,7 @@ const mappedNodeRecords: SearchRecord[] = disciplines.flatMap((discipline) => di
     english: `${topic.en} · ${discipline.en}`,
     description: topic.summary,
     keywords: `${discipline.name} ${discipline.en} ${discipline.question} ${topic.title} ${topic.en}`,
-    href: `/atlas/#${discipline.slug}`,
+    href: `/atlas/${discipline.slug}/`,
     priority: 5,
   }];
 })));
@@ -97,7 +97,7 @@ export const searchRecords: SearchRecord[] = [
     english: `${book.originalTitle ?? ''} ${book.author}`,
     description: book.intro,
     keywords: `${book.topic} ${book.language} ${book.level} ${book.publisher} ${book.isbn}`,
-    href: `/books/#${book.id}`,
+    href: `/books/${book.id}/`,
     priority: 4,
   })),
   ...videos.map((video) => ({
@@ -107,7 +107,7 @@ export const searchRecords: SearchRecord[] = [
     english: video.titleEn ?? video.platform,
     description: video.description,
     keywords: `${video.topic} ${video.language} ${video.level} ${video.platform}`,
-    href: `/videos/#${video.id}`,
+    href: `/videos/${video.id}/`,
     priority: 4,
   })),
   ...toolCatalog.map((tool) => ({
@@ -117,7 +117,7 @@ export const searchRecords: SearchRecord[] = [
     english: tool.category,
     description: tool.description,
     keywords: `${tool.category} 计算器 calculator`,
-    href: `/tools/#${tool.id}`,
+    href: `/tools/${tool.id}/`,
     priority: 7,
   })),
   ...timelineEvents.map((event, index) => ({
@@ -127,7 +127,7 @@ export const searchRecords: SearchRecord[] = [
     english: `Economic & Financial History · ${event.kind}`,
     description: event.description,
     keywords: `${event.kind} ${event.impact}`,
-    href: `/timeline/#event-${event.year}`,
+    href: `/timeline/${event.year}/`,
     priority: 5,
   })),
 ];

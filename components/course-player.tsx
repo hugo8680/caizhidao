@@ -2,12 +2,14 @@
 
 import { useEffect, useMemo, useState } from 'react';
 import type { Course } from '@/lib/courses';
+import { buildLessonGuide } from '@/lib/course-guides';
 
 export function CoursePlayer({ course }: { course: Course }) {
   const storageKey = `caishi-course-${course.slug}`;
   const [activeId, setActiveId] = useState(1);
   const [completed, setCompleted] = useState<number[]>([]);
   const lesson = course.lessons.find((item) => item.id === activeId) ?? course.lessons[0];
+  const guide = buildLessonGuide(course, lesson);
 
   useEffect(() => {
     let timer: number | undefined;
@@ -29,7 +31,6 @@ export function CoursePlayer({ course }: { course: Course }) {
   const move = (offset: number) => {
     const next = Math.min(course.lessons.length, Math.max(1, lesson.id + offset));
     setActiveId(next);
-    window.scrollTo({ top: 330, behavior: 'smooth' });
   };
 
   return (
@@ -52,20 +53,39 @@ export function CoursePlayer({ course }: { course: Course }) {
       <article className="course-reader">
         <header><span>LESSON {String(lesson.id).padStart(2, '0')} / {String(course.lessons.length).padStart(2, '0')}</span><small>{lesson.minutes} MINUTES</small></header>
         <h1>{lesson.title}</h1>
-        <p className="course-reader-lead">{lesson.summary}</p>
+        <p className="course-reader-lead">{guide.plain}</p>
         <section className="lesson-key"><span>本课核心关系</span><strong>{lesson.key}</strong></section>
+        <section className="lesson-context">
+          <span>WHY IT MATTERS</span>
+          <h2>为什么值得学</h2>
+          <p>{guide.why}</p>
+        </section>
         <section className="lesson-explain">
-          <span>LEARNING METHOD</span><h2>四步学会这个概念</h2>
+          <span>CONCEPT WALKTHROUGH</span><h2>把概念一步步拆开</h2>
           <ol>
-            <li><b>先说人话</b><p>{lesson.summary}</p></li>
-            <li><b>找到变量</b><p>识别这条关系里可以改变的数字、时间与风险条件。</p></li>
-            <li><b>做个反例</b><p>想一想：在什么情形下，直接套用“{lesson.key}”会得出误导结论？</p></li>
-            <li><b>回到决策</b><p>把它放进自己的目标、期限和承受能力中，再决定是否行动。</p></li>
+            {guide.mechanism.map((item) => <li key={item.title}><b>{item.title}</b><p>{item.text}</p></li>)}
           </ol>
+        </section>
+        <section className="lesson-example">
+          <div><span>WORKED EXAMPLE</span><h2>带数字的例子</h2></div>
+          <p>{guide.example}</p>
+        </section>
+        <div className="lesson-depth-grid">
+          <section className="lesson-misconceptions">
+            <span>COMMON MISTAKES</span><h2>常见误区</h2>
+            {guide.misconceptions.map((item, index) => <p key={item}><b>{String(index + 1).padStart(2, '0')}</b>{item}</p>)}
+          </section>
+          <section className="lesson-checklist">
+            <span>DECISION CHECKLIST</span><h2>学完要会问</h2>
+            {guide.checklist.map((item) => <p key={item}>✓ {item}</p>)}
+          </section>
+        </div>
+        <section className="lesson-english">
+          <span>ENGLISH NOTE</span><h2>相关英文解释</h2><p lang="en">{guide.english}</p>
         </section>
         <details className="lesson-practice">
           <summary><span>随堂练习</span><b>{lesson.practice}</b><i>展开练习提示 ＋</i></summary>
-          <p>先不用追求唯一答案。写下你的假设、计算过程或判断依据，再回看本课核心关系，检查是否遗漏了时间、风险、流动性或成本。</p>
+          <p>{guide.exerciseHint}</p>
         </details>
         <section className="lesson-notice"><b>学习边界</b><p>本站课程用于建立分析框架，不构成个别产品推荐。真实决策还应核验费用、税务、合同与自身风险承受能力。</p></section>
         <div className="course-reader-actions">
