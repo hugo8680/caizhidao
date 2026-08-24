@@ -4,19 +4,19 @@ import './globals.css';
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.SITE_URL ?? 'http://localhost:3000'),
   title: '财识 · 零基础金融学习地图',
-  description: '28 天系统建立金融思维：从复利、通胀与风险，到资产、公司与市场。',
+  description: '64 课系统建立金融思维：从金钱基础到个人财务、投资分析、组合管理与全球金融。',
   openGraph: {
     title: '财识 · 零基础金融学习地图',
-    description: '28 天建立金融思维，每天一个概念、一个案例、一道练习。',
+    description: '64 课、8 大模块，从零到进阶系统建立金融思维。',
     type: 'website',
     locale: 'zh_CN',
     siteName: '财识',
-    images: [{ url: '/og.png', width: 1200, height: 630, alt: '财识 · 28 天建立金融思维' }],
+    images: [{ url: '/og.png', width: 1200, height: 630, alt: '财识 · 64 课系统建立金融思维' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: '财识 · 零基础金融学习地图',
-    description: '28 天建立金融思维，每天一个概念、一个案例、一道练习。',
+    description: '64 课、8 大模块，从零到进阶系统建立金融思维。',
     images: ['/og.png'],
   },
 };

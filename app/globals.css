@@ -67,10 +67,13 @@ nav a:first-child::after { content: ''; position: absolute; left: 50%; bottom: -
 .module-grid { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid rgba(255,255,255,.18); border-bottom: 1px solid rgba(255,255,255,.18); }
 .module-card { min-height: 270px; padding: 22px 24px; border-right: 1px solid rgba(255,255,255,.18); position: relative; }
 .module-card:last-child { border-right: 0; }
+.module-card:nth-child(4n) { border-right: 0; }
+.module-card:nth-child(-n+4) { border-bottom: 1px solid rgba(255,255,255,.18); }
 .module-index { color: #96aaa5; font: 11px Georgia, serif; letter-spacing: .12em; }
 .module-icon { width: 46px; height: 46px; margin: 34px 0 26px; display: grid; place-items: center; border: 1px solid currentColor; border-radius: 50%; }
 .module-icon span { font: italic 18px Georgia, serif; }
 .module-card.amber { color: #e6bf73; } .module-card.green { color: #92bdab; } .module-card.blue { color: #8fb1c5; } .module-card.coral { color: #d79978; }
+.module-card.violet { color: #c4acd6; } .module-card.sage { color: #a9bd8f; } .module-card.gold { color: #d5a85f; } .module-card.rose { color: #d5a0a6; }
 .module-card h3 { margin: 0; color: #fffaf0; font: 500 21px "Songti SC", serif; }
 .module-card p { margin: 11px 0 28px; color: #aeb9b6; font-size: 12px; }
 .module-footer { display: flex; justify-content: space-between; color: #aeb9b6; font-size: 11px; }
@@ -93,8 +96,9 @@ footer p { margin: 0; }
   .today-card { max-width: 440px; margin: 0 auto; }
   .section-heading { align-items: flex-start; gap: 18px; flex-direction: column; }
   .module-grid { grid-template-columns: 1fr 1fr; }
-  .module-card:nth-child(2) { border-right: 0; }
-  .module-card:nth-child(-n+2) { border-bottom: 1px solid rgba(255,255,255,.18); }
+  .module-card { border-right: 1px solid rgba(255,255,255,.18); border-bottom: 1px solid rgba(255,255,255,.18); }
+  .module-card:nth-child(even) { border-right: 0; }
+  .module-card:nth-last-child(-n+2) { border-bottom: 0; }
 }
 
 @media (max-width: 520px) {
@@ -103,6 +107,7 @@ footer p { margin: 0; }
   .today-card { padding: 26px 24px; }
   .module-grid { grid-template-columns: 1fr; }
   .module-card { min-height: 235px; border-right: 0; border-bottom: 1px solid rgba(255,255,255,.18); }
+  .module-card:not(:last-child) { border-bottom: 1px solid rgba(255,255,255,.18); }
   .module-card:last-child { border-bottom: 0; }
   footer { flex-direction: column; gap: 8px; }
 }
