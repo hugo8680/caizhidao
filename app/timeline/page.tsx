@@ -12,7 +12,7 @@ export default function TimelinePage() {
   return (
     <main>
       <section className="timeline-hero">
-        <div><p>ECONOMIC & FINANCIAL HISTORY</p><h1>财经世界，<br />不是一天建成的。</h1><p>一次思想突破解释旧问题，一场危机暴露制度缺口，一项政策又创造新的行为与风险。把概念放回时间，才能理解它为什么存在。</p></div>
+        <div><p>ECONOMIC & FINANCIAL HISTORY</p><h1>财经发展简史</h1><p>一次思想突破解释旧问题，一场危机暴露制度缺口，一项政策又创造新的行为与风险。把概念放回时间，才能理解它为什么存在。</p></div>
         <aside><span>1776</span><i /><span>2023</span><b>{timelineEvents.length} 个关键节点</b></aside>
       </section>
 

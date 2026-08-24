@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 export default function BooksPage() {
   return (
     <main>
-      <section className="page-hero library-hero"><p>FINANCE LIBRARY · 财经图书馆</p><h1>从一本好书开始，<br />把碎片知识连成体系。</h1><div className="hero-metrics"><span><b>{books.length}</b>本精选</span><span><b>{books.filter((book) => book.language === '中文').length}</b>本中文</span><span><b>{books.filter((book) => book.language === '英文').length}</b>本英文</span></div></section>
+      <section className="page-hero library-hero"><p>FINANCE LIBRARY · 财经图书馆</p><h1>财经图书馆</h1><div className="hero-metrics"><span><b>{books.length}</b>本精选</span><span><b>{books.filter((book) => book.language === '中文').length}</b>本中文</span><span><b>{books.filter((book) => book.language === '英文').length}</b>本英文</span></div></section>
       <section className="library-note"><div><span>EDITION MATTERS</span><h2>先核对版本，再决定购买</h2></div><p>下列 ISBN、页数与价格按列出的具体版本汇总。价格仅为参考，会随渠道和时间变化；点击“版本资料”可交叉核验，点击“购书检索”可查看当前渠道信息。</p></section>
       <section className="book-shelves">
         {(['中文', '英文'] as const).map((language) => (

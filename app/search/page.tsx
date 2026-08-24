@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 export default function SearchPage() {
   return (
     <main>
-      <section className="page-hero search-hero"><p>SMART SEARCH · 全站检索</p><h1>一个关键词，<br />穿过整座财经知识城。</h1><div><b>{searchRecords.length}</b><span>条可检索内容<br />支持中英文与 ISBN</span></div></section>
+      <section className="page-hero search-hero"><p>SMART SEARCH · 全站检索</p><h1>全站知识检索</h1><div><b>{searchRecords.length}</b><span>条可检索内容<br />支持中英文与 ISBN</span></div></section>
       <SearchExperience />
     </main>
   );

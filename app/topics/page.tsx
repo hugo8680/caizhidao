@@ -11,7 +11,7 @@ export default function TopicsPage() {
     <main>
       <section className="page-hero topics-hero">
         <p>GUIDED EXPLORATION · 专题路线</p>
-        <h1>不从术语表开始，<br />从一个你真正关心的问题开始。</h1>
+        <h1>专题学习路线</h1>
         <div className="hero-metrics"><span><b>{learningRoutes.length}</b>条路线</span><span><b>{learningRoutes.reduce((sum, route) => sum + route.steps.length, 0)}</b>个步骤</span><span><b>跨学科</b>连接理解</span></div>
       </section>
       <section className="topics-intro">

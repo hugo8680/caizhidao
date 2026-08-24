@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default function KnowledgePage() {
   return (
     <main>
-      <section className="page-hero compact-hero"><p>KNOWLEDGE BASE · 知识库</p><h1>把陌生名词，变成<br />一眼能懂的知识卡片。</h1><div><b>{knowledgeTerms.length}</b><span>个核心概念<br />包含英文、图解与趣闻</span></div></section>
+      <section className="page-hero compact-hero"><p>KNOWLEDGE BASE · 知识库</p><h1>财经知识库</h1><div><b>{knowledgeTerms.length}</b><span>个核心概念<br />包含英文、图解与趣闻</span></div></section>
       <section className="knowledge-layout">
         <aside><span>按主题进入独立页面</span>{knowledgeCategories.map((category) => {
           const page = getKnowledgeCategoryByName(category);

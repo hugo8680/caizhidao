@@ -12,7 +12,7 @@ export default function CoursesPage() {
     <main>
       <section className="page-hero course-index-hero">
         <p>LEARNING PATHS · 系统课程</p>
-        <h1>不止一门课。<br />八条路径，搭好完整金融骨架。</h1>
+        <h1>系统课程</h1>
         <div className="hero-metrics"><span><b>{courses.length}</b>套课程</span><span><b>{lessonCount}</b>节课</span><span><b>3</b>个难度</span></div>
       </section>
       <section className="course-index-intro">

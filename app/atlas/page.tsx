@@ -13,7 +13,7 @@ export default function AtlasPage() {
       <section className="atlas-hero">
         <div>
           <p>KNOWLEDGE ATLAS · 财经知识地图</p>
-          <h1>先知道知识在哪里，<br />再决定从哪里深入。</h1>
+          <h1>财经知识地图</h1>
           <p className="atlas-hero-lead">知识地图只负责组织学科、主题和概念之间的层级，不承担百科、课程或工具的职责。点击任一学科后，仍会留在知识地图模块中查看它的完整结构。</p>
           <div className="atlas-hero-actions"><a href="/atlas/microeconomics/">从微观经济学开始 →</a><a href="/atlas/personal-finance/">从个人财务开始</a></div>
         </div>
