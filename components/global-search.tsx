@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { searchContent } from '@/lib/search';
 
-export function GlobalSearch() {
+export function GlobalSearch({ active = false }: { active?: boolean }) {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
@@ -27,7 +27,7 @@ export function GlobalSearch() {
 
   return (
     <>
-      <button className="search-entry" type="button" onClick={() => setOpen(true)} aria-label="打开全站检索">
+      <button className={`search-entry${active ? ' active' : ''}`} type="button" onClick={() => setOpen(true)} aria-label="打开全站检索" aria-current={active ? 'page' : undefined}>
         <kbd>⌘ K</kbd><span>检索全站知识</span>
       </button>
       {open && (
