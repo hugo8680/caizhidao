@@ -1,0 +1,49 @@
+'use client';
+
+import { useEffect, useMemo, useState } from 'react';
+import { searchContent, searchRecords, type SearchKind } from '@/lib/search';
+
+const kinds: Array<SearchKind | '全部'> = ['全部', '知识', '课程', '工具', '图书', '视频'];
+const suggestions = ['复利', '现金流', 'ETF', '通胀', '风险', '退休', '估值', '英文课程'];
+
+export function SearchExperience() {
+  const [query, setQuery] = useState('');
+  const [kind, setKind] = useState<SearchKind | '全部'>('全部');
+
+  useEffect(() => {
+    const value = new URLSearchParams(window.location.search).get('q');
+    const timer = value ? window.setTimeout(() => setQuery(value), 0) : undefined;
+    return () => { if (timer) window.clearTimeout(timer); };
+  }, []);
+
+  useEffect(() => {
+    const url = new URL(window.location.href);
+    if (query) url.searchParams.set('q', query); else url.searchParams.delete('q');
+    window.history.replaceState({}, '', `${url.pathname}${url.search}${url.hash}`);
+  }, [query]);
+
+  const results = useMemo(() => searchContent(query, kind), [query, kind]);
+  const counts = useMemo(() => kinds.reduce<Record<string, number>>((map, item) => ({ ...map, [item]: searchContent(query, item).length }), {}), [query]);
+
+  return (
+    <section className="search-page-shell">
+      <div className="search-page-box">
+        <label><span>⌕</span><input type="search" autoFocus value={query} onChange={(event) => setQuery(event.target.value)} placeholder="输入中文、English、ISBN 或课程主题…" /><kbd>⌘ K</kbd></label>
+        <div className="search-suggestions"><span>快速检索</span>{suggestions.map((item) => <button type="button" onClick={() => setQuery(item)} key={item}>{item}</button>)}</div>
+      </div>
+      <div className="search-tabs" role="tablist" aria-label="结果类型">
+        {kinds.map((item) => <button type="button" role="tab" aria-selected={kind === item} className={kind === item ? 'active' : ''} onClick={() => setKind(item)} key={item}><span>{item}</span><b>{counts[item]}</b></button>)}
+      </div>
+      <div className="search-results-head"><p>{query ? <>“{query}” 的检索结果</> : <>浏览全部内容</>}<b>{results.length}</b></p><small>标题与中英文精确匹配优先，其次匹配主题、摘要与课程内容。</small></div>
+      <div className="search-page-results">
+        {results.slice(0, query ? 80 : 36).map(({ record }) => (
+          <a href={record.href} key={record.id}>
+            <span>{record.kind}</span><div><h2>{record.title}</h2><h3>{record.english}</h3><p>{record.description}</p></div><i>→</i>
+          </a>
+        ))}
+        {results.length === 0 && <div className="search-page-empty"><b>没有找到匹配内容</b><p>缩短关键词、切回“全部”，或试试中英文同义词。知识库仍在持续扩充。</p><button type="button" onClick={() => { setQuery(''); setKind('全部'); }}>清除条件</button></div>}
+      </div>
+      {!query && results.length > 36 && <p className="search-browse-note">当前先展示 36 条精选入口；输入任意关键词即可检索全部 {searchRecords.length} 条内容。</p>}
+    </section>
+  );
+}
