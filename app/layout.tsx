@@ -4,7 +4,7 @@ import { SiteHeader } from '@/components/site-header';
 import './globals.css';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://caishi.yrchr.com'),
+  metadataBase: new URL('https://caizhidao.yrchr.com'),
   title: {
     default: '财知道 · 财经金融经济学科普知识库',
     template: '%s',
