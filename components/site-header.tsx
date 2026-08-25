@@ -105,7 +105,6 @@ export function SiteHeader() {
       {activeGroup && (
         <div className="section-nav">
           <div className="section-nav-inner">
-            <span className="section-nav-label"><HeaderIcon name={activeGroup.icon} /><b>{activeGroup.label}</b></span>
             <nav aria-label={`${activeGroup.label}二级导航`} ref={subnavRef}>
               {activeGroup.items.map((item) => {
                 const active = item.key === activeItem?.key;

@@ -277,26 +277,14 @@ body .section-nav-inner {
   height: 44px;
   margin: 0 auto;
   padding: 0;
-  display: grid;
-  grid-template-columns: minmax(210px, 238px) minmax(430px, 1fr) minmax(200px, 238px);
-  gap: 28px;
+  display: flex;
   align-items: center;
+  justify-content: center;
 }
-
-body .section-nav-label {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 0;
-  border: 0;
-}
-
-body .section-nav-label::before { display: none; }
-body .section-nav-label > svg { width: 15px; height: 15px; color: var(--cz-green); }
-body .section-nav-label b { color: var(--cz-muted); font: 600 12px/1 var(--cz-sans); }
 
 body .site-chrome .section-nav nav {
   min-width: 0;
+  max-width: 100%;
   height: 44px;
   padding: 0;
   display: flex;
@@ -586,11 +574,9 @@ body .system-board > footer b { display: block; margin-bottom: 4px; color: var(-
   body .section-nav-inner {
     width: 100%;
     padding: 0 22px;
-    grid-template-columns: auto minmax(0, 1fr);
-    gap: 20px;
   }
 
-  body .site-chrome .section-nav nav { justify-content: flex-start; }
+  body .site-chrome .section-nav nav { justify-content: center; }
 
   body .science-hero {
     grid-template-columns: 1fr;
@@ -633,8 +619,7 @@ body .system-board > footer b { display: block; margin-bottom: 4px; color: var(-
   }
 
   body .section-nav { height: 42px; }
-  body .section-nav-inner { height: 42px; padding: 0 14px; gap: 12px; }
-  body .section-nav-label b { display: none; }
+  body .section-nav-inner { height: 42px; padding: 0 14px; }
   body .site-chrome .section-nav nav { height: 42px; gap: 22px; }
   body .site-chrome .section-nav nav a { height: 42px; }
 
