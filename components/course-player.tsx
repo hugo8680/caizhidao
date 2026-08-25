@@ -36,7 +36,7 @@ export function CoursePlayer({ course }: { course: Course }) {
   return (
     <section className="course-player">
       <aside className="course-player-nav">
-        <div className="course-progress-head"><span>你的本机进度</span><b>{progress}%</b></div>
+        <div className="course-progress-head"><span>学习进度</span><b>{progress}%</b></div>
         <div className="course-progress-bar"><i style={{ width: `${progress}%` }} /></div>
         <small>{completed.length} / {course.lessons.length} 课完成 · 共 {totalMinutes} 分钟</small>
         <div className="course-lesson-buttons">
@@ -51,43 +51,33 @@ export function CoursePlayer({ course }: { course: Course }) {
       </aside>
 
       <article className="course-reader">
-        <header><span>LESSON {String(lesson.id).padStart(2, '0')} / {String(course.lessons.length).padStart(2, '0')}</span><small>{lesson.minutes} MINUTES</small></header>
+        <header><span>第 {lesson.id} 课 · 共 {course.lessons.length} 课</span><small>{lesson.minutes} 分钟</small></header>
         <h1>{lesson.title}</h1>
         <p className="course-reader-lead">{guide.plain}</p>
         <section className="lesson-key"><span>本课核心关系</span><strong>{lesson.key}</strong></section>
         <section className="lesson-context">
-          <span>WHY IT MATTERS</span>
-          <h2>为什么值得学</h2>
+          <span>理解这节课</span>
+          <h2>先把概念说清楚</h2>
           <p>{guide.why}</p>
         </section>
-        <section className="lesson-explain">
-          <span>CONCEPT WALKTHROUGH</span><h2>把概念一步步拆开</h2>
-          <ol>
-            {guide.mechanism.map((item) => <li key={item.title}><b>{item.title}</b><p>{item.text}</p></li>)}
-          </ol>
-        </section>
         <section className="lesson-example">
-          <div><span>WORKED EXAMPLE</span><h2>带数字的例子</h2></div>
+          <div><span>例子</span><h2>放到具体数字里看</h2></div>
           <p>{guide.example}</p>
         </section>
-        <div className="lesson-depth-grid">
+        <div className="lesson-depth-grid single-column">
           <section className="lesson-misconceptions">
-            <span>COMMON MISTAKES</span><h2>常见误区</h2>
+            <span>容易忽略</span><h2>常见误区</h2>
             {guide.misconceptions.map((item, index) => <p key={item}><b>{String(index + 1).padStart(2, '0')}</b>{item}</p>)}
-          </section>
-          <section className="lesson-checklist">
-            <span>DECISION CHECKLIST</span><h2>学完要会问</h2>
-            {guide.checklist.map((item) => <p key={item}>✓ {item}</p>)}
           </section>
         </div>
         <section className="lesson-english">
-          <span>ENGLISH NOTE</span><h2>相关英文解释</h2><p lang="en">{guide.english}</p>
+          <span>英文说法</span><h2>相关英文解释</h2><p lang="en">{guide.english}</p>
         </section>
         <details className="lesson-practice">
-          <summary><span>随堂练习</span><b>{lesson.practice}</b><i>展开练习提示 ＋</i></summary>
+          <summary><span>练习一下</span><b>{lesson.practice}</b><i>查看提示 ＋</i></summary>
           <p>{guide.exerciseHint}</p>
         </details>
-        <section className="lesson-notice"><b>学习边界</b><p>本站课程用于建立分析框架，不构成个别产品推荐。真实决策还应核验费用、税务、合同与自身风险承受能力。</p></section>
+        <section className="lesson-notice"><b>说明</b><p>涉及真实资金时，还要核对费率、税务、合同和自己能承受的风险。</p></section>
         <div className="course-reader-actions">
           <button type="button" disabled={lesson.id === 1} onClick={() => move(-1)}>← 上一课</button>
           <button type="button" className={completed.includes(lesson.id) ? 'complete done' : 'complete'} onClick={toggleComplete}>{completed.includes(lesson.id) ? '✓ 已完成本课' : '标记本课完成'}</button>

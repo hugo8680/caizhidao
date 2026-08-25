@@ -10,7 +10,7 @@ export default function TimelinePage() {
   return (
     <main>
       <section className="timeline-hero">
-        <div><p>ECONOMIC & FINANCIAL HISTORY</p><h1>财经发展简史</h1><p>一次思想突破解释旧问题，一场危机暴露制度缺口，一项政策又创造新的行为与风险。把概念放回时间，才能理解它为什么存在。</p></div>
+        <div><p>财经简史</p><h1>财经发展简史</h1><p>许多今天习以为常的制度，都经历过危机、争论和反复调整。沿着时间往回看，更容易理解它们为什么出现。</p></div>
         <aside><span>1776</span><i /><span>2023</span><b>{timelineEvents.length} 个关键节点</b></aside>
       </section>
 
@@ -19,7 +19,7 @@ export default function TimelinePage() {
           {timelineEvents.map((event, index) => (
             <article data-kind={event.kind} key={`${event.year}-${event.title}`}>
               <div><span>{event.year}</span><i /><small>{String(index + 1).padStart(2, '0')}</small></div>
-              <a className="timeline-event-link" href={`/timeline/${event.year}/`}><header><b>{event.kind}</b><small>{index === 0 ? '起点' : `${Number(event.year) - Number(timelineEvents[index - 1].year)} 年后`}</small></header><h2>{event.title}</h2><p>{event.description}</p><blockquote><span>它改变了什么</span>{event.impact}</blockquote><strong>阅读事件详情 →</strong></a>
+              <a className="timeline-event-link" href={`/timeline/${event.year}/`}><header><b>{event.kind}</b><small>{index === 0 ? '起点' : `${Number(event.year) - Number(timelineEvents[index - 1].year)} 年后`}</small></header><h2>{event.title}</h2><p>{event.description}</p><blockquote><span>带来的变化</span>{event.impact}</blockquote><strong>查看详情 →</strong></a>
             </article>
           ))}
         </div>

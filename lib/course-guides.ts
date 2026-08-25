@@ -180,8 +180,8 @@ export function buildLessonGuide(course: Course, lesson: CourseLesson): LessonGu
 
   return {
     english,
-    plain: `${lesson.summary}${intuition}`,
-    why: frame.why,
+    plain: lesson.summary,
+    why: intuition,
     mechanism: [
       { title: '01｜先定对象与口径', text: `本课讨论“${lesson.title}”。先确认金额对应的主体、时间点、计量单位与比较口径；口径不同，再准确的算式也无法直接比较。` },
       { title: '02｜顺着核心关系走', text: `本课核心关系是“${lesson.key}”。不要只背这句话，要逐项说明每个变量为什么变化、变化后通过哪条路径影响结果。` },

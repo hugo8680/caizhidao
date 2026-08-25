@@ -728,6 +728,23 @@ body::before {
 .course-lesson-buttons button:hover,
 .course-lesson-buttons button.active { background: white; box-shadow: inset 3px 0 #ed6749; }
 .course-reader { border: 0; border-radius: 16px; background: white; box-shadow: 0 16px 42px rgba(19, 39, 47, .08); }
+.lesson-depth-grid.single-column { grid-template-columns: 1fr; }
+
+.plain-error-page {
+  min-height: 72vh;
+  display: grid;
+  place-items: center;
+  padding: 48px 24px;
+}
+.plain-error-page > section { width: min(560px, 100%); }
+.plain-error-page span { color: #ed6749; font-size: 13px; font-weight: 800; }
+.plain-error-page h1 { margin: 12px 0 16px; font-size: clamp(30px, 5vw, 52px); }
+.plain-error-page p { margin: 0; color: var(--muted); font-size: 16px; line-height: 1.8; }
+.plain-error-page div { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 10px; }
+.plain-error-page a,
+.plain-error-page button { min-height: 44px; padding: 0 18px; display: inline-flex; align-items: center; border: 1px solid var(--ink); border-radius: 9px; background: white; color: var(--ink); font: inherit; cursor: pointer; }
+.plain-error-page a:first-child,
+.plain-error-page button { background: var(--ink); color: white; }
 .course-reader > h1 { font-family: var(--sans); font-weight: 760; }
 .lesson-context,
 .lesson-depth-grid > section,
@@ -753,6 +770,7 @@ body::before {
 .book-detail-layout > aside { border: 0; border-radius: 13px; background: white; box-shadow: 0 9px 26px rgba(19, 39, 47, .06); }
 .video-detail-content > article,
 .video-detail-content > aside { border: 0; border-radius: 13px; }
+.video-detail-content { grid-template-columns: minmax(0, 1fr) 300px; }
 
 .discipline-pagination,
 .topic-pagination,
@@ -801,6 +819,7 @@ body::before {
   .knowledge-layout > aside a { flex: 0 0 auto; }
   .topics-index-grid,
   .book-grid { grid-template-columns: 1fr; }
+  .video-detail-content { grid-template-columns: 1fr; }
   .topics-index-grid ol { grid-template-columns: 1fr; }
 }
 

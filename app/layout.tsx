@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     default: '财知道 · 财经金融经济学科普知识库',
     template: '%s',
   },
-  description: '连接经济学、金融学、会计与个人财务的科普知识体系：12 个学科、240 个知识节点、双语百科、专题路线、课程、工具与资源。',
+  description: '通俗解释经济学、金融学、会计和个人财务，收录知识地图、双语百科、课程、计算工具、图书与公开视频。',
   icons: {
     icon: [{ url: '/favicon.svg', type: 'image/svg+xml' }],
     shortcut: '/favicon.svg',

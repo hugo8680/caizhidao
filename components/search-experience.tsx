@@ -28,22 +28,22 @@ export function SearchExperience() {
   return (
     <section className="search-page-shell">
       <div className="search-page-box">
-        <label><span>⌕</span><input type="search" autoFocus value={query} onChange={(event) => setQuery(event.target.value)} placeholder="输入中文、English、ISBN 或课程主题…" /><kbd>⌘ K</kbd></label>
-        <div className="search-suggestions"><span>快速检索</span>{suggestions.map((item) => <button type="button" onClick={() => setQuery(item)} key={item}>{item}</button>)}</div>
+        <label><span>⌕</span><input type="search" autoFocus value={query} onChange={(event) => setQuery(event.target.value)} placeholder="输入关键词、英文术语或 ISBN…" /><kbd>⌘ K</kbd></label>
+        <div className="search-suggestions"><span>常用关键词</span>{suggestions.map((item) => <button type="button" onClick={() => setQuery(item)} key={item}>{item}</button>)}</div>
       </div>
       <div className="search-tabs" role="tablist" aria-label="结果类型">
         {kinds.map((item) => <button type="button" role="tab" aria-selected={kind === item} className={kind === item ? 'active' : ''} onClick={() => setKind(item)} key={item}><span>{item}</span><b>{counts[item]}</b></button>)}
       </div>
-      <div className="search-results-head"><p>{query ? <>“{query}” 的检索结果</> : <>浏览全站知识网络</>}<b>{results.length}</b></p><small>深度百科与标题精确匹配优先，其次匹配学科、主题、摘要、课程与资源。</small></div>
+      <div className="search-results-head"><p>{query ? <>“{query}” 的搜索结果</> : <>浏览全部内容</>}<b>{results.length}</b></p><small>按相关程度排序</small></div>
       <div className="search-page-results">
         {results.slice(0, query ? 80 : 36).map(({ record }) => (
           <a href={record.href} key={record.id}>
             <span>{record.kind}</span><div><h2>{record.title}</h2><h3>{record.english}</h3><p>{record.description}</p></div><i>→</i>
           </a>
         ))}
-        {results.length === 0 && <div className="search-page-empty"><b>没有找到匹配内容</b><p>缩短关键词、切回“全部”，或试试中英文同义词。知识库仍在持续扩充。</p><button type="button" onClick={() => { setQuery(''); setKind('全部'); }}>清除条件</button></div>}
+        {results.length === 0 && <div className="search-page-empty"><b>没有找到相关内容</b><p>可以换一个短一点的关键词，或者切回“全部”。</p><button type="button" onClick={() => { setQuery(''); setKind('全部'); }}>清除条件</button></div>}
       </div>
-      {!query && results.length > 36 && <p className="search-browse-note">当前先展示 36 条精选入口；输入任意关键词即可检索全部 {searchRecords.length} 条内容。</p>}
+      {!query && results.length > 36 && <p className="search-browse-note">这里先显示 36 条；输入关键词可以搜索全部 {searchRecords.length} 条内容。</p>}
     </section>
   );
 }

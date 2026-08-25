@@ -31,13 +31,13 @@ export default async function KnowledgeCategoryPage({ params }: CategoryPageProp
       <section className="knowledge-category-hero">
         <p><a href="/knowledge/">科普百科</a><span>／</span>主题目录</p>
         <small>{category.en}</small><h1>{category.name}</h1><p>{category.overview}</p>
-        <div><b>{terms.length}</b><span>篇深度百科</span></div>
+        <div><b>{terms.length}</b><span>个百科词条</span></div>
       </section>
       <section className="knowledge-category-grid">
         {terms.map((term, index) => (
           <a href={`/knowledge/${term.slug}/`} key={term.slug}>
             <ConceptVisual type={term.visual} label={term.zh} />
-            <div><span>{String(index + 1).padStart(2, '0')} · {term.en}</span><h2>{term.zh}</h2><p>{term.summary}</p><b>阅读完整解释 →</b></div>
+            <div><span>{String(index + 1).padStart(2, '0')} · {term.en}</span><h2>{term.zh}</h2><p>{term.summary}</p><b>查看解释 →</b></div>
           </a>
         ))}
       </section>

@@ -49,8 +49,8 @@ export default async function DisciplinePage({ params }: DisciplinePageProps) {
       </section>
 
       <nav className="discipline-pagination" aria-label="相邻学科索引">
-        {previous ? <a href={`/atlas/${previous.slug}/`}><span>← 相邻学科</span><b>{previous.name}</b></a> : <a href="/atlas/"><span>← 返回</span><b>全部学科索引</b></a>}
-        {next ? <a href={`/atlas/${next.slug}/`}><span>相邻学科 →</span><b>{next.name}</b></a> : <a href="/atlas/"><span>返回</span><b>全部学科索引</b></a>}
+        {previous ? <a href={`/atlas/${previous.slug}/`}><span>← 上一学科</span><b>{previous.name}</b></a> : <a href="/atlas/"><span>← 返回</span><b>全部学科索引</b></a>}
+        {next ? <a href={`/atlas/${next.slug}/`}><span>下一学科 →</span><b>{next.name}</b></a> : <a href="/atlas/"><span>返回</span><b>全部学科索引</b></a>}
       </nav>
     </main>
   );

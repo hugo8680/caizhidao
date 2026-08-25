@@ -12,7 +12,7 @@ export default function KnowledgePage() {
   return (
     <main>
       <section className="reference-index-head">
-        <div><span>ENCYCLOPEDIA · 百科词条</span><h1>财经知识库</h1><p>按主题查找名词解释、英文释义、机制、公式、案例与常见误区。</p></div>
+        <div><span>百科词条</span><h1>财经知识库</h1><p>按主题查找名词解释、英文释义、公式、例子和常见误区。</p></div>
         <dl><div><dt>收录词条</dt><dd>{knowledgeTerms.length}</dd></div><div><dt>主题分类</dt><dd>{knowledgeCategories.length}</dd></div><div><dt>内容形态</dt><dd>中英双语</dd></div></dl>
       </section>
       <section className="knowledge-layout">
@@ -27,7 +27,7 @@ export default function KnowledgePage() {
               <div className="knowledge-list">
                 {knowledgeTerms.filter((term) => term.category === category).map((term) => <a href={`/knowledge/${term.slug}/`} key={term.slug} className="knowledge-card">
                   <ConceptVisual type={term.visual} label={term.zh} />
-                  <div className="knowledge-copy"><span>{term.category}</span><h2>{term.zh}</h2><h3>{term.en}{term.abbr ? ` · ${term.abbr}` : ''}</h3><p>{term.summary}</p><b>打开百科词条 →</b></div>
+                  <div className="knowledge-copy"><span>{term.category}</span><h2>{term.zh}</h2><h3>{term.en}{term.abbr ? ` · ${term.abbr}` : ''}</h3><p>{term.summary}</p><b>查看解释 →</b></div>
                 </a>)}
               </div>
             </section>

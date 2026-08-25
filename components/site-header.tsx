@@ -13,7 +13,6 @@ type NavItem = {
 type NavGroup = {
   key: string;
   label: string;
-  en: string;
   href: string;
   items: NavItem[];
 };
@@ -22,7 +21,7 @@ const beginnerHref = '/courses/finance-foundations/';
 
 const navGroups: NavGroup[] = [
   {
-    key: 'learn', label: '学习', en: 'LEARN', href: '/courses/',
+    key: 'learn', label: '学习', href: '/courses/',
     items: [
       { key: 'beginner', label: '新手入门', href: beginnerHref },
       { key: 'courses', label: '系统课程', href: '/courses/' },
@@ -30,7 +29,7 @@ const navGroups: NavGroup[] = [
     ],
   },
   {
-    key: 'reference', label: '查知识', en: 'REFERENCE', href: '/knowledge/',
+    key: 'reference', label: '查知识', href: '/knowledge/',
     items: [
       { key: 'knowledge', label: '百科词条', href: '/knowledge/' },
       { key: 'atlas', label: '知识地图', href: '/atlas/' },
@@ -38,14 +37,14 @@ const navGroups: NavGroup[] = [
     ],
   },
   {
-    key: 'practice', label: '练习工具', en: 'PRACTICE', href: '/tools/',
+    key: 'practice', label: '练习工具', href: '/tools/',
     items: [
       { key: 'tools', label: '计算工具', href: '/tools/' },
       { key: 'games', label: '互动练习', href: '/games/' },
     ],
   },
   {
-    key: 'resources', label: '书与视频', en: 'RESOURCES', href: '/books/',
+    key: 'resources', label: '书与视频', href: '/books/',
     items: [
       { key: 'books', label: '财经图书', href: '/books/' },
       { key: 'videos', label: '视频课程', href: '/videos/' },
@@ -85,13 +84,13 @@ export function SiteHeader() {
       <header className="platform-header">
         <a className={`platform-brand${isHome ? ' active' : ''}`} href="/" aria-label="财知道首页" aria-current={isHome ? 'page' : undefined}>
           <span>财</span>
-          <b>财知道<small>ECONOMY KNOWLEDGE ATLAS</small></b>
+          <b>财知道<small>财经知识库</small></b>
         </a>
 
         <nav className="primary-nav" aria-label="主要分区">
           {navGroups.map((group) => {
             const active = group.key === activeGroup?.key;
-            return <a href={group.href} key={group.key} className={active ? 'active' : ''} aria-current={active ? 'page' : undefined}><span>{group.label}</span><small>{group.en}</small></a>;
+            return <a href={group.href} key={group.key} className={active ? 'active' : ''} aria-current={active ? 'page' : undefined}><span>{group.label}</span></a>;
           })}
         </nav>
 
@@ -104,7 +103,7 @@ export function SiteHeader() {
       {activeGroup && (
         <div className="section-nav">
           <div className="section-nav-inner">
-            <span className="section-nav-label"><b>{activeGroup.label}</b><small>{activeGroup.en}</small></span>
+            <span className="section-nav-label"><b>{activeGroup.label}</b></span>
             <nav aria-label={`${activeGroup.label}二级导航`} ref={subnavRef}>
               {activeGroup.items.map((item) => {
                 const active = item.key === activeItem?.key;

@@ -12,9 +12,9 @@ export default function CoursesPage() {
     <main className="course-catalog-page">
       <section className="course-catalog-head">
         <div>
-          <span>COURSE CATALOG / 课程目录</span>
+          <span>课程目录</span>
           <h1>从基础认知，到独立判断</h1>
-          <p>每套课程都有明确的起点、学习结果和完整课时。第一次来，建议从「金融通识入门」开始；已有基础，可以直接按目标选择。</p>
+          <p>第一次来，可以从「金融通识入门」开始；如果已经有基础，直接选择自己关心的主题即可。</p>
         </div>
         <dl>
           <div><dt>课程</dt><dd>{courses.length}<small>套</small></dd></div>
@@ -23,7 +23,7 @@ export default function CoursesPage() {
         </dl>
       </section>
       <section className="course-catalog-bar" aria-label="课程选择提示">
-        <span>建议顺序</span><b>建立通识</b><i>→</i><b>读懂产品与报表</b><i>→</i><b>理解估值、组合与全球风险</b>
+        <span>怎么选</span><b>先学通识</b><i>→</i><b>再读产品与报表</b><i>→</i><b>最后看估值、组合与全球风险</b>
       </section>
       <section className="course-index-grid course-bento-grid">
         {courses.map((course, index) => (

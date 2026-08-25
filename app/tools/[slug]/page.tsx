@@ -33,14 +33,14 @@ export default async function ToolDetailPage({ params }: ToolPageProps) {
 
   return (
     <main>
-      <section className="tool-detail-hero"><p><a href="/tools/">金融工具目录</a><span>／</span>{tool.category}</p><small>TOOL {String(index + 1).padStart(2, '0')}</small><h1>{tool.title}</h1><h2>{guide.question}</h2><p>{guide.explanation}</p></section>
+      <section className="tool-detail-hero"><p><a href="/tools/">金融工具目录</a><span>／</span>{tool.category}</p><small>第 {index + 1} 个工具</small><h1>{tool.title}</h1><h2>{guide.question}</h2><p>{guide.explanation}</p></section>
 
       <section className="tool-detail-calculator"><FinanceTools toolId={tool.id} /></section>
 
       <section className="tool-detail-guide">
-        <article><span>01 · INPUTS</span><h2>每个输入代表什么</h2><dl>{guide.inputs.map((input) => <div key={input.name}><dt>{input.name}</dt><dd>{input.meaning}</dd></div>)}</dl></article>
-        <article><span>02 · HOW TO READ</span><h2>怎样读结果</h2><p>{guide.reading}</p><div className="tool-guide-example"><b>建议练习</b><p>{guide.example}</p></div></article>
-        <article><span>03 · LIMITS</span><h2>计算没有包含什么</h2><ul>{guide.limits.map((limit) => <li key={limit}>{limit}</li>)}</ul><p>结果用于理解变量关系，不是报价、收益承诺或个别建议。真实决策应核对合同、费用、税务和风险。</p></article>
+        <article><span>输入项</span><h2>每个数字代表什么</h2><dl>{guide.inputs.map((input) => <div key={input.name}><dt>{input.name}</dt><dd>{input.meaning}</dd></div>)}</dl></article>
+        <article><span>计算结果</span><h2>怎么看这个数字</h2><p>{guide.reading}</p><div className="tool-guide-example"><b>可以这样试</b><p>{guide.example}</p></div></article>
+        <article><span>使用前请注意</span><h2>这个计算没有包括什么</h2><ul>{guide.limits.map((limit) => <li key={limit}>{limit}</li>)}</ul><p>计算结果仅供比较，不是报价或收益承诺。做实际决定前，请再核对合同、费用、税务和风险。</p></article>
       </section>
 
       <nav className="tool-pagination" aria-label="金融工具翻页">

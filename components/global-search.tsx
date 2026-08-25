@@ -27,16 +27,16 @@ export function GlobalSearch({ active = false }: { active?: boolean }) {
 
   return (
     <>
-      <button className={`search-entry${active ? ' active' : ''}`} type="button" onClick={() => setOpen(true)} aria-label="打开全站检索" aria-current={active ? 'page' : undefined}>
-        <kbd>⌘ K</kbd><span>检索全站知识</span>
+      <button className={`search-entry${active ? ' active' : ''}`} type="button" onClick={() => setOpen(true)} aria-label="打开搜索" aria-current={active ? 'page' : undefined}>
+        <kbd>⌘ K</kbd><span>搜索</span>
       </button>
       {open && (
         <div className="search-overlay" role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget) setOpen(false); }}>
-          <section className="search-dialog" role="dialog" aria-modal="true" aria-label="全站检索">
+          <section className="search-dialog" role="dialog" aria-modal="true" aria-label="全站搜索">
             <div className="search-dialog-input">
               <span>⌕</span>
-              <input ref={inputRef} type="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="搜索术语、课程、ISBN、工具或视频…" />
-              <button type="button" onClick={() => setOpen(false)}>ESC</button>
+              <input ref={inputRef} type="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="输入关键词、英文术语或 ISBN…" />
+              <button type="button" onClick={() => setOpen(false)}>关闭</button>
             </div>
             <div className="search-dialog-results">
               {results.map(({ record }) => (
@@ -46,9 +46,9 @@ export function GlobalSearch({ active = false }: { active?: boolean }) {
                   <i>↗</i>
                 </a>
               ))}
-              {query && results.length === 0 && <p className="search-empty">没有找到完全匹配的内容，试试更短的词，例如“现金流”“ETF”或“通胀”。</p>}
+            {query && results.length === 0 && <p className="search-empty">没有找到相关内容。可以试试“现金流”“ETF”或“通胀”这样的短词。</p>}
             </div>
-            <footer><span>↑ ↓ 浏览</span><span>Enter 打开</span><a href={`/search/?q=${encodeURIComponent(query)}`}>进入高级检索 →</a></footer>
+          <footer><a href={`/search/?q=${encodeURIComponent(query)}`}>查看全部结果 →</a></footer>
           </section>
         </div>
       )}

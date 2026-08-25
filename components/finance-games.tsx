@@ -43,7 +43,7 @@ export function FinanceGames() {
   return (
     <section className="game-grid">
       <article className="game-card game-speed">
-        <header><span>GAME 01</span><b>复利冲刺</b><small>估算力</small></header>
+        <header><span>游戏 1</span><b>复利冲刺</b><small>估算力</small></header>
         <h2>一笔钱按年化 {rates[rateIndex]}% 复利，多久大约翻倍？</h2>
         <div className="rate-picker">{rates.map((rate, index) => <button type="button" className={index === rateIndex ? 'active' : ''} onClick={() => { setRateIndex(index); setSpeedResult(''); }} key={rate}>{rate}%</button>)}</div>
         <label><span>你的答案</span><input type="range" min="5" max="25" value={years} onChange={(event) => { setYears(Number(event.target.value)); setSpeedResult(''); }} /><b>{years} 年</b></label>
@@ -52,7 +52,7 @@ export function FinanceGames() {
       </article>
 
       <article className="game-card game-match">
-        <header><span>GAME 02</span><b>目标配对</b><small>资产匹配</small></header>
+        <header><span>游戏 2</span><b>目标配对</b><small>资产匹配</small></header>
         <div className="game-score"><span>第 {matchIndex + 1} / {matches.length} 题</span><b>{matchScore} 分</b></div>
         <h2>{matches[matchIndex].goal}</h2><p>{matches[matchIndex].note}</p>
         <div className="match-choices">{matches[matchIndex].choices.map((choice, index) => <button type="button" className={matchAnswer === null ? '' : index === matches[matchIndex].correct ? 'correct' : index === matchAnswer ? 'wrong' : ''} onClick={() => chooseMatch(index)} key={choice}>{choice}</button>)}</div>
@@ -60,7 +60,7 @@ export function FinanceGames() {
       </article>
 
       <article className="game-card game-detective">
-        <header><span>GAME 03</span><b>产品侦探</b><small>骗局识别</small></header>
+        <header><span>游戏 3</span><b>产品侦探</b><small>骗局识别</small></header>
         <div className="case-tabs">{detectiveCases.map((item, index) => <button type="button" className={index === caseIndex ? 'active' : ''} onClick={() => { setCaseIndex(index); setCaseChoice(''); }} key={item.title}>案件 {index + 1}</button>)}</div>
         <h2>{currentCase.title}</h2><p>{currentCase.body}</p>
         <div className="detective-choices">{['立即转账', '阅读后再匹配目标', '拒绝并核验'].map((choice) => <button type="button" className={caseChoice ? (choice === currentCase.answer ? 'correct' : choice === caseChoice ? 'wrong' : '') : ''} onClick={() => setCaseChoice(choice)} key={choice}>{choice}</button>)}</div>

@@ -32,23 +32,18 @@ export default async function TopicDetailPage({ params }: TopicPageProps) {
         <p><a href="/topics/">专题路线</a><span>／</span>路线 {route.no}</p>
         <div>
           <span>{route.en}</span><h1>{route.title}</h1><h2>{route.question}</h2><p>{route.description}</p>
-          <div><b>{route.minutes}</b><small>建议分钟</small><b>{route.steps.length}</b><small>递进步骤</small></div>
+          <div><b>{route.minutes}</b><small>预计用时（分钟）</small><b>{route.steps.length}</b><small>个步骤</small></div>
         </div>
       </section>
 
       <section className="topic-step-list">
         {route.steps.map((step, index) => (
           <article key={step.title}>
-            <div className="topic-step-number"><span>STEP</span><b>{String(index + 1).padStart(2, '0')}</b><i /></div>
+            <div className="topic-step-number"><span>第</span><b>{String(index + 1).padStart(2, '0')}</b><i /></div>
             <div className="topic-step-copy"><small>{step.note}</small><h2>{step.title}</h2><p>{step.explanation}</p><div className="topic-step-example"><span>现实例子</span><p>{step.example}</p></div></div>
-            <aside><span>连接</span><b>{index === 0 ? '起点' : `${index} → ${index + 1}`}</b></aside>
+            <aside><span>进度</span><b>{index + 1} / {route.steps.length}</b></aside>
           </article>
         ))}
-      </section>
-
-      <section className="topic-recap">
-        <div><span>RECAP</span><h2>现在，用一句话串起来</h2><p>{route.question} 尝试不看页面，用“因为…所以…但如果…”复述五个步骤。能说清关系，比记住五个名词更重要。</p></div>
-        <a href="/topics/">返回专题路线目录 →</a>
       </section>
 
       <nav className="topic-pagination" aria-label="专题路线翻页">
