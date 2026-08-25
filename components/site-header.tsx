@@ -91,7 +91,7 @@ export function SiteHeader() {
         <nav className="primary-nav" aria-label="主要分区">
           {navGroups.map((group) => {
             const active = group.key === activeGroup?.key;
-            return <a href={group.href} key={group.key} className={active ? 'active' : ''} aria-current={active ? 'page' : undefined}>{group.label}</a>;
+            return <a href={group.href} key={group.key} className={active ? 'active' : ''} aria-current={active ? 'page' : undefined}><span>{group.label}</span><small>{group.en}</small></a>;
           })}
         </nav>
 
