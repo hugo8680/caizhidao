@@ -4,6 +4,7 @@ import { SiteHeader } from '@/components/site-header';
 import './globals.css';
 import './visual-refresh.css';
 import './visual-rebuild.css';
+import './knowledge-system.css';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://caizhidao.yrchr.com'),

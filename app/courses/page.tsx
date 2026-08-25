@@ -22,9 +22,6 @@ export default function CoursesPage() {
           <div><dt>难度</dt><dd>3<small>级</small></dd></div>
         </dl>
       </section>
-      <section className="course-catalog-bar" aria-label="课程选择提示">
-        <span>怎么选</span><b>先学通识</b><i>→</i><b>再读产品与报表</b><i>→</i><b>最后看估值、组合与全球风险</b>
-      </section>
       <section className="course-index-grid course-bento-grid">
         {courses.map((course, index) => (
           <a href={`/courses/${course.slug}/`} className={`course-index-card accent-${course.accent}`} data-course={String(index + 1).padStart(2, '0')} key={course.slug}>

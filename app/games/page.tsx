@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 export default function GamesPage() {
   return (
     <main>
-      <section className="page-hero games-hero"><p>边玩边学</p><h1>金融小游戏</h1><div className="hero-metrics"><span><b>3</b>个游戏</span><span><b>10+</b>种情景</span><span><b>随时</b>可以重玩</span></div></section>
+      <header className="catalog-head standalone-catalog-head"><div><span>练习工具 / 互动</span><h1>金融小游戏</h1></div><dl><div><dt>游戏</dt><dd>3 个</dd></div><div><dt>情景</dt><dd>10+ 种</dd></div><div><dt>练习</dt><dd>可重复</dd></div></dl></header>
       <FinanceGames />
     </main>
   );

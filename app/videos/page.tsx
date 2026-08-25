@@ -11,8 +11,11 @@ const languageOrder = ['中文', '双语/中文字幕', '英文'] as const;
 export default function VideosPage() {
   return (
     <main>
-      <section className="page-hero video-hero"><p>公开课与视频</p><h1>中英文视频课程</h1><div className="hero-metrics"><span><b>{videos.length}</b>个入口</span><span><b>{videos.filter((item) => item.price.includes('免费')).length}</b>个免费入口</span><span><b>3</b>种语言</span></div></section>
       <section className="video-sections">
+        <header className="catalog-head resource-catalog-head">
+          <div><span>书与视频 / 视频</span><h1>视频课程</h1></div>
+          <dl><div><dt>课程</dt><dd>{videos.length} 个</dd></div><div><dt>免费</dt><dd>{videos.filter((item) => item.price.includes('免费')).length} 个</dd></div><div><dt>语言</dt><dd>3 种</dd></div></dl>
+        </header>
         {languageOrder.map((language) => (
           <section className="video-section" key={language}>
             <header><span>{language === '中文' ? '中文课程' : language === '英文' ? '英文课程' : '双语或带字幕'}</span><h2>{language}</h2><small>{videos.filter((video) => video.language === language).length} 个课程入口</small></header>
