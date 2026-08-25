@@ -1,6 +1,5 @@
 <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <path d="M8 8C8 3.582 11.582 0 16 0H48C56.837 0 64 7.163 64 16V48C64 56.837 56.837 64 48 64H16C7.163 64 0 56.837 0 48V16C0 11.582 3.582 8 8 8Z" fill="#172A33"/>
-  <rect x="9" y="9" width="4" height="46" rx="2" fill="#D5A950"/>
-  <path d="M48 0H64V16L48 0Z" fill="#F2E8D1"/>
-  <text x="36" y="43" fill="#E4BD68" font-family="Songti SC, STSong, serif" font-size="29" font-weight="700" text-anchor="middle">财</text>
+  <rect x="2" y="2" width="60" height="60" rx="13" fill="#173F36"/>
+  <rect x="8.5" y="8.5" width="47" height="47" rx="8.5" stroke="#E8C982" stroke-opacity="0.28"/>
+  <text x="32" y="43" fill="#E8C982" font-family="Songti SC, STSong, serif" font-size="30" font-weight="700" text-anchor="middle">财</text>
 </svg>

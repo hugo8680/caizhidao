@@ -26,9 +26,9 @@ export default function Home() {
     <main>
       <section className="science-hero">
         <div className="science-copy">
-          <p className="science-kicker"><span>财知道</span> 财经 · 金融 · 经济学科普知识库</p>
-          <h1>看懂钱如何流动，<br />市场为何波动，<br /><em>世界怎样做选择。</em></h1>
-          <p className="science-lead">从一杯咖啡的价格，到一次加息、一张财报和一场金融危机，我们把这些事情放在一起讲清楚。</p>
+          <p className="science-kicker"><span>财知道</span> 财经 · 金融 · 经济学知识库</p>
+          <h1>从一个问题开始，<br /><em>看懂钱、市场与经济。</em></h1>
+          <p className="science-lead">需要查一个名词、补一门课程，或梳理一整套知识，都可以从这里开始。</p>
           <div className="science-actions"><a href="/courses/finance-foundations/">从零开始学习 <span>→</span></a><a href="/search/">我想查一个概念</a></div>
           <div className="question-seeds"><span>从问题出发</span><a href="/search/?q=通胀">物价为什么会上涨？</a><a href="/search/?q=利率">加息影响了谁？</a><a href="/search/?q=股票">股票到底是什么？</a></div>
         </div>
