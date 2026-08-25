@@ -851,3 +851,313 @@ body::before {
   .knowledge-card .concept-visual { min-height: 105px; }
   .book-card { grid-template-columns: 50px minmax(0, 1fr); }
 }
+
+/* --------------------------------------------------------------------------
+   Calm editorial pass: one meaningful accent per module, neutral content.
+   -------------------------------------------------------------------------- */
+
+html { scroll-behavior: auto; }
+
+/* Repeated cards use structure, not a different fill color for every item. */
+.course-catalog-page { background: #f2f5f4; }
+.course-bento-grid .course-index-card { --accent: #d65f48; }
+.course-bento-grid .course-index-card:nth-child(2),
+.course-bento-grid .course-index-card:nth-child(4),
+.course-bento-grid .course-index-card:nth-child(6),
+.course-bento-grid .course-index-card:nth-child(8) { background: #fff; }
+.course-catalog-bar span { background: #f7e6e2; color: #a84f3c; }
+.course-catalog-head dd small,
+.course-bento-grid .course-index-card:first-child > footer b { color: #f2a08e; }
+
+.home-discipline-grid .home-discipline { --tone: #39746b; background: #fff; }
+.atlas-directory-grid > a { --tone: #4263eb; }
+.atlas-directory-grid > a:nth-child(4n + 2),
+.resource-layer-grid > a:nth-child(3n + 2) { background: #fff; }
+
+.route-grid > a:nth-child(4n + 1),
+.route-grid > a:nth-child(4n + 2),
+.route-grid > a:nth-child(4n + 3),
+.route-grid > a:nth-child(4n),
+.concept-preview-grid > a,
+.concept-preview-grid > a:nth-child(even) { background: #f2f5f4; }
+
+.topics-index-grid > a:nth-child(4n + 1),
+.topics-index-grid > a:nth-child(4n + 2),
+.topics-index-grid > a:nth-child(4n + 3),
+.topics-index-grid > a:nth-child(4n),
+.tool-directory-grid > a:nth-child(4n + 2),
+.tool-directory-grid > a:nth-child(4n + 3) { background: #fff; }
+
+.question-lab { background: #19333b; }
+.question-lab .home-section-head > p,
+.question-grid p { color: #b8c7ca; }
+.question-grid header span { color: #a9bdc1; }
+
+/* Module headers remain distinct, but their fills stay in one muted family. */
+.topics-hero { background: #f5efec; }
+.tools-hero { background: #eaf2ef; }
+.library-hero { background: #f3eeea; }
+.games-hero { background: #f4efe2; }
+.games-hero > p { color: #7b6430; }
+
+/* Learning pages consistently use the learning accent. */
+.topics-index-grid h3,
+.topics-index-grid footer,
+.topics-index-grid header span,
+.topics-index-grid li > span,
+.topic-detail-hero > p a,
+.topic-detail-hero > div > span,
+.topic-detail-hero > div > div b,
+.topic-step-number span,
+.topic-step-copy small,
+.topic-step-example > span { color: #c15843; }
+.topic-step-number::after { background: #c15843; box-shadow: 0 0 0 1px #c15843; }
+.topic-step-example { border-left-color: #c15843; }
+
+/* Course reader: a single paper-like reading surface with restrained callouts. */
+.course-detail-hero { --accent: #d65f48; background: #173039; }
+.course-detail-hero > p a,
+.course-detail-hero h2,
+.course-detail-hero > aside b { color: #f2a08e; }
+.course-player-nav {
+  border: 1px solid rgba(19, 39, 47, .1);
+  background: #edf1ef;
+  box-shadow: 0 8px 24px rgba(19, 39, 47, .045);
+}
+.course-progress-head b { color: #b85440; }
+.course-progress-bar { background: #d9dfdc; }
+.course-progress-bar i { background: #b85440; }
+.course-lesson-buttons button { transition: background-color .14s ease, box-shadow .14s ease, color .14s ease, transform .08s ease; }
+.course-lesson-buttons button:hover:not(.active) { background: rgba(255, 255, 255, .58); box-shadow: none; }
+.course-lesson-buttons button.active {
+  background: #fff;
+  color: #182f36;
+  box-shadow: inset 3px 0 #d65f48, 0 3px 10px rgba(19, 39, 47, .045);
+}
+.course-lesson-buttons button.active > span { border-color: #d65f48; color: #b85440; }
+.course-lesson-buttons button:active { transform: translateY(1px); }
+
+.course-reader {
+  scroll-margin-top: calc(var(--site-chrome-height) + 16px);
+  border: 1px solid rgba(19, 39, 47, .08);
+  box-shadow: 0 12px 34px rgba(19, 39, 47, .065);
+}
+.course-reader > header { color: #a84f3c; }
+.course-reader > h1:focus { outline: 0; }
+.course-reader h2 { font-family: var(--sans); font-weight: 730; letter-spacing: -.02em; }
+
+.lesson-key {
+  border-left-color: #d65f48;
+  background: #f3f5f4;
+}
+.lesson-key span,
+.lesson-context > span,
+.lesson-example span,
+.lesson-depth-grid section > span,
+.lesson-english > span,
+.lesson-practice summary span { color: #b85440; }
+
+.lesson-context {
+  margin-bottom: 34px;
+  padding: 0 0 31px;
+  border: 0;
+  border-bottom: 1px solid rgba(19, 39, 47, .11);
+  border-radius: 0;
+  background: transparent;
+}
+.lesson-context h2 { margin-top: 0; }
+
+.lesson-example {
+  border: 1px solid rgba(19, 39, 47, .1);
+  background: #f4f5f3;
+}
+.lesson-example h2 { margin: 0; }
+.lesson-example > p { border-left-color: rgba(19, 39, 47, .13); }
+
+.lesson-depth-grid > section {
+  border: 1px solid rgba(19, 39, 47, .1);
+  background: #fff;
+}
+.lesson-depth-grid h2 { margin-top: 0; }
+
+.lesson-english {
+  border: 1px solid rgba(19, 39, 47, .1);
+  border-left: 3px solid #d65f48;
+  background: #f4f5f3;
+  color: var(--ink);
+  box-shadow: none;
+}
+.lesson-english h2 { margin-top: 0; color: var(--ink); }
+.lesson-english p { color: #52636a; }
+
+.lesson-practice {
+  border: 1px solid rgba(19, 39, 47, .13);
+  background: #fff;
+}
+.lesson-practice summary i { color: #b85440; }
+.lesson-notice {
+  border-left: 3px solid #d65f48;
+  background: #f3f5f4;
+  color: #5d6d72;
+}
+.lesson-notice b { color: #a84f3c; }
+.course-reader-actions .complete.done { background: #2e7065; }
+
+/* Encyclopedia pages keep blue as their sole accent without large blue slabs. */
+.term-article > section > span {
+  border-color: rgba(66, 99, 235, .22);
+  background: #eef1fb;
+  color: #3e56bd;
+}
+.term-article .english-definition {
+  border: 1px solid rgba(19, 39, 47, .1);
+  border-left: 3px solid #4263eb;
+  background: #f3f5f4;
+  color: var(--ink);
+  box-shadow: none;
+}
+.term-article .english-definition > span {
+  border-color: rgba(66, 99, 235, .22);
+  background: #eef1fb;
+  color: #3e56bd;
+}
+.term-article .english-definition p { color: #52636a; }
+.term-formula strong,
+.term-scenario blockquote {
+  border-left-color: #4263eb;
+  background: #f3f5f4;
+}
+.term-checklist > div { background: #f3f5f4; }
+.term-aside {
+  border: 1px solid rgba(66, 99, 235, .13);
+  background: #eef1f6;
+  box-shadow: none;
+}
+.term-aside > span,
+.term-aside i,
+.term-back,
+.term-fact p::first-letter,
+.term-checklist > div b { color: #4263eb; }
+
+/* Reference pages consistently use the reference accent. */
+.atlas-reference-head { background: #173039; }
+.atlas-reference-head > div > p:first-child,
+.atlas-reference-head .atlas-scale dd { color: #aebcff; }
+.knowledge-group > header span,
+.knowledge-copy > span,
+.knowledge-copy > b { color: #4263eb; }
+.discipline-hero { --tone: #4263eb; }
+.discipline-hero > p a,
+.discipline-hero > div > small,
+.discipline-topic-list > article > header span { color: #4263eb; }
+.discipline-hero > aside b { color: #aebcff; }
+
+/* Calculators and practice pages consistently use the practice accent. */
+.tool-directory-grid header span,
+.tool-directory-grid header small,
+.tool-directory-grid footer,
+.tool-detail-hero > p a,
+.tool-detail-hero > small,
+.tool-detail-calculator > header span,
+.tool-detail-guide article > span,
+.tool-card-title > span,
+.tool-card-title small,
+.tool-result > span,
+.tool-detail-guide dt,
+.game-card > header span,
+.game-score b { color: #087a6b; }
+.tool-card-title > span { border-color: #087a6b; }
+.tool-result,
+.tool-result.green,
+.tool-result.coral { background: #f2f5f4; }
+.tool-guide-example {
+  border-left: 3px solid #087a6b;
+  background: #f2f5f4;
+  color: var(--ink);
+}
+.tool-guide-example b { color: #087a6b; }
+.tool-guide-example p { color: #5d6d72; }
+.game-speed > label input { accent-color: #087a6b; }
+
+/* Games use semantic success/error colors only after the user answers. */
+.game-card.game-speed,
+.game-card.game-match,
+.game-card.game-detective {
+  border: 1px solid rgba(19, 39, 47, .1) !important;
+  background: #fff;
+  box-shadow: 0 8px 24px rgba(19, 39, 47, .055);
+}
+.game-feedback { border-left-color: #39746b; background: #f2f5f4; }
+
+/* Book guidance stays in the warmer resources palette. */
+.book-reading-fit {
+  border-left: 3px solid #9b5b36;
+  background: #f4efeb;
+}
+.book-reading-fit b { color: #9b5b36; }
+
+/* Solid dark headers avoid decorative multi-color gradients. */
+.video-hero,
+.timeline-hero { background: #173039; }
+
+/* Search feedback stays neutral and the overlay avoids a costly blur layer. */
+.search-overlay { background: rgba(10, 25, 27, .76); backdrop-filter: none; }
+.search-dialog-results > a:hover,
+.search-page-results > a:hover { background: #edf1ef; }
+.search-dialog > footer { background: #f2f5f4; }
+
+/* Keep the two navigation rows inside the viewport at tablet and phone sizes. */
+@media (max-width: 1120px) {
+  .site-chrome .platform-header {
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-rows: 64px 44px;
+  }
+  .site-chrome .primary-nav {
+    width: calc(100% + 48px);
+    margin-left: -24px;
+    padding: 4px 14px;
+    grid-column: 1 / -1;
+    grid-row: 2;
+    justify-content: flex-start;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+  }
+  .site-chrome .primary-nav > a { flex: 1 0 94px; }
+  .header-actions { width: auto; grid-column: 2; grid-row: 1; }
+  .site-chrome .search-entry { min-width: 44px; width: 44px; padding: 0; }
+  .site-chrome .search-entry span { display: none; }
+}
+
+@media (max-width: 620px) {
+  .site-chrome .platform-header {
+    padding-inline: 14px;
+    grid-template-rows: 62px 44px;
+  }
+  .site-chrome .platform-brand { height: 62px; }
+  .site-chrome .primary-nav {
+    width: calc(100% + 28px);
+    margin-left: -14px;
+    padding-inline: 8px;
+  }
+  .site-chrome .primary-nav > a {
+    min-width: 78px;
+    flex: 1 0 76px;
+    padding-inline: 9px !important;
+  }
+  .site-chrome .search-entry { min-width: 43px; width: 43px; }
+  .section-nav-inner {
+    padding: 0;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 0;
+  }
+  .section-nav-label {
+    padding: 0 12px;
+    border-right: 1px solid rgba(19, 39, 47, .1);
+  }
+  .site-chrome .section-nav nav { padding: 0 8px; }
+  .site-chrome .section-nav nav a {
+    min-width: auto;
+    flex: 0 0 auto;
+    padding-inline: 11px !important;
+  }
+}

@@ -1,11 +1,12 @@
 'use client';
 
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState, type KeyboardEvent as ReactKeyboardEvent } from 'react';
 import { searchContent } from '@/lib/search';
 
 export function GlobalSearch({ active = false }: { active?: boolean }) {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState('');
+  const triggerRef = useRef<HTMLButtonElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const results = useMemo(() => searchContent(query).slice(0, 8), [query]);
 
@@ -22,17 +23,41 @@ export function GlobalSearch({ active = false }: { active?: boolean }) {
   }, []);
 
   useEffect(() => {
-    if (open) window.setTimeout(() => inputRef.current?.focus(), 30);
+    if (!open) return;
+    const trigger = triggerRef.current;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    const timer = window.setTimeout(() => inputRef.current?.focus(), 30);
+    return () => {
+      window.clearTimeout(timer);
+      document.body.style.overflow = previousOverflow;
+      trigger?.focus({ preventScroll: true });
+    };
   }, [open]);
+
+  const keepFocusInside = (event: ReactKeyboardEvent<HTMLElement>) => {
+    if (event.key !== 'Tab') return;
+    const focusable = Array.from(event.currentTarget.querySelectorAll<HTMLElement>('input, button:not(:disabled), a[href]'));
+    if (focusable.length === 0) return;
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
+  };
 
   return (
     <>
-      <button className={`search-entry${active ? ' active' : ''}`} type="button" onClick={() => setOpen(true)} aria-label="打开搜索" aria-current={active ? 'page' : undefined}>
+      <button ref={triggerRef} className={`search-entry${active ? ' active' : ''}`} type="button" onClick={() => setOpen(true)} aria-label="打开搜索" aria-current={active ? 'page' : undefined} aria-haspopup="dialog" aria-expanded={open} aria-controls="site-search-dialog">
         <kbd>⌘ K</kbd><span>搜索</span>
       </button>
       {open && (
         <div className="search-overlay" role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget) setOpen(false); }}>
-          <section className="search-dialog" role="dialog" aria-modal="true" aria-label="全站搜索">
+          <section className="search-dialog" id="site-search-dialog" role="dialog" aria-modal="true" aria-label="全站搜索" onKeyDown={keepFocusInside}>
             <div className="search-dialog-input">
               <span>⌕</span>
               <input ref={inputRef} type="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="输入关键词、英文术语或 ISBN…" />
