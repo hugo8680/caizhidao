@@ -134,7 +134,7 @@ summary:focus-visible {
   letter-spacing: .18em;
 }
 
-.site-chrome .platform-brand.active > span {
+.site-chrome .platform-brand.active > .brand-emblem {
   box-shadow: inset 0 0 0 2px #e8c874, 0 0 0 3px rgba(23, 54, 56, .1), 0 8px 20px rgba(17, 48, 49, .15);
 }
 

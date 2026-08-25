@@ -7,7 +7,11 @@
   --library-paper: #f6f4ef;
   --library-surface: #fffefa;
   --library-line: #dfe3df;
-  --site-chrome-height: 120px;
+  --library-text-xs: 12px;
+  --library-text-sm: 13px;
+  --library-text: 15px;
+  --library-text-lg: 17px;
+  --site-chrome-height: 128px;
 }
 
 body {
@@ -34,13 +38,13 @@ body {
 }
 
 .site-chrome .platform-header {
-  width: min(1440px, 100%);
-  height: 76px;
+  width: min(1400px, 100%);
+  height: 80px;
   margin: 0 auto;
-  padding: 0 32px;
+  padding: 0 28px;
   display: grid;
-  grid-template-columns: 280px minmax(440px, 1fr) 280px;
-  gap: 24px;
+  grid-template-columns: minmax(220px, 250px) minmax(480px, 1fr) minmax(220px, 250px);
+  gap: 20px;
   align-items: center;
   border: 0;
   background: transparent;
@@ -48,26 +52,26 @@ body {
 
 .site-chrome .platform-brand {
   width: max-content;
-  height: 76px;
+  height: 80px;
   padding: 0;
   display: inline-flex;
   align-items: center;
-  gap: 12px;
+  gap: 13px;
   border: 0;
 }
 
 .site-chrome .platform-brand .brand-emblem {
-  width: 46px;
+  width: 48px;
   height: 48px;
-  flex: 0 0 46px;
+  flex: 0 0 48px;
   display: grid;
   place-items: center;
   overflow: hidden;
   border: 0;
-  border-radius: 14px 14px 14px 5px;
+  border-radius: 13px 13px 13px 5px;
   background: var(--library-ink);
   color: #e4bd68;
-  box-shadow: 0 9px 22px rgba(23, 42, 51, .14);
+  box-shadow: inset 0 0 0 1px rgba(228, 189, 104, .14), 0 8px 20px rgba(23, 42, 51, .14);
   position: relative;
 }
 
@@ -75,7 +79,7 @@ body {
   content: '';
   width: 3px;
   position: absolute;
-  inset: 7px auto 7px 7px;
+  inset: 8px auto 8px 7px;
   border-radius: 3px;
   background: #d5a950;
   opacity: .82;
@@ -87,19 +91,19 @@ body {
   top: 0;
   right: 0;
   border-style: solid;
-  border-width: 0 13px 13px 0;
+  border-width: 0 12px 12px 0;
   border-color: transparent #f2e8d1 transparent transparent;
   opacity: .85;
 }
 
 .site-chrome .platform-brand .brand-emblem i {
-  font: normal 700 23px/1 "Songti SC", "STSong", serif;
+  font: normal 700 24px/1 "Songti SC", "STSong", serif;
   transform: translateX(2px);
 }
 
 .site-chrome .platform-brand.active .brand-emblem {
   transform: none;
-  box-shadow: 0 9px 22px rgba(23, 42, 51, .14);
+  box-shadow: inset 0 0 0 1px rgba(228, 189, 104, .14), 0 8px 20px rgba(23, 42, 51, .14);
 }
 
 .site-chrome .platform-brand > .brand-wordmark {
@@ -114,46 +118,50 @@ body {
   box-shadow: none;
 }
 
+.site-chrome .platform-brand.active > .brand-wordmark {
+  box-shadow: none !important;
+}
+
 .site-chrome .brand-wordmark b {
   color: var(--library-ink);
-  font: 730 19px/1.12 var(--serif);
-  letter-spacing: .08em;
+  font: 730 21px/1.1 var(--serif);
+  letter-spacing: .075em;
 }
 
 .site-chrome .brand-wordmark small {
   display: block;
   max-width: none;
-  color: #7d898d;
-  font: 570 8px/1.2 var(--sans);
-  letter-spacing: .1em;
+  color: #748186;
+  font: 560 11px/1.25 var(--sans);
+  letter-spacing: .055em;
   white-space: nowrap;
 }
 
 .site-chrome .primary-nav {
   min-width: 0;
-  height: 76px;
+  height: 80px;
   display: flex !important;
   justify-content: center;
   align-items: stretch;
-  gap: clamp(24px, 3vw, 46px) !important;
+  gap: clamp(24px, 2.6vw, 40px) !important;
   overflow: visible;
 }
 
 .site-chrome .primary-nav > a {
   min-width: 0;
-  height: 76px;
-  padding: 0 3px !important;
+  height: 80px;
+  padding: 0 2px !important;
   display: inline-flex;
   flex: 0 0 auto;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 9px;
   border: 0 !important;
   border-radius: 0;
   background: transparent !important;
   box-shadow: none !important;
-  color: #5e6d73;
+  color: #52646b;
   font: 650 15px/1 var(--sans);
   letter-spacing: .01em;
   position: relative;
@@ -164,7 +172,7 @@ body {
 .site-chrome .primary-nav > a::after {
   content: '' !important;
   width: 0;
-  height: 2px;
+  height: 3px;
   display: block !important;
   position: absolute;
   left: 50%;
@@ -184,14 +192,14 @@ body {
   color: var(--library-ink);
 }
 
-.site-chrome .primary-nav > a:hover::after { width: 18px; }
-.site-chrome .primary-nav > a.active::after { width: 100%; }
+.site-chrome .primary-nav > a:hover::after { width: 20px; }
+.site-chrome .primary-nav > a.active::after { width: 28px; }
 
 .site-chrome .primary-nav-icon {
-  width: 19px;
-  color: #879297;
-  font: normal 500 18px/1 Georgia, serif;
-  text-align: center;
+  width: 20px;
+  height: 20px;
+  flex: 0 0 20px;
+  color: #748388;
   transition: color .2s ease, transform .2s ease;
 }
 
@@ -206,19 +214,19 @@ body {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  gap: 18px;
+  gap: 22px;
 }
 
 .site-chrome .start-entry {
   height: auto;
-  padding: 7px 0 5px;
+  padding: 8px 0 6px;
   border: 0;
   border-bottom: 1px solid #c7a45d;
   border-radius: 0;
   background: transparent;
   box-shadow: none;
-  color: #405b58;
-  font-size: 13px;
+  color: #3e5956;
+  font-size: 14px;
   font-weight: 700;
 }
 
@@ -226,17 +234,17 @@ body {
 .site-chrome .start-entry:hover { color: var(--library-ink); border-bottom-color: var(--library-ink); }
 
 .site-chrome .search-entry {
-  min-width: 112px;
+  min-width: 124px;
   width: auto;
-  height: 39px;
-  padding: 0 12px;
-  gap: 7px;
+  height: 42px;
+  padding: 0 10px;
+  gap: 8px;
   border: 0;
   border-radius: 0;
   border-bottom: 1px solid #cbd1ce;
   background: transparent;
   box-shadow: none;
-  color: #66747a;
+  color: #5f7076;
 }
 
 .site-chrome .search-entry:hover,
@@ -246,19 +254,19 @@ body {
   color: var(--library-ink);
 }
 
-.site-chrome .search-entry i { color: var(--library-accent); font: normal 18px/1 Georgia, serif; }
-.site-chrome .search-entry span { font-size: 12px; }
+.site-chrome .search-entry-icon { width: 19px; height: 19px; color: var(--library-accent); }
+.site-chrome .search-entry span { font-size: 13px; font-weight: 620; }
 .site-chrome .search-entry kbd {
   padding: 0;
   border: 0;
   background: transparent;
   box-shadow: none;
   color: #9aa3a6;
-  font-size: 9px;
+  font-size: 11px;
 }
 
 .section-nav {
-  height: 44px;
+  height: 48px;
   border: 0;
   border-top: 1px solid rgba(23, 42, 51, .07);
   background: #faf9f5 !important;
@@ -266,36 +274,36 @@ body {
 }
 
 .section-nav-inner {
-  width: min(1440px, 100%);
-  height: 44px;
+  width: min(1400px, 100%);
+  height: 48px;
   margin: 0 auto;
-  padding: 0 32px;
+  padding: 0 28px;
   display: grid;
-  grid-template-columns: 280px minmax(0, 1fr) 280px;
-  gap: 24px;
+  grid-template-columns: minmax(220px, 250px) minmax(480px, 1fr) minmax(220px, 250px);
+  gap: 20px;
   align-items: center;
 }
 
 .section-nav-label {
   padding: 0;
   display: inline-flex;
-  gap: 8px;
+  gap: 9px;
   align-items: center;
   border: 0;
 }
 
 .section-nav-label::before { display: none; }
-.section-nav-label i { width: 20px; color: var(--library-accent); font: normal 16px/1 Georgia, serif; text-align: center; }
-.section-nav-label b { color: #647278; font: 650 12px/1 var(--sans); }
+.section-nav-label > svg { width: 18px; height: 18px; color: var(--library-accent); }
+.section-nav-label b { color: #586a70; font: 650 13px/1 var(--sans); }
 
 .site-chrome .section-nav nav {
   min-width: 0;
-  height: 44px;
+  height: 48px;
   padding: 0;
   display: flex;
   justify-content: center;
   align-items: stretch;
-  gap: 32px;
+  gap: 34px;
   overflow-x: auto;
   scrollbar-width: none;
 }
@@ -303,7 +311,7 @@ body {
 .site-chrome .section-nav nav::-webkit-scrollbar { display: none; }
 .site-chrome .section-nav nav a {
   min-width: 0;
-  height: 44px;
+  height: 48px;
   padding: 0 !important;
   display: inline-flex;
   align-items: center;
@@ -313,7 +321,7 @@ body {
   background: transparent !important;
   box-shadow: none !important;
   color: #778389 !important;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 570;
   position: relative;
 }
@@ -341,7 +349,7 @@ body {
 }
 
 @media (max-width: 1120px) {
-  :root { --site-chrome-height: 164px; }
+  :root { --site-chrome-height: 168px; }
   .site-chrome .platform-header {
     height: 120px;
     padding: 0 20px;
@@ -365,12 +373,12 @@ body {
   }
   .site-chrome .primary-nav::-webkit-scrollbar { display: none; }
   .site-chrome .primary-nav > a { height: 52px; }
-  .section-nav-inner { padding: 0 20px; grid-template-columns: 180px minmax(0, 1fr); gap: 18px; }
+  .section-nav-inner { padding: 0 20px; grid-template-columns: 190px minmax(0, 1fr); gap: 18px; }
   .site-chrome .section-nav nav { justify-content: flex-start; }
 }
 
 @media (max-width: 620px) {
-  :root { --site-chrome-height: 156px; }
+  :root { --site-chrome-height: 162px; }
   .site-chrome .platform-header {
     height: 114px;
     padding: 0 15px;
@@ -379,11 +387,11 @@ body {
   .site-chrome .platform-brand { height: 64px; gap: 9px; }
   .site-chrome .platform-brand .brand-emblem { width: 40px; height: 42px; flex-basis: 40px; border-radius: 12px 12px 12px 4px; }
   .site-chrome .platform-brand .brand-emblem i { font-size: 20px; }
-  .site-chrome .brand-wordmark b { font-size: 17px; }
+  .site-chrome .brand-wordmark b { font-size: 18px; }
   .site-chrome .brand-wordmark small { display: none; }
   .site-chrome .header-actions { gap: 0; }
   .site-chrome .start-entry { display: none; }
-  .site-chrome .search-entry { min-width: 40px; width: 40px; height: 38px; padding: 0; justify-content: center; border: 0; }
+  .site-chrome .search-entry { min-width: 42px; width: 42px; height: 42px; padding: 0; justify-content: center; border: 0; }
   .site-chrome .search-entry span,
   .site-chrome .search-entry kbd { display: none; }
   .site-chrome .primary-nav {
@@ -392,16 +400,16 @@ body {
     margin-left: -15px;
     padding: 0 14px;
     justify-content: flex-start;
-    gap: 26px !important;
+    gap: 18px !important;
   }
-  .site-chrome .primary-nav > a { height: 50px; min-width: max-content; font-size: 13px; gap: 6px; }
-  .site-chrome .primary-nav-icon { width: 16px; font-size: 16px; }
-  .section-nav { height: 42px; }
-  .section-nav-inner { height: 42px; padding: 0; grid-template-columns: auto minmax(0, 1fr); gap: 0; }
-  .section-nav-label { height: 42px; padding: 0 14px; border-right: 1px solid var(--library-line); }
+  .site-chrome .primary-nav > a { height: 50px; min-width: max-content; font-size: 14px; gap: 7px; }
+  .site-chrome .primary-nav-icon { width: 18px; height: 18px; flex-basis: 18px; }
+  .section-nav { height: 48px; }
+  .section-nav-inner { height: 48px; padding: 0; grid-template-columns: auto minmax(0, 1fr); gap: 0; }
+  .section-nav-label { height: 48px; padding: 0 14px; border-right: 1px solid var(--library-line); }
   .section-nav-label b { display: none; }
-  .site-chrome .section-nav nav { height: 42px; padding: 0 16px; gap: 26px; }
-  .site-chrome .section-nav nav a { height: 42px; font-size: 12px; }
+  .site-chrome .section-nav nav { height: 48px; padding: 0 16px; gap: 26px; }
+  .site-chrome .section-nav nav a { height: 48px; font-size: 13px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -982,4 +990,392 @@ main { min-width: 0; overflow: clip; }
   .game-card,
   .video-screen::before,
   .video-screen > i { transition: none !important; transform: none !important; }
+}
+
+/* --------------------------------------------------------------------------
+   Readable type scale: keep dense reference pages compact without tiny copy.
+   -------------------------------------------------------------------------- */
+
+body {
+  font-size: var(--library-text);
+  line-height: 1.65;
+}
+
+body main p {
+  font-size: 14px !important;
+  line-height: 1.78;
+}
+
+body main small,
+body main dt {
+  font-size: 12px !important;
+  line-height: 1.45;
+}
+
+body main li {
+  font-size: 13px !important;
+  line-height: 1.65;
+}
+
+/* Home: one display title, then a stable editorial reading scale. */
+body .science-copy h1 {
+  max-width: 720px;
+  font-size: clamp(48px, 4.35vw, 64px);
+  line-height: 1.15;
+  letter-spacing: -.055em;
+}
+
+body .science-kicker,
+body .science-kicker span,
+body .question-seeds span,
+body .question-seeds a {
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+body .science-lead {
+  font-size: 16px !important;
+  line-height: 1.85;
+}
+
+body .science-actions a {
+  font-size: 14px;
+}
+
+body .science-actions a:first-child,
+body .science-actions a:last-child { font-size: 14px; }
+
+body .system-board > header span,
+body .system-board > header b,
+body .system-core small {
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+body .system-core strong { font-size: 21px; line-height: 1.45; }
+body .discipline-grid span { font-size: 11px; }
+body .discipline-grid b { font-size: 13px; line-height: 1.35; }
+body .discipline-grid small { font-size: 11px !important; }
+body .system-board > footer span { font-size: 11px; line-height: 1.45; }
+body .system-board > footer b { font-size: 21px; }
+
+body .home-section-head span,
+body .platform-section-title span {
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+body .home-section-head h2 { font-size: clamp(30px, 3vw, 42px); }
+body .home-section-head > p { font-size: 15px !important; line-height: 1.8; }
+body .home-discipline > header span { font-size: 12px; }
+body .home-discipline > b { font-size: 14px; line-height: 1.55; }
+body .home-discipline > p { font-size: 14px !important; }
+body .home-discipline > footer { font-size: 12px; }
+body .question-grid header span,
+body .question-grid header small,
+body .question-grid b { font-size: 12px !important; }
+body .question-grid p { font-size: 13px !important; }
+body .route-grid header span { font-size: 12px; }
+body .route-grid header small,
+body .route-grid h4 { font-size: 12px !important; }
+body .route-grid > a > b { font-size: 14px; }
+body .route-grid > a > p { font-size: 13px !important; }
+body .route-grid footer { font-size: 12px; }
+body .history-line small { font-size: 11px !important; }
+body .history-line h3 { font-size: 16px; }
+body .history-line p { font-size: 12px !important; }
+body .resource-layer-grid header span,
+body .resource-layer-grid header small,
+body .resource-layer-grid > a > b { font-size: 12px !important; }
+body .resource-layer-grid p { font-size: 13px !important; }
+body .concept-preview-grid > a > span,
+body .concept-preview-grid small { font-size: 12px !important; }
+body .concept-preview-grid p { font-size: 13px !important; }
+body .platform-section-title > a { font-size: 13px; }
+body .section-wide-link,
+body .dark-wide-link { font-size: 13px; }
+body .section-wide-link b,
+body .dark-wide-link b { font-size: 12px; }
+
+/* Catalogs: titles, descriptions and metadata follow the same five steps. */
+body .catalog-head > div > span,
+body .course-catalog-head > div > span,
+body .reference-index-head > div > span {
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+body .catalog-head dt,
+body .course-catalog-head dt,
+body .reference-index-head dt { font-size: 12px; }
+body .catalog-head dd { font-size: 14px; }
+body .course-catalog-head p,
+body .reference-index-head p,
+body .atlas-reference-head .atlas-hero-lead { font-size: 14px !important; }
+body .course-catalog-head dd small { font-size: 12px !important; }
+body .course-catalog-bar { font-size: 13px; }
+
+body .course-bento-grid .course-index-card > header span,
+body .course-bento-grid .course-index-card > header small,
+body .course-bento-grid .course-index-card > header em {
+  font-size: 11px !important;
+  line-height: 1.3;
+}
+
+body .course-bento-grid .course-index-card h3 { font-size: 12px; }
+body .course-bento-grid .course-index-card > p { font-size: 14px !important; }
+body .course-bento-grid .course-index-card li { font-size: 12px !important; }
+body .course-bento-grid .course-index-card > footer,
+body .course-bento-grid .course-index-card > footer b { font-size: 12px; }
+body .course-bento-grid .course-index-card > footer strong { font-size: 15px; }
+
+body .reference-index-head dd { font-size: 18px; }
+body .knowledge-layout > aside span,
+body .knowledge-layout > aside a { font-size: 12px; }
+body .knowledge-group > header small { font-size: 12px !important; }
+body .knowledge-copy > span,
+body .knowledge-copy h3,
+body .knowledge-copy > b { font-size: 12px; }
+body .knowledge-copy p { font-size: 14px !important; }
+
+body .atlas-reference-head > div > p:first-child,
+body .atlas-reference-head .atlas-scale dt { font-size: 12px !important; }
+body .atlas-directory-grid > a > header span { font-size: 12px; }
+body .atlas-directory-grid > a > p { font-size: 14px !important; }
+body .atlas-directory-grid li { font-size: 12px !important; }
+body .atlas-directory-grid footer { font-size: 12px; }
+
+body .topics-index-grid header small,
+body .topics-index-grid h3,
+body .topics-index-grid li > span,
+body .topics-index-grid li small,
+body .topics-index-grid footer { font-size: 12px !important; }
+body .topics-index-grid > a > strong { font-size: 15px; line-height: 1.55; }
+body .topics-index-grid > a > p { font-size: 14px !important; }
+
+body .tool-directory-grid header span,
+body .tool-directory-grid header small,
+body .tool-directory-grid footer { font-size: 12px !important; }
+body .tool-directory-grid p { font-size: 13px !important; }
+
+/* Resource records: bibliographic data stays dense, but never microscopic. */
+body .book-shelf > header span,
+body .video-section > header span,
+body .book-shelf > header small,
+body .video-section > header small { font-size: 12px !important; }
+body .book-spine span { font-size: 11px; }
+body .book-spine b { font-size: 13px; }
+body .book-spine i { font-size: 11px; }
+body .book-info > span,
+body .book-info h4,
+body .book-info dt,
+body .book-info dd,
+body .book-info > footer a { font-size: 12px !important; }
+body .book-info > p { font-size: 14px !important; }
+body .video-screen > span { font-size: 11px; }
+body .video-info > span,
+body .video-info h4,
+body .video-info dt,
+body .video-info dd,
+body .video-info > b { font-size: 12px !important; }
+body .video-info > p { font-size: 14px !important; }
+
+/* Search, tools and games use body-sized controls rather than caption text. */
+body .search-dialog-input svg { width: 23px; height: 23px; color: var(--library-accent); }
+body .search-dialog-input input { font-size: 16px; }
+body .search-dialog-input button,
+body .search-dialog-results > a > span,
+body .search-dialog-results small,
+body .search-dialog footer a { font-size: 12px; }
+body .search-dialog-results b { font-size: 15px; }
+body .search-dialog-results p { font-size: 13px !important; }
+body .search-page-box input { font-size: 17px; }
+body .search-page-box kbd,
+body .search-suggestions > span,
+body .search-suggestions button,
+body .search-tabs button,
+body .search-results-head small,
+body .search-page-results > a > span,
+body .search-page-results h3,
+body .search-browse-note { font-size: 12px !important; }
+body .search-page-results h2 { font-size: 18px; }
+body .search-page-results p { font-size: 14px !important; }
+
+body .tool-card-title small,
+body .tool-field > span,
+body .tool-field small,
+body .tool-result > span { font-size: 12px; }
+body .tool-card-title p,
+body .tool-result p { font-size: 13px !important; }
+body .tool-field input { font-size: 15px; }
+body .game-card > header span,
+body .game-card > header small,
+body .rate-picker button,
+body .case-tabs button,
+body .game-speed > label span,
+body .game-primary,
+body .game-feedback,
+body .game-feedback button,
+body .game-score,
+body .match-choices button,
+body .detective-choices button { font-size: 12px !important; }
+
+/* Reading pages: 16px leads, 15px explanation, 12px metadata. */
+body .term-definition > p,
+body .course-reader-lead { font-size: 16px !important; line-height: 1.85; }
+body .term-layout p,
+body .course-player p,
+body .discipline-topic-list p,
+body .topic-step-list p,
+body .timeline-layout p,
+body .event-detail-layout p,
+body .book-detail-layout p,
+body .video-detail-layout p { font-size: 15px !important; line-height: 1.82; }
+
+body .term-hero > div > span,
+body .term-hero h2,
+body .course-detail-hero > div > span,
+body .course-detail-hero h2,
+body .course-detail-hero > aside span,
+body .tool-detail-hero > small,
+body .topic-detail-hero > div > span,
+body .event-detail-hero > div > span,
+body .book-detail-hero > div > span,
+body .video-detail-hero > div > span { font-size: 12px; }
+
+body .term-article > span,
+body .term-mechanism-grid span,
+body .lesson-key span,
+body .lesson-context > span,
+body .lesson-example span,
+body .lesson-depth-grid section > span,
+body .lesson-english > span,
+body .lesson-explain > span,
+body .lesson-practice summary span,
+body .lesson-practice summary i,
+body .lesson-notice b,
+body .course-reader > header,
+body .course-player-nav > small,
+body .course-progress-head,
+body .course-lesson-buttons small,
+body .reset-course { font-size: 12px !important; }
+
+body .course-lesson-buttons b { font-size: 13px; }
+body .course-lesson-buttons button > span { font-size: 12px; }
+body .lesson-misconceptions p b { font-size: 12px; }
+body .course-reader-actions button { font-size: 13px; }
+body .lesson-context p,
+body .lesson-explain li p,
+body .lesson-depth-grid section > p,
+body .lesson-practice > p,
+body .lesson-notice p { font-size: 14px !important; }
+
+body .topic-learning-guide > span,
+body .topic-learning-guide li,
+body .topic-step-number span,
+body .topic-step-copy small,
+body .topic-step-copy a,
+body .topic-step-list article > aside span,
+body .topic-recap span,
+body .topic-pagination span,
+body .timeline-legend > span,
+body .timeline-legend b,
+body .timeline-legend p,
+body .timeline-layout > aside > span,
+body .timeline-layout > aside > a,
+body .timeline-events article > div small,
+body .timeline-events article > section > header b,
+body .timeline-events article > section > header small,
+body .timeline-events blockquote span { font-size: 12px !important; }
+
+body .knowledge-group > header span { font-size: 12px; }
+body .term-article > section > span,
+body .term-checklist > div > b,
+body .term-sources a i,
+body .term-aside > span,
+body .term-back { font-size: 12px; }
+body .atlas-directory-grid footer b { font-size: 12px; }
+body .discipline-hero > aside span,
+body .discipline-concept-card > span,
+body .discipline-concept-card > i { font-size: 12px; }
+body .topic-step-example > span { font-size: 12px; }
+body .tool-card-title > span,
+body .tool-detail-guide article > span,
+body .tool-detail-guide dd,
+body .tool-guide-example b { font-size: 12px; }
+body .timeline-hero aside b,
+body .timeline-event-link > header b,
+body .timeline-event-link > header small,
+body .timeline-event-link blockquote,
+body .timeline-event-link blockquote span,
+body .timeline-event-link > strong { font-size: 12px !important; }
+body .search-tabs b { font-size: 12px; }
+body .discipline-pagination a,
+body .tool-pagination a,
+body .book-pagination a,
+body .video-pagination a,
+body .event-pagination a { font-size: 13px !important; }
+body .discipline-pagination span,
+body .tool-pagination span,
+body .book-pagination span,
+body .video-pagination span,
+body .event-pagination span { font-size: 12px !important; }
+
+/* Secondary detail templates share the same minimum readable metadata size. */
+body .knowledge-category-hero > div > span,
+body .knowledge-category-grid .concept-visual span,
+body .knowledge-category-grid > a > div > span,
+body .knowledge-category-grid > a > div > b,
+body .category-pagination a { font-size: 12px !important; }
+
+body .atlas-concept-head dd { font-size: 13px; }
+body .atlas-concept-article > section > span,
+body .atlas-concept-mechanism article b,
+body .atlas-concept-article ol li b,
+body .atlas-concept-sources a i,
+body .atlas-concept-aside > span,
+body .atlas-concept-aside a b,
+body .atlas-concept-back,
+body .atlas-concept-pagination span { font-size: 12px !important; }
+
+body .book-detail-layout article > section > span,
+body .book-reading-fit b,
+body .book-detail-layout ol li b,
+body .book-detail-layout aside > span { font-size: 12px !important; }
+body .book-detail-meta dd { font-size: 13px; }
+body .book-detail-layout aside a { font-size: 13px !important; }
+
+body .video-detail-screen b,
+body .video-detail-facts span,
+body .video-course-caution b,
+body .video-detail-content article > span,
+body .video-detail-content ol li b,
+body .video-detail-content aside > span { font-size: 12px !important; }
+body .video-detail-facts b { font-size: 13px; }
+body .video-course-caution p { font-size: 14px !important; }
+body .video-detail-content aside a { font-size: 13px !important; }
+
+body .event-detail-layout article > section > span,
+body .event-detail-layout aside > span,
+body .event-detail-layout aside dt { font-size: 12px !important; }
+body .event-detail-layout aside dd { font-size: 13px; }
+
+body .platform-footer { font-size: 13px; }
+body .footer-brand > small,
+body .footer-link-groups section b,
+body .platform-footer .footer-link-groups a,
+body .footer-bottom { font-size: 12px; }
+body .footer-brand > p { font-size: 13px !important; }
+
+@media (max-width: 700px) {
+  body .science-copy h1 { font-size: clamp(35px, 9.5vw, 40px); line-height: 1.16; letter-spacing: -.045em; }
+  body .science-lead { font-size: 15px !important; }
+  body .home-section-head h2 { font-size: clamp(28px, 8vw, 35px); }
+  body .home-section-head > p { font-size: 14px !important; }
+  body .course-bento-grid .course-index-card > p,
+  body .knowledge-copy p,
+  body .atlas-directory-grid > a > p,
+  body .topics-index-grid > a > p,
+  body .book-info > p,
+  body .video-info > p { font-size: 13px !important; }
 }

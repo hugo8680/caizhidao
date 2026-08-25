@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState, type KeyboardEvent as ReactKeyboardEvent } from 'react';
 import { searchContent } from '@/lib/search';
+import { HeaderIcon } from './header-icon';
 
 export function GlobalSearch({ active = false }: { active?: boolean }) {
   const [open, setOpen] = useState(false);
@@ -53,13 +54,13 @@ export function GlobalSearch({ active = false }: { active?: boolean }) {
   return (
     <>
       <button ref={triggerRef} className={`search-entry${active ? ' active' : ''}`} type="button" onClick={() => setOpen(true)} aria-label="打开搜索" aria-current={active ? 'page' : undefined} aria-haspopup="dialog" aria-expanded={open} aria-controls="site-search-dialog">
-        <i aria-hidden="true">⌕</i><span>搜索</span><kbd>⌘ K</kbd>
+        <HeaderIcon name="search" className="search-entry-icon" /><span>搜索</span><kbd>⌘ K</kbd>
       </button>
       {open && (
         <div className="search-overlay" role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget) setOpen(false); }}>
           <section className="search-dialog" id="site-search-dialog" role="dialog" aria-modal="true" aria-label="全站搜索" onKeyDown={keepFocusInside}>
             <div className="search-dialog-input">
-              <span>⌕</span>
+              <HeaderIcon name="search" />
               <input ref={inputRef} type="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="输入关键词、英文术语或 ISBN…" />
               <button type="button" onClick={() => setOpen(false)}>关闭</button>
             </div>

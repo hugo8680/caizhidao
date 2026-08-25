@@ -3,6 +3,7 @@
 import { useEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation';
 import { GlobalSearch } from './global-search';
+import { HeaderIcon, type HeaderIconName } from './header-icon';
 
 type NavItem = {
   key: string;
@@ -13,7 +14,7 @@ type NavItem = {
 type NavGroup = {
   key: string;
   label: string;
-  icon: string;
+  icon: HeaderIconName;
   href: string;
   items: NavItem[];
 };
@@ -22,7 +23,7 @@ const beginnerHref = '/courses/finance-foundations/';
 
 const navGroups: NavGroup[] = [
   {
-    key: 'learn', label: '学习', icon: '◫', href: '/courses/',
+    key: 'learn', label: '学习', icon: 'learn', href: '/courses/',
     items: [
       { key: 'beginner', label: '新手入门', href: beginnerHref },
       { key: 'courses', label: '系统课程', href: '/courses/' },
@@ -30,7 +31,7 @@ const navGroups: NavGroup[] = [
     ],
   },
   {
-    key: 'reference', label: '查知识', icon: '⌕', href: '/knowledge/',
+    key: 'reference', label: '查知识', icon: 'reference', href: '/knowledge/',
     items: [
       { key: 'knowledge', label: '百科词条', href: '/knowledge/' },
       { key: 'atlas', label: '知识地图', href: '/atlas/' },
@@ -38,14 +39,14 @@ const navGroups: NavGroup[] = [
     ],
   },
   {
-    key: 'practice', label: '练习工具', icon: '∑', href: '/tools/',
+    key: 'practice', label: '练习工具', icon: 'practice', href: '/tools/',
     items: [
       { key: 'tools', label: '计算工具', href: '/tools/' },
       { key: 'games', label: '互动练习', href: '/games/' },
     ],
   },
   {
-    key: 'resources', label: '书与视频', icon: '▤', href: '/books/',
+    key: 'resources', label: '书与视频', icon: 'resources', href: '/books/',
     items: [
       { key: 'books', label: '财经图书', href: '/books/' },
       { key: 'videos', label: '视频课程', href: '/videos/' },
@@ -91,7 +92,7 @@ export function SiteHeader() {
         <nav className="primary-nav" aria-label="主要分区">
           {navGroups.map((group) => {
             const active = group.key === activeGroup?.key;
-            return <a href={group.href} key={group.key} className={active ? 'active' : ''} aria-current={active ? 'page' : undefined}><i className="primary-nav-icon" aria-hidden="true">{group.icon}</i><span>{group.label}</span></a>;
+            return <a href={group.href} key={group.key} className={active ? 'active' : ''} aria-current={active ? 'page' : undefined}><HeaderIcon name={group.icon} className="primary-nav-icon" /><span>{group.label}</span></a>;
           })}
         </nav>
 
@@ -104,7 +105,7 @@ export function SiteHeader() {
       {activeGroup && (
         <div className="section-nav">
           <div className="section-nav-inner">
-            <span className="section-nav-label"><i aria-hidden="true">{activeGroup.icon}</i><b>{activeGroup.label}</b></span>
+            <span className="section-nav-label"><HeaderIcon name={activeGroup.icon} /><b>{activeGroup.label}</b></span>
             <nav aria-label={`${activeGroup.label}二级导航`} ref={subnavRef}>
               {activeGroup.items.map((item) => {
                 const active = item.key === activeItem?.key;
