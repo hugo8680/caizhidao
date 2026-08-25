@@ -1,12 +1,5 @@
 import type { Course, CourseLesson } from './courses';
 
-type CourseFrame = {
-  why: string;
-  evidence: string;
-  boundary: string;
-  questions: [string, string, string];
-};
-
 type LessonTuple = readonly [
   english: string,
   intuition: string,
@@ -19,62 +12,9 @@ export type LessonGuide = {
   english: string;
   plain: string;
   why: string;
-  mechanism: Array<{ title: string; text: string }>;
   example: string;
   misconceptions: string[];
-  checklist: string[];
   exerciseHint: string;
-};
-
-const courseFrames: Record<string, CourseFrame> = {
-  'finance-foundations': {
-    why: '这些基础关系会反复出现在储蓄、借款、投资和宏观新闻中。把金额、时间与风险放到同一张图里，后面的产品名再复杂，也能逐层拆开。',
-    evidence: '查看金额发生的时间、现金流由谁支付、结果是否扣除通胀，以及最坏结果由谁承担。',
-    boundary: '公式是一把比较尺，不是对未来的保证。利率、通胀和收益率都可能变化，现实现金流也往往不规则。',
-    questions: ['金额发生在今天还是未来，能否直接比较？', '名义数字扣除通胀、费用和税后还剩多少？', '如果结果不如预期，损失是否会影响既定生活目标？'],
-  },
-  'personal-finance': {
-    why: '个人财务的核心不是追求某个最高收益，而是让短期生活、意外风险和长期目标不争抢同一笔钱。先搭好系统，投资工具才有合适的位置。',
-    evidence: '优先核对银行流水、债务合同、家庭责任、保险条款和资金使用日期，而不是只凭大致比例做判断。',
-    boundary: '通用比例只能作为起点。收入稳定性、所在城市、家庭人数和保障条件不同，适合的安全垫与支出结构也不同。',
-    questions: ['这笔钱在什么日期之前不能承受损失？', '收入中断时，家庭能维持几个月必要支出？', '方案是否遗漏了手续费、违约金、税费或保障缺口？'],
-  },
-  'investment-products': {
-    why: '产品名称只是外壳。真正决定收益和风险的是底层资产、现金流来源、合同权利、费用和退出机制，理解这些才能进行同口径比较。',
-    evidence: '阅读产品说明书、底层持仓、费用表、托管安排、赎回条款与历史压力期表现，并确认销售展示是否省略了条件。',
-    boundary: '“低波动”“可交易”或“历史收益高”都不等于本金安全。极端行情下，价格、流动性和信用状况可能同时恶化。',
-    questions: ['收益最终由谁、用什么现金流支付？', '我拥有的是所有权、债权还是附条件的合约权利？', '退出时是否有期限、价差、折溢价或其他成本？'],
-  },
-  'financial-statements': {
-    why: '单看利润容易把会计确认当成真实现金。把三张报表和附注连起来，才能判断企业如何赚钱、资金占在哪里，以及增长是否健康。',
-    evidence: '至少比较三年趋势，并在利润表、资产负债表、现金流量表和附注之间寻找能够互相解释的变化。',
-    boundary: '财务数据受会计政策、估计与行业周期影响。比率能提示问题，却不能脱离业务模式直接给出好坏结论。',
-    questions: ['这项增长来自销量、价格、并购还是口径变化？', '利润是否被经营现金流验证？', '应收、存货、资本开支与债务是否同步恶化？'],
-  },
-  'corporate-valuation': {
-    why: '估值不是猜明天价格，而是把企业未来能产生的现金、所需投入和不确定性放进一套可检查的假设中，形成合理区间。',
-    evidence: '把收入增长、利润率、再投资、资本成本和终值逐项写明，再做悲观、基准、乐观三种情景及敏感性分析。',
-    boundary: '模型输出只是输入假设的结果。越依赖遥远年份、永续增长或单一可比公司，结论越需要保守解释。',
-    questions: ['增长需要投入多少资本，回报是否高于资本成本？', '估值中有多少来自难以验证的终值？', '关键假设小幅变化后，结论是否完全反转？'],
-  },
-  'macro-economy': {
-    why: '宏观分析帮助理解整个经济体的收入、价格与政策环境，但它更适合建立情景，而不是直接预测单一资产涨跌。',
-    evidence: '优先使用统计部门、央行和财政部门的原始数据，核对同比、环比、实际、名义、季调与修订口径。',
-    boundary: '一个数据点既可能有噪声，也可能早已被市场预期。经济向好不必然带来资产上涨，政策传导也通常存在时滞。',
-    questions: ['数据描述的是水平、增速还是相对预期的偏差？', '变化由需求、供给、基数还是政策造成？', '从政策到企业和家庭现金流，中间经过哪些环节？'],
-  },
-  'portfolio-management': {
-    why: '组合管理不是把很多产品放在一起，而是让不同风险来源围绕同一目标协作，并提前规定遇到上涨、下跌和现金需求时怎样行动。',
-    evidence: '穿透查看底层持仓、相关性、费用、币种和期限，并用回撤、压力情景和再平衡记录检查组合是否按设计运行。',
-    boundary: '历史相关性会变化，分散也不能消除市场损失。组合必须以可承受回撤和资金期限为约束，而不是追求事后最优。',
-    questions: ['组合最大的共同风险因子是什么？', '压力时期哪些资产可能同时下跌或失去流动性？', '再平衡由时间、偏离阈值还是主观判断触发？'],
-  },
-  'global-finance-risk': {
-    why: '全球金融把利率、汇率、商品、保证金和跨境规则叠加起来。画清资金流与合同义务，才能看见杠杆和传染从哪里出现。',
-    evidence: '核对合约规格、保证金、结算方式、交易对手、托管、汇率报价与压力时期流动性，不能只看最初投入金额。',
-    boundary: '衍生品可以转移风险但不会让风险消失。名义本金、跳空、追加保证金和对手方问题可能让损失超过直觉。',
-    questions: ['最坏情况下谁必须在什么时间支付多少现金？', '汇率变化会放大还是抵消资产本身的回报？', '价格下跌是否会触发被迫卖出并形成反馈循环？'],
-  },
 };
 
 const lessonNotes: Record<string, readonly LessonTuple[]> = {
@@ -93,7 +33,7 @@ const lessonNotes: Record<string, readonly LessonTuple[]> = {
     ['Bucket Budgeting — A bucket budget assigns income to essentials, goals, and discretionary spending before money is spent.', '预算不是惩罚消费，而是让重要事项先获得资源。分账户能把必要支出、目标储蓄和自由消费分开，减少月底才发现钱被无意识花掉的情况。', '月到手 12,000 元，可先设 6,000 元必要支出、3,000 元目标储蓄、3,000 元自由支出。若房租上涨，应明确从哪一栏调整，而不是让信用卡自动填补。', '机械套用 50/30/20 等比例，忽略高房租城市、抚养责任和收入波动，最终预算无法执行。', '用最近三个月流水算真实均值；先划必要支出和自动储蓄，再给自由消费保留可持续额度。'],
     ['Emergency Fund — An emergency fund is liquid money reserved for unexpected, necessary expenses or income interruption.', '应急金负责“防止被迫做坏决定”，不是追求最高收益。规模由必要支出、收入稳定性、家庭责任与保险等待期共同决定，存放位置要安全并能快速取用。', '月必要支出 8,000 元，稳定双职工家庭按 3—6 个月准备约 2.4万—4.8万元；收入高度波动且有抚养责任，可能需要 9—12 个月。', '把旅行、装修或每年保费等已知支出算作紧急事件；这些应另建目标账户，避免反复掏空安全垫。', '先从流水中剔除可暂停消费，得到必要支出；再按收入与家庭责任选择覆盖月数，并写明何时可以动用。'],
     ['Debt Repayment — The debt avalanche method pays the highest effective interest rate first, while the snowball method pays the smallest balance first.', '偿债顺序同时有数学和行为两面。高利率优先通常减少总利息，小余额优先更快获得完成感；不论哪种方法，都要先保证各笔债务最低还款不违约。', '三笔债务余额分别为 2 万@18%、8 万@6%、5千@0%。数学上先集中还 18% 的债务，同时支付另外两笔最低额；提前还款费可能改变排序。', '只比较宣传月费率或每期手续费，未把所有费用换成同一年的实际融资成本。', '列出余额、实际年化成本、最低还款、剩余期限和违约后果；先处理会迅速滚大的高成本债务。'],
-    ['Cost of Credit — The annual percentage cost includes interest, mandatory fees, and the timing of repayments.', '信用成本不能只看“每月 0.5%”。分期本金不断偿还，却可能始终按初始本金收手续费，因此真实年化成本会明显高于简单乘以 12。', '借 12,000 元分 12 期，每月还本金 1,000 元并付 60 元手续费，总费用 720 元看似 6%，但平均占用本金远低于 12,000 元，实际资金成本更高。', '认为按时还最低还款就没有问题；循环利息、费用和信用记录影响可能让小额消费变成长期负担。', '画出每月实际收到与支付的现金流，用内部收益率或正规 APR 口径比较，并阅读逾期和提前还款条款。'],
+    ['Cost of Credit — The annual percentage cost includes interest, mandatory fees, and the timing of repayments.', '信用成本不能只看“每月 0.5%”。分期本金不断偿还，却可能始终按初始本金收手续费，因此真实年化成本会明显高于简单乘以 12。', '借 12,000 元分 12 期，每月还本金 1,000 元并付 60 元手续费，总费用 720 元看似 6%，但平均占用本金远低于 12,000 元，实际资金成本更高。', '认为按时还最低还款就没有问题；循环利息、费用和信用记录影响可能让小额消费变成长期负担。', '画出每月实际收到与支付的现金流，用内部收益率计算年化资金成本，并阅读逾期和提前还款条款。'],
     ['Protection Gap — A protection gap is the difference between financial responsibilities after a loss and resources already available.', '保险适合转移“发生概率不一定高、但家庭无法自行承担”的损失。保额应从债务、抚养、收入替代和现有资产反推，而不是从销售套餐起步。', '家庭主要收入者离世后还需偿还 80 万房贷、准备 50 万教育金和 5 年生活费 60 万，已有可用资产 40 万，粗略保障缺口为 150 万。', '把储蓄型产品的展示收益当成保障是否充足的主要标准，反而忽略责任范围、免责、等待期和赔付条件。', '列出家庭无法承担的事件、对应金额和已有保障；逐条核对保险责任、免责、保额、期限与受益人。'],
     ['Rent versus Buy — The decision compares total housing costs, flexibility, and opportunity cost, not only rent versus mortgage payment.', '买房月供中有本金积累，也有利息成本；租房则保留迁移自由与首付款的其他用途。正确比较要把税费、维修、交易成本和机会成本都放进同一持有期。', '房价 300 万、首付 90 万，不仅要算贷款利息，还要算 90 万首付失去的投资机会、买卖税费与维护。若三年内可能换城市，较高交易成本尤其重要。', '把月租 6,000 元直接与月供 10,000 元比较，既没拆出月供中的本金，也遗漏首付和交易成本。', '选定预计居住年限，分别列租与买的现金流、可回收资产和迁移成本，再用多组房价与租金假设测试。'],
     ['Retirement Planning — Retirement planning estimates future spending in today’s purchasing power and builds a flexible funding plan.', '养老规划要先讨论退休后的生活，而不是先选产品。未来支出需考虑通胀、医疗、养老金和退休年限，长期数字误差很大，因此重点是持续投入与定期更新。', '今天每月需要 8,000 元生活费，按 2.5% 通胀，30 年后同等购买力约需 16,780 元。若收益、寿命或养老金变化，所需资产也会明显改变。', '看到一个巨大的退休目标后，靠提高收益率假设“解决缺口”；这只是让表格好看，并没有降低真实风险。', '用今天购买力列必要与可选支出，加入养老金和医疗情景；分别计算低收益、高通胀和长寿三种压力方案。'],
@@ -122,10 +62,10 @@ const lessonNotes: Record<string, readonly LessonTuple[]> = {
     ['Economic Value Creation — A company creates economic value when return on invested capital exceeds its cost of capital.', '利润增长不等于创造价值。如果为了多赚 1 元利润投入了过多资本，而资本回报低于投资者要求的回报，规模扩大反而会破坏价值。', '项目投入 1,000 万，每年税后经营利润 80 万，ROIC 约 8%；若 WACC 为 10%，经济利润约为负 20 万。会计上盈利，经济上未覆盖资本成本。', '只看收入增速或净利润，不看增长需要的营运资本、设备与融资，容易奖励低质量扩张。', '估算投入资本、税后经营利润和资本成本；再判断新增增长的边际回报是否高于存量业务。'],
     ['Net Present Value — NPV equals the present value of future project cash flows minus the initial investment.', '净现值把项目所有增量现金流折到今天。NPV 为正表示在给定折现率和假设下，项目在补偿资本成本后仍有剩余价值。', '项目今天投入 100 万，未来三年各回收 40 万，按 8% 折现，三笔现金流现值合计约 103 万，NPV 约 3 万；若成本超支，结论可能转负。', '使用会计利润代替项目增量现金流，或把已经发生、无法收回的沉没成本继续算进决策。', '只列因接受项目而改变的现金流，写明时间点、税、营运资本和残值，再对销量与成本做敏感性分析。'],
     ['Capital Structure — Capital structure balances the benefits of debt financing against financial distress and loss of flexibility.', '债务要求固定支付，能在经营良好时放大股东回报，也会在收入下降时挤压现金。最优结构取决于现金流稳定性、资产抵押能力和未来融资需求。', '企业资产回报 12%，债务成本 5% 时，加杠杆可能提高 ROE；若衰退使资产回报降到 2%，利息仍需支付，股东损失会被同步放大。', '认为债务便宜就应尽量多借，忽略评级下降、再融资、契约限制和失去战略灵活性的成本。', '做正常与衰退情景，比较利息、到期本金、契约余量和可用现金；说明为何这种业务能承受该杠杆。'],
-    ['Weighted Average Cost of Capital — WACC is the blended required return of debt and equity capital used to discount operating cash flows.', 'WACC 是资本提供者要求的综合回报。权益风险更高，要求回报通常高于债务；债务利息可能有税盾，但权重要尽量反映市场价值而非历史账面值。', '公司权益市场价值 70、债务 30，权益成本 12%、税后债务成本 4%，WACC=70%×12%+30%×4%=9.6%。', '用公司整体 WACC 折现风险完全不同的新项目；高风险项目会因此被高估，低风险项目可能被错杀。', '统一无风险利率、风险溢价和币种口径，使用市场权重，并为不同业务风险设置合理调整。'],
+    ['Weighted Average Cost of Capital — WACC is the blended required return of debt and equity capital used to discount operating cash flows.', 'WACC 是资本提供者要求的综合回报。权益风险更高，要求回报通常高于债务；债务利息可能有税盾，但权重要尽量反映市场价值而非历史账面值。', '公司权益市场价值 70、债务 30，权益成本 12%、税后债务成本 4%，WACC=70%×12%+30%×4%=9.6%。', '用公司整体 WACC 折现风险完全不同的新项目；高风险项目会因此被高估，低风险项目可能被错杀。', '无风险利率、风险溢价与现金流必须使用同一币种，资本权重应采用市场价值，并按业务风险调整折现率。'],
     ['Free Cash Flow to the Firm — FCFF is cash generated by operations after taxes and reinvestment, available to all capital providers.', '自由现金流从经营利润出发，加回非现金费用，再扣除维持与增长所需的资本开支和营运资本。增长越快，短期占用现金可能越多。', '税后经营利润 1,000 万，加折旧 200 万，资本开支 350 万，营运资本增加 150 万，FCFF 为 700 万。若只看利润会高估可分配现金。', '把所有资本开支都视为坏事。高回报的增长投资会压低当期现金，却可能增加未来价值，关键在投入回报。', '从 EBIT 到 NOPAT，再依次处理折旧、资本开支和营运资本；核对增长假设需要多少再投资。'],
     ['Discounted Cash Flow — DCF values a business by discounting forecast free cash flows and a terminal value to the present.', 'DCF 的价值是让假设透明。预测期解释企业如何从当前经营走向成熟，终值代表更远期现金流；折现率把时间和风险转换成今天的价值。', '预测现金流现值 40 亿元、终值现值 60 亿元，企业价值 100 亿元。若终值占 60%，说明结论很依赖远期增长和折现率，应重点做敏感性。', '把模型做得很复杂就认为更准确。小数点很多不代表假设可靠，尤其当终值和利润率缺少经济解释时。', '建立悲观、基准、乐观三情景；检查终值占比、隐含成熟利润率和永续增长是否符合长期经济约束。'],
-    ['Relative Valuation — Valuation multiples compare price with earnings, sales, book value, or cash flow among genuinely comparable businesses.', '倍数是被压缩的估值模型。市盈率差异往往隐含增长、风险、资本回报和会计质量差异；只有业务与口径可比，比较才有意义。', '甲公司 PE 15 倍、乙公司 25 倍，不能直接说甲便宜。若乙增长更快、资本回报更高且负债更低，高倍数可能有合理解释。', '按行业标签随意选择可比公司，忽略地区、业务结构、周期位置、租赁和一次性利润造成的口径差异。', '先写可比标准，再统一盈利与企业价值口径；用中位数形成区间，并解释每家为何应有折价或溢价。'],
+    ['Relative Valuation — Valuation multiples compare price with earnings, sales, book value, or cash flow among genuinely comparable businesses.', '倍数是被压缩的估值模型。市盈率差异往往隐含增长、风险、资本回报和会计质量差异；只有业务结构与会计定义可比，比较才有意义。', '甲公司 PE 15 倍、乙公司 25 倍，不能直接说甲便宜。若乙增长更快、资本回报更高且负债更低，高倍数可能有合理解释。', '按行业标签随意选择可比公司，忽略地区、业务结构、周期位置、租赁和一次性利润造成的会计差异。', '明确可比公司的选择标准，并保证盈利指标与股权价值、经营指标与企业价值相匹配；再用中位数形成估值区间。'],
     ['Margin of Safety — A margin of safety recognizes valuation uncertainty by requiring a gap between estimated value and purchase price.', '安全边际不是“便宜百分之多少”的固定规则，而是为预测误差、周期变化和未知风险留出空间。不确定性越高，所需余量通常越大。', '估值区间为 80—120 元，市场价 95 元。只拿 120 元比较会显得便宜，按保守端则没有边际；决策应说明依赖哪组假设。', '把模型低估当成市场一定会纠正的保证，忽略基本面恶化可能让估值区间本身继续下降。', '记录估值日期、三情景、关键变量和三项失效条件；新信息出现时更新假设，不用股价反向修改结论。'],
   ],
   'macro-economy': [
@@ -160,37 +100,22 @@ const lessonNotes: Record<string, readonly LessonTuple[]> = {
   ],
 };
 
-const fallbackFrame: CourseFrame = {
-  why: '把概念放进真实金额、期限和风险条件中，才能从记住一个名词走向做出可解释的判断。',
-  evidence: '核对定义、现金流、适用条件与原始资料，并用至少一个反例检查结论。',
-  boundary: '任何简化关系都有假设和边界，不能把课堂示例直接当作收益承诺或个别决策建议。',
-  questions: ['它在描述什么对象和时间范围？', '结论依赖哪些可以变化的假设？', '最坏情况下谁承担损失，是否能够承受？'],
-};
-
 export function buildLessonGuide(course: Course, lesson: CourseLesson): LessonGuide {
-  const frame = courseFrames[course.slug] ?? fallbackFrame;
   const note = lessonNotes[course.slug]?.[lesson.id - 1];
   const [english, intuition, example, pitfall, exerciseHint] = note ?? [
-    `${lesson.title} — A practical concept for understanding financial decisions.`,
-    `理解“${lesson.title}”时，要把定义、数字、期限和风险放在同一个场景里，而不是只记结论。`,
-    `从一个具体金额和日期出发，使用“${lesson.key}”进行计算，再改变一个假设观察结果。`,
-    '把课堂中的简化关系直接套到真实决策，没有核对费用、税务、现金流和风险条件。',
-    '先写已知条件，再写假设和计算过程，最后说明结论在哪些条件改变后会失效。',
+    `${lesson.title} — ${lesson.summary}`,
+    lesson.summary,
+    `可依据“${lesson.key}”建立数值例子，并比较关键假设变化前后的结果。`,
+    '忽略模型假设、交易成本、税收与现金流时点，会使理论结果偏离现实。',
+    '列出已知变量、假设与计算过程，并说明结论的适用条件。',
   ];
 
   return {
     english,
     plain: lesson.summary,
     why: intuition,
-    mechanism: [
-      { title: '01｜先定对象与口径', text: `本课讨论“${lesson.title}”。先确认金额对应的主体、时间点、计量单位与比较口径；口径不同，再准确的算式也无法直接比较。` },
-      { title: '02｜顺着核心关系走', text: `本课核心关系是“${lesson.key}”。不要只背这句话，要逐项说明每个变量为什么变化、变化后通过哪条路径影响结果。` },
-      { title: '03｜用资料与反例验证', text: `${frame.evidence} 然后主动构造一个不满足假设的反例，判断原结论还是否成立。` },
-      { title: '04｜回到真实决策', text: `${frame.why} 最终答案应同时写出结论、主要假设、风险边界和下一步需要核验的信息。` },
-    ],
     example,
-    misconceptions: [pitfall, frame.boundary],
-    checklist: [...frame.questions, `能否不用公式，用自己的话解释“${lesson.key}”？`],
+    misconceptions: [pitfall],
     exerciseHint,
   };
 }

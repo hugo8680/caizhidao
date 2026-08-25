@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: AtlasConceptPageProps): Promi
   if (!profile) return {};
   return {
     title: `${profile.name}（${profile.en}）· ${profile.disciplineName}知识地图 · 财知道`,
-    description: `${profile.brief} 包含定义、运作机制、案例、适用边界、常见误区和判断清单。`,
+    description: `${profile.brief} 包含概念定义、理论机制、经济例证、适用条件和分析要点。`,
     openGraph: { title: `${profile.name} · ${profile.en}`, description: profile.brief, images: [] },
     twitter: { title: `${profile.name} · ${profile.en}`, description: profile.brief, images: [] },
   };
@@ -42,21 +42,21 @@ export default async function AtlasConceptPage({ params }: AtlasConceptPageProps
 
       <section className="atlas-concept-layout">
         <article className="atlas-concept-article">
-          <section className="atlas-concept-definition"><span>完整定义</span><h2>它具体是什么意思</h2><p className="atlas-concept-lead">{profile.brief}</p><p>{profile.explanation}</p></section>
+          <section className="atlas-concept-definition"><span>概念定义</span><h2>定义与经济含义</h2><p className="atlas-concept-lead">{profile.brief}</p><p>{profile.explanation}</p></section>
 
-          <section><span>运作机制</span><h2>放进完整关系里理解</h2><div className="atlas-concept-mechanism">{profile.mechanism.map((item, index) => <article key={item.title}><b>{String(index + 1).padStart(2, '0')}</b><h3>{item.title}</h3><p>{item.text}</p></article>)}</div></section>
+          <section><span>理论机制</span><h2>学科位置与作用机制</h2><div className="atlas-concept-mechanism">{profile.mechanism.map((item, index) => <article key={item.title}><b>{String(index + 1).padStart(2, '0')}</b><h3>{item.title}</h3><p>{item.text}</p></article>)}</div></section>
 
-          <section className="atlas-concept-example"><span>现实案例</span><h2>用一个具体情景看</h2><blockquote>{profile.example}</blockquote><p>阅读时先标出“{profile.name}”对应的主体和变化，再观察{profile.related.slice(0, 2).map((item) => item.name).join('、')}如何随之变化。这样才能把概念从名词还原成一条关系。</p></section>
+          <section className="atlas-concept-example"><span>经济例证</span><h2>现实中的表现</h2><blockquote>{profile.example}</blockquote></section>
 
-          <section className="atlas-concept-boundary"><span>适用条件与边界</span><h2>这个结论什么时候可能失效</h2><p>{profile.boundary}</p></section>
+          <section className="atlas-concept-boundary"><span>适用条件</span><h2>理论成立的条件</h2><p>{profile.boundary}</p></section>
 
-          <section className="atlas-concept-misconceptions"><span>常见误区</span><h2>不要把这些问题混在一起</h2><ol>{profile.misconceptions.map((item, index) => <li key={item}><b>{String(index + 1).padStart(2, '0')}</b><p>{item}</p></li>)}</ol></section>
+          <section className="atlas-concept-misconceptions"><span>概念辨析</span><h2>常见混淆</h2><ol>{profile.misconceptions.map((item, index) => <li key={item}><b>{String(index + 1).padStart(2, '0')}</b><p>{item}</p></li>)}</ol></section>
 
-          <section className="atlas-concept-checklist"><span>判断清单</span><h2>遇到实际问题时问什么</h2><ul>{profile.checklist.map((item) => <li key={item}>{item}</li>)}</ul></section>
+          <section className="atlas-concept-checklist"><span>分析要点</span><h2>应用与观察</h2><ul>{profile.checklist.map((item) => <li key={item}>{item}</li>)}</ul></section>
 
-          <section className="atlas-concept-english"><span>英文阅读</span><h2>{profile.en}</h2><p lang="en">{profile.englishNote}</p></section>
+          <section className="atlas-concept-english"><span>英文术语</span><h2>{profile.en}</h2><p lang="en">{profile.englishNote}</p></section>
 
-          {profile.references.length > 0 && <section className="atlas-concept-sources"><span>延伸核验</span><h2>从哪里继续查</h2><p>以下是本学科常用的教材、官方或专业资料入口。规则和数据应以最新原始资料为准。</p><div>{profile.references.map((source) => <a href={source.url} target="_blank" rel="noreferrer" key={source.url}><b>{source.title}</b><small>{source.publisher}</small><p>{source.note}</p><i>访问资料 ↗</i></a>)}</div></section>}
+          {profile.references.length > 0 && <section className="atlas-concept-sources"><span>参考文献</span><h2>教材与机构资料</h2><p>统计数据和制度规则可能更新，引用时应以发布机构的现行版本为准。</p><div>{profile.references.map((source) => <a href={source.url} target="_blank" rel="noreferrer" key={source.url}><b>{source.title}</b><small>{source.publisher}</small><p>{source.note}</p><i>查看资料 ↗</i></a>)}</div></section>}
         </article>
 
         <aside className="atlas-concept-aside">

@@ -116,7 +116,7 @@ export default function Home() {
       </section>
 
       <section className="concept-preview">
-        <div className="platform-section-title"><div><span>图解百科</span><h2>先看懂，再记住</h2></div><a href="/knowledge/">浏览全部百科词条 →</a></div>
+        <div className="platform-section-title"><div><span>图解百科</span><h2>概念、公式与例证</h2></div><a href="/knowledge/">浏览全部百科词条 →</a></div>
         <div className="concept-preview-grid">
           {knowledgeTerms.slice(0, 4).map((term) => <a href={`/knowledge/${term.slug}/`} key={term.slug}><ConceptVisual type={term.visual} label={term.zh} /><span>{term.category}</span><h3>{term.zh}</h3><small>{term.en}</small><p>{term.summary}</p></a>)}
         </div>

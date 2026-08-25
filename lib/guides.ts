@@ -11,10 +11,10 @@ export type KnowledgeCategoryPage = {
 export const knowledgeCategoryPages: KnowledgeCategoryPage[] = [
   { slug: 'personal-money', name: '金钱与个人财务', en: 'Money & Personal Finance', overview: '从现金流、债务、保障和时间价值出发，理解家庭财务为什么首先是期限与安全问题。', learningGoal: '能把收入、支出、负债和长期目标放到同一张家庭资产负债表中。' },
   { slug: 'investing-basics', name: '投资基础', en: 'Investing Basics', overview: '建立风险、收益、流动性和价格之间的基本关系，避免只用“涨不涨”理解投资。', learningGoal: '能说清一项回报来自承担什么风险，以及这项风险是否与自己的期限匹配。' },
-  { slug: 'markets-products', name: '市场与产品', en: 'Markets & Instruments', overview: '认识股票、债券、基金与交易机制，先看底层现金流和权利义务，再看产品名称。', learningGoal: '能从底层资产、交易结构、费用和流动性四个角度拆解金融产品。' },
+  { slug: 'markets-products', name: '市场与产品', en: 'Markets & Instruments', overview: '股票、债券和基金的经济性质，取决于底层现金流、合同权利与交易制度，而不是产品名称。', learningGoal: '能说明金融产品的底层资产、交易结构、费用和流动性特征。' },
   { slug: 'financial-statements', name: '财务报表', en: 'Financial Statements', overview: '把利润、资产与现金放在一起阅读，用三张报表还原企业真实经营过程。', learningGoal: '能解释利润为什么不等于现金，并用趋势与勾稽关系发现值得追问的变化。' },
   { slug: 'corporate-finance', name: '公司金融与估值', en: 'Corporate Finance & Valuation', overview: '理解企业如何投资、融资和分配资本，以及未来现金流如何被折算成今天的价值。', learningGoal: '能区分价值、价格和估值假设，并知道哪些变量最容易让结论失真。' },
-  { slug: 'macroeconomics', name: '宏观经济', en: 'Macroeconomics', overview: '用增长、就业、通胀和政策观察整个经济体，同时区分数据事实与因果解释。', learningGoal: '能把一条宏观新闻拆成指标变化、政策反应、传导路径和市场预期。' },
+  { slug: 'macroeconomics', name: '宏观经济', en: 'Macroeconomics', overview: '用增长、就业、通胀和政策观察整个经济体，同时区分数据事实与因果解释。', learningGoal: '能区分宏观新闻中的指标变化、政策反应、传导机制和市场预期。' },
   { slug: 'portfolio-risk', name: '组合与风险', en: 'Portfolio & Risk', overview: '从目标和风险预算出发组合资产，用相关性、回撤与再平衡管理不确定性。', learningGoal: '能判断组合是否真正分散，并用规则而非临场情绪调整风险。' },
   { slug: 'global-derivatives', name: '全球与衍生品', en: 'Global Markets & Derivatives', overview: '理解汇率、跨境资本、期货、期权和杠杆如何转移风险，也如何放大损失。', learningGoal: '能画出基本权利义务和现金流方向，并识别杠杆与流动性反馈。' },
 ];
@@ -50,7 +50,7 @@ const categoryDepth: Record<string, CategoryDepth> = {
     checklist: ['这笔钱最早什么时候必须使用？', '如果收入中断六个月，方案是否仍能维持？', '计算的是名义金额，还是扣除通胀后的购买力？'],
     sources: [
       { title: 'Consumer Tools', publisher: 'U.S. Consumer Financial Protection Bureau', url: 'https://www.consumerfinance.gov/consumer-tools/', note: '贷款、信用、住房与日常财务的消费者资料。' },
-      { title: 'Investor education', publisher: 'Investor.gov · U.S. SEC', url: 'https://www.investor.gov/introduction-investing', note: '投资基础、风险与产品核验入口。' },
+      { title: 'Investor education', publisher: 'Investor.gov · U.S. SEC', url: 'https://www.investor.gov/introduction-investing', note: '投资基础、风险与金融产品资料。' },
     ],
   },
   '投资基础': {
@@ -73,7 +73,7 @@ const categoryDepth: Record<string, CategoryDepth> = {
   },
   '财务报表': {
     boundary: '报表是按会计规则形成的经营记录，不是企业现实的完整复制。确认时点、估计方法、一次性项目和管理层判断都会影响数字。',
-    misconceptions: ['孤立阅读{term}，没有与另外两张报表和附注相互核对。', '看到同比增长就下结论，没有区分价格、数量、并购和会计口径变化。'],
+    misconceptions: ['孤立阅读{term}，没有与另外两张报表和附注相互核对。', '看到同比增长就下结论，没有区分价格、数量、并购和会计处理变化。'],
     checklist: ['这个数字对应一段期间，还是一个时点？', '它能否与另一张报表和附注勾稽？', '变化来自主营经营，还是一次性项目与会计估计？'],
     sources: [
       { title: 'Issued IFRS Standards', publisher: 'IFRS Foundation', url: 'https://www.ifrs.org/issued-standards/list-of-standards/', note: '国际财务报告准则与配套资料入口。' },
@@ -92,7 +92,7 @@ const categoryDepth: Record<string, CategoryDepth> = {
   '宏观经济': {
     boundary: '宏观指标是对大量经济活动的汇总，发布有滞后并可能修订；同时变化不自动代表因果关系，市场价格还会提前反映预期。',
     misconceptions: ['用一次{term}数据判断长期趋势，没有检查基数、季节性和后续修订。', '把经济数据好坏直接等同于资产涨跌，忽略市场此前已经计入的预期。'],
-    checklist: ['这是总量、增速还是价格指数？', '名义与实际、同比与环比的口径是否一致？', '数据相对前值、预期值和历史修订偏离多少？'],
+    checklist: ['这是总量、增速还是价格指数？', '数据采用名义值还是实际值，比较的是同比还是环比？', '数据相对前值、预期值和历史修订偏离多少？'],
     sources: [
       { title: '财经数据', publisher: '中华人民共和国国家统计局', url: 'https://data.stats.gov.cn/', note: '中国国民经济与社会统计数据查询入口。' },
       { title: 'Back to Basics', publisher: 'International Monetary Fund', url: 'https://www.imf.org/external/pubs/ft/fandd/basics/', note: 'GDP、通胀、财政和国际收支等概念说明。' },
@@ -112,7 +112,7 @@ const categoryDepth: Record<string, CategoryDepth> = {
     misconceptions: ['只看{term}的方向判断，没有画出权利、义务和全部现金流。', '把保证金当作最大损失，忽略杠杆、追加保证金、跳空和交易对手风险。'],
     checklist: ['标的、名义本金、到期日和结算方式是什么？', '最坏情况下需要追加多少现金？', '汇率、基差和交易对手变化会怎样影响结果？'],
     sources: [
-      { title: 'Balance of Payments Manual', publisher: 'International Monetary Fund', url: 'https://www.imf.org/external/pubs/ft/bop/2007/bopman6.htm', note: '国际收支、跨境头寸与统计口径。' },
+      { title: 'Balance of Payments Manual', publisher: 'International Monetary Fund', url: 'https://www.imf.org/external/pubs/ft/bop/2007/bopman6.htm', note: '国际收支、跨境头寸的定义与编制方法。' },
       { title: 'Derivatives information', publisher: 'U.S. Commodity Futures Trading Commission', url: 'https://www.cftc.gov/LearnAndProtect/AdvisoriesAndArticles/index.htm', note: '期货、期权、杠杆和交易风险资料。' },
     ],
   },
@@ -131,9 +131,9 @@ const categorySources: Record<string, string> = {
 
 const termNotes: Record<string, TermNote> = {
   'compound-interest': { caution: '复利公式假定收益不断留在账户里。中途取走收益、费率变化或发生亏损，结果都会偏离那条平滑曲线。', check: '把本金、追加投入、收益率、计息频率和年数分别写清，再用较低的收益率重算一次。' },
-  'time-value': { caution: '折现率不是随手填的数字。它既包含等待的机会成本，也可能包含通胀、信用和不确定性。', check: '先把所有现金流标在时间轴上，再确认比较的是同一币种、同一风险和同一计息口径。' },
+  'time-value': { caution: '折现率不是随手填的数字。它既包含等待的机会成本，也可能包含通胀、信用和不确定性。', check: '把所有现金流标在时间轴上，并保证币种、风险等级和计息方式一致。' },
   'emergency-fund': { caution: '旅行、装修和年度保费是可以预见的支出，不宜反复从应急金里支付；它们更适合单独储备。', check: '用“不能暂停的支出”计算基数，并结合收入稳定性、家庭责任和保险到账时间决定覆盖月数。' },
-  'debt-to-income': { caution: '不同机构可能使用税前收入或税后收入，也可能对信用卡、房贷采用不同月供口径，比例不能直接横比。', check: '注明收入口径，把所有固定还款放进分子，并另外检查收入中断时现金能撑多久。' },
+  'debt-to-income': { caution: '不同机构可能使用税前收入或税后收入，对信用卡和房贷月供的定义也可能不同，因此比例不能直接横比。', check: '注明采用税前还是税后收入，把所有固定还款放进分子，并检查收入中断时现金能维持多久。' },
   amortization: { caution: '月供固定不代表每月偿还的本金相同。等额本息早期支付的利息更多，剩余本金下降得较慢。', check: '查看完整还款表，并把提前还款费、利率重定价和缩期或降月供的选择一并比较。' },
   insurance: { caution: '保险首先解决难以自行承担的损失，不应只按返还金额或演示收益判断好坏。', check: '从家庭责任反推保额，逐条核对保障范围、等待期、免责、续保条件和受益人。' },
   'risk-return': { caution: '“预期收益更高”不等于结果一定更好，只表示承担风险后可能要求更高补偿。', check: '说清收益由什么现金流或风险溢价提供，并估算最坏损失是否会破坏既定目标。' },
@@ -159,7 +159,7 @@ const termNotes: Record<string, TermNote> = {
   dcf: { caution: 'DCF 输出到小数点并不代表准确。终值常占估值的大部分，遥远假设的小变化会被明显放大。', check: '至少做悲观、基准和乐观三种情景，并展示增长率、利润率、再投资和折现率的敏感性。' },
   npv: { caution: 'NPV 为正只说明在给定现金流与折现率下项目创造价值；输入过于乐观时，正数本身没有说服力。', check: '核对初始投入、后续追加、营运资本、残值和税，再对关键变量做压力测试。' },
   wacc: { caution: 'WACC 不是公司永远不变的一条利率，也不能把一套集团折现率用于风险完全不同的新业务。', check: '使用市场价值权重，并确保无风险利率、风险溢价、税率、币种和项目风险彼此一致。' },
-  'pe-ratio': { caution: '低市盈率不一定便宜：盈利可能处在周期高点、质量较差，亏损企业的市盈率则没有可比意义。', check: '确认使用静态还是预测盈利，再比较增长、利润质量、杠杆、周期位置和同业会计口径。' },
+  'pe-ratio': { caution: '低市盈率不一定便宜：盈利可能处在周期高点、质量较差，亏损企业的市盈率则没有可比意义。', check: '确认使用历史盈利还是预测盈利，再比较增长、利润质量、杠杆、周期位置和同业会计处理方法。' },
   inflation: { caution: '某一种商品涨价不等于通胀；通胀回落通常表示价格上涨变慢，也不等于价格已经下降。', check: '同时看总体与核心指标、环比与同比，并拆分食品、能源、住房、商品和服务。' },
   gdp: { caution: 'GDP 衡量生产，不直接衡量幸福、分配或环境质量；名义增长还可能主要来自价格上涨。', check: '区分名义与实际、总量与人均，再查看消费、投资、政府支出和净出口分别贡献多少。' },
   cpi: { caution: 'CPI 是代表性消费篮子的平均变化，不会与每个家庭的生活成本完全一致，权重也会随方法调整。', check: '查看篮子权重、基期、季调方法和分项贡献，并用自己的主要支出对照官方平均值。' },
@@ -188,17 +188,16 @@ export function buildKnowledgeGuide(term: KnowledgeTerm) {
   const depth = categoryDepth[term.category];
   const related = term.related.map((slug) => getKnowledgeTerm(slug)).filter((item): item is KnowledgeTerm => Boolean(item));
   const relatedLine = related.length > 0
-    ? `${related.map((item) => `“${item.zh}”关注${item.summary.replace(/[。！？；]+$/u, '')}`).join('；')}。`
-    : '把它与同主题概念并排比较，确认各自描述的对象和口径。';
+    ? `${related.map((item) => `“${item.zh}”：${item.summary.replace(/[。！？；]+$/u, '')}`).join('；')}。`
+    : '同一理论中的相近概念可能解释不同变量，需要分别考察其定义和因果关系。';
   const caution = note?.caution ?? term.fact;
-  const check = note?.check ?? `先确认“${term.zh}”描述的对象、期间和计量口径，再结合具体资料判断。`;
+  const check = note?.check ?? `分析“${term.zh}”时，需要同时考察定义、成立条件、变量关系和经验事实。`;
   return {
     mechanism: [
-      { title: '定义与口径', text: `${term.summary}${term.why}阅读时先确认它描述的主体、时间范围和计量单位。` },
-      { title: '关系如何发生', text: `${term.example}这个例子不是为了记住一个答案，而是看清变量、现金流或风险从哪里开始变化。` },
-      { title: '与相近概念区分', text: relatedLine },
-      { title: '适用条件与边界', text: `${depth?.boundary ?? '任何概念都依赖具体对象、时间范围和前提条件。'}${caution}` },
+      { title: '经济含义', text: term.why },
+      { title: '相关概念', text: relatedLine },
     ],
+    boundary: depth?.boundary ?? '理论结论依赖其前提假设；当约束、制度或市场环境变化时，结论也可能改变。',
     misconceptions: [caution, ...(depth?.misconceptions ?? []).map((item) => item.replaceAll('{term}', `“${term.zh}”`))],
     checklist: [check, ...(depth?.checklist ?? [])],
     sources: depth?.sources ?? [],

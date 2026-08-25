@@ -40,7 +40,7 @@ export default async function ToolDetailPage({ params }: ToolPageProps) {
       <section className="tool-detail-guide">
         <article><span>输入项</span><h2>每个数字代表什么</h2><dl>{guide.inputs.map((input) => <div key={input.name}><dt>{input.name}</dt><dd>{input.meaning}</dd></div>)}</dl></article>
         <article><span>计算结果</span><h2>怎么看这个数字</h2><p>{guide.reading}</p><div className="tool-guide-example"><b>可以这样试</b><p>{guide.example}</p></div></article>
-        <article><span>使用前请注意</span><h2>这个计算没有包括什么</h2><ul>{guide.limits.map((limit) => <li key={limit}>{limit}</li>)}</ul><p>计算结果仅供比较，不是报价或收益承诺。做实际决定前，请再核对合同、费用、税务和风险。</p></article>
+        <article><span>适用范围</span><h2>计算中未包含的因素</h2><ul>{guide.limits.map((limit) => <li key={limit}>{limit}</li>)}</ul><p>计算结果用于方案比较，不是报价或收益承诺；实际交易还会受到合同条款、费用、税收和风险条件影响。</p></article>
       </section>
 
       <nav className="tool-pagination" aria-label="金融工具翻页">

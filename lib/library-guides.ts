@@ -27,7 +27,7 @@ const bookGuides: Record<string, BookGuide> = {
 };
 
 export function getBookGuide(book: Book): BookGuide {
-  return bookGuides[book.id] ?? { fit: `适合关注“${book.topic}”、并能接受${book.level}阅读难度的读者。`, points: [book.intro, '理解作者使用的主要概念与判断框架。', '把书中的原则与自己的目标、期限和风险条件对照。'], reading: '先浏览目录，再围绕一个明确问题做笔记；读完后用自己的案例复述核心论点。', caution: '书籍版本、数据和制度背景会变化，具体决策还要核验最新规则与原始资料。' };
+  return bookGuides[book.id] ?? { fit: `适合关注“${book.topic}”、并能接受${book.level}阅读难度的读者。`, points: [book.intro, '理解作者使用的主要概念与论证方法。', '把书中的原则与自己的目标、期限和风险条件对照。'], reading: '浏览目录后，围绕一个明确问题做笔记，并用自己的案例复述核心论点。', caution: '书籍版本、数据和制度背景会变化，涉及现实制度时应以现行规则和原始资料为准。' };
 }
 
 export type VideoGuide = {
@@ -41,7 +41,7 @@ const videoGuides: Record<string, VideoGuide> = {
   'mooc-finance-cn': { before: '这是一页课程检索结果，不是一门固定课程。先按授课学校、教师、课程大纲、开课状态和作业安排筛选。', focus: ['金融学基础课程是否覆盖货币、银行、证券与风险。', '公司金融或投资学课程是否有计算题与案例。', '课程页面是否标明教材、考核和完整课时。'], after: '选定一门后先完成前两周内容，再决定是否投入整个学期；避免同时收藏很多课程却没有完成一门。', caution: '检索结果和开课状态会变化，证书、费用和访问权限以课程页面为准。' },
   'xuetang-finance-cn': { before: '先把目标限定为宏观、会计、金融科技或公司金融中的一个方向，再按大纲和先修要求筛选。', focus: ['课程是否来自高校或明确的教学团队。', '视频之外是否提供讲义、练习和讨论。', '难度是否与自己的数学和会计基础匹配。'], after: '用本站同主题词条建立术语表，并完成至少一份作业或案例复盘。', caution: '平台聚合内容的开放周期与费用不同，进入课程页后再核对。' },
   'smartedu-cn': { before: '这是国家级课程资源入口。建议使用“金融学”“宏观经济学”“财务报表分析”等具体关键词，而不是泛搜财经。', focus: ['课程负责人和建设学校。', '章节结构、总课时与考核资料。', '是否有适合当前基础的先导课程。'], after: '确定一条连续课程路径，并把每周固定学习时段写入日程。', caution: '部分资源可能需要登录，开放范围和课程版本以平台显示为准。' },
-  'bilibili-yale-cn': { before: '先确认视频是否为完整课程、字幕来源和上传者；优先选择学校、出版社或长期维护的合集。', focus: ['风险分担、保险和金融机构的社会功能。', '证券、银行与市场制度如何连接。', '行为金融怎样解释传统模型之外的现象。'], after: '对照 Open Yale 官方课程页核验讲次，并为每一讲写三行摘要。', caution: '检索页可能混入剪辑、搬运或不完整字幕，版权状态和内容完整性需要逐项判断。' },
+  'bilibili-yale-cn': { before: '完整课程应具有连续讲次、可靠字幕和明确来源；学校、出版社或长期维护的合集更便于核对内容。', focus: ['风险分担、保险和金融机构的社会功能。', '证券、银行与市场制度如何连接。', '行为金融怎样解释传统模型之外的现象。'], after: '对照 Open Yale 官方课程页核对讲次，并为每一讲写三行摘要。', caution: '检索页可能混入剪辑、搬运或不完整字幕，版权状态和内容完整性需要逐项判断。' },
   'bilibili-accounting-cn': { before: '先具备资产、负债、收入、费用和现金流的基础定义，再筛选有完整案例和报表附注的课程。', focus: ['三张报表怎样勾稽。', '利润质量、应收、存货和经营现金流。', '比率变化背后的业务原因。'], after: '找一家公司连续三年的年报，按课程方法完成一页报表联读。', caution: '避免只看股票解读类视频；分析结论应回到公司公告、会计政策和附注。' },
   'coursera-markets': { before: '不要求高等数学，但需要愿意理解风险、保险、证券和制度之间的关系；可先旁听一周判断节奏。', focus: ['金融机构如何分担风险并服务真实经济。', '股票、债券、保险与银行的基本结构。', '行为、监管和社会目标怎样进入金融设计。'], after: '每周选择一种真实产品，画出参与者、现金流、风险和监管关系。', caution: '字幕与证书政策可能变化，课程中的案例和市场数据也有时间背景。' },
   'yale-markets': { before: '适合能阅读英文讲义、希望观看完整大学课程的学习者；先下载课程大纲并按讲次推进。', focus: ['Risk sharing, insurance and portfolio ideas.', 'Securities, banking, regulation and market institutions.', 'Behavioral finance and the social purpose of finance.'], after: 'Use the transcripts to build an English glossary, then explain one institution in Chinese without looking at notes.', caution: 'This is a 2011 course. Core concepts remain useful, but regulations, market structure and data must be refreshed.' },
@@ -53,5 +53,5 @@ const videoGuides: Record<string, VideoGuide> = {
 };
 
 export function getVideoGuide(video: VideoCourse): VideoGuide {
-  return videoGuides[video.id] ?? { before: `先确认自己具备${video.level}课程需要的数学、会计与英文基础。`, focus: [video.description, '记录核心概念、假设和至少一个数字例子。', '把课程结论与原始资料和现实案例对照。'], after: '学完后用自己的话写一页总结，并完成一个可检查的练习或案例。', caution: '课程状态、字幕、费用和访问权限以平台最新页面为准。' };
+  return videoGuides[video.id] ?? { before: `这套资源面向${video.level}学习者，需要相应的数学、会计与英文基础。`, focus: [video.description, '记录核心概念、假设和至少一个数字例子。', '把课程结论与原始资料和现实案例对照。'], after: '学完后用自己的话写一页总结，并完成一个可检查的练习或案例。', caution: '课程状态、字幕、费用和访问权限以平台最新页面为准。' };
 }

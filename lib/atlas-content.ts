@@ -337,7 +337,7 @@ const disciplineDepth: Record<string, DisciplineDepth> = {
   },
   macroeconomics: {
     process: '宏观分析把家庭、企业、政府和海外部门的活动汇总起来，再通过增长、就业、价格、信用和政策传导解释经济整体的变化。',
-    evidence: '优先查看统计部门和央行发布的原始数据、口径说明、季调方法与历史修订，并同时比较总量、增速和人均指标。',
+    evidence: '优先查看统计部门和央行发布的原始数据、指标定义、季节调整方法与历史修订，并同时比较总量、增速和人均指标。',
     boundary: '宏观数据发布有滞后且经常修订；单个指标只能描述经济的一面，同步变化也不能自动证明因果。',
     references: [{ title: 'Back to Basics', publisher: 'International Monetary Fund', url: 'https://www.imf.org/external/pubs/ft/fandd/basics/', note: 'GDP、通胀、财政、货币和国际收支的基础说明。' }, { title: '国家数据', publisher: '中华人民共和国国家统计局', url: 'https://data.stats.gov.cn/', note: '中国宏观与社会经济数据查询入口。' }],
   },
@@ -357,7 +357,7 @@ const disciplineDepth: Record<string, DisciplineDepth> = {
     process: '投资分析从目标和期限开始，把预期回报拆成现金流与价格变化，再识别承担了哪些市场、信用、流动性和行为风险。',
     evidence: '至少查看底层持仓、基准、费用、历史回撤、成交条件和压力情景；结果评价还要区分市场暴露、主动决策与运气。',
     boundary: '历史平均收益不是承诺，风险也不只等于日常波动。期限错配、被迫卖出和永久损失往往比短期涨跌更重要。',
-    references: [{ title: 'Investing basics', publisher: 'Investor.gov · U.S. SEC', url: 'https://www.investor.gov/introduction-investing/investing-basics', note: '风险、收益、分散、费用与产品核验。' }],
+    references: [{ title: 'Investing basics', publisher: 'Investor.gov · U.S. SEC', url: 'https://www.investor.gov/introduction-investing/investing-basics', note: '风险、收益、分散投资、费用与金融产品资料。' }],
   },
   'corporate-finance': {
     process: '公司金融沿着现金流判断价值：企业先投入资本，经营产生未来现金，再按资金的时间价值和风险折回今天，同时考虑融资与治理怎样分配结果。',
@@ -367,7 +367,7 @@ const disciplineDepth: Record<string, DisciplineDepth> = {
   },
   accounting: {
     process: '会计把交易按确认、计量和分类规则记录下来。分析时要把利润表、资产负债表和现金流量表连接起来，追踪同一业务怎样穿过三张表。',
-    evidence: '以经审计年报、会计政策、报表附注和管理层讨论为主，并至少比较三期趋势和同业口径。',
+    evidence: '以经审计年报、会计政策、报表附注和管理层讨论为主，并至少比较三期趋势以及同业采用的会计处理方法。',
     boundary: '会计数字依赖确认时点与估计，账面价值不等于可变现价格，利润也不等于已经收到的现金。',
     references: [{ title: 'Issued IFRS Standards', publisher: 'IFRS Foundation', url: 'https://www.ifrs.org/issued-standards/list-of-standards/', note: '国际财务报告准则与配套资料。' }],
   },
@@ -458,35 +458,34 @@ export function getAtlasConceptProfile(disciplineSlug: string, id: string): Atla
   const depth = disciplineDepth[disciplineSlug];
   const resolvedBrief = source?.summary ?? brief;
   const resolvedExample = source?.example ?? topicExamples[`${disciplineSlug}:${topicIndex}`] ?? topic.summary;
-  const resolvedCaution = source?.fact ?? `不要把“${name}”当成脱离条件的固定结论。先写明分析对象、时间范围和假设，再判断条件变化后结论是否仍成立。`;
+  const resolvedCaution = source?.fact ?? `“${name}”的经济含义依赖既定假设、制度环境和约束条件；这些条件变化时，理论结论也可能改变。`;
   const relatedNames = related.slice(0, 3).map((item) => item.name).join('、');
   return {
     id,
     name,
     en: source?.en ?? english,
     brief: resolvedBrief,
-    explanation: source?.why ?? `它属于“${topic.title}”这一组问题；${topic.summary}因此理解它时不能脱离${relatedNames}等相邻概念。`,
+    explanation: source?.why ?? `“${name}”是“${topic.title}”中的核心概念。${topic.summary}它与${relatedNames}共同解释这一主题中的经济关系。`,
     example: resolvedExample,
     caution: resolvedCaution,
     mechanism: [
-      { title: '先确定它描述什么', text: `${resolvedBrief}先写清分析主体、时间范围和计量单位，避免把名称相同但口径不同的现象混在一起。` },
-      { title: '再放回完整关系', text: `${depth?.process ?? discipline.summary}在“${topic.title}”中，${topic.summary}` },
-      { title: '和相邻概念一起看', text: `“${name}”通常不能单独解释结果。把它与${relatedNames}并排比较，才能分清起点、传导过程与最终表现。` },
-      { title: '用资料进行验证', text: depth?.evidence ?? `从与“${topic.title}”有关的原始数据、合同与公开披露中核对。` },
+      { title: '理论背景', text: topic.summary },
+      { title: '作用机制', text: depth?.process ?? discipline.summary },
+      { title: '相关概念', text: `“${name}”与${relatedNames}共同构成“${topic.title}”的理论关系。它们分别解释起点、传导过程或最终结果。` },
+      { title: '经验观察', text: depth?.evidence ?? `经验分析通常使用与“${topic.title}”有关的统计数据、合同或公开披露。` },
     ],
     boundary: `${depth?.boundary ?? '结论依赖具体环境和假设。'}${resolvedCaution}`,
     misconceptions: [
-      resolvedCaution,
-      `把“${name}”和“${related[0]?.name ?? topic.title}”当作同一个概念，没有区分它们描述的对象、阶段或计量方法。`,
-      `只记住一个例子的结果，却没有检查金额、期限、制度和参与者改变后，原来的关系是否还成立。`,
+      `“${name}”与“${related[0]?.name ?? topic.title}”分别描述不同的经济变量、作用阶段或计算方法，二者不能互相替代。`,
+      `单一案例不能证明普遍规律；金额、期限、制度和参与者发生变化后，原有关系可能不再成立。`,
     ],
     checklist: [
-      `“${name}”在当前问题中描述哪个主体、哪段时间和哪一种口径？`,
-      `它与${related.slice(0, 2).map((item) => `“${item.name}”`).join('、')}分别解释哪一部分？`,
-      '可以用哪项原始数据、合同条款或公开披露验证判断？',
-      '哪一个关键假设改变后，当前结论会明显变弱或反转？',
+      `“${name}”的定义是什么，核心变量有哪些？`,
+      `它与${related.slice(0, 2).map((item) => `“${item.name}”`).join('、')}之间存在什么理论关系？`,
+      '现实中可以使用哪些统计数据、合同条款或公开披露进行观察？',
+      '哪些前提假设发生变化后，结论会减弱或反转？',
     ],
-    englishNote: source?.definitionEn ?? `${source?.en ?? english} is the standard English term used in ${discipline.en}. In English-language materials, it is commonly discussed under ${topic.en}, together with ${related.slice(0, 2).map((item) => item.en).join(' and ')}.`,
+    englishNote: source?.definitionEn ?? `In ${discipline.en}, ${source?.en ?? english} is analyzed under ${topic.en}, together with ${related.slice(0, 2).map((item) => item.en).join(' and ')}.`,
     related,
     references: depth?.references ?? [],
     disciplineSlug,

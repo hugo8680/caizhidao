@@ -79,7 +79,7 @@ export const disciplines: Discipline[] = [
   },
   {
     slug: 'accounting', no: '07', name: '会计与报表', en: 'Accounting & Statements', tone: 'coral', question: '一家公司真实发生了什么？',
-    summary: '把商业活动翻译成可以核验的数字，并用三张报表观察盈利、资产与现金。',
+    summary: '按照确认、计量和列报规则记录商业活动，并用三张报表反映盈利、资产与现金流。',
     topics: [
       { title: '会计语言', en: 'Accounting Language', summary: '权责发生、确认和计量把经营事实转为统一记录。', concepts: ['会计等式', '权责发生制', '收入确认', '折旧', '会计估计'] },
       { title: '三张报表', en: 'Three Statements', summary: '利润、家底与现金必须联读，任何一张表都不完整。', concepts: ['资产负债表', '利润表', '现金流量表', '所有者权益', '报表勾稽'] },
@@ -149,7 +149,7 @@ export const popularQuestions = [
   { domain: '投资组合', question: '买了很多基金，为什么还是没有分散？', answer: '名称不同不等于风险不同；多只基金可能重复持有同一批股票或受同一市场驱动。', href: '/knowledge/diversification/' },
   { domain: '个人财务', question: '提前还贷还是继续投资？', answer: '需要比较确定性利息节省、税费、替代投资的风险后回报、流动性与心理压力。', href: '/tools/early-repay/' },
   { domain: '公共财政', question: '政府为什么不能无限印钱？', answer: '货币能改变名义购买力的分配，却不能凭空创造真实商品、服务和生产能力。', href: '/atlas/public-finance/' },
-  { domain: '国际经济', question: '汇率上涨，到底是谁升值了？', answer: '先确认报价方向；一种货币的升值必然是相对另一种货币而言。', href: '/knowledge/exchange-rate/' },
+  { domain: '国际经济', question: '汇率上涨，到底是谁升值了？', answer: '汇率的含义取决于报价方向；一种货币的升值必然是相对另一种货币而言。', href: '/knowledge/exchange-rate/' },
   { domain: '行为经济', question: '亏损后为什么更容易做出冒险决定？', answer: '损失厌恶与参照点会让人试图“翻本”，从而接受原本不会承担的风险。', href: '/atlas/behavioral-economics/' },
   { domain: '金融科技', question: '技术更先进，金融产品就更安全吗？', answer: '技术能提高效率，也会新增模型、托管、网络与平台集中风险；经济约束不会因界面更漂亮而消失。', href: '/knowledge/systemic-risk/' },
 ];
@@ -202,7 +202,7 @@ export const learningRoutes: LearningRoute[] = [
     { title: '未来现金流决定价值', note: 'DCF 与安全边际', explanation: '企业价值来自未来可分配现金流的现值。增长率、资本投入和风险共同决定价值，支付价格还要为预测错误保留缓冲。', example: '好公司若买入价格已经包含极高增长预期，也可能成为回报很差的投资。' },
   ] },
   { slug: 'invest-without-noise', no: '05', title: '投资不被噪声带走', en: 'Investing with Clarity', question: '从目标出发，而不是从热门产品出发', description: '建立风险、配置、费用、行为与再平衡组成的长期投资框架。', minutes: 61, steps: [
-    { title: '先定义目标与期限', note: '投资政策书', explanation: '目标决定资金何时使用、允许多大损失和需要多少流动性。先写清边界，能避免市场热闹时让产品反过来定义目标。', example: '两年后要用的首付款，与二十年后的退休金不应采用同一风险配置。' },
+    { title: '目标与期限', note: '投资政策书', explanation: '目标决定资金何时使用、允许多大损失和需要多少流动性。明确这些约束，可以避免根据热门产品反向修改财务目标。', example: '两年后要用的首付款，与二十年后的退休金不应采用同一风险配置。' },
     { title: '理解风险收益交换', note: '不存在免费回报', explanation: '高预期回报通常来自承担价格波动、违约、流动性或不确定现金流。分析收益时要能明确说出“我因承担什么风险获得补偿”。', example: '高收益债券的额外利息，是对更高违约风险和较差流动性的补偿。' },
     { title: '用相关性实现分散', note: '风险来源', explanation: '有效分散来自不同风险驱动，而不是产品数量。还要观察压力时期相关性是否上升，以及底层持仓是否重复。', example: '五只都重仓同一批科技股的基金，名称不同也不能提供真正分散。' },
     { title: '让费用少吃掉复利', note: '长期成本', explanation: '管理费、交易成本和税收会直接减少当期资产，也减少未来可复利的本金。费用是少数可以在投资前较确定比较的变量。', example: '相同市场暴露下，年费率差 1% 经过二十年会形成显著终值差异。' },
@@ -217,7 +217,7 @@ export const learningRoutes: LearningRoute[] = [
   ] },
   { slug: 'global-money', no: '07', title: '全球的钱如何流动', en: 'Money Across Borders', question: '贸易、汇率与资本流动如何互相牵动', description: '从比较优势走到美元周期、主权债务和跨境金融传染。', minutes: 58, steps: [
     { title: '贸易为何能创造收益', note: '比较优势', explanation: '即使一方在所有产品上都更高效，双方仍可能通过专注相对机会成本更低的领域获得总产出收益。收益如何分配则取决于价格、制度与谈判能力。', example: '贸易的总收益可以为正，但某些行业和劳动者仍可能承担转型成本。' },
-    { title: '汇率是一种相对价格', note: '货币的两面', explanation: '汇率表示一种货币用另一种货币计价的价格。讨论升值或贬值前必须先确认报价方向，否则同一次变化会被说成相反结论。', example: '美元兑人民币从 7.0 到 7.2，表示一美元换更多人民币，即美元相对人民币升值。' },
+    { title: '汇率是一种相对价格', note: '货币的两面', explanation: '汇率表示一种货币用另一种货币计价的价格。报价方向决定升值与贬值的含义；方向相反时，同一次变化会得到相反表述。', example: '美元兑人民币从 7.0 到 7.2，表示一美元换更多人民币，即美元相对人民币升值。' },
     { title: '国际收支记录跨境往来', note: '经常与金融账户', explanation: '经常账户记录商品、服务和收入往来，金融账户记录资产与负债变化。一个国家的贸易与跨境融资并非两套互不相关的故事。', example: '经常账户逆差需要由资本流入、储备变化或其他金融项目对应。' },
     { title: '资本为什么突然撤离', note: '风险与流动性', explanation: '当利差、汇率预期、信用风险或全球风险偏好改变时，跨境资金可能迅速重新配置。短期外币债务会放大这种压力。', example: '本币贬值会抬高外币债务的本币负担，进一步削弱偿付信心并推动资本外流。' },
     { title: '局部冲击怎样扩散', note: '系统性风险', explanation: '金融机构通过共同持仓、融资市场、支付清算和信心相互连接。局部损失若触发保证金、挤兑和被迫卖出，就可能变成系统事件。', example: '某类资产下跌导致抵押品缩水，机构卖出其他资产补充保证金，压力因此跨市场传播。' },

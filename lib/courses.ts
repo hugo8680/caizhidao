@@ -22,8 +22,8 @@ export type Course = {
 
 export const courses: Course[] = [
   {
-    slug: 'finance-foundations', title: '金融通识入门', en: 'Finance Foundations', level: '入门', duration: '2.2 小时', category: '基础框架', accent: 'amber',
-    description: '从货币、利率和风险开始，建立理解所有金融问题都能复用的底层框架。',
+    slug: 'finance-foundations', title: '金融通识入门', en: 'Finance Foundations', level: '入门', duration: '2.2 小时', category: '金融基础', accent: 'amber',
+    description: '从货币、利率和风险开始，理解金融决策中的时间价值、现金流与风险补偿。',
     outcomes: ['理解货币随时间变化的原因', '区分名义收益与实际购买力', '用风险、收益和流动性比较金融产品'],
     lessons: [
       { id: 1, title: '货币为什么有价值', minutes: 14, summary: '从交换媒介、记账单位和价值储藏理解货币。', key: '货币价值来自可接受性、稀缺性与制度信用', practice: '列出现金同时具有的三种用途。' },
@@ -33,7 +33,7 @@ export const courses: Course[] = [
       { id: 5, title: '利率是资金的价格', minutes: 18, summary: '利率连接储蓄者、借款人和资产价格。', key: '实际利率 ≈ 名义利率 − 预期通胀', practice: '解释加息为什么通常压低旧债券价格。' },
       { id: 6, title: '风险不只是波动', minutes: 17, summary: '认识永久损失、流动性与目标落空等多维风险。', key: '风险 = 不利结果 × 发生概率 × 承受后果', practice: '为一笔两年后要用的钱列出三种风险。' },
       { id: 7, title: '收益从哪里来', minutes: 16, summary: '把投资收益拆成现金流、增长与价格变化。', key: '总回报 = 收入回报 + 资本利得', practice: '区分债券票息与债券价格变化。' },
-      { id: 8, title: '金融地图总复盘', minutes: 18, summary: '用时间、风险、流动性和成本比较任意金融决策。', key: '目标 → 期限 → 风险 → 工具 → 成本', practice: '用五步框架分析一个真实储蓄目标。' },
+      { id: 8, title: '金融地图总复盘', minutes: 18, summary: '用时间、风险、流动性和成本比较任意金融决策。', key: '目标 → 期限 → 风险 → 工具 → 成本', practice: '分析一个真实储蓄目标的金额、期限、风险、工具和成本。' },
     ],
   },
   {
@@ -59,11 +59,11 @@ export const courses: Course[] = [
       { id: 1, title: '现金与货币基金', minutes: 16, summary: '理解流动性、安全性和通胀成本。', key: '现金价值 = 支付能力 + 选择权 + 缓冲', practice: '为应急金选择合适的存放方式。' },
       { id: 2, title: '存款与结构性产品', minutes: 20, summary: '区分存款保障、期限和嵌入式衍生条件。', key: '高展示收益不等于高确定收益', practice: '找出一份产品说明中的触发条件。' },
       { id: 3, title: '债券与信用风险', minutes: 21, summary: '认识票息、到期收益率、信用与久期。', key: '债券回报 = 票息 + 价格变化', practice: '比较短久期和长久期债券的利率风险。' },
-      { id: 4, title: '股票与股东权益', minutes: 20, summary: '股票代表企业剩余现金流的所有权。', key: '股东回报 = 盈利增长 + 分红 + 估值变化', practice: '拆解一只股票近年的回报来源。' },
+      { id: 4, title: '股票与股东权益', minutes: 20, summary: '股票代表企业剩余现金流的所有权。', key: '股东回报 = 盈利增长 + 分红 + 估值变化', practice: '区分一只股票近年的盈利增长、分红和估值变化。' },
       { id: 5, title: '主动基金与指数基金', minutes: 21, summary: '从策略、费用和跟踪误差比较基金。', key: '净回报 = 资产回报 − 费用 − 税费', practice: '比较两只同类基金的总费用。' },
       { id: 6, title: 'ETF 的交易机制', minutes: 20, summary: '理解净值、市场价格、折溢价与流动性。', key: 'ETF 价格围绕基金净值波动', practice: '查看一只 ETF 的折溢价和成交量。' },
       { id: 7, title: '黄金、商品与房地产', minutes: 22, summary: '区分现金流资产与非现金流资产。', key: '实物资产也有持有、融资和变现成本', practice: '分析黄金与出租房的收益结构差异。' },
-      { id: 8, title: '产品尽调与骗局识别', minutes: 20, summary: '核验主体、托管、费用、退出与盈利来源。', key: '高收益且低风险的承诺需要反向验证', practice: '用五项清单检查一款真实产品。' },
+      { id: 8, title: '产品尽调与骗局识别', minutes: 20, summary: '查明合同主体、托管安排、费用、退出条件与收益来源。', key: '高收益且低风险的承诺需要反向验证', practice: '调查一款真实产品的主体、资产、托管、费用与退出条件。' },
     ],
   },
   {
@@ -102,13 +102,13 @@ export const courses: Course[] = [
     outcomes: ['读懂常见宏观数据', '理解货币与财政政策传导', '区分经济周期与市场预期'],
     lessons: [
       { id: 1, title: 'GDP 与经济增长', minutes: 20, summary: '从支出法理解消费、投资、政府和净出口。', key: 'GDP = C + I + G + NX', practice: '判断四类支出分别属于哪一项。' },
-      { id: 2, title: '通胀的来源', minutes: 21, summary: '区分需求、供给、工资与预期驱动。', key: '通胀要看持续性、广度和预期', practice: '拆解一份 CPI 数据的主要分项。' },
+      { id: 2, title: '通胀的来源', minutes: 21, summary: '区分需求、供给、工资与预期驱动。', key: '通胀要看持续性、广度和预期', practice: '分析一份 CPI 数据中食品、能源、商品和服务的贡献。' },
       { id: 3, title: '就业与生产率', minutes: 20, summary: '就业是周期指标，生产率决定长期收入空间。', key: '长期增长来自劳动、资本与生产率', practice: '解释就业数据为何常滞后于周期。' },
       { id: 4, title: '央行与货币政策', minutes: 23, summary: '政策利率通过金融条件影响消费和投资。', key: '政策利率 → 市场利率 → 融资与需求', practice: '画出一次加息的三条传导路径。' },
       { id: 5, title: '财政政策与政府债务', minutes: 22, summary: '税收与支出直接改变总需求和资源配置。', key: '财政余额 = 政府收入 − 政府支出', practice: '区分自动稳定器与主动刺激。' },
       { id: 6, title: '经济周期', minutes: 21, summary: '库存、信贷、投资与情绪共同制造波动。', key: '周期阶段可描述，拐点难精确预测', practice: '为扩张、过热、放缓列出典型特征。' },
       { id: 7, title: '汇率与国际收支', minutes: 22, summary: '汇率同时连接贸易、资本流动与政策。', key: '本币回报 = 海外资产回报 + 汇率影响', practice: '计算一次海外投资的本币回报。' },
-      { id: 8, title: '宏观叙事的陷阱', minutes: 20, summary: '区分数据事实、因果解释与市场已定价预期。', key: '市场交易预期差，不只交易好坏', practice: '用三层框架拆解一条财经新闻。' },
+      { id: 8, title: '宏观叙事的陷阱', minutes: 20, summary: '区分数据事实、因果解释与市场已定价预期。', key: '市场交易预期差，不只交易好坏', practice: '分别写出一条财经新闻中的数据事实、因果解释和市场预期。' },
     ],
   },
   {
@@ -138,7 +138,7 @@ export const courses: Course[] = [
       { id: 5, title: '期货与期权', minutes: 26, summary: '衍生品既能套保，也能通过杠杆放大损失。', key: '期权买方有权利，卖方有义务', practice: '画出买入看涨期权的损益结构。' },
       { id: 6, title: '杠杆与流动性螺旋', minutes: 24, summary: '价格下跌会触发追加保证金和被迫卖出。', key: '下跌 → 抵押缩水 → 卖出 → 继续下跌', practice: '复盘一次典型流动性危机。' },
       { id: 7, title: '监管与投资者保护', minutes: 21, summary: '监管降低制度风险，但不保证投资盈利。', key: '合规、保本与低风险是三件不同的事', practice: '检查一个平台的牌照与托管安排。' },
-      { id: 8, title: '金融科技与数字资产', minutes: 23, summary: '新技术重构流程，也带来托管、模型和网络风险。', key: '技术能改变流程，不能取消经济约束', practice: '用七项清单评估一个数字资产平台。' },
+      { id: 8, title: '金融科技与数字资产', minutes: 23, summary: '新技术重构流程，也带来托管、模型和网络风险。', key: '技术能改变流程，不能取消经济约束', practice: '评估一个数字资产平台的法律主体、托管、流动性、治理、收益来源、技术与退出风险。' },
     ],
   },
 ];

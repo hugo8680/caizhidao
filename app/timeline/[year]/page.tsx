@@ -40,7 +40,7 @@ export default async function TimelineEventPage({ params }: TimelineEventPagePro
           <section><span>过程</span><h2>变化是怎样传开的</h2><p>{event.description} {guide.mechanism}</p></section>
           <section className="event-impact"><span>影响</span><h2>它带来了什么变化</h2><blockquote>{event.impact}</blockquote></section>
           <section><span>容易忽略</span><h2>不能只看表面</h2><p>{guide.caveat}</p></section>
-          <section><span>今天再看</span><h2>它和现在有什么关系</h2><p>{guide.today}</p></section>
+          <section><span>当代影响</span><h2>对今天的影响</h2><p>{guide.today}</p></section>
         </article>
         <aside><span>事件信息</span><dl><div><dt>年份</dt><dd>{event.year}</dd></div><div><dt>类型</dt><dd>{event.kind}</dd></div><div><dt>序号</dt><dd>{String(index + 1).padStart(2, '0')} / {timelineEvents.length}</dd></div></dl></aside>
       </section>

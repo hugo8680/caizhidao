@@ -420,7 +420,7 @@ export const knowledgeTerms: KnowledgeTerm[] = [
     definitionEn: 'The price of one currency expressed in units of another currency.',
     why: '海外投资、留学支出、进出口和跨国企业利润都同时受到汇率变化影响。',
     example: '海外资产上涨 8%，若对应外币相对本币贬值 5%，本币回报会被削弱。',
-    fact: '汇率报价方向不同会让“升值”表述相反，阅读时先确认谁是基准货币。',
+    fact: '汇率报价方向不同会让“升值”得到相反表述，因此必须明确基准货币与计价货币。',
     related: ['hedging', 'interest-rate', 'asset-allocation'],
   },
   {

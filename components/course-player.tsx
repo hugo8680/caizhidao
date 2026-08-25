@@ -72,39 +72,28 @@ export function CoursePlayer({ course }: { course: Course }) {
         <header><span>第 {lesson.id} 课 · 共 {course.lessons.length} 课</span><small>{lesson.minutes} 分钟</small></header>
         <h1 ref={readerHeadingRef} tabIndex={-1}>{lesson.title}</h1>
         <p className="course-reader-lead">{guide.plain}</p>
-        <section className="lesson-key"><span>一句话记住</span><strong>{lesson.key}</strong></section>
+        <section className="lesson-key"><span>核心命题</span><strong>{lesson.key}</strong></section>
         <section className="lesson-context">
-          <h2>先把概念说清楚</h2>
+          <h2>概念解释</h2>
           <p>{guide.why}</p>
         </section>
-        <section className="lesson-explain">
-          <h2>一步步看它怎样运作</h2>
-          <ol>
-            {guide.mechanism.map((item) => <li key={item.title}><b>{item.title}</b><p>{item.text}</p></li>)}
-          </ol>
-        </section>
         <section className="lesson-example">
-          <div><h2>用具体数字算一遍</h2></div>
+          <div><h2>数值或现实例子</h2></div>
           <p>{guide.example}</p>
         </section>
-        <div className="lesson-depth-grid">
+        <div className="lesson-depth-grid lesson-depth-grid-single">
           <section className="lesson-misconceptions">
-            <h2>容易踩的坑</h2>
+            <h2>常见误解</h2>
             {guide.misconceptions.map((item, index) => <p key={item}><b>{String(index + 1).padStart(2, '0')}</b>{item}</p>)}
-          </section>
-          <section className="lesson-checklist">
-            <h2>学完要能回答</h2>
-            {guide.checklist.map((item) => <p key={item}>✓ {item}</p>)}
           </section>
         </div>
         <section className="lesson-english">
-          <h2>英文怎么说</h2><p lang="en">{guide.english}</p>
+          <h2>英文定义</h2><p lang="en">{guide.english}</p>
         </section>
         <details className="lesson-practice" key={lesson.id}>
           <summary><span>小练习</span><b>{lesson.practice}</b><i>查看提示 ＋</i></summary>
           <p>{guide.exerciseHint}</p>
         </details>
-        <section className="lesson-notice"><b>实际使用前</b><p>涉及真实资金时，还要核对费率、税务、合同和自己能承受的风险。</p></section>
         <div className="course-reader-actions">
           <button type="button" disabled={lesson.id === 1} onClick={() => move(-1)}>← 上一课</button>
           <button type="button" className={completed.includes(lesson.id) ? 'complete done' : 'complete'} onClick={toggleComplete}>{completed.includes(lesson.id) ? '✓ 已完成本课' : '标记本课完成'}</button>

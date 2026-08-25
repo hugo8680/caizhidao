@@ -10,9 +10,9 @@ const matches = [
   { goal: '三年后确定支付的留学学费', note: '目标明确，且还可能存在外币支出。', choices: ['全仓高波动股票', '与期限及币种匹配的稳健资产', '无限期锁仓', '高杠杆外汇'], correct: 1 },
 ];
 const detectiveCases = [
-  { title: '“年化 18%，保本保息”', body: '销售称机会仅限今天，收款转入个人账户，无法提供托管与底层资产信息。', answer: '拒绝并核验', reason: '高收益保本承诺、制造紧迫感、个人收款与信息不透明同时出现，是严重红旗。' },
-  { title: '低费率宽基指数基金', body: '官网可查招募说明书、托管人、跟踪指数、费用和风险等级，但市场价格会波动。', answer: '阅读后再匹配目标', reason: '信息可核验不代表保证盈利；仍需检查底层资产、期限、波动与个人目标。' },
-  { title: '熟人推荐“内部份额”', body: '没有正式合同，对方只展示收益截图，承诺拉新还能获得返佣。', answer: '拒绝并核验', reason: '无合同、只晒收益与拉新返佣都要求停止转账，并向合法渠道核验主体。' },
+  { title: '“年化 18%，保本保息”', body: '销售称机会仅限今天，收款转入个人账户，无法提供托管与底层资产信息。', answer: '拒绝并查证主体', reason: '高收益保本承诺、制造紧迫感、个人收款与信息不透明同时出现，是严重红旗。' },
+  { title: '低费率宽基指数基金', body: '官网可查招募说明书、托管人、跟踪指数、费用和风险等级，但市场价格会波动。', answer: '阅读资料并匹配目标', reason: '公开资料齐全不等于保证盈利；仍需考察底层资产、资金期限、价格波动与个人目标。' },
+  { title: '熟人推荐“内部份额”', body: '没有正式合同，对方只展示收益截图，承诺拉新还能获得返佣。', answer: '拒绝并查证主体', reason: '没有合同、只展示收益和拉新返佣时，应停止转账，并通过监管机构或正式工商资料查询合同主体。' },
 ];
 
 export function FinanceGames() {
@@ -63,7 +63,7 @@ export function FinanceGames() {
         <header><span>游戏 3</span><b>产品侦探</b><small>骗局识别</small></header>
         <div className="case-tabs">{detectiveCases.map((item, index) => <button type="button" className={index === caseIndex ? 'active' : ''} onClick={() => { setCaseIndex(index); setCaseChoice(''); }} key={item.title}>案件 {index + 1}</button>)}</div>
         <h2>{currentCase.title}</h2><p>{currentCase.body}</p>
-        <div className="detective-choices">{['立即转账', '阅读后再匹配目标', '拒绝并核验'].map((choice) => <button type="button" className={caseChoice ? (choice === currentCase.answer ? 'correct' : choice === caseChoice ? 'wrong' : '') : ''} onClick={() => setCaseChoice(choice)} key={choice}>{choice}</button>)}</div>
+        <div className="detective-choices">{['立即转账', '阅读资料并匹配目标', '拒绝并查证主体'].map((choice) => <button type="button" className={caseChoice ? (choice === currentCase.answer ? 'correct' : choice === caseChoice ? 'wrong' : '') : ''} onClick={() => setCaseChoice(choice)} key={choice}>{choice}</button>)}</div>
         {caseChoice && <p className="game-feedback"><b>{caseChoice === currentCase.answer ? '判断正确' : '这个选择遗漏了重要风险'}</b>{currentCase.reason}</p>}
       </article>
     </section>
