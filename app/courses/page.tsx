@@ -17,7 +17,7 @@ export default function CoursesPage() {
       </section>
       <section className="course-index-grid">
         {courses.map((course, index) => (
-          <a href={`/courses/${course.slug}/`} className={`course-index-card accent-${course.accent}`} key={course.slug}>
+          <a href={`/courses/${course.slug}/`} className={`course-index-card accent-${course.accent}`} data-course={String(index + 1).padStart(2, '0')} key={course.slug}>
             <header><span>{String(index + 1).padStart(2, '0')}</span><small>{course.level} · {course.category}</small></header>
             <h2>{course.title}</h2><h3>{course.en}</h3><p>{course.description}</p>
             <ul>{course.outcomes.map((outcome) => <li key={outcome}>{outcome}</li>)}</ul>
