@@ -133,12 +133,11 @@ export function SiteHeader() {
                     <i className="tool-menu-chevron" aria-hidden="true" />
                   </button>
                   <div className="tool-nav-dropdown" id="financial-tool-menu" aria-label="金融小工具">
-                    {toolCatalog.map((tool, index) => {
+                    {toolCatalog.map((tool) => {
                       const href = `/tools/${tool.id}/`;
                       const current = pathname === href;
                       return (
                         <a href={href} key={tool.id} className={current ? 'active' : ''} aria-current={current ? 'page' : undefined}>
-                          <i>{String(index + 1).padStart(2, '0')}</i>
                           <b>{tool.title}</b>
                           <small>{tool.category}</small>
                         </a>
