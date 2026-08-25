@@ -33,8 +33,6 @@ export default async function ToolDetailPage({ params }: ToolPageProps) {
 
   return (
     <main>
-      <section className="tool-detail-hero"><p><a href="/tools/">金融工具目录</a><span>／</span>{tool.category}</p><small>第 {index + 1} 个工具</small><h1>{tool.title}</h1><h2>{guide.question}</h2><p>{guide.explanation}</p></section>
-
       <section className="tool-detail-calculator"><FinanceTools toolId={tool.id} /></section>
 
       <section className="tool-detail-guide">
