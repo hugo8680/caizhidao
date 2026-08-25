@@ -27,9 +27,6 @@ export default async function ToolDetailPage({ params }: ToolPageProps) {
   const tool = toolCatalog.find((item) => item.id === slug);
   const guide = toolGuides[slug];
   if (!tool || !guide) notFound();
-  const index = toolCatalog.findIndex((item) => item.id === tool.id);
-  const previous = index > 0 ? toolCatalog[index - 1] : undefined;
-  const next = index < toolCatalog.length - 1 ? toolCatalog[index + 1] : undefined;
 
   return (
     <main>
@@ -40,11 +37,6 @@ export default async function ToolDetailPage({ params }: ToolPageProps) {
         <article><span>计算结果</span><h2>怎么看这个数字</h2><p>{guide.reading}</p><div className="tool-guide-example"><b>可以这样试</b><p>{guide.example}</p></div></article>
         <article><span>适用范围</span><h2>计算中未包含的因素</h2><ul>{guide.limits.map((limit) => <li key={limit}>{limit}</li>)}</ul><p>计算结果用于方案比较，不是报价或收益承诺；实际交易还会受到合同条款、费用、税收和风险条件影响。</p></article>
       </section>
-
-      <nav className="tool-pagination" aria-label="金融工具翻页">
-        {previous ? <a href={`/tools/${previous.id}/`}><span>← 上一个工具</span><b>{previous.title}</b></a> : <a href="/tools/"><span>← 返回</span><b>工具目录</b></a>}
-        {next ? <a href={`/tools/${next.id}/`}><span>下一个工具 →</span><b>{next.title}</b></a> : <a href="/tools/"><span>返回</span><b>全部工具</b></a>}
-      </nav>
     </main>
   );
 }
