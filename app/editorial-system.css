@@ -298,7 +298,16 @@ body .site-chrome .tool-nav-dropdown a {
   border-radius: 6px;
   color: var(--cz-ink-soft);
   position: relative;
+  border-bottom: 0;
+  box-shadow: none;
+  text-decoration: none;
   transition: background .14s ease, color .14s ease;
+}
+
+body .site-chrome .tool-nav-dropdown a::before,
+body .site-chrome .tool-nav-dropdown a::after {
+  content: none;
+  display: none;
 }
 
 body .site-chrome .tool-nav-dropdown a:hover {
@@ -309,17 +318,6 @@ body .site-chrome .tool-nav-dropdown a:hover {
 body .site-chrome .tool-nav-dropdown a.active {
   background: #edf3ef;
   color: var(--cz-green-deep);
-}
-
-body .site-chrome .tool-nav-dropdown a.active::before {
-  content: '';
-  width: 2px;
-  position: absolute;
-  top: 9px;
-  bottom: 9px;
-  left: 5px;
-  border-radius: 2px;
-  background: var(--cz-green);
 }
 
 body .site-chrome .tool-nav-dropdown a > b {
