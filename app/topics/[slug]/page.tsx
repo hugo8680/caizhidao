@@ -36,12 +36,6 @@ export default async function TopicDetailPage({ params }: TopicPageProps) {
         </div>
       </section>
 
-      <section className="topic-learning-guide">
-        <span>LEARNING METHOD</span>
-        <div><h2>怎么走完这条路线？</h2><p>五个步骤的完整解释都留在本专题内。按顺序阅读机制和例子，最后用自己的话复述整条因果链，不需要在不同模块之间来回跳转。</p></div>
-        <ol><li>先读标题并猜答案</li><li>阅读机制与现实例子</li><li>连接前后两步的因果</li></ol>
-      </section>
-
       <section className="topic-step-list">
         {route.steps.map((step, index) => (
           <article key={step.title}>

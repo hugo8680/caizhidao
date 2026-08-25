@@ -35,7 +35,7 @@ export default async function ToolDetailPage({ params }: ToolPageProps) {
     <main>
       <section className="tool-detail-hero"><p><a href="/tools/">金融工具目录</a><span>／</span>{tool.category}</p><small>TOOL {String(index + 1).padStart(2, '0')}</small><h1>{tool.title}</h1><h2>{guide.question}</h2><p>{guide.explanation}</p></section>
 
-      <section className="tool-detail-calculator"><header><span>INTERACTIVE CALCULATOR</span><h2>输入自己的数字，立即观察变量关系</h2><p>所有计算只发生在当前浏览器中。修改任意输入，结果会即时更新。</p></header><FinanceTools toolId={tool.id} /></section>
+      <section className="tool-detail-calculator"><FinanceTools toolId={tool.id} /></section>
 
       <section className="tool-detail-guide">
         <article><span>01 · INPUTS</span><h2>每个输入代表什么</h2><dl>{guide.inputs.map((input) => <div key={input.name}><dt>{input.name}</dt><dd>{input.meaning}</dd></div>)}</dl></article>
@@ -45,7 +45,7 @@ export default async function ToolDetailPage({ params }: ToolPageProps) {
 
       <nav className="tool-pagination" aria-label="金融工具翻页">
         {previous ? <a href={`/tools/${previous.id}/`}><span>← 上一个工具</span><b>{previous.title}</b></a> : <a href="/tools/"><span>← 返回</span><b>工具目录</b></a>}
-        {next ? <a href={`/tools/${next.id}/`}><span>下一个工具 →</span><b>{next.title}</b></a> : <a href="/tools/"><span>完成</span><b>返回工具目录</b></a>}
+        {next ? <a href={`/tools/${next.id}/`}><span>下一个工具 →</span><b>{next.title}</b></a> : <a href="/tools/"><span>返回</span><b>全部工具</b></a>}
       </nav>
     </main>
   );

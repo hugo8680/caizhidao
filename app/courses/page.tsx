@@ -15,10 +15,6 @@ export default function CoursesPage() {
         <h1>系统课程</h1>
         <div className="hero-metrics"><span><b>{courses.length}</b>套课程</span><span><b>{lessonCount}</b>节课</span><span><b>3</b>个难度</span></div>
       </section>
-      <section className="course-index-intro">
-        <div><span>HOW TO LEARN</span><h2>从哪里开始？</h2></div>
-        <p>完全零基础先走 01；想整理家庭财务从 02 开始；已经会看产品，可直接选择报表、估值、宏观或组合路径。每套课程都会在当前设备保存完成进度。</p>
-      </section>
       <section className="course-index-grid">
         {courses.map((course, index) => (
           <a href={`/courses/${course.slug}/`} className={`course-index-card accent-${course.accent}`} key={course.slug}>

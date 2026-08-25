@@ -14,10 +14,6 @@ export default function TopicsPage() {
         <h1>专题学习路线</h1>
         <div className="hero-metrics"><span><b>{learningRoutes.length}</b>条路线</span><span><b>{learningRoutes.reduce((sum, route) => sum + route.steps.length, 0)}</b>个步骤</span><span><b>跨学科</b>连接理解</span></div>
       </section>
-      <section className="topics-intro">
-        <div><span>HOW IT WORKS</span><h2>每条路线都是一条因果链</h2></div>
-        <p>先建立直觉，再补概念；先理解机制，再观察数据；最后把知识放回生活或市场。每个步骤都连接到知识地图、百科或可操作工具。</p>
-      </section>
       <section className="topics-index-grid">
         {learningRoutes.map((route) => (
           <a href={`/topics/${route.slug}/`} key={route.slug}>

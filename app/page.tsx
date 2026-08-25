@@ -29,7 +29,7 @@ export default function Home() {
           <p className="science-kicker"><span>CAIZHIDAO</span> 财经 · 金融 · 经济学科普知识库</p>
           <h1>看懂钱如何流动，<br />市场为何波动，<br /><em>世界怎样做选择。</em></h1>
           <p className="science-lead">从一杯咖啡的价格，到一次加息、一张财报和一场金融危机。用概念、因果、数据与历史，把财经世界连接成可以层层探索的知识体系。</p>
-          <div className="science-actions"><a href="/atlas/">进入知识地图 <span>→</span></a><a href="/search/">我有一个财经问题</a></div>
+          <div className="science-actions"><a href="/courses/finance-foundations/">从零开始学习 <span>→</span></a><a href="/search/">我想查一个概念</a></div>
           <div className="question-seeds"><span>从问题出发</span><a href="/search/?q=通胀">物价为什么会上涨？</a><a href="/search/?q=利率">加息影响了谁？</a><a href="/search/?q=股票">股票到底是什么？</a></div>
         </div>
         <aside className="system-board">

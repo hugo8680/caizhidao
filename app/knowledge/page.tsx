@@ -11,9 +11,12 @@ export const metadata: Metadata = {
 export default function KnowledgePage() {
   return (
     <main>
-      <section className="page-hero compact-hero"><p>KNOWLEDGE BASE · 知识库</p><h1>财经知识库</h1><div><b>{knowledgeTerms.length}</b><span>个核心概念<br />包含英文、图解与趣闻</span></div></section>
+      <section className="reference-index-head">
+        <div><span>ENCYCLOPEDIA · 百科词条</span><h1>财经知识库</h1><p>按主题查找名词解释、英文释义、机制、公式、案例与常见误区。</p></div>
+        <dl><div><dt>收录词条</dt><dd>{knowledgeTerms.length}</dd></div><div><dt>主题分类</dt><dd>{knowledgeCategories.length}</dd></div><div><dt>内容形态</dt><dd>中英双语</dd></div></dl>
+      </section>
       <section className="knowledge-layout">
-        <aside><span>按主题进入独立页面</span>{knowledgeCategories.map((category) => {
+        <aside><span>主题分类</span>{knowledgeCategories.map((category) => {
           const page = getKnowledgeCategoryByName(category);
           return page ? <a href={`/knowledge/category/${page.slug}/`} key={category}>{category}</a> : null;
         })}</aside>
@@ -24,7 +27,7 @@ export default function KnowledgePage() {
               <div className="knowledge-list">
                 {knowledgeTerms.filter((term) => term.category === category).map((term) => <a href={`/knowledge/${term.slug}/`} key={term.slug} className="knowledge-card">
                   <ConceptVisual type={term.visual} label={term.zh} />
-                  <div className="knowledge-copy"><span>{term.category}</span><h2>{term.zh}</h2><h3>{term.en}{term.abbr ? ` · ${term.abbr}` : ''}</h3><p>{term.summary}</p><b>查看公式、英文解释与案例 →</b></div>
+                  <div className="knowledge-copy"><span>{term.category}</span><h2>{term.zh}</h2><h3>{term.en}{term.abbr ? ` · ${term.abbr}` : ''}</h3><p>{term.summary}</p><b>打开百科词条 →</b></div>
                 </a>)}
               </div>
             </section>

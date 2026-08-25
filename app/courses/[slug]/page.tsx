@@ -29,7 +29,6 @@ export default async function CourseDetailPage({ params }: CoursePageProps) {
         <div><span>{course.category}</span><h1>{course.title}</h1><h2>{course.en}</h2><p>{course.description}</p></div>
         <aside><b>{course.lessons.length}</b><span>节课<br />{course.duration}</span></aside>
       </section>
-      <section className="course-outcomes"><span>完成后你将能够</span>{course.outcomes.map((outcome) => <p key={outcome}>✓ {outcome}</p>)}</section>
       <CoursePlayer course={course} />
     </main>
   );

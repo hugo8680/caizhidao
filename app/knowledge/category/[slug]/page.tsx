@@ -33,7 +33,6 @@ export default async function KnowledgeCategoryPage({ params }: CategoryPageProp
         <small>{category.en}</small><h1>{category.name}</h1><p>{category.overview}</p>
         <div><b>{terms.length}</b><span>篇深度百科</span></div>
       </section>
-      <section className="knowledge-category-goal"><span>LEARNING GOAL</span><h2>学完这一组，你应该能够</h2><p>{category.learningGoal}</p></section>
       <section className="knowledge-category-grid">
         {terms.map((term, index) => (
           <a href={`/knowledge/${term.slug}/`} key={term.slug}>
