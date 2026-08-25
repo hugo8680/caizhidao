@@ -1196,8 +1196,7 @@ body .atlas-directory-grid footer { margin-top: auto; padding-top: 18px; display
 body .atlas-directory-grid footer b { color: var(--cz-faint); font-size: 9px !important; font-weight: 550; }
 
 body .topics-index-grid,
-body .tool-directory-grid,
-body .game-grid {
+body .tool-directory-grid {
   width: min(1220px, calc(100% - 48px));
   margin: 0 auto;
   padding: 28px 0 80px;
@@ -1968,70 +1967,8 @@ body [class$="-pagination"] a b { margin-top: 4px; font: 650 14px/1.4 var(--cz-s
 body [class$="-pagination"] a small { color: var(--cz-faint); font-size: 9px; }
 
 /* --------------------------------------------------------------------------
-   Practice, search and utility surfaces
+   Search and utility surfaces
    -------------------------------------------------------------------------- */
-
-body .game-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 16px;
-}
-
-body .game-card,
-body .game-card.game-speed,
-body .game-card.game-match,
-body .game-card.game-detective {
-  min-height: 440px;
-  padding: 28px;
-  border: 1px solid var(--cz-line);
-  border-radius: 4px;
-  background: var(--cz-surface) !important;
-  box-shadow: none;
-  color: var(--cz-ink) !important;
-}
-
-body .game-card.game-detective { grid-column: 1 / -1; min-height: 360px; }
-body .game-card > header { padding-bottom: 14px; display: grid; grid-template-columns: auto 1fr auto; gap: 12px; align-items: center; border-bottom: 1px solid var(--cz-line); }
-body .game-card > header span { color: var(--cz-gold); font-size: 9px !important; }
-body .game-card > header b { font: 650 17px/1.3 var(--cz-serif); }
-body .game-card > header small { color: var(--cz-faint); font-size: 9px !important; }
-body .game-card > h2 { margin: 25px 0 15px; color: var(--cz-ink); font: 650 23px/1.45 var(--cz-serif); }
-body .game-card > p { color: var(--cz-muted); font-size: 14px !important; line-height: 1.75; }
-body .rate-picker,
-body .case-tabs { display: flex; flex-wrap: wrap; gap: 7px; }
-body .rate-picker button,
-body .case-tabs button {
-  min-height: 34px;
-  padding: 0 12px;
-  border: 1px solid var(--cz-line);
-  border-radius: 3px;
-  background: #f8f7f3;
-  color: var(--cz-muted);
-  font-size: 10px !important;
-}
-body .rate-picker button.active,
-body .case-tabs button.active { border-color: var(--cz-green); background: var(--cz-green) !important; color: white; }
-body .game-speed > label { margin: 28px 0 19px; display: grid; grid-template-columns: auto 1fr auto; gap: 14px; align-items: center; color: var(--cz-muted); }
-body .game-speed > label span { font-size: 10px; }
-body .game-speed > label b { color: var(--cz-green); font: 650 17px Georgia, serif; }
-body .game-primary { min-height: 40px; padding: 0 17px; border: 0; border-radius: 3px; background: var(--cz-green) !important; color: white !important; font-size: 11px !important; }
-body .game-score { margin-top: 20px; display: flex; justify-content: space-between; color: var(--cz-faint); font-size: 10px !important; }
-body .game-score b { color: var(--cz-green); }
-body .match-choices,
-body .detective-choices { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
-body .detective-choices { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-body .match-choices button,
-body .detective-choices button { min-height: 46px; padding: 9px 12px; border: 1px solid var(--cz-line); border-radius: 3px; background: #f8f7f3; color: var(--cz-ink-soft); font-size: 11px !important; }
-body .match-choices button:hover,
-body .detective-choices button:hover { border-color: var(--cz-line-strong); background: white; }
-body .match-choices button.correct,
-body .detective-choices button.correct { border-color: var(--cz-green); background: var(--cz-green-pale); color: var(--cz-green-deep); }
-body .match-choices button.wrong,
-body .detective-choices button.wrong { border-color: #b77b6d; background: #f7ece8; color: #85483b; }
-body .game-feedback { margin-top: 16px; padding: 15px 17px; border: 0; border-left: 3px solid var(--cz-gold); border-radius: 0; background: #f3f0e7 !important; color: var(--cz-ink-soft) !important; font-size: 12px !important; line-height: 1.7; }
-body .game-feedback b { display: block; margin-bottom: 5px; color: var(--cz-ink); }
-body .game-feedback span { display: block; }
-body .game-feedback button { margin-top: 9px; padding: 0; border: 0; background: transparent; color: var(--cz-green); font-size: 10px !important; }
 
 body .search-route { background: var(--cz-paper) !important; }
 body .search-page-shell {
@@ -2168,7 +2105,6 @@ body .footer-bottom { margin-top: 42px; padding-top: 17px; display: flex; justif
   body .course-bento-grid,
   body .topics-index-grid,
   body .tool-directory-grid,
-  body .game-grid,
   body .book-shelves,
   body .video-sections { width: calc(100% - 36px); }
 
@@ -2238,7 +2174,6 @@ body .footer-bottom { margin-top: 42px; padding-top: 17px; display: flex; justif
   body .atlas-directory-grid,
   body .knowledge-list,
   body .knowledge-category-grid,
-  body .game-grid,
   body .search-page-results { grid-template-columns: 1fr; }
 
   body .history-line { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -2340,11 +2275,6 @@ body .footer-bottom { margin-top: 42px; padding-top: 17px; display: flex; justif
   body .book-detail-meta { grid-template-columns: repeat(2, 1fr); }
   body .video-detail-facts { grid-template-columns: repeat(2, 1fr); }
   body .video-detail-content > article { padding: 27px 20px; }
-
-  body .game-card.game-detective { grid-column: auto; }
-  body .game-card { min-height: 0; padding: 23px 20px; }
-  body .match-choices,
-  body .detective-choices { grid-template-columns: 1fr; }
 
   body .search-page-shell { padding-top: 38px; }
   body .search-page-box > label { height: 56px; padding-inline: 14px; }

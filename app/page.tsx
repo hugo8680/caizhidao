@@ -16,7 +16,6 @@ const resourceLayers = [
   { no: '03', title: '金融工具', label: '动手算一算', metric: `${toolCatalog.length} 个`, text: '把复利、贷款、退休、债券与估值变成可计算问题。', href: '/tools/' },
   { no: '04', title: '财经图书', label: '继续阅读', metric: `${books.length} 本`, text: '汇总中英文版本、作者、出版社、ISBN、价格与购买入口。', href: '/books/' },
   { no: '05', title: '公开课程', label: '中文与英文', metric: `${videos.length} 组`, text: '连接国内高校、Yale、MIT、Coursera 与专业机构资源。', href: '/videos/' },
-  { no: '06', title: '互动练习', label: '边玩边检验', metric: '3 个', text: '用小游戏体验复利速度、资产匹配与金融骗局识别。', href: '/games/' },
 ];
 
 const featuredTimeline = timelineEvents.filter((event) => ['1776', '1929', '1944', '1971', '2008', '2020', '2022'].includes(event.year));
@@ -107,7 +106,7 @@ export default function Home() {
 
       <section className="resource-network">
         <div className="home-section-head light">
-          <div><span>书、课程与工具</span><h2>读、算、看、练，互相连接。</h2></div>
+          <div><span>书、课程与工具</span><h2>查、学、算、读、看，互相连接。</h2></div>
           <p>想查名词可以看百科，想从头学可以选课程，遇到复利、贷款或估值问题可以直接打开计算器。书和视频放在后面，方便继续深入。</p>
         </div>
         <div className="resource-layer-grid">

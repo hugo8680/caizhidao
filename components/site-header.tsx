@@ -42,7 +42,6 @@ const navGroups: NavGroup[] = [
     key: 'practice', label: '练习工具', icon: 'practice', href: '/tools/',
     items: [
       { key: 'tools', label: '计算工具', href: '/tools/' },
-      { key: 'games', label: '互动练习', href: '/games/' },
     ],
   },
   {
@@ -102,7 +101,7 @@ export function SiteHeader() {
         </div>
       </header>
 
-      {activeGroup && (
+      {activeGroup && activeGroup.items.length > 1 && (
         <div className="section-nav">
           <div className="section-nav-inner">
             <nav aria-label={`${activeGroup.label}二级导航`} ref={subnavRef}>
