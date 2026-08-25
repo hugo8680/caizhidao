@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: ToolPageProps): Promise<Metad
   const tool = toolCatalog.find((item) => item.id === slug);
   if (!tool) return {};
   return {
-    title: `${tool.title} · 财知道金融工具`,
+    title: `${tool.title} · 财知道金融小工具`,
     description: `${tool.description} 包含变量说明、使用示例、结果读法与局限。`,
     openGraph: { title: tool.title, description: tool.description, images: [] },
     twitter: { title: tool.title, description: tool.description, images: [] },

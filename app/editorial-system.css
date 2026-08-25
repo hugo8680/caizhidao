@@ -151,7 +151,8 @@ body .site-chrome .primary-nav {
   overflow: visible;
 }
 
-body .site-chrome .primary-nav > a {
+body .site-chrome .primary-nav > a,
+body .site-chrome .tool-nav-trigger {
   min-width: 0;
   height: 72px;
   padding: 0 1px !important;
@@ -172,8 +173,10 @@ body .site-chrome .primary-nav > a {
   transition: color .18s ease;
 }
 
-body .site-chrome .primary-nav > a::before { display: none !important; }
-body .site-chrome .primary-nav > a::after {
+body .site-chrome .primary-nav > a::before,
+body .site-chrome .tool-nav-trigger::before { display: none !important; }
+body .site-chrome .primary-nav > a::after,
+body .site-chrome .tool-nav-trigger::after {
   content: '' !important;
   width: 0;
   height: 2px;
@@ -189,13 +192,19 @@ body .site-chrome .primary-nav > a::after {
 }
 
 body .site-chrome .primary-nav > a:hover,
-body .site-chrome .primary-nav > a.active {
+body .site-chrome .primary-nav > a.active,
+body .site-chrome .tool-nav-trigger:hover,
+body .site-chrome .tool-nav-menu.active .tool-nav-trigger,
+body .site-chrome .tool-nav-menu.open .tool-nav-trigger {
   background: transparent !important;
   color: var(--cz-ink);
 }
 
 body .site-chrome .primary-nav > a:hover::after { width: 18px; }
 body .site-chrome .primary-nav > a.active::after { width: 30px; }
+body .site-chrome .tool-nav-trigger:hover::after { width: 18px; }
+body .site-chrome .tool-nav-menu.active .tool-nav-trigger::after,
+body .site-chrome .tool-nav-menu.open .tool-nav-trigger::after { width: 30px; }
 
 body .site-chrome .primary-nav-icon {
   width: 17px;
@@ -207,9 +216,115 @@ body .site-chrome .primary-nav-icon {
 }
 
 body .site-chrome .primary-nav > a:hover .primary-nav-icon,
-body .site-chrome .primary-nav > a.active .primary-nav-icon {
+body .site-chrome .primary-nav > a.active .primary-nav-icon,
+body .site-chrome .tool-nav-trigger:hover .primary-nav-icon,
+body .site-chrome .tool-nav-menu.active .primary-nav-icon,
+body .site-chrome .tool-nav-menu.open .primary-nav-icon {
   color: var(--cz-green);
   transform: none;
+}
+
+body .site-chrome .tool-nav-menu {
+  height: 72px;
+  display: flex;
+  flex: 0 0 auto;
+  align-items: stretch;
+  position: relative;
+}
+
+body .site-chrome .tool-nav-trigger {
+  appearance: none;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+body .site-chrome .tool-menu-chevron {
+  width: 7px;
+  height: 7px;
+  margin: -4px 0 0 1px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg);
+  transition: transform .18s ease, margin .18s ease;
+}
+
+body .site-chrome .tool-nav-menu.open .tool-menu-chevron {
+  margin-top: 3px;
+  transform: rotate(225deg);
+}
+
+body .site-chrome .tool-nav-dropdown {
+  width: min(580px, calc(100vw - 28px));
+  padding: 10px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  position: absolute;
+  top: calc(100% - 1px);
+  left: 50%;
+  z-index: 320;
+  overflow: hidden;
+  border: 1px solid var(--cz-line-strong);
+  border-radius: 8px;
+  background: var(--cz-surface);
+  box-shadow: 0 18px 42px rgba(29, 43, 42, .16);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translate(-50%, 7px);
+  transition: opacity .16s ease, transform .16s ease, visibility .16s ease;
+}
+
+body .site-chrome .tool-nav-menu.open .tool-nav-dropdown {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translate(-50%, 0);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  body .site-chrome .tool-nav-menu:hover .tool-nav-dropdown {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translate(-50%, 0);
+  }
+}
+
+body .site-chrome .tool-nav-dropdown a {
+  min-width: 0;
+  min-height: 46px;
+  padding: 9px 11px;
+  display: grid;
+  grid-template-columns: 25px minmax(0, 1fr) auto;
+  gap: 8px;
+  align-items: center;
+  border-radius: 5px;
+  color: var(--cz-ink-soft);
+}
+
+body .site-chrome .tool-nav-dropdown a:hover,
+body .site-chrome .tool-nav-dropdown a.active {
+  background: var(--cz-green-pale);
+  color: var(--cz-ink);
+}
+
+body .site-chrome .tool-nav-dropdown a > i {
+  color: var(--cz-gold);
+  font: normal 10px/1 Georgia, serif;
+}
+
+body .site-chrome .tool-nav-dropdown a > b {
+  overflow: hidden;
+  font-size: 13px;
+  font-weight: 620;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+body .site-chrome .tool-nav-dropdown a > small {
+  color: var(--cz-faint);
+  font-size: 9px;
+  white-space: nowrap;
 }
 
 body .site-chrome .header-actions {
@@ -563,11 +678,15 @@ body .system-board > footer b { display: block; margin-bottom: 4px; color: var(-
     border-top: 1px solid rgba(29, 43, 42, .07);
   }
 
-  body .site-chrome .primary-nav > a {
+  body .site-chrome .primary-nav > a,
+  body .site-chrome .tool-nav-menu,
+  body .site-chrome .tool-nav-trigger {
     min-width: 118px;
     height: 48px;
     flex: 1 0 110px;
   }
+
+  body .site-chrome .primary-nav { overflow: visible; }
 
   body .site-chrome .header-actions { grid-column: 2; grid-row: 1; }
 
@@ -610,13 +729,30 @@ body .system-board > footer b { display: block; margin-bottom: 4px; color: var(-
     padding: 0 8px;
   }
 
-  body .site-chrome .primary-nav > a {
+  body .site-chrome .primary-nav > a,
+  body .site-chrome .tool-nav-menu,
+  body .site-chrome .tool-nav-trigger {
     min-width: 86px;
     height: 46px;
     flex: 1 0 82px;
     gap: 6px;
     font-size: 12px;
   }
+
+  body .site-chrome .tool-nav-dropdown {
+    width: auto;
+    max-height: calc(100vh - 122px);
+    padding: 8px;
+    grid-template-columns: 1fr;
+    position: fixed;
+    top: 108px;
+    right: 10px;
+    left: 10px;
+    overflow-y: auto;
+    transform: translateY(7px);
+  }
+
+  body .site-chrome .tool-nav-menu.open .tool-nav-dropdown { transform: translateY(0); }
 
   body .section-nav { height: 42px; }
   body .section-nav-inner { height: 42px; padding: 0 14px; }
@@ -641,9 +777,17 @@ body .system-board > footer b { display: block; margin-bottom: 4px; color: var(-
   body .system-board > footer b { font-size: 17px; }
 }
 
+@media (max-width: 620px) and (hover: hover) and (pointer: fine) {
+  body .site-chrome .tool-nav-menu:hover .tool-nav-dropdown { transform: translateY(0); }
+}
+
 @media (prefers-reduced-motion: reduce) {
   body .site-chrome .primary-nav > a,
-  body .site-chrome .primary-nav > a::after { transition: none; }
+  body .site-chrome .primary-nav > a::after,
+  body .site-chrome .tool-nav-trigger,
+  body .site-chrome .tool-nav-trigger::after,
+  body .site-chrome .tool-menu-chevron,
+  body .site-chrome .tool-nav-dropdown { transition: none; }
 }
 
 /* --------------------------------------------------------------------------

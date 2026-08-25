@@ -13,7 +13,7 @@ import {
 const resourceLayers = [
   { no: '01', title: '百科词条', label: '查一个概念', metric: `${knowledgeTerms.length} 个`, text: '中英双语解释、概念图、公式、例子与相关知识。', href: '/knowledge/' },
   { no: '02', title: '系统课程', label: '按顺序学习', metric: `${courses.length} 套`, text: '从零基础到报表、估值、宏观、组合与全球风险。', href: '/courses/' },
-  { no: '03', title: '金融工具', label: '动手算一算', metric: `${toolCatalog.length} 个`, text: '把复利、贷款、退休、债券与估值变成可计算问题。', href: '/tools/' },
+  { no: '03', title: '金融小工具', label: '动手算一算', metric: `${toolCatalog.length} 个`, text: '把复利、贷款、退休、债券与估值变成可计算问题。', href: '/tools/compound/' },
   { no: '04', title: '财经图书', label: '继续阅读', metric: `${books.length} 本`, text: '汇总中英文版本、作者、出版社、ISBN、价格与购买入口。', href: '/books/' },
   { no: '05', title: '公开课程', label: '中文与英文', metric: `${videos.length} 组`, text: '连接国内高校、Yale、MIT、Coursera 与专业机构资源。', href: '/videos/' },
 ];

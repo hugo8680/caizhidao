@@ -1,7 +1,8 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
+import { toolCatalog } from '@/lib/tool-catalog';
 import { GlobalSearch } from './global-search';
 import { HeaderIcon, type HeaderIconName } from './header-icon';
 
@@ -39,9 +40,9 @@ const navGroups: NavGroup[] = [
     ],
   },
   {
-    key: 'practice', label: '练习工具', icon: 'practice', href: '/tools/',
+    key: 'practice', label: '金融小工具', icon: 'practice', href: '/tools/',
     items: [
-      { key: 'tools', label: '计算工具', href: '/tools/' },
+      { key: 'tools', label: '金融小工具', href: '/tools/' },
     ],
   },
   {
@@ -72,6 +73,8 @@ export function SiteHeader() {
   const activeItem = activeGroup?.items.find((item) => itemIsActive(item, pathname));
   const subnavRef = useRef<HTMLElement>(null);
   const activeItemRef = useRef<HTMLAnchorElement>(null);
+  const toolMenuRef = useRef<HTMLDivElement>(null);
+  const [toolMenuOpen, setToolMenuOpen] = useState(false);
 
   useEffect(() => {
     const nav = subnavRef.current;
@@ -79,6 +82,23 @@ export function SiteHeader() {
     if (!nav || !item || nav.scrollWidth <= nav.clientWidth) return;
     nav.scrollTo({ left: Math.max(0, item.offsetLeft - (nav.clientWidth - item.offsetWidth) / 2), behavior: 'auto' });
   }, [pathname]);
+
+  useEffect(() => {
+    function closeFromOutside(event: PointerEvent) {
+      if (!toolMenuRef.current?.contains(event.target as Node)) setToolMenuOpen(false);
+    }
+
+    function closeFromKeyboard(event: KeyboardEvent) {
+      if (event.key === 'Escape') setToolMenuOpen(false);
+    }
+
+    document.addEventListener('pointerdown', closeFromOutside);
+    document.addEventListener('keydown', closeFromKeyboard);
+    return () => {
+      document.removeEventListener('pointerdown', closeFromOutside);
+      document.removeEventListener('keydown', closeFromKeyboard);
+    };
+  }, []);
 
   return (
     <div className={`site-chrome${isHome || isSearch ? ' compact' : ''}${activeGroup ? ` group-${activeGroup.key}` : ''}`}>
@@ -91,6 +111,43 @@ export function SiteHeader() {
         <nav className="primary-nav" aria-label="主要分区">
           {navGroups.map((group) => {
             const active = group.key === activeGroup?.key;
+            if (group.key === 'practice') {
+              return (
+                <div
+                  className={`tool-nav-menu${active ? ' active' : ''}${toolMenuOpen ? ' open' : ''}`}
+                  key={group.key}
+                  ref={toolMenuRef}
+                  onBlurCapture={(event) => {
+                    if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setToolMenuOpen(false);
+                  }}
+                >
+                  <button
+                    className="tool-nav-trigger"
+                    type="button"
+                    aria-expanded={toolMenuOpen}
+                    aria-controls="financial-tool-menu"
+                    onClick={() => setToolMenuOpen((open) => !open)}
+                  >
+                    <HeaderIcon name={group.icon} className="primary-nav-icon" />
+                    <span>{group.label}</span>
+                    <i className="tool-menu-chevron" aria-hidden="true" />
+                  </button>
+                  <div className="tool-nav-dropdown" id="financial-tool-menu" aria-label="金融小工具">
+                    {toolCatalog.map((tool, index) => {
+                      const href = `/tools/${tool.id}/`;
+                      const current = pathname === href;
+                      return (
+                        <a href={href} key={tool.id} className={current ? 'active' : ''} aria-current={current ? 'page' : undefined}>
+                          <i>{String(index + 1).padStart(2, '0')}</i>
+                          <b>{tool.title}</b>
+                          <small>{tool.category}</small>
+                        </a>
+                      );
+                    })}
+                  </div>
+                </div>
+              );
+            }
             return <a href={group.href} key={group.key} className={active ? 'active' : ''} aria-current={active ? 'page' : undefined}><HeaderIcon name={group.icon} className="primary-nav-icon" /><span>{group.label}</span></a>;
           })}
         </nav>

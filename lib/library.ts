@@ -16,6 +16,8 @@ export type Book = {
   shopUrl: string;
 };
 
+export { toolCatalog } from './tool-catalog';
+
 export const books: Book[] = [
   { id: 'dog-money', title: '小狗钱钱', originalTitle: 'Ein Hund Namens Money', author: '博多·舍费尔', publisher: '中信出版集团', year: '2021', isbn: '9787521726473', pages: '240', price: '¥39.80', language: '中文', level: '入门', topic: '财商启蒙', intro: '用故事讲储蓄、目标、收入与长期积累，适合作为第一本财商读物。', sourceUrl: 'https://book.douban.com/subject/35295592/', shopUrl: 'https://search.jd.com/Search?keyword=9787521726473' },
   { id: 'most-important-thing', title: '投资最重要的事', originalTitle: 'The Most Important Thing', author: '霍华德·马克斯', publisher: '中信出版社', year: '2012', isbn: '9787508633800', pages: '248', price: '¥58.00', language: '中文', level: '进阶', topic: '风险管理', intro: '围绕第二层思维、周期、风险与安全边际建立投资决策框架。', sourceUrl: 'https://book.douban.com/subject/10799082/', shopUrl: 'https://search.jd.com/Search?keyword=9787508633800' },
@@ -62,19 +64,4 @@ export const videos: VideoCourse[] = [
   { id: 'khan-finance', title: 'Finance and Capital Markets', platform: 'Khan Academy', language: '英文', level: '入门', duration: '自定进度', price: '免费', topic: '金融通识', description: '短视频拆解利率、债券、股票、银行和住房金融。', url: 'https://www.khanacademy.org/economics-finance-domain/core-finance' },
   { id: 'damodaran-valuation', title: 'Valuation Online Class', platform: 'NYU Stern · Damodaran', language: '英文', level: '专业', duration: '约 25 讲', price: '免费', topic: '公司估值', description: 'Aswath Damodaran 公开的完整估值课程、讲义和案例。', url: 'https://pages.stern.nyu.edu/~adamodar/New_Home_Page/webcastvalonline.htm' },
   { id: 'cfa-foundations', title: 'Investment Foundations', platform: 'CFA Institute', language: '英文', level: '入门', duration: '约 35–65 小时', price: '以官网为准', topic: '投资行业', description: '系统了解投资工具、市场结构、行业伦理和客户需求。', url: 'https://www.cfainstitute.org/programs/investment-foundations' },
-];
-
-export const toolCatalog = [
-  { id: 'compound', title: '复利计算器', category: '积累', description: '测算本金、定投与复利终值。' },
-  { id: 'real-return', title: '实际收益率', category: '回报', description: '扣除通胀后的购买力增长。' },
-  { id: 'cagr', title: '年化增长率', category: '回报', description: '把起止金额换算为复合年化增长。' },
-  { id: 'loan', title: '贷款月供', category: '负债', description: '等额本息月供、总利息与总还款。' },
-  { id: 'early-repay', title: '提前还贷比较', category: '负债', description: '比较提前还款与保留资金的确定性成本。' },
-  { id: 'saving-goal', title: '储蓄目标', category: '规划', description: '反推达到目标所需的每月投入。' },
-  { id: 'emergency', title: '应急金测算', category: '规划', description: '根据支出与收入稳定性估算安全垫。' },
-  { id: 'retirement', title: '退休资金缺口', category: '规划', description: '按通胀和提取率估算养老目标。' },
-  { id: 'dcf', title: '简化 DCF 估值', category: '估值', description: '用现金流、增长与折现率估算价值。' },
-  { id: 'bond', title: '债券价格', category: '固定收益', description: '根据票息、期限与到期收益率估算价格。' },
-  { id: 'position', title: '仓位风险控制', category: '风险', description: '根据可承受损失反推最大仓位。' },
-  { id: 'fee-impact', title: '费用侵蚀', category: '成本', description: '查看长期费用差异如何被复利放大。' },
 ];
