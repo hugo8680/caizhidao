@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+import { getAtlasTopicProfiles } from '@/lib/atlas-content';
 import { disciplines } from '@/lib/system';
 
 type DisciplinePageProps = { params: Promise<{ slug: string }> };
@@ -42,7 +43,10 @@ export default async function DisciplinePage({ params }: DisciplinePageProps) {
             <header><span>{discipline.no}.{topicIndex + 1}</span><small>{topic.en}</small></header>
             <div className="discipline-topic-copy"><h2>{topic.title}</h2><p>{topic.summary}</p></div>
             <div className="discipline-concepts">
-              {topic.concepts.map((concept) => <div key={concept}><b>{concept}</b></div>)}
+              {getAtlasTopicProfiles(discipline.slug, topicIndex).map((concept) => <a className="discipline-concept-card" href={`/atlas/${discipline.slug}/${concept.id}/`} key={concept.id}>
+                <span>{discipline.no}.{topicIndex + 1}.{concept.conceptIndex + 1}</span>
+                <b>{concept.name}</b><small>{concept.en}</small><p>{concept.brief}</p><i>查看完整解释 →</i>
+              </a>)}
             </div>
           </article>
         ))}

@@ -77,14 +77,24 @@ export function CoursePlayer({ course }: { course: Course }) {
           <h2>先把概念说清楚</h2>
           <p>{guide.why}</p>
         </section>
+        <section className="lesson-explain">
+          <h2>一步步看它怎样运作</h2>
+          <ol>
+            {guide.mechanism.map((item) => <li key={item.title}><b>{item.title}</b><p>{item.text}</p></li>)}
+          </ol>
+        </section>
         <section className="lesson-example">
           <div><h2>用具体数字算一遍</h2></div>
           <p>{guide.example}</p>
         </section>
-        <div className="lesson-depth-grid single-column">
+        <div className="lesson-depth-grid">
           <section className="lesson-misconceptions">
             <h2>容易踩的坑</h2>
             {guide.misconceptions.map((item, index) => <p key={item}><b>{String(index + 1).padStart(2, '0')}</b>{item}</p>)}
+          </section>
+          <section className="lesson-checklist">
+            <h2>学完要能回答</h2>
+            {guide.checklist.map((item) => <p key={item}>✓ {item}</p>)}
           </section>
         </div>
         <section className="lesson-english">

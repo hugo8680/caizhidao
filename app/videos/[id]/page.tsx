@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { videos } from '@/lib/library';
+import { getVideoGuide } from '@/lib/library-guides';
 
 type VideoPageProps = { params: Promise<{ id: string }> };
 
@@ -24,6 +25,7 @@ export default async function VideoDetailPage({ params }: VideoPageProps) {
   const { id } = await params;
   const video = videos.find((item) => item.id === id);
   if (!video) notFound();
+  const guide = getVideoGuide(video);
   const index = videos.findIndex((item) => item.id === video.id);
   const previous = index > 0 ? videos[index - 1] : undefined;
   const next = index < videos.length - 1 ? videos[index + 1] : undefined;
@@ -35,7 +37,9 @@ export default async function VideoDetailPage({ params }: VideoPageProps) {
       <section className="video-detail-facts"><div><span>平台</span><b>{video.platform}</b></div><div><span>语言</span><b>{video.language}</b></div><div><span>难度</span><b>{video.level}</b></div><div><span>时长</span><b>{video.duration}</b></div><div><span>费用</span><b>{video.price}</b></div></section>
 
       <section className="video-detail-content">
-        <article><span>课程简介</span><h2>主要内容</h2><p>{video.description}</p></article>
+        <article><span>开始之前</span><h2>这项资源适不适合你</h2><p>{guide.before}</p></article>
+        <article><span>观看重点</span><h2>学习时抓住什么</h2><ol>{guide.focus.map((point, pointIndex) => <li key={point}><b>{String(pointIndex + 1).padStart(2, '0')}</b><p>{point}</p></li>)}</ol></article>
+        <article><span>学完以后</span><h2>怎样把内容变成能力</h2><p>{guide.after}</p><div className="video-course-caution"><b>需要注意</b><p>{guide.caution}</p></div></article>
         <aside><span>课程链接</span><h2>{video.platform}</h2><p>将在新窗口打开。课程状态、字幕和费用以对方页面为准。</p><a href={video.url} target="_blank" rel="noreferrer">打开课程页面 ↗</a></aside>
       </section>
 

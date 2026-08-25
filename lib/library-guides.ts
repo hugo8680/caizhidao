@@ -1,0 +1,57 @@
+import type { Book, VideoCourse } from './library';
+
+export type BookGuide = {
+  fit: string;
+  points: string[];
+  reading: string;
+  caution: string;
+};
+
+const bookGuides: Record<string, BookGuide> = {
+  'dog-money': { fit: '适合没有系统接触过个人财务、希望先建立储蓄习惯的读者，也适合家长与青少年一起讨论。', points: ['把模糊愿望改写成有金额和日期的目标。', '先储蓄后消费，并尝试增加主动收入。', '用持续行动和记录建立长期金钱习惯。'], reading: '先顺着故事读完，再用一页纸写下自己的三个目标、每月可储蓄金额和第一项增收尝试。', caution: '它是财商启蒙故事，不是完整的投资教材；书中的比例和产品安排需要结合现实收入、地区制度与风险重新判断。' },
+  'most-important-thing': { fit: '适合已经了解股票、债券等基础产品，希望把注意力从“预测涨跌”转向风险与周期的读者。', points: ['第二层思维：判断事实之外，还要判断市场已经预期了什么。', '风险不仅是波动，更包括高价买入后发生永久损失。', '周期、逆向思考与安全边际如何共同约束仓位。'], reading: '每章写下作者提出的一个判断原则，再找一个它可能不适用的反例；最后整理成自己的投资前检查表。', caution: '书中以经验与备忘录式论述为主，不提供机械交易规则；“逆向”也不是为了反对市场而反对市场。' },
+  'intelligent-investor-cn': { fit: '适合愿意耐心阅读经典、希望理解投资与投机边界及安全边际的进阶读者。', points: ['防御型与积极型投资者承担的研究任务不同。', '“市场先生”解释价格波动应被利用，而不是被服从。', '安全边际用于承认估值误差，而不是保证价格上涨。'], reading: '先读投资与投机、市场波动和安全边际相关章节，再决定是否继续阅读证券分析细节；把历史产品规则与今天市场分开。', caution: '原著形成于较早市场环境，具体债券比例、估值区间和产品描述有时代背景，应学习原则而非照搬数字。' },
+  'random-walk-cn': { fit: '适合想建立低成本、长期、分散投资框架，并希望理解主动管理争议的入门读者。', points: ['市场价格为何很难被持续、稳定地预测。', '股票、债券等资产在不同期限中的风险与作用。', '费用、税收、分散和生命周期配置怎样影响净结果。'], reading: '把“市场理论”“资产类别”“个人配置”三部分分开读，并用自己的目标期限重做书中的配置思路。', caution: '指数化是执行方案，不等于任何指数都合适；仍需检查指数规则、估值、费用、币种和资金期限。' },
+  'psychology-money-cn': { fit: '适合想理解金钱行为、长期坚持和风险余量，而不急于学习复杂公式的读者。', points: ['运气与风险让个人经历不能简单外推成普遍规律。', '复利需要时间，也需要避免在压力中被迫退出。', '“足够”、选择自由和安全余量本身就是财务目标。'], reading: '每篇故事后写下一个与自己经历相反的案例，再把最有共鸣的原则改成可执行的账户或行为规则。', caution: '故事能帮助理解行为，却不能替代产品尽调、现金流计算和投资估值。' },
+  'corporate-finance-cn': { fit: '适合商科学生、分析岗位和需要系统学习公司投资、融资与估值的专业读者。', points: ['货币时间价值、净现值与项目现金流。', '风险收益、资本成本与资本结构。', '分红、回购、期权、并购和公司价值。'], reading: '按章节完成例题和课后题，自己搭建现金流时间轴与简化模型；只读概念而不计算，很难真正掌握。', caution: '教材公式通常在简化假设下成立，实际项目还要处理税、会计、融资约束、情景变化和估计误差。' },
+  'behavioral-finance-cn': { fit: '适合已掌握投资基础，希望把心理偏差、社会互动与投资决策联系起来的读者。', points: ['投资者的目标不只追求均值方差意义上的最优。', '认知偏差与情绪怎样改变储蓄、交易和组合选择。', '市场现象如何由个体行为与制度环境共同形成。'], reading: '不要只背偏差名称；每读一个概念，就记录触发条件、可能后果和一项可执行的防护机制。', caution: '给错误贴上“行为偏差”标签并不等于完成解释，还要排除信息、约束与激励造成的合理反应。' },
+  'economics-principles-cn': { fit: '适合想从零建立经济学全貌、理解财经新闻背后基本关系的读者。', points: ['稀缺、机会成本、边际分析和激励。', '供需、市场结构、外部性与公共政策。', 'GDP、通胀、失业、货币和国际贸易。'], reading: '优先掌握图形背后的因果关系，每章用一个现实新闻重画供需或现金流，并完成章节问题。', caution: '原理教材先建立简化模型；现实政策分析仍需加入制度、分配、执行与数据识别问题。' },
+  'psychology-money-en': { fit: '适合希望用难度适中的英文阅读行为金融和个人财务故事的读者。', points: ['How luck and risk complicate financial success stories.', 'Why compounding needs both time and staying power.', 'How room for error and a sense of enough protect long-term plans.'], reading: 'Read one story at a time, underline the claim, then write a counterexample and one rule you can apply to your own finances.', caution: 'Narratives explain behavior well, but they do not replace product research, cash-flow planning or valuation.' },
+  'random-walk-en': { fit: '适合能阅读英文财经材料、希望系统比较市场效率、资产配置和低成本投资的读者。', points: ['Evidence for and against persistent market-beating strategies.', 'Risk and return across major asset classes.', 'Lifecycle allocation, diversification, fees and taxes.'], reading: 'Separate the evidence on markets from the portfolio recommendations, then rebuild the allocation examples using your own horizon and currency.', caution: 'Passive investing still requires choosing an index, understanding its construction and matching its risks to a real goal.' },
+  'intelligent-investor-en': { fit: '适合愿意阅读经典英文文本、重点学习投资者气质与安全边际的进阶读者。', points: ['The distinction between investment and speculation.', 'Mr. Market as a way to think about price fluctuations.', 'Margin of safety as protection against analytical error.'], reading: 'Start with the chapters on policy, market fluctuations and margin of safety; treat the historical security rules as context rather than timeless thresholds.', caution: 'Product examples and numerical rules reflect an earlier market era. Preserve the reasoning framework, not every historical prescription.' },
+  'common-sense-en': { fit: '适合希望用较短英文读物理解宽基指数、费用和长期纪律的入门读者。', points: ['Why investor returns collectively lag market returns after costs.', 'How diversification and low turnover support implementation.', 'Why staying the course matters when markets become uncomfortable.'], reading: 'Use the book to audit your current products: index scope, total fees, turnover, tax treatment and reasons for holding each one.', caution: 'Low cost is powerful but not sufficient; the chosen index, valuation, currency and goal horizon still matter.' },
+  'investment-valuation-en': { fit: '适合需要构建估值模型、理解不同企业与资产估值方法的专业读者。', points: ['Discounted cash-flow valuation from cash flows to terminal value.', 'Relative valuation and the conditions behind comparable multiples.', 'Special cases including financial firms, young companies and real options.'], reading: 'Work with spreadsheets alongside the text, reproduce one complete valuation, then stress-test growth, margins, reinvestment and discount rates.', caution: 'Model precision is not forecast accuracy. A professional valuation must expose assumptions, sensitivity and the share of value coming from terminal estimates.' },
+  'derivatives-en': { fit: '适合具备概率、统计和基础金融知识，需要系统学习衍生品定价与风险管理的专业读者。', points: ['Forward, futures and swap mechanics and no-arbitrage pricing.', 'Option payoffs, binomial trees, Black–Scholes and the Greeks.', 'Hedging, credit risk, volatility and market practice.'], reading: 'Draw every payoff before using a formula, complete numerical exercises, and track units, contract multipliers, collateral and settlement conventions.', caution: 'Pricing models rely on assumptions; real trading adds liquidity, jumps, margin calls, model risk and operational constraints.' },
+  'financial-statements-en': { fit: '适合希望用图解和交易实例快速建立三张报表联动概念的英文入门读者。', points: ['How the balance sheet, income statement and cash-flow statement connect.', 'How common business transactions move through the statements.', 'How ratios turn statement lines into questions about operations and solvency.'], reading: 'Recreate the example company on paper and update all three statements after each transaction instead of only reading the finished tables.', caution: 'The accessible format is a starting point; company analysis still requires accounting policies, footnotes, multi-period comparison and industry context.' },
+  'misbehaving-en': { fit: '适合希望了解行为经济学如何形成、实验发现怎样进入经济学争论的进阶读者。', points: ['The historical development of behavioral economics.', 'Evidence on mental accounting, fairness, self-control and market behavior.', 'How experiments and field observations challenge simplified rational models.'], reading: 'Treat it as an intellectual history: record the traditional prediction, the observed behavior and the alternative explanation for each episode.', caution: 'A compelling anomaly does not invalidate every rational model; effect size, context, replication and institutional incentives still matter.' },
+};
+
+export function getBookGuide(book: Book): BookGuide {
+  return bookGuides[book.id] ?? { fit: `适合关注“${book.topic}”、并能接受${book.level}阅读难度的读者。`, points: [book.intro, '理解作者使用的主要概念与判断框架。', '把书中的原则与自己的目标、期限和风险条件对照。'], reading: '先浏览目录，再围绕一个明确问题做笔记；读完后用自己的案例复述核心论点。', caution: '书籍版本、数据和制度背景会变化，具体决策还要核验最新规则与原始资料。' };
+}
+
+export type VideoGuide = {
+  before: string;
+  focus: string[];
+  after: string;
+  caution: string;
+};
+
+const videoGuides: Record<string, VideoGuide> = {
+  'mooc-finance-cn': { before: '这是一页课程检索结果，不是一门固定课程。先按授课学校、教师、课程大纲、开课状态和作业安排筛选。', focus: ['金融学基础课程是否覆盖货币、银行、证券与风险。', '公司金融或投资学课程是否有计算题与案例。', '课程页面是否标明教材、考核和完整课时。'], after: '选定一门后先完成前两周内容，再决定是否投入整个学期；避免同时收藏很多课程却没有完成一门。', caution: '检索结果和开课状态会变化，证书、费用和访问权限以课程页面为准。' },
+  'xuetang-finance-cn': { before: '先把目标限定为宏观、会计、金融科技或公司金融中的一个方向，再按大纲和先修要求筛选。', focus: ['课程是否来自高校或明确的教学团队。', '视频之外是否提供讲义、练习和讨论。', '难度是否与自己的数学和会计基础匹配。'], after: '用本站同主题词条建立术语表，并完成至少一份作业或案例复盘。', caution: '平台聚合内容的开放周期与费用不同，进入课程页后再核对。' },
+  'smartedu-cn': { before: '这是国家级课程资源入口。建议使用“金融学”“宏观经济学”“财务报表分析”等具体关键词，而不是泛搜财经。', focus: ['课程负责人和建设学校。', '章节结构、总课时与考核资料。', '是否有适合当前基础的先导课程。'], after: '确定一条连续课程路径，并把每周固定学习时段写入日程。', caution: '部分资源可能需要登录，开放范围和课程版本以平台显示为准。' },
+  'bilibili-yale-cn': { before: '先确认视频是否为完整课程、字幕来源和上传者；优先选择学校、出版社或长期维护的合集。', focus: ['风险分担、保险和金融机构的社会功能。', '证券、银行与市场制度如何连接。', '行为金融怎样解释传统模型之外的现象。'], after: '对照 Open Yale 官方课程页核验讲次，并为每一讲写三行摘要。', caution: '检索页可能混入剪辑、搬运或不完整字幕，版权状态和内容完整性需要逐项判断。' },
+  'bilibili-accounting-cn': { before: '先具备资产、负债、收入、费用和现金流的基础定义，再筛选有完整案例和报表附注的课程。', focus: ['三张报表怎样勾稽。', '利润质量、应收、存货和经营现金流。', '比率变化背后的业务原因。'], after: '找一家公司连续三年的年报，按课程方法完成一页报表联读。', caution: '避免只看股票解读类视频；分析结论应回到公司公告、会计政策和附注。' },
+  'coursera-markets': { before: '不要求高等数学，但需要愿意理解风险、保险、证券和制度之间的关系；可先旁听一周判断节奏。', focus: ['金融机构如何分担风险并服务真实经济。', '股票、债券、保险与银行的基本结构。', '行为、监管和社会目标怎样进入金融设计。'], after: '每周选择一种真实产品，画出参与者、现金流、风险和监管关系。', caution: '字幕与证书政策可能变化，课程中的案例和市场数据也有时间背景。' },
+  'yale-markets': { before: '适合能阅读英文讲义、希望观看完整大学课程的学习者；先下载课程大纲并按讲次推进。', focus: ['Risk sharing, insurance and portfolio ideas.', 'Securities, banking, regulation and market institutions.', 'Behavioral finance and the social purpose of finance.'], after: 'Use the transcripts to build an English glossary, then explain one institution in Chinese without looking at notes.', caution: 'This is a 2011 course. Core concepts remain useful, but regulations, market structure and data must be refreshed.' },
+  'yale-theory': { before: '需要微积分、概率和基础微观经济学；若无法跟上最优化与均衡推导，应先补数学和金融通识。', focus: ['Expected utility, state prices and risk sharing.', 'Portfolio choice, CAPM and market equilibrium.', 'Options, asymmetric information and agency problems.'], after: 'Redo derivations and problem sets rather than only watching lectures; keep a list of every assumption used.', caution: '理论模型用来隔离关系，不应不经检验地直接套入真实产品或交易。' },
+  'mit-finance': { before: '适合具备会计、统计和代数基础的专业学习者；先阅读 syllabus 并准备电子表格或计算工具。', focus: ['Present value, fixed income and capital budgeting.', 'Risk, return, portfolio theory and asset pricing.', 'Corporate financing decisions and options.'], after: 'Complete assignments and exams, then build one project valuation with transparent assumptions and sensitivity analysis.', caution: '课程年份较早，案例数据与市场惯例需更新，但基本分析框架仍有价值。' },
+  'khan-finance': { before: '适合按小主题补基础。不要从头被动连续播放，先选利率、债券、股票或银行中的一个具体问题。', focus: ['Interest and present-value calculations.', 'Bond and stock cash flows.', 'Banking, credit and housing finance mechanics.'], after: '每看完一组短视频，关闭页面重做一个数字例子并用自己的话解释。', caution: '短视频擅长拆概念，但难以替代连续教材、作业和完整课程结构。' },
+  'damodaran-valuation': { before: '需要财务报表、公司金融和电子表格基础；最好准备一家真实公司作为贯穿案例。', focus: ['Cash-flow estimation, growth and reinvestment.', 'Risk, discount rates and capital structure.', 'Terminal value, relative valuation and narrative consistency.'], after: 'Complete a full valuation, publish the assumptions table and test at least three scenarios; do not keep only a single output number.', caution: '估值依赖判断，课程模型不能消除数据质量、会计调整和预测误差。' },
+  'cfa-foundations': { before: '适合想了解投资行业全貌、工具、客户与伦理的入门学习者；先核对当前注册和费用政策。', focus: ['Industry structure, markets and investment instruments.', 'Client needs, portfolio basics and performance.', 'Ethics, regulation and professional conduct.'], after: '把课程模块整理成行业地图，选择一个岗位或产品继续深入。', caution: '它是行业基础项目，不等同于完整的 CFA Program，也不构成任何职业资格保证。' },
+};
+
+export function getVideoGuide(video: VideoCourse): VideoGuide {
+  return videoGuides[video.id] ?? { before: `先确认自己具备${video.level}课程需要的数学、会计与英文基础。`, focus: [video.description, '记录核心概念、假设和至少一个数字例子。', '把课程结论与原始资料和现实案例对照。'], after: '学完后用自己的话写一页总结，并完成一个可检查的练习或案例。', caution: '课程状态、字幕、费用和访问权限以平台最新页面为准。' };
+}

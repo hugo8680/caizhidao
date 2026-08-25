@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { books } from '@/lib/library';
+import { getBookGuide } from '@/lib/library-guides';
 
 type BookPageProps = { params: Promise<{ id: string }> };
 
@@ -24,6 +25,7 @@ export default async function BookDetailPage({ params }: BookPageProps) {
   const { id } = await params;
   const book = books.find((item) => item.id === id);
   if (!book) notFound();
+  const guide = getBookGuide(book);
   const index = books.findIndex((item) => item.id === book.id);
   const previous = index > 0 ? books[index - 1] : undefined;
   const next = index < books.length - 1 ? books[index + 1] : undefined;
@@ -34,7 +36,10 @@ export default async function BookDetailPage({ params }: BookPageProps) {
 
       <section className="book-detail-layout">
         <article>
-          <section><span>内容简介</span><h2>这本书讲什么</h2><p>{book.intro}</p></section>
+          <section><span>内容简介</span><h2>这本书讲什么</h2><p>{book.intro}</p><div className="book-reading-fit"><b>适合谁读</b><p>{guide.fit}</p></div></section>
+          <section><span>核心内容</span><h2>读完应该带走什么</h2><ol>{guide.points.map((point, pointIndex) => <li key={point}><b>{String(pointIndex + 1).padStart(2, '0')}</b><p>{point}</p></li>)}</ol></section>
+          <section><span>阅读方法</span><h2>怎样读得更有收获</h2><p>{guide.reading}</p></section>
+          <section><span>需要注意</span><h2>哪些内容不能直接照搬</h2><p>{guide.caution}</p></section>
           <section><span>版本信息</span><h2>书目信息</h2><p>同一本书可能有不同译本、修订版、平装版和电子版。购买时请以 ISBN 为准。</p><dl className="book-detail-meta"><div><dt>作者</dt><dd>{book.author}</dd></div><div><dt>出版社</dt><dd>{book.publisher}</dd></div><div><dt>出版年份</dt><dd>{book.year}</dd></div><div><dt>ISBN</dt><dd>{book.isbn}</dd></div><div><dt>页数</dt><dd>{book.pages}</dd></div><div><dt>参考价格</dt><dd>{book.price}</dd></div><div><dt>语言</dt><dd>{book.language}</dd></div><div><dt>难度</dt><dd>{book.level}</dd></div><div><dt>主题</dt><dd>{book.topic}</dd></div></dl></section>
         </article>
         <aside><span>站外链接</span><h2>版本与购买</h2><p>链接会在新窗口打开。价格与库存以对方页面为准。</p><a href={book.sourceUrl} target="_blank" rel="noreferrer">查看版本资料 ↗</a><a href={book.shopUrl} target="_blank" rel="noreferrer">查看购买渠道 ↗</a></aside>

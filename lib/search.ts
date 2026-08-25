@@ -1,4 +1,5 @@
 import { knowledgeTerms } from './content';
+import { getAtlasConceptHref, getAtlasConceptProfile } from './atlas-content';
 import { courses } from './courses';
 import { books, toolCatalog, videos } from './library';
 import { disciplines, learningRoutes, timelineEvents } from './system';
@@ -42,17 +43,18 @@ const disciplineRecords: SearchRecord[] = disciplines.flatMap((discipline) => [
   })),
 ]);
 
-const mappedNodeRecords: SearchRecord[] = disciplines.flatMap((discipline) => discipline.topics.flatMap((topic) => topic.concepts.flatMap((concept) => {
+const mappedNodeRecords: SearchRecord[] = disciplines.flatMap((discipline) => discipline.topics.flatMap((topic, topicIndex) => topic.concepts.flatMap((concept, conceptIndex) => {
   if (detailedNames.has(concept) || mappedNames.has(concept)) return [];
   mappedNames.add(concept);
+  const profile = getAtlasConceptProfile(discipline.slug, `${String(topicIndex + 1).padStart(2, '0')}-${String(conceptIndex + 1).padStart(2, '0')}`);
   return [{
     id: `map-${discipline.slug}-${concept}`,
     kind: '知识' as const,
     title: concept,
-    english: `${topic.en} · ${discipline.en}`,
-    description: topic.summary,
-    keywords: `${discipline.name} ${discipline.en} ${discipline.question} ${topic.title} ${topic.en}`,
-    href: `/atlas/${discipline.slug}/`,
+    english: profile?.en ?? `${topic.en} · ${discipline.en}`,
+    description: profile?.brief ?? topic.summary,
+    keywords: `${discipline.name} ${discipline.en} ${discipline.question} ${topic.title} ${topic.en} ${profile?.explanation ?? ''}`,
+    href: getAtlasConceptHref(discipline.slug, topicIndex, conceptIndex),
     priority: 5,
   }];
 })));

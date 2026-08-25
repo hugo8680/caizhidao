@@ -1297,3 +1297,121 @@ body {
   .term-article > section { padding: 26px 0; }
   .course-index-grid, .topics-index-grid, .tool-directory-grid, .book-shelves, .video-sections, .game-grid { padding-top: 32px; }
 }
+
+/* Content-depth pass: every reference card has a real reading surface. */
+.discipline-concepts { align-items: stretch; }
+.discipline-concepts .discipline-concept-card {
+  min-height: 148px; padding: 15px 16px; display: grid; grid-template-columns: 1fr auto; grid-template-rows: auto auto auto 1fr auto;
+  gap: 3px 12px; border: 1px solid rgba(23,43,45,.14); border-top: 3px solid color-mix(in srgb, var(--tone), transparent 18%);
+  border-radius: 4px; background: #fbf8f1; box-shadow: 0 7px 18px rgba(23,43,45,.035);
+  transition: transform .16s ease, border-color .16s ease, box-shadow .16s ease;
+}
+.discipline-concepts .discipline-concept-card:hover { transform: translateY(-2px); border-color: var(--tone); box-shadow: 0 12px 24px rgba(23,43,45,.07); }
+.discipline-concept-card > span { grid-column: 1; color: var(--tone); font-size: 8px; }
+.discipline-concept-card > b { grid-column: 1; margin-top: 3px; font: 600 15px "Songti SC", serif; }
+.discipline-concept-card > small { grid-column: 2; grid-row: 1 / 3; max-width: 130px; color: #78837f; font: 9px/1.35 Georgia, serif; text-align: right; }
+.discipline-concept-card > p { grid-column: 1 / -1; margin: 7px 0 10px; color: #586763; font-size: 10px; line-height: 1.7; }
+.discipline-concept-card > i { grid-column: 1 / -1; color: var(--tone); font-size: 9px; font-style: normal; }
+
+.lesson-explain { margin: 36px 0; }
+.lesson-explain h2 { margin-top: 0; }
+.lesson-explain li { padding: 18px 0; }
+.lesson-depth-grid > section { background: #faf7f0; }
+.lesson-depth-grid .lesson-checklist { background: #e7efeb; }
+
+.term-sources > p { color: var(--muted); font-size: 11px; line-height: 1.8; }
+.term-sources > div { margin-top: 18px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.term-sources a { min-height: 165px; padding: 18px; display: flex; flex-direction: column; border: 1px solid var(--line); background: #f8f4eb; }
+.term-sources a:hover { border-color: #7d5a42; background: #fffaf1; }
+.term-sources a b { font: 600 15px/1.4 "Songti SC", serif; }
+.term-sources a small { margin-top: 4px; color: #8e6549; font-size: 8px; line-height: 1.5; }
+.term-sources a p { margin: 15px 0; color: var(--muted); font-size: 10px; line-height: 1.7; }
+.term-sources a i { margin-top: auto; color: var(--green); font-size: 9px; font-style: normal; }
+
+/* Knowledge-map concept entries are reference articles, not course screens. */
+.atlas-concept-head {
+  padding: 25px max(28px, calc((100% - 1120px)/2)) 31px; display: grid; grid-template-columns: minmax(0, 1fr) 310px;
+  gap: 17px 54px; align-items: end; border-bottom: 4px solid #597d75; background: #f0e9de;
+}
+.atlas-concept-head > p { grid-column: 1 / -1; margin: 0; color: #71807c; font-size: 9px; }
+.atlas-concept-head > p span { margin: 0 7px; }.atlas-concept-head > p a { color: #8f6042; }
+.atlas-concept-head > div > small { color: #8f6042; font: 8px Georgia, serif; letter-spacing: .12em; }
+.atlas-concept-head h1 { margin: 8px 0 2px; font: 600 clamp(34px, 4vw, 47px)/1.15 "Songti SC", serif; }
+.atlas-concept-head h2 { margin: 0; color: #486b65; font: 14px Georgia, serif; }
+.atlas-concept-head > div > p { max-width: 760px; margin: 13px 0 0; color: #596965; font-size: 12px; line-height: 1.8; }
+.atlas-concept-head dl { margin: 0; border-top: 1px solid var(--line); }
+.atlas-concept-head dl div { padding: 10px 0; display: grid; grid-template-columns: 75px 1fr; gap: 12px; border-bottom: 1px solid var(--line); }
+.atlas-concept-head dt { color: #78837f; font-size: 8px; }.atlas-concept-head dd { margin: 0; font-size: 10px; font-weight: 600; }
+
+.atlas-concept-layout { width: min(1120px, calc(100% - 48px)); margin: 0 auto; padding: 48px 0 92px; display: grid; grid-template-columns: minmax(0, 1fr) 270px; gap: 64px; }
+.atlas-concept-article > section { padding: 32px 0; border-bottom: 1px solid var(--line); }
+.atlas-concept-article > section:first-child { padding-top: 0; }
+.atlas-concept-article > section > span { display: inline-block; padding: 4px 7px; border: 1px solid rgba(82,112,105,.24); background: #e8efe9; color: #3f6b62; font-size: 8px; }
+.atlas-concept-article h2 { margin: 10px 0 16px; font: 600 24px/1.35 "Songti SC", serif; }
+.atlas-concept-article > section > p { color: #566763; font-size: 12px; line-height: 1.9; }
+.atlas-concept-article .atlas-concept-lead { color: #263f3d; font: 500 17px/1.9 "Songti SC", serif; }
+.atlas-concept-mechanism { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
+.atlas-concept-mechanism article { min-height: 205px; padding: 20px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); background: rgba(255,255,255,.3); }
+.atlas-concept-mechanism article > b { color: #9a6645; font: 9px Georgia, serif; }
+.atlas-concept-mechanism h3 { margin: 24px 0 9px; font: 600 16px "Songti SC", serif; }
+.atlas-concept-mechanism p { margin: 0; color: #5d6a67; font-size: 11px; line-height: 1.85; }
+.atlas-concept-example blockquote { margin: 0 0 19px; padding: 23px 25px; border: 0; border-left: 3px solid #a66c47; background: #ece2d3; color: #263d3b; font: 500 16px/1.85 "Songti SC", serif; }
+.atlas-concept-boundary { margin: 25px 0; padding: 26px!important; border: 1px solid #c8b394!important; background: #f1e4cf; }
+.atlas-concept-boundary h2 { margin-top: 10px; }
+.atlas-concept-misconceptions ol { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--line); }
+.atlas-concept-misconceptions li { padding: 16px 0; display: grid; grid-template-columns: 35px 1fr; gap: 10px; border-bottom: 1px solid var(--line); }
+.atlas-concept-misconceptions li b { color: #9a6645; font: 9px Georgia, serif; }.atlas-concept-misconceptions li p { margin: 0; color: #586763; font-size: 11px; line-height: 1.8; }
+.atlas-concept-checklist ul { margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; list-style: none; border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
+.atlas-concept-checklist li { min-height: 96px; padding: 18px 18px 18px 43px; display: flex; align-items: center; position: relative; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); font-size: 11px; line-height: 1.7; }
+.atlas-concept-checklist li::before { content: '✓'; position: absolute; left: 17px; color: #356b61; font-weight: 700; }
+.atlas-concept-english { padding: 28px!important; border: 0!important; background: #193b3c; color: white; }
+.atlas-concept-english > span { border-color: rgba(231,202,128,.35)!important; background: rgba(255,255,255,.06)!important; color: #e6c77e!important; }
+.atlas-concept-english h2 { font-family: Georgia, serif; font-weight: 500; }.atlas-concept-english p { margin-bottom: 0; color: #dbe6e2!important; font: 14px/1.85 Georgia, serif!important; }
+.atlas-concept-sources > p { color: var(--muted); font-size: 11px; line-height: 1.8; }
+.atlas-concept-sources > div { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.atlas-concept-sources a { min-height: 150px; padding: 17px; display: flex; flex-direction: column; border: 1px solid var(--line); background: #f8f4eb; }
+.atlas-concept-sources a b { font: 600 15px/1.4 "Songti SC", serif; }.atlas-concept-sources a small { margin-top: 4px; color: #966447; font-size: 8px; }
+.atlas-concept-sources a p { color: var(--muted); font-size: 10px; line-height: 1.7; }.atlas-concept-sources a i { margin-top: auto; color: #356b61; font-size: 9px; font-style: normal; }
+.atlas-concept-aside { align-self: start; position: sticky; top: calc(var(--site-chrome-height) + 20px); padding: 19px; border: 1px solid var(--line); background: #eee7dc; }
+.atlas-concept-aside > span { color: #966447; font-size: 8px; }.atlas-concept-aside h3 { margin: 7px 0; font: 600 18px "Songti SC", serif; }
+.atlas-concept-aside > p { color: var(--muted); font-size: 9px; line-height: 1.7; }
+.atlas-concept-aside > a:not(.atlas-concept-back) { padding: 11px 0; display: grid; grid-template-columns: 1fr auto; gap: 3px 9px; border-bottom: 1px solid var(--line); }
+.atlas-concept-aside a b { font-size: 10px; }.atlas-concept-aside a small { grid-column: 1; color: var(--muted); font: 8px Georgia, serif; }.atlas-concept-aside a i { grid-column: 2; grid-row: 1 / 3; align-self: center; color: #356b61; font-style: normal; }
+.atlas-concept-back { display: block; margin-top: 22px; color: #356b61; font-size: 9px; }
+.atlas-concept-pagination { width: min(1000px, calc(100% - 48px)); margin: 0 auto; padding: 0 0 76px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+.atlas-concept-pagination a { padding: 18px 0; border-top: 1px solid var(--line); }.atlas-concept-pagination a:last-child { text-align: right; }
+.atlas-concept-pagination span, .atlas-concept-pagination small { display: block; color: var(--muted); font-size: 8px; }.atlas-concept-pagination b { display: block; margin: 5px 0 2px; font: 600 15px "Songti SC", serif; }
+
+/* Timeline cards keep the same padding before and after hover. */
+.timeline-event-link {
+  margin: 0 0 30px; padding: 24px 27px 26px; border: 1px solid rgba(23,43,45,.12); border-radius: 4px;
+  background: #fbf9f4; box-shadow: 0 8px 22px rgba(23,43,45,.035); transition: border-color .16s ease, transform .16s ease, box-shadow .16s ease;
+}
+.timeline-event-link:hover { transform: translateY(-2px); border-color: rgba(48,102,91,.55); background: #fffdf8; box-shadow: 0 14px 30px rgba(23,43,45,.07); }
+.timeline-event-link > p { max-width: 760px; }
+.video-course-caution { margin-top: 18px; padding: 15px; border-left: 3px solid #a76b45; background: #eee3d2; }
+.video-course-caution b { color: #8f5c3d; font-size: 8px; }.video-course-caution p { margin: 6px 0 0; font-size: 10px!important; line-height: 1.7!important; }
+
+@media (max-width: 980px) {
+  .atlas-concept-layout { grid-template-columns: 1fr; gap: 38px; }
+  .atlas-concept-aside { position: static; }
+}
+
+@media (max-width: 760px) {
+  .discipline-concepts { grid-template-columns: 1fr; }
+  .term-sources > div, .atlas-concept-sources > div { grid-template-columns: 1fr; }
+  .atlas-concept-head { grid-template-columns: 1fr; gap: 22px; padding-inline: 18px; }
+  .atlas-concept-head > p { grid-column: 1; }
+  .atlas-concept-layout { width: calc(100% - 32px); padding-top: 34px; }
+  .atlas-concept-mechanism, .atlas-concept-checklist ul { grid-template-columns: 1fr; }
+  .atlas-concept-mechanism article { min-height: 0; }
+  .atlas-concept-pagination { width: calc(100% - 32px); gap: 18px; }
+  .timeline-event-link { padding: 19px 18px 21px; }
+}
+
+@media (max-width: 560px) {
+  .discipline-concept-card > small { max-width: 105px; }
+  .atlas-concept-head dl div { grid-template-columns: 68px 1fr; }
+  .atlas-concept-pagination { grid-template-columns: 1fr; }.atlas-concept-pagination a:last-child { text-align: left; }
+  .term-sources a, .atlas-concept-sources a { min-height: 0; }
+}

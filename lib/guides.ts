@@ -1,4 +1,4 @@
-import type { KnowledgeTerm } from './content';
+import { getKnowledgeTerm, type KnowledgeTerm } from './content';
 
 export type KnowledgeCategoryPage = {
   slug: string;
@@ -28,6 +28,95 @@ export function getKnowledgeCategoryByName(name: string) {
 }
 
 type TermNote = { caution: string; check: string };
+
+type KnowledgeSource = {
+  title: string;
+  publisher: string;
+  url: string;
+  note: string;
+};
+
+type CategoryDepth = {
+  boundary: string;
+  misconceptions: string[];
+  checklist: string[];
+  sources: KnowledgeSource[];
+};
+
+const categoryDepth: Record<string, CategoryDepth> = {
+  '金钱与个人财务': {
+    boundary: '家庭财务没有脱离生活目标的“最优数字”。同一个比例或方案，对收入稳定、短期要用钱和承担家庭责任的人，意义可能完全不同。',
+    misconceptions: ['把{term}当成越高越好的单一指标，忽略资金期限、家庭责任和现金流稳定性。', '只计算正常情景，没有检查失业、疾病或大额支出发生时方案能否继续。'],
+    checklist: ['这笔钱最早什么时候必须使用？', '如果收入中断六个月，方案是否仍能维持？', '计算的是名义金额，还是扣除通胀后的购买力？'],
+    sources: [
+      { title: 'Consumer Tools', publisher: 'U.S. Consumer Financial Protection Bureau', url: 'https://www.consumerfinance.gov/consumer-tools/', note: '贷款、信用、住房与日常财务的消费者资料。' },
+      { title: 'Investor education', publisher: 'Investor.gov · U.S. SEC', url: 'https://www.investor.gov/introduction-investing', note: '投资基础、风险与产品核验入口。' },
+    ],
+  },
+  '投资基础': {
+    boundary: '投资指标通常只描述风险的一部分。平均收益、波动、回撤、流动性和永久损失不是同一件事，任何单一数字都不能独立证明一项资产值得买。',
+    misconceptions: ['把{term}当作预测涨跌的信号，而不是描述风险、收益或执行条件的工具。', '只看历史平均值，忽略样本区间、费用、税收、失败路径与幸存者偏差。'],
+    checklist: ['收益最终来自什么现金流或风险补偿？', '最大回撤发生时，自己是否会被迫卖出？', '产品费用、税收和买卖价差会留下多少净回报？'],
+    sources: [
+      { title: 'Investing basics', publisher: 'Investor.gov · U.S. SEC', url: 'https://www.investor.gov/introduction-investing/investing-basics', note: '资产类别、风险、费用与分散投资的基础资料。' },
+      { title: 'Investment Foundations', publisher: 'CFA Institute', url: 'https://www.cfainstitute.org/programs/investment-foundations', note: '市场、工具、行业结构与职业伦理的系统框架。' },
+    ],
+  },
+  '市场与产品': {
+    boundary: '金融产品是权利、现金流和风险的法律载体。名称相似不代表底层资产、偿付顺序、费用、托管或流动性相同。',
+    misconceptions: ['只根据产品名称理解{term}，没有继续查看底层资产和合同权利。', '把“能够交易”理解为“任何时候都能按屏幕价格成交”。'],
+    checklist: ['最终拥有的是所有权、债权，还是一项合约权利？', '现金流由谁支付，违约时偿付顺序是什么？', '在哪里买卖、由谁托管、退出成本是多少？'],
+    sources: [
+      { title: 'Investment products', publisher: 'Investor.gov · U.S. SEC', url: 'https://www.investor.gov/introduction-investing/investing-basics/investment-products', note: '股票、债券、基金等产品的基础说明。' },
+      { title: 'How Stock Markets Work', publisher: 'Investor.gov · U.S. SEC', url: 'https://www.investor.gov/introduction-investing/investing-basics/how-stock-markets-work', note: '发行、交易和市场运作的入门资料。' },
+    ],
+  },
+  '财务报表': {
+    boundary: '报表是按会计规则形成的经营记录，不是企业现实的完整复制。确认时点、估计方法、一次性项目和管理层判断都会影响数字。',
+    misconceptions: ['孤立阅读{term}，没有与另外两张报表和附注相互核对。', '看到同比增长就下结论，没有区分价格、数量、并购和会计口径变化。'],
+    checklist: ['这个数字对应一段期间，还是一个时点？', '它能否与另一张报表和附注勾稽？', '变化来自主营经营，还是一次性项目与会计估计？'],
+    sources: [
+      { title: 'Issued IFRS Standards', publisher: 'IFRS Foundation', url: 'https://www.ifrs.org/issued-standards/list-of-standards/', note: '国际财务报告准则与配套资料入口。' },
+      { title: 'How to Read a 10-K', publisher: 'Investor.gov · U.S. SEC', url: 'https://www.investor.gov/introduction-investing/general-resources/news-alerts/alerts-bulletins/investor-bulletins/how-read-10-k', note: '阅读年报、主表与风险披露的实用说明。' },
+    ],
+  },
+  '公司金融与估值': {
+    boundary: '估值是对未来现金流、再投资和风险的条件性判断，不是精确报价。增长率、利润率或折现率的小变化，可能带来很大的价值变化。',
+    misconceptions: ['把{term}的计算结果当作唯一答案，没有展示输入假设和估值区间。', '使用增长假设，却没有说明增长需要多少再投资、竞争是否允许它持续。'],
+    checklist: ['价值来自哪些可以持续的现金流？', '增长需要多少资本，回报率是否高于资本成本？', '悲观、基准和乐观情景下，结论相差多大？'],
+    sources: [
+      { title: 'Valuation resources', publisher: 'NYU Stern · Aswath Damodaran', url: 'https://pages.stern.nyu.edu/~adamodar/', note: '公司估值、资本成本、数据和课程资料。' },
+      { title: 'Corporate Finance', publisher: 'MIT OpenCourseWare', url: 'https://ocw.mit.edu/search/?q=corporate+finance', note: '公司金融课程、讲义与练习入口。' },
+    ],
+  },
+  '宏观经济': {
+    boundary: '宏观指标是对大量经济活动的汇总，发布有滞后并可能修订；同时变化不自动代表因果关系，市场价格还会提前反映预期。',
+    misconceptions: ['用一次{term}数据判断长期趋势，没有检查基数、季节性和后续修订。', '把经济数据好坏直接等同于资产涨跌，忽略市场此前已经计入的预期。'],
+    checklist: ['这是总量、增速还是价格指数？', '名义与实际、同比与环比的口径是否一致？', '数据相对前值、预期值和历史修订偏离多少？'],
+    sources: [
+      { title: '财经数据', publisher: '中华人民共和国国家统计局', url: 'https://data.stats.gov.cn/', note: '中国国民经济与社会统计数据查询入口。' },
+      { title: 'Back to Basics', publisher: 'International Monetary Fund', url: 'https://www.imf.org/external/pubs/ft/fandd/basics/', note: 'GDP、通胀、财政和国际收支等概念说明。' },
+    ],
+  },
+  '组合与风险': {
+    boundary: '风险指标只总结特定样本和假设下的一部分不确定性。压力时期的相关性、流动性、波动结构和融资条件都可能与平时不同。',
+    misconceptions: ['把{term}当作风险的完整定义，遗漏永久损失、流动性和目标落空。', '持有很多产品就认为已经分散，没有检查共同持仓和共同风险因子。'],
+    checklist: ['组合最大的共同风险来源是什么？', '各资产在压力时期是否仍能提供分散？', '何时再平衡，由什么事先写好的规则触发？'],
+    sources: [
+      { title: 'Asset Allocation and Diversification', publisher: 'Investor.gov · U.S. SEC', url: 'https://www.investor.gov/introduction-investing/investing-basics/asset-allocation-diversification', note: '资产配置、分散和再平衡的基础资料。' },
+      { title: 'Global Investment Performance Standards', publisher: 'CFA Institute', url: 'https://www.gipsstandards.org/', note: '投资业绩计算、展示与可比性的专业标准。' },
+    ],
+  },
+  '全球与衍生品': {
+    boundary: '跨境交易和衍生品会把标的价格、汇率、保证金、流动性与法律义务叠加在一起；最初投入通常不等于名义敞口或最大损失。',
+    misconceptions: ['只看{term}的方向判断，没有画出权利、义务和全部现金流。', '把保证金当作最大损失，忽略杠杆、追加保证金、跳空和交易对手风险。'],
+    checklist: ['标的、名义本金、到期日和结算方式是什么？', '最坏情况下需要追加多少现金？', '汇率、基差和交易对手变化会怎样影响结果？'],
+    sources: [
+      { title: 'Balance of Payments Manual', publisher: 'International Monetary Fund', url: 'https://www.imf.org/external/pubs/ft/bop/2007/bopman6.htm', note: '国际收支、跨境头寸与统计口径。' },
+      { title: 'Derivatives information', publisher: 'U.S. Commodity Futures Trading Commission', url: 'https://www.cftc.gov/LearnAndProtect/AdvisoriesAndArticles/index.htm', note: '期货、期权、杠杆和交易风险资料。' },
+    ],
+  },
+};
 
 const categorySources: Record<string, string> = {
   '金钱与个人财务': '银行流水、家庭预算、贷款合同、保单条款和年度净资产记录。',
@@ -96,9 +185,25 @@ const termNotes: Record<string, TermNote> = {
 
 export function buildKnowledgeGuide(term: KnowledgeTerm) {
   const note = termNotes[term.slug];
+  const depth = categoryDepth[term.category];
+  const related = term.related.map((slug) => getKnowledgeTerm(slug)).filter((item): item is KnowledgeTerm => Boolean(item));
+  const relatedLine = related.length > 0
+    ? `${related.map((item) => `“${item.zh}”关注${item.summary.replace(/[。！？；]+$/u, '')}`).join('；')}。`
+    : '把它与同主题概念并排比较，确认各自描述的对象和口径。';
+  const caution = note?.caution ?? term.fact;
+  const check = note?.check ?? `先确认“${term.zh}”描述的对象、期间和计量口径，再结合具体资料判断。`;
   return {
-    caution: note?.caution ?? term.fact,
-    check: note?.check ?? `先确认“${term.zh}”描述的对象、期间和计量口径，再结合具体资料判断。`,
+    mechanism: [
+      { title: '定义与口径', text: `${term.summary}${term.why}阅读时先确认它描述的主体、时间范围和计量单位。` },
+      { title: '关系如何发生', text: `${term.example}这个例子不是为了记住一个答案，而是看清变量、现金流或风险从哪里开始变化。` },
+      { title: '与相近概念区分', text: relatedLine },
+      { title: '适用条件与边界', text: `${depth?.boundary ?? '任何概念都依赖具体对象、时间范围和前提条件。'}${caution}` },
+    ],
+    misconceptions: [caution, ...(depth?.misconceptions ?? []).map((item) => item.replaceAll('{term}', `“${term.zh}”`))],
+    checklist: [check, ...(depth?.checklist ?? [])],
+    sources: depth?.sources ?? [],
+    caution,
+    check,
     observation: categorySources[term.category] ?? '相关合同、公开披露和原始数据。',
   };
 }
