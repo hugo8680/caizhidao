@@ -18,6 +18,8 @@ const resourceLayers = [
 ];
 
 const featuredTimeline = timelineEvents.filter((event) => ['1776', '1929', '1944', '1971', '2008', '2020', '2022'].includes(event.year));
+const historyLead = featuredTimeline[0];
+const historyBriefs = featuredTimeline.slice(1);
 
 export default function Home() {
   return (
@@ -99,10 +101,23 @@ export default function Home() {
           <div><span>财经简史</span><h2>把今天，放回历史里理解。</h2></div>
           <p>财经制度往往是在危机后被重新设计。沿着时间轴看思想、技术、政策与市场如何彼此塑造。</p>
         </div>
-        <div className="history-line">
-          {featuredTimeline.map((event) => <a href={`/timeline/${event.year}/`} key={event.year}><header><span>{event.year}</span><ActionArrow /></header><small>{event.kind}</small><h3>{event.title}</h3><p>{event.impact}</p></a>)}
+        <div className="history-editorial">
+          {historyLead && (
+            <a className="history-feature" href={`/timeline/${historyLead.year}/`}>
+              <header><small>{historyLead.kind}</small><ActionArrow /></header>
+              <div><span>{historyLead.year}</span><h3>{historyLead.title}</h3><p>{historyLead.impact}</p></div>
+            </a>
+          )}
+          <div className="history-brief-grid">
+            {historyBriefs.map((event) => (
+              <a className="history-brief" href={`/timeline/${event.year}/`} key={event.year}>
+                <header><span>{event.year}</span><small>{event.kind}</small><ActionArrow /></header>
+                <h3>{event.title}</h3><p>{event.impact}</p>
+              </a>
+            ))}
+          </div>
         </div>
-        <a className="dark-wide-link" href="/timeline/"><span>打开财经发展简史</span><ActionArrow /></a>
+        <a className="history-more-link" href="/timeline/"><span>浏览完整财经简史</span><ActionArrow /></a>
       </section>
 
       <section className="resource-network">

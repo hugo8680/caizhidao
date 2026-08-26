@@ -1,9 +1,5 @@
 <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <path d="M5 15C5 8.925 9.925 4 16 4H48C54.075 4 59 8.925 59 15V49C59 55.075 54.075 60 48 60H16C9.925 60 5 55.075 5 49V15Z" fill="#153F35"/>
-  <path d="M5 15C5 8.925 9.925 4 16 4H18V60H16C9.925 60 5 55.075 5 49V15Z" fill="#D2A455"/>
-  <circle cx="58" cy="59" r="10" fill="#D2A455"/>
-  <text x="30" y="43" fill="#FFFAF0" font-family="Songti SC, STSong, serif" font-size="31" font-weight="700" text-anchor="middle">财</text>
-  <rect x="45" y="40" width="3" height="8" rx="1.5" fill="#E1BD72" fill-opacity="0.7"/>
-  <rect x="50" y="35" width="3" height="13" rx="1.5" fill="#E1BD72" fill-opacity="0.85"/>
-  <rect x="55" y="29" width="3" height="19" rx="1.5" fill="#E1BD72"/>
+  <circle cx="31" cy="31" r="27" fill="#173F36"/>
+  <text x="31" y="42" fill="#FFF9EE" font-family="Songti SC, STSong, serif" font-size="30" font-weight="700" text-anchor="middle">财</text>
+  <circle cx="53" cy="52" r="6" fill="#C8954D"/>
 </svg>
