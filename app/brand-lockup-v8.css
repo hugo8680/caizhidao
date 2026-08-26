@@ -1,0 +1,78 @@
+/* Desktop uses the complete name as one logo. Mobile switches to a compact 财 mark. */
+
+body .site-chrome .platform-brand {
+  width: max-content;
+  min-width: 0;
+  gap: 0;
+  text-decoration: none;
+}
+
+body .site-chrome .brand-desktop-wordmark {
+  width: auto;
+  height: auto;
+  display: block;
+  overflow: visible;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  color: var(--cz-green-deep);
+  font: 760 28px/.92 var(--cz-serif);
+  letter-spacing: .12em;
+  text-rendering: geometricPrecision;
+  white-space: nowrap;
+  transform: translateY(-1px);
+}
+
+body .site-chrome .platform-brand.active .brand-desktop-wordmark,
+body .site-chrome .platform-brand:hover .brand-desktop-wordmark {
+  background: transparent;
+  box-shadow: none;
+  color: #102f29;
+  transform: translateY(-1px);
+}
+
+body .site-chrome .brand-mobile-mark { display: none; }
+
+body .site-chrome .platform-brand:focus-visible {
+  outline: 2px solid rgba(23, 63, 54, .28);
+  outline-offset: 6px;
+  border-radius: 3px;
+}
+
+@media (max-width: 640px) {
+  body .site-chrome .platform-brand {
+    width: 38px;
+    height: 62px;
+  }
+
+  body .site-chrome .brand-desktop-wordmark { display: none; }
+
+  body .site-chrome .brand-mobile-mark {
+    width: 38px;
+    height: 38px;
+    flex: 0 0 38px;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    border: 0;
+    border-radius: 50%;
+    background: var(--cz-green-deep);
+    box-shadow: inset 0 0 0 1px rgba(229, 197, 124, .42);
+    color: #fffaf0;
+  }
+
+  body .site-chrome .brand-mobile-mark > i {
+    color: inherit;
+    font: normal 730 22px/1 var(--cz-serif);
+    letter-spacing: -.08em;
+    transform: translate(-1px, -1px);
+  }
+
+  body .site-chrome .platform-brand.active .brand-mobile-mark,
+  body .site-chrome .platform-brand:hover .brand-mobile-mark {
+    background: var(--cz-green-deep);
+    box-shadow: inset 0 0 0 1px rgba(229, 197, 124, .42);
+    transform: none;
+  }
+}
