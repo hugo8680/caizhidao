@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 import { toolCatalog } from '@/lib/tool-catalog';
 import { GlobalSearch } from './global-search';
 import { HeaderIcon, type HeaderIconName } from './header-icon';
+import { ActionArrow } from './action-arrow';
 
 type NavItem = {
   key: string;
@@ -104,7 +105,10 @@ export function SiteHeader() {
     <div className={`site-chrome${isHome || isSearch ? ' compact' : ''}${activeGroup ? ` group-${activeGroup.key}` : ''}`}>
       <header className="platform-header">
         <a className={`platform-brand${isHome ? ' active' : ''}`} href="/" aria-label="财知道首页" aria-current={isHome ? 'page' : undefined}>
-          <span className="brand-emblem" aria-hidden="true"><i>财</i></span>
+          <span className="brand-emblem" aria-hidden="true">
+            <i>财</i>
+            <span className="brand-ledger"><em /><em /><em /></span>
+          </span>
           <span className="brand-wordmark"><b>财知道</b><small>财经 · 金融 · 经济学知识库</small></span>
         </a>
 
@@ -152,7 +156,7 @@ export function SiteHeader() {
         </nav>
 
         <div className="header-actions">
-          <a className={`start-entry${pathname === beginnerHref ? ' active' : ''}`} href={beginnerHref}>从零开始</a>
+          <a className={`start-entry${pathname === beginnerHref ? ' active' : ''}`} href={beginnerHref}><span>从零开始</span><ActionArrow /></a>
           <GlobalSearch active={isSearch} />
         </div>
       </header>

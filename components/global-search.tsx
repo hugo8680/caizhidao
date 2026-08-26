@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState, type KeyboardEvent as ReactKeyboardEvent } from 'react';
 import { searchContent } from '@/lib/search';
+import { ActionArrow } from './action-arrow';
 import { HeaderIcon } from './header-icon';
 
 export function GlobalSearch({ active = false }: { active?: boolean }) {
@@ -69,12 +70,12 @@ export function GlobalSearch({ active = false }: { active?: boolean }) {
                 <a href={record.href} key={record.id}>
                   <span>{record.kind}</span>
                   <div><b>{record.title}</b><small>{record.english}</small><p>{record.description}</p></div>
-                  <i>↗</i>
+                  <ActionArrow />
                 </a>
               ))}
             {query && results.length === 0 && <p className="search-empty">没有找到相关内容。可以试试“现金流”“ETF”或“通胀”这样的短词。</p>}
             </div>
-          <footer><a href={`/search/?q=${encodeURIComponent(query)}`}>查看全部结果 →</a></footer>
+          <footer><a href={`/search/?q=${encodeURIComponent(query)}`}><span>查看全部结果</span><ActionArrow /></a></footer>
           </section>
         </div>
       )}

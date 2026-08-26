@@ -1,4 +1,6 @@
 import { ConceptVisual } from '@/components/concept-visual';
+import { ActionArrow } from '@/components/action-arrow';
+import { HeaderIcon } from '@/components/header-icon';
 import { knowledgeTerms } from '@/lib/content';
 import {
   disciplines,
@@ -25,11 +27,14 @@ export default function Home() {
           <p className="science-kicker"><span>财知道</span> 财经 · 金融 · 经济学知识库</p>
           <h1>从一个问题开始，<br /><em>看懂钱、市场与经济。</em></h1>
           <p className="science-lead">需要查一个名词、补一门课程，或梳理一整套知识，都可以从这里开始。</p>
-          <div className="science-actions"><a href="/courses/finance-foundations/">从零开始学习 <span>→</span></a><a href="/search/">我想查一个概念</a></div>
-          <div className="question-seeds"><span>从问题出发</span><a href="/search/?q=通胀">物价为什么会上涨？</a><a href="/search/?q=利率">加息影响了谁？</a><a href="/search/?q=股票">股票到底是什么？</a></div>
+          <div className="science-actions">
+            <a href="/courses/finance-foundations/"><span>从零开始学习</span><ActionArrow /></a>
+            <a className="science-search-action" href="/search/"><HeaderIcon name="search" /><span>我想查一个概念</span></a>
+          </div>
+          <div className="question-seeds"><a href="/search/?q=通胀">物价为什么会上涨？</a><a href="/search/?q=利率">加息影响了谁？</a><a href="/search/?q=股票">股票到底是什么？</a></div>
         </div>
         <aside className="system-board">
-          <header><span>从这里认识财经世界</span><b>知识体系总览</b></header>
+          <header><span>从这里认识财经世界</span></header>
           <div className="system-core"><i /><div><small>一切经济问题的起点</small><strong>稀缺之下<br />如何选择？</strong></div></div>
           <div className="discipline-grid">
             {disciplines.map((discipline) => <a href={`/atlas/${discipline.slug}/`} key={discipline.slug}><span>{discipline.no}</span><b>{discipline.name}</b><small>{discipline.en}</small></a>)}
@@ -49,11 +54,11 @@ export default function Home() {
               <h3>{discipline.name}</h3>
               <b>{discipline.question}</b>
               <p>{discipline.summary}</p>
-              <footer><span>查看学科索引</span><i>↗</i></footer>
+              <footer><span>查看学科索引</span><ActionArrow /></footer>
             </a>
           ))}
         </div>
-        <a className="section-wide-link" href="/atlas/"><span>打开完整知识地图</span><i>→</i></a>
+        <a className="section-wide-link" href="/atlas/"><span>打开完整知识地图</span><ActionArrow /></a>
       </section>
 
       <section className="question-lab">
@@ -65,7 +70,7 @@ export default function Home() {
           {popularQuestions.map((item, index) => (
             <a href={item.href} key={item.question}>
               <header><span>{String(index + 1).padStart(2, '0')}</span><small>{item.domain}</small></header>
-              <h3>{item.question}</h3><p>{item.answer}</p><b>查看相关解释 →</b>
+              <h3>{item.question}</h3><p>{item.answer}</p><b><span>查看相关解释</span><ActionArrow /></b>
             </a>
           ))}
         </div>
@@ -79,14 +84,14 @@ export default function Home() {
         <div className="route-grid">
           {learningRoutes.map((route) => (
             <a href={`/topics/${route.slug}/`} key={route.slug}>
-              <header><span>{route.no}</span><small>{route.minutes} 分钟 · 5 个节点</small></header>
+              <header><span>{route.no}</span><small>预计学习时长 {route.minutes} 分钟</small></header>
               <h3>{route.title}</h3><h4>{route.en}</h4><b>{route.question}</b><p>{route.description}</p>
-              <ol>{route.steps.slice(0, 3).map((step) => <li key={step.title}>{step.title}</li>)}</ol>
-              <footer><span>查看完整路线</span><i>→</i></footer>
+              <ol>{route.steps.slice(0, 3).map((step, index) => <li key={step.title}><span>{index + 1}</span>{step.title}</li>)}</ol>
+              <footer><span>查看完整路线</span><ActionArrow /></footer>
             </a>
           ))}
         </div>
-        <a className="section-wide-link" href="/topics/"><span>浏览全部专题路线</span><i>→</i></a>
+        <a className="section-wide-link" href="/topics/"><span>浏览全部专题路线</span><ActionArrow /></a>
       </section>
 
       <section className="history-preview">
@@ -95,9 +100,9 @@ export default function Home() {
           <p>财经制度往往是在危机后被重新设计。沿着时间轴看思想、技术、政策与市场如何彼此塑造。</p>
         </div>
         <div className="history-line">
-          {featuredTimeline.map((event) => <a href={`/timeline/${event.year}/`} key={event.year}><span>{event.year}</span><i /><small>{event.kind}</small><h3>{event.title}</h3><p>{event.impact}</p></a>)}
+          {featuredTimeline.map((event) => <a href={`/timeline/${event.year}/`} key={event.year}><header><span>{event.year}</span><ActionArrow /></header><small>{event.kind}</small><h3>{event.title}</h3><p>{event.impact}</p></a>)}
         </div>
-        <a className="dark-wide-link" href="/timeline/"><span>打开财经发展简史</span><i>→</i></a>
+        <a className="dark-wide-link" href="/timeline/"><span>打开财经发展简史</span><ActionArrow /></a>
       </section>
 
       <section className="resource-network">
@@ -106,12 +111,12 @@ export default function Home() {
           <p>想查名词可以看百科，想从头学可以选课程，遇到复利、贷款或估值问题可以直接打开计算器。书和视频放在后面，方便继续深入。</p>
         </div>
         <div className="resource-layer-grid">
-          {resourceLayers.map((layer) => <a href={layer.href} key={layer.no}><header><span>{layer.no}</span><small>{layer.label}</small></header><h3>{layer.title}</h3><p>{layer.text}</p><b>打开看看 →</b></a>)}
+          {resourceLayers.map((layer) => <a href={layer.href} key={layer.no}><header><span>{layer.no}</span><small>{layer.label}</small></header><h3>{layer.title}</h3><p>{layer.text}</p><b><span>打开看看</span><ActionArrow /></b></a>)}
         </div>
       </section>
 
       <section className="concept-preview">
-        <div className="platform-section-title"><div><span>图解百科</span><h2>概念、公式与例证</h2></div><a href="/knowledge/">浏览全部百科词条 →</a></div>
+        <div className="platform-section-title"><div><span>图解百科</span><h2>概念、公式与例证</h2></div><a href="/knowledge/"><span>浏览全部百科词条</span><ActionArrow /></a></div>
         <div className="concept-preview-grid">
           {knowledgeTerms.slice(0, 4).map((term) => <a href={`/knowledge/${term.slug}/`} key={term.slug}><ConceptVisual type={term.visual} label={term.zh} /><span>{term.category}</span><h3>{term.zh}</h3><small>{term.en}</small><p>{term.summary}</p></a>)}
         </div>
