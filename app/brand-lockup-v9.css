@@ -1,4 +1,4 @@
-/* Desktop uses the complete name as one logo. Mobile switches to a compact 财 mark. */
+/* Desktop: one complete 财知道 wordmark with its original knowledge-base subtitle. */
 
 body .site-chrome .platform-brand {
   width: max-content;
@@ -7,29 +7,61 @@ body .site-chrome .platform-brand {
   text-decoration: none;
 }
 
-body .site-chrome .brand-desktop-wordmark {
+body .site-chrome .brand-desktop-lockup {
   width: auto;
   height: auto;
-  display: block;
+  display: grid;
+  gap: 7px;
   overflow: visible;
   border: 0;
   border-radius: 0;
   background: transparent;
   box-shadow: none;
-  color: var(--cz-green-deep);
-  font: 760 28px/.92 var(--cz-serif);
-  letter-spacing: .12em;
-  text-rendering: geometricPrecision;
-  white-space: nowrap;
   transform: translateY(-1px);
 }
 
-body .site-chrome .platform-brand.active .brand-desktop-wordmark,
-body .site-chrome .platform-brand:hover .brand-desktop-wordmark {
+body .site-chrome .brand-desktop-lockup > strong {
+  display: block;
+  color: #1c3430;
+  font: 760 27px/.82 var(--cz-serif);
+  letter-spacing: .12em;
+  text-rendering: geometricPrecision;
+  white-space: nowrap;
+}
+
+body .site-chrome .brand-desktop-lockup > strong::first-letter {
+  color: var(--cz-green-deep);
+}
+
+body .site-chrome .brand-desktop-lockup > small {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #6c7b77;
+  font: 620 9px/1 var(--cz-sans);
+  letter-spacing: .055em;
+  white-space: nowrap;
+}
+
+body .site-chrome .brand-desktop-lockup > small > i {
+  width: 3px;
+  height: 3px;
+  flex: 0 0 3px;
+  display: block;
+  border-radius: 50%;
+  background: #bd8640;
+}
+
+body .site-chrome .platform-brand.active .brand-desktop-lockup,
+body .site-chrome .platform-brand:hover .brand-desktop-lockup {
+  border: 0;
   background: transparent;
   box-shadow: none;
-  color: #102f29;
   transform: translateY(-1px);
+}
+
+body .site-chrome .platform-brand:hover .brand-desktop-lockup > strong {
+  color: var(--cz-green-deep);
 }
 
 body .site-chrome .brand-mobile-mark { display: none; }
@@ -46,7 +78,7 @@ body .site-chrome .platform-brand:focus-visible {
     height: 62px;
   }
 
-  body .site-chrome .brand-desktop-wordmark { display: none; }
+  body .site-chrome .brand-desktop-lockup { display: none; }
 
   body .site-chrome .brand-mobile-mark {
     width: 38px;

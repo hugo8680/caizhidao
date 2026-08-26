@@ -105,7 +105,10 @@ export function SiteHeader() {
     <div className={`site-chrome${isHome || isSearch ? ' compact' : ''}${activeGroup ? ` group-${activeGroup.key}` : ''}`}>
       <header className="platform-header">
         <a className={`platform-brand${isHome ? ' active' : ''}`} href="/" aria-label="财知道首页" aria-current={isHome ? 'page' : undefined}>
-          <span className="brand-desktop-wordmark" aria-hidden="true">财知道</span>
+          <span className="brand-desktop-lockup" aria-hidden="true">
+            <strong>财知道</strong>
+            <small><span>财经</span><i /><span>金融</span><i /><span>经济学知识库</span></small>
+          </span>
           <span className="brand-mobile-mark" aria-hidden="true"><i>财</i></span>
         </a>
 
