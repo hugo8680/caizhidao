@@ -1,4 +1,4 @@
-/* A separately versioned override keeps dropdown fixes out of stale immutable CSS caches. */
+/* Versioned interface policies prevent stale immutable CSS from reviving retired decoration. */
 body .site-chrome .tool-nav-dropdown a,
 body .site-chrome .tool-nav-dropdown a:hover,
 body .site-chrome .tool-nav-dropdown a:focus,

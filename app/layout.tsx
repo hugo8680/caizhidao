@@ -3,7 +3,7 @@ import { SiteFooter } from '@/components/site-footer';
 import { SiteHeader } from '@/components/site-header';
 import './globals.css';
 import './editorial-system.css';
-import './navigation-dropdown-v2.css';
+import './interface-policies-v3.css';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://caizhidao.yrchr.com'),
