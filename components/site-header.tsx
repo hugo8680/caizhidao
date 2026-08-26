@@ -21,11 +21,11 @@ type NavGroup = {
   items: NavItem[];
 };
 
-const beginnerHref = '/courses/finance-foundations/';
+const beginnerHref = '/courses/start/';
 
 const navGroups: NavGroup[] = [
   {
-    key: 'learn', label: '学习', icon: 'learn', href: '/courses/',
+    key: 'learn', label: '学习', icon: 'learn', href: beginnerHref,
     items: [
       { key: 'beginner', label: '新手入门', href: beginnerHref },
       { key: 'courses', label: '系统课程', href: '/courses/' },

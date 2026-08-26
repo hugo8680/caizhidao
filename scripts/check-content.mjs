@@ -8,8 +8,7 @@ const bundled = await build({
       "export { atlasTopicArticles } from './lib/atlas-topic-articles.ts';",
       "export { getAtlasTopicProfiles } from './lib/atlas-content.ts';",
       "export { disciplines, learningRoutes, timelineEvents } from './lib/system.ts';",
-      "export { courses } from './lib/courses.ts';",
-      "export { buildLessonGuide } from './lib/course-guides.ts';",
+      "export { courses, plannedCourses } from './lib/courses.ts';",
       "export { books, videos, toolCatalog } from './lib/library.ts';",
       "export { getBookGuide, getVideoGuide } from './lib/library-guides.ts';",
       "export { toolGuides } from './lib/guides.ts';",
@@ -71,14 +70,27 @@ if (data.knowledgeTerms.length !== 51) problems.push(`百科词条应为 51，�
 let lessonCount = 0;
 for (const course of data.courses) {
   if (course.lessons.length !== 8) problems.push(`课程应有 8 节：${course.slug}`);
-  for (const lesson of course.lessons) {
+  if (!course.audience || !course.prerequisite || !course.method) problems.push(`课程缺少教学说明：${course.slug}`);
+  const lessonSlugs = new Set();
+  for (const [lessonIndex, lesson] of course.lessons.entries()) {
     lessonCount += 1;
-    const guide = data.buildLessonGuide(course, lesson);
-    if (guide.why === lesson.summary) problems.push(`课程章节仍使用通用说明：${course.slug}/${lesson.id}`);
-    if (guide.english.length < 30 || guide.why.length < 45 || guide.example.length < 40) problems.push(`课程章节解释过短：${course.slug}/${lesson.id}`);
-    if (guide.misconceptions.length < 1 || guide.exerciseHint.length < 35) problems.push(`课程章节缺少误区或练习：${course.slug}/${lesson.id}`);
+    const key = `${course.slug}/${lesson.slug}`;
+    if (lesson.id !== lessonIndex + 1) problems.push(`课程课号不连续：${key}`);
+    if (!lesson.slug || lessonSlugs.has(lesson.slug)) problems.push(`课程课时 slug 缺失或重复：${key}`);
+    lessonSlugs.add(lesson.slug);
+    if (JSON.stringify(lesson).length < 2500) problems.push(`课程正文仍然过短：${key}`);
+    if (lesson.objectives.length < 3 || lesson.sections.length < 2) problems.push(`课程缺少目标或系统解释：${key}`);
+    if (lesson.sections.some((section) => section.paragraphs.length < 2)) problems.push(`课程章节论述不足：${key}`);
+    if (lesson.mechanism.length < 4) problems.push(`课程缺少完整作用机制：${key}`);
+    if (!lesson.formula || lesson.formula.variables.length < 3 || lesson.formula.conditions.length < 3) problems.push(`课程缺少公式变量或使用条件：${key}`);
+    if (lesson.example.steps.length < 3 || lesson.example.conclusion.length < 20) problems.push(`课程缺少完整案例：${key}`);
+    if (lesson.misconceptions.length < 3 || lesson.checklist.length < 5) problems.push(`课程缺少误区辨析或决策清单：${key}`);
+    if (lesson.terms.length < 4 || lesson.exercises.length < 3 || lesson.sources.length < 3) problems.push(`课程缺少术语、练习或资料来源：${key}`);
   }
 }
+
+if (data.plannedCourses.length !== 5) problems.push(`后续课程计划应为 5 门，当前为 ${data.plannedCourses.length} 门`);
+if (data.plannedCourses.some((course) => 'lessons' in course || 'duration' in course)) problems.push('未开放课程不应包含虚假课时或时长');
 
 for (const tool of data.toolCatalog) {
   const guide = data.toolGuides[tool.id];
@@ -106,7 +118,8 @@ for (const route of data.learningRoutes) {
   if (route.steps.length < 4 || route.steps.some((step) => step.explanation.length < 35 || step.example.length < 20)) problems.push(`专题路线不完整：${route.slug}`);
 }
 
-if (data.courses.length !== 8 || lessonCount !== 64) problems.push(`课程应为 8 门 64 节，当前为 ${data.courses.length} 门 ${lessonCount} 节`);
+if (data.courses.length !== 3 || lessonCount !== 24) problems.push(`已开放课程应为 3 门 24 节，当前为 ${data.courses.length} 门 ${lessonCount} 节`);
+if (data.searchRecords.some((record) => data.plannedCourses.some((course) => record.href === `/courses/${course.slug}/`))) problems.push('搜索索引不应把未开放课程当作可学习课程');
 if (data.toolCatalog.length !== 12) problems.push(`金融小工具应为 12 个，当前为 ${data.toolCatalog.length}`);
 if (data.books.length !== 16) problems.push(`图书应为 16 本，当前为 ${data.books.length}`);
 if (data.videos.length !== 12) problems.push(`视频课程应为 12 个，当前为 ${data.videos.length}`);
@@ -120,5 +133,5 @@ if (problems.length > 0) {
   console.error(problems.join('\n'));
   process.exitCode = 1;
 } else {
-  console.log(`Content audit passed: ${data.knowledgeTerms.length} encyclopedia articles, ${topicCount} topic articles, ${data.courses.length} courses/${lessonCount} lessons, ${data.toolCatalog.length} tools, ${data.books.length} books, ${data.videos.length} videos, ${data.timelineEvents.length} history entries, ${data.learningRoutes.length} study routes, ${data.searchRecords.length} search records.`);
+  console.log(`Content audit passed: ${data.knowledgeTerms.length} encyclopedia articles, ${topicCount} topic articles, ${data.courses.length} open courses/${lessonCount} complete lessons, ${data.plannedCourses.length} planned courses, ${data.toolCatalog.length} tools, ${data.books.length} books, ${data.videos.length} videos, ${data.timelineEvents.length} history entries, ${data.learningRoutes.length} study routes, ${data.searchRecords.length} search records.`);
 }

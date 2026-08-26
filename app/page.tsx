@@ -11,7 +11,7 @@ import {
 
 const resourceLayers = [
   { no: '01', title: '百科词条', label: '查一个概念', text: '专业定义、作用机制、公式、可复算例子与常见误解。', href: '/knowledge/' },
-  { no: '02', title: '系统课程', label: '按顺序学习', text: '从零基础到报表、估值、宏观、组合与全球风险。', href: '/courses/' },
+  { no: '02', title: '系统课程', label: '按顺序学习', text: '先学金融通识、个人财务与投资产品三门完整入门课。', href: '/courses/' },
   { no: '03', title: '金融小工具', label: '动手算一算', text: '把复利、贷款、退休、债券与估值变成可计算问题。', href: '/tools/compound/' },
   { no: '04', title: '财经图书', label: '继续阅读', text: '汇总中英文版本、作者、出版社、ISBN、价格与购买入口。', href: '/books/' },
   { no: '05', title: '公开课程', label: '中文与英文', text: '连接国内高校、Yale、MIT、Coursera 与专业机构资源。', href: '/videos/' },
@@ -30,7 +30,7 @@ export default function Home() {
           <h1>从一个问题开始，<br /><em>看懂钱、市场与经济。</em></h1>
           <p className="science-lead">需要查一个名词、补一门课程，或梳理一整套知识，都可以从这里开始。</p>
           <div className="science-actions">
-            <a href="/courses/finance-foundations/"><span>从零开始学习</span><ActionArrow /></a>
+            <a href="/courses/start/"><span>从零开始学习</span><ActionArrow /></a>
             <a className="science-search-action" href="/search/"><HeaderIcon name="search" /><span>我想查一个概念</span></a>
           </div>
           <div className="question-seeds"><a href="/search/?q=通胀">物价为什么会上涨？</a><a href="/search/?q=利率">加息影响了谁？</a><a href="/search/?q=股票">股票到底是什么？</a></div>
