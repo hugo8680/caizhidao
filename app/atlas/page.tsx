@@ -13,7 +13,7 @@ export default function AtlasPage() {
     <main className="atlas-map-page">
       <section className="atlas-map-intro">
         <div><p>知识结构索引</p><h1>财经知识地图</h1></div>
-        <p>十二个学科依次展开为四十八个主题，每个主题列出核心概念与英文名称。可以直接进入词条，也可以先看一组概念如何共同解释同一个问题。</p>
+        <p>十二个学科展开为四十八篇主题文章。每篇围绕一个真实经济问题，说明五个核心概念的定义、关系、证据和适用边界。</p>
       </section>
 
       <section className="atlas-map-directory">
@@ -37,19 +37,13 @@ export default function AtlasPage() {
                   <section className="atlas-map-topic" key={topic.title}>
                     <header>
                       <span>{String(topicIndex + 1).padStart(2, '0')}</span>
-                      <div><h3>{topic.title}</h3><small>{topic.en}</small></div>
+                      <div><h3><a href={`/atlas/${discipline.slug}/topic/${String(topicIndex + 1).padStart(2, '0')}/`}>{topic.title}</a></h3><small>{topic.en}</small></div>
                     </header>
                     <p>{topic.summary}</p>
                     <ul>
-                      {concepts.map((concept) => (
-                        <li key={concept.id}>
-                          <a href={`/atlas/${discipline.slug}/${concept.id}/`}>
-                            <span><b>{concept.name}</b><small>{concept.en}</small></span>
-                            <ActionArrow />
-                          </a>
-                        </li>
-                      ))}
+                      {concepts.map((concept) => <li key={concept.id}><span><b>{concept.name}</b><small>{concept.en}</small></span></li>)}
                     </ul>
+                    <a className="atlas-map-topic-read" href={`/atlas/${discipline.slug}/topic/${String(topicIndex + 1).padStart(2, '0')}/`}><span>阅读主题文章</span><ActionArrow /></a>
                   </section>
                 );
               })}

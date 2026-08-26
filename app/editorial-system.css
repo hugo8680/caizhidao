@@ -2234,7 +2234,9 @@ body .footer-bottom { margin-top: 42px; padding-top: 17px; display: flex; justif
   body .question-lab,
   body .history-preview { padding: 58px 18px; }
 
-  body .home-section-head { grid-template-columns: 1fr; gap: 14px; }
+  body .home-section-head,
+  body .home-section-head.light,
+  body .home-section-head.dark { grid-template-columns: 1fr; gap: 14px; }
   body .home-section-head > p { max-width: 650px; }
 
   body .catalog-head,

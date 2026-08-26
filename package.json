@@ -6,8 +6,13 @@
     "node": ">=22.13.0"
   },
   "scripts": {
+    "predev": "npm run build:search",
     "dev": "vinext dev",
+    "build:search": "node scripts/build-search-index.mjs",
+    "check:content": "node scripts/check-content.mjs",
+    "prebuild": "npm run build:search",
     "build": "vinext build",
+    "prebuild:static": "npm run build:search",
     "build:static": "STATIC_EXPORT=1 next build",
     "start": "vinext start",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next"

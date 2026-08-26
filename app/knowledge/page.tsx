@@ -5,14 +5,14 @@ import { getKnowledgeCategoryByName } from '@/lib/guides';
 
 export const metadata: Metadata = {
   title: '财经知识库 · 财知道',
-  description: '中英双语财经名词解释、概念图解、公式与学习趣闻。',
+  description: '专业、通俗的财经名词解释，包含作用机制、公式、可复算案例、现实分析、概念辨析与参考资料。',
 };
 
 export default function KnowledgePage() {
   return (
     <main>
       <section className="reference-index-head">
-        <div><span>百科词条</span><h1>财经知识库</h1><p>按主题查找名词解释、英文释义、公式、例子和常见误区。</p></div>
+        <div><span>百科词条</span><h1>财经知识库</h1><p>按主题查找专业定义、作用机制、公式、现实案例、概念辨析与参考资料。</p></div>
       </section>
       <section className="knowledge-layout">
         <aside><span>主题分类</span>{knowledgeCategories.map((category) => {

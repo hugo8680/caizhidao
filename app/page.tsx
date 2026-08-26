@@ -10,7 +10,7 @@ import {
 } from '@/lib/system';
 
 const resourceLayers = [
-  { no: '01', title: '百科词条', label: '查一个概念', text: '中英双语解释、概念图、公式、例子与相关知识。', href: '/knowledge/' },
+  { no: '01', title: '百科词条', label: '查一个概念', text: '专业定义、作用机制、公式、可复算例子与常见误解。', href: '/knowledge/' },
   { no: '02', title: '系统课程', label: '按顺序学习', text: '从零基础到报表、估值、宏观、组合与全球风险。', href: '/courses/' },
   { no: '03', title: '金融小工具', label: '动手算一算', text: '把复利、贷款、退休、债券与估值变成可计算问题。', href: '/tools/compound/' },
   { no: '04', title: '财经图书', label: '继续阅读', text: '汇总中英文版本、作者、出版社、ISBN、价格与购买入口。', href: '/books/' },
@@ -46,7 +46,7 @@ export default function Home() {
 
       <section className="home-system" id="system">
         <div className="home-section-head light">
-          <div><span>知识全景</span><h2>先建立坐标，再深入细节。</h2></div>
+          <div><span>学科地图</span><h2>先理解学科关系，再逐步深入。</h2></div>
           <p>经济学研究选择，金融学关心资金和风险，会计记录企业发生了什么。它们彼此相连：利率会改变融资，融资会影响经营，经营结果又会写进财报。</p>
         </div>
         <div className="home-discipline-grid">
@@ -131,7 +131,7 @@ export default function Home() {
       </section>
 
       <section className="concept-preview">
-        <div className="platform-section-title"><div><span>图解百科</span><h2>概念、公式与例证</h2></div><a href="/knowledge/"><span>浏览全部百科词条</span><ActionArrow /></a></div>
+        <div className="platform-section-title"><div><span>百科精选</span><h2>定义、机制、公式与例证</h2></div><a href="/knowledge/"><span>浏览全部百科词条</span><ActionArrow /></a></div>
         <div className="concept-preview-grid">
           {knowledgeTerms.slice(0, 4).map((term) => <a href={`/knowledge/${term.slug}/`} key={term.slug}><ConceptVisual type={term.visual} label={term.zh} /><span>{term.category}</span><h3>{term.zh}</h3><small>{term.en}</small><p>{term.summary}</p></a>)}
         </div>

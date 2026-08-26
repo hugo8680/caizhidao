@@ -1,16 +1,18 @@
 'use client';
 
 import { useEffect, useMemo, useRef, useState, type KeyboardEvent as ReactKeyboardEvent } from 'react';
-import { searchContent } from '@/lib/search';
+import { searchContent } from '@/lib/search-ranking';
 import { ActionArrow } from './action-arrow';
 import { HeaderIcon } from './header-icon';
+import { useSearchIndex } from './use-search-index';
 
 export function GlobalSearch({ active = false }: { active?: boolean }) {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState('');
   const triggerRef = useRef<HTMLButtonElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-  const results = useMemo(() => searchContent(query).slice(0, 8), [query]);
+  const { records, loading, failed } = useSearchIndex(open);
+  const results = useMemo(() => searchContent(records, query).slice(0, 8), [records, query]);
 
   useEffect(() => {
     const handleKey = (event: KeyboardEvent) => {
@@ -66,6 +68,8 @@ export function GlobalSearch({ active = false }: { active?: boolean }) {
               <button type="button" onClick={() => setOpen(false)}>关闭</button>
             </div>
             <div className="search-dialog-results">
+              {loading && <p className="search-empty">正在载入知识索引…</p>}
+              {failed && <p className="search-empty">搜索索引暂时无法载入，请稍后重试。</p>}
               {results.map(({ record }) => (
                 <a href={record.href} key={record.id}>
                   <span>{record.kind}</span>
@@ -73,7 +77,7 @@ export function GlobalSearch({ active = false }: { active?: boolean }) {
                   <ActionArrow />
                 </a>
               ))}
-            {query && results.length === 0 && <p className="search-empty">没有找到相关内容。可以试试“现金流”“ETF”或“通胀”这样的短词。</p>}
+            {!loading && !failed && query && results.length === 0 && <p className="search-empty">没有找到相关内容。可以试试“现金流”“ETF”或“通胀”这样的短词。</p>}
             </div>
           <footer><a href={`/search/?q=${encodeURIComponent(query)}`}><span>查看全部结果</span><ActionArrow /></a></footer>
           </section>

@@ -3,7 +3,7 @@ import { timelineEvents } from '@/lib/system';
 
 export const metadata: Metadata = {
   title: '财经发展简史 · 财知道',
-  description: '从 1776 年到现代，用思想、制度、危机、市场、技术与政策节点理解财经世界如何形成。',
+  description: '从 1776 年到现代，沿思想、制度、危机、市场、技术与政策变化理解财经世界如何形成。',
 };
 
 export default function TimelinePage() {

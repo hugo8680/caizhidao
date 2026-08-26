@@ -235,7 +235,7 @@ export const timelineEvents = [
   { year: '1776', title: '《国富论》出版', kind: '思想', description: '亚当·斯密系统讨论分工、交换与市场秩序。', impact: '经济学开始形成独立的分析传统。' },
   { year: '1848', title: '《政治经济学原理》出版', kind: '思想', description: '约翰·斯图亚特·密尔整理古典经济学并讨论分配与制度。', impact: '生产规律与分配制度被更清晰地区分。' },
   { year: '1871', title: '边际革命', kind: '思想', description: '杰文斯、门格尔等用边际效用重新解释价值和价格。', impact: '现代微观经济学的核心工具逐渐成形。' },
-  { year: '1913', title: '美国联邦储备体系成立', kind: '制度', description: '美国建立更系统的中央银行与最后贷款人安排。', impact: '现代央行体系的重要制度节点。' },
+  { year: '1913', title: '美国联邦储备体系成立', kind: '制度', description: '美国建立更系统的中央银行与最后贷款人安排。', impact: '现代央行制度形成过程中的重要一步。' },
   { year: '1929', title: '大萧条开始', kind: '危机', description: '股市崩盘、银行倒闭、通缩与失业相互强化。', impact: '改变了宏观政策、金融监管与经济思想。' },
   { year: '1936', title: '《就业、利息和货币通论》', kind: '思想', description: '凯恩斯强调总需求不足可能让经济长期停留在高失业状态。', impact: '现代宏观经济学与逆周期政策兴起。' },
   { year: '1944', title: '布雷顿森林体系', kind: '制度', description: '战后建立以美元与黄金联系为核心的国际货币秩序。', impact: 'IMF 与世界银行等机构由此诞生。' },

@@ -1,0 +1,386 @@
+/* Long-form knowledge articles: quiet, continuous and citation-led. */
+.knowledge-essay-page {
+  background: #f5f3ed;
+  color: #1d2b2d;
+}
+
+.knowledge-essay-header {
+  width: min(900px, calc(100% - 48px));
+  margin: 0 auto;
+  padding: 42px 0 34px;
+}
+
+.knowledge-essay-breadcrumb,
+.knowledge-essay-kicker,
+.knowledge-essay-deck,
+.knowledge-essay-question { margin: 0; }
+
+.knowledge-essay-breadcrumb {
+  color: #76817f;
+  font-size: 12px;
+}
+
+.knowledge-essay-breadcrumb a { color: #37665d; }
+.knowledge-essay-breadcrumb span { margin: 0 8px; color: #a9afac; }
+
+.knowledge-essay-kicker {
+  margin-top: 34px;
+  color: #596d68;
+  font: 500 14px/1.5 Georgia, "Times New Roman", serif;
+}
+
+.knowledge-essay-header h1 {
+  margin: 5px 0 15px;
+  color: #17292b;
+  font: 650 clamp(38px, 5vw, 54px)/1.14 var(--cz-serif, "Songti SC", serif);
+  letter-spacing: -.035em;
+}
+
+.knowledge-essay-deck {
+  margin-top: 13px;
+  max-width: 760px;
+  color: #657370;
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+.knowledge-essay-question {
+  max-width: 780px;
+  color: #314846;
+  font: 600 19px/1.7 var(--cz-serif, "Songti SC", serif);
+}
+
+.knowledge-essay {
+  width: min(900px, calc(100% - 48px));
+  margin: 0 auto;
+  padding: 0 62px 90px;
+  background: #fffefa;
+}
+
+.knowledge-essay > section,
+.knowledge-essay > nav {
+  padding: 42px 0;
+  border-bottom: 1px solid #e0e1dc;
+}
+
+.knowledge-essay > section:last-of-type { border-bottom: 0; }
+
+.knowledge-essay h2 {
+  margin: 0 0 18px;
+  color: #1c3031;
+  font: 650 25px/1.4 var(--cz-serif, "Songti SC", serif);
+  letter-spacing: -.015em;
+}
+
+.knowledge-essay h3 {
+  margin: 0 0 6px;
+  color: #263b3a;
+  font: 650 17px/1.5 var(--cz-serif, "Songti SC", serif);
+}
+
+.knowledge-essay p {
+  margin: 0 0 15px;
+  color: #40504f;
+  font-size: 16px;
+  line-height: 1.95;
+}
+
+.knowledge-essay-thesis {
+  margin: 25px 0 0;
+  padding-left: 20px;
+  border-left: 3px solid #b48a43;
+  color: #283c3a !important;
+  font: 600 16px/1.85 var(--cz-serif, "Songti SC", serif) !important;
+}
+
+.knowledge-essay-sequence,
+.knowledge-essay-calculation,
+.knowledge-essay-misconceptions {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: essay-step;
+}
+
+.knowledge-essay-sequence > li,
+.knowledge-essay-calculation > li,
+.knowledge-essay-misconceptions > li {
+  padding: 17px 0 17px 48px;
+  border-top: 1px solid #e2e3de;
+  color: #40504f;
+  font-size: 15px;
+  line-height: 1.85;
+  position: relative;
+  counter-increment: essay-step;
+}
+
+.knowledge-essay-sequence > li::before,
+.knowledge-essay-calculation > li::before,
+.knowledge-essay-misconceptions > li::before {
+  content: counter(essay-step, decimal-leading-zero);
+  position: absolute;
+  left: 0;
+  top: 19px;
+  color: #8a6a36;
+  font: 600 11px/1.4 Georgia, serif;
+}
+
+.knowledge-essay-sequence p { margin-bottom: 0; font-size: 15px; }
+
+.knowledge-essay-formula {
+  margin-top: 25px;
+  padding: 24px 26px;
+  background: #f3f1ea;
+}
+
+.knowledge-essay-formula > strong {
+  display: block;
+  overflow-wrap: anywhere;
+  color: #203737;
+  font: 600 clamp(18px, 3vw, 24px)/1.55 Georgia, "Times New Roman", serif;
+}
+
+.knowledge-essay-formula > p { margin: 10px 0 15px; font-size: 14px; }
+.knowledge-essay-formula dl { margin: 0; }
+.knowledge-essay-formula dl > div { padding: 8px 0; display: grid; grid-template-columns: 120px 1fr; border-top: 1px solid #d9dad4; }
+.knowledge-essay-formula dt { color: #2b4744; font: 600 13px/1.6 Georgia, serif; }
+.knowledge-essay-formula dd { margin: 0; color: #5d6a68; font-size: 13px; line-height: 1.7; }
+
+.knowledge-essay-conclusion {
+  margin-top: 23px !important;
+  padding: 16px 19px;
+  background: #edf2ee;
+  color: #26443f !important;
+  font-weight: 600;
+}
+
+.knowledge-essay-distinctions { margin: 0; }
+.knowledge-essay-distinctions > div { padding: 16px 0; display: grid; grid-template-columns: 190px 1fr; gap: 24px; border-top: 1px solid #e2e3de; }
+.knowledge-essay-distinctions dt { color: #263d3b; font: 650 15px/1.6 var(--cz-serif, "Songti SC", serif); }
+.knowledge-essay-distinctions dd { margin: 0; color: #4c5b59; font-size: 14px; line-height: 1.8; }
+
+.knowledge-essay-checklist { margin: 0; padding: 0; list-style: none; }
+.knowledge-essay-checklist li { padding: 12px 0 12px 28px; border-top: 1px solid #e2e3de; color: #40504f; font-size: 15px; line-height: 1.75; position: relative; }
+.knowledge-essay-checklist li::before { content: '—'; position: absolute; left: 2px; color: #8a6a36; }
+
+.knowledge-essay-english p {
+  padding-left: 20px;
+  border-left: 2px solid #47766d;
+  color: #354b48;
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+.knowledge-essay-sources > p { color: #687572; font-size: 14px; }
+.knowledge-essay-sources ol { margin: 23px 0 0; padding: 0; list-style: none; }
+.knowledge-essay-sources li { padding: 14px 0; border-top: 1px solid #e2e3de; }
+.knowledge-essay-sources a { color: #2f645b; font-size: 14px; font-weight: 700; }
+.knowledge-essay-sources span { display: block; margin-top: 3px; color: #7b8582; font-size: 12px; }
+.knowledge-essay-sources li p { margin: 7px 0 0; font-size: 13px; line-height: 1.7; }
+
+.knowledge-essay-related { border-top: 2px solid #344d49; border-bottom: 0 !important; }
+.knowledge-essay-related > div { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.knowledge-essay-related > div a { min-width: 0; }
+.knowledge-essay-related b { display: block; color: #203635; font: 650 16px/1.45 var(--cz-serif, "Songti SC", serif); }
+.knowledge-essay-related span { display: block; margin-top: 3px; color: #7b8582; font: 11px/1.5 Georgia, serif; }
+.knowledge-essay-related p { margin: 10px 0 0; color: #5d6a68; font-size: 13px; line-height: 1.7; }
+.knowledge-essay-back { display: inline-block; margin-top: 28px; color: #37665d; font-size: 13px; }
+
+/* The knowledge map now explains five concepts as one economic relationship. */
+.atlas-topic-essay-page {
+  background: #f5f3ed;
+  color: #1d2b2d;
+}
+
+.atlas-topic-essay-header {
+  width: min(900px, calc(100% - 48px));
+  margin: 0 auto;
+  padding: 42px 0 34px;
+}
+
+.atlas-topic-essay-header h1 {
+  margin: 5px 0 13px;
+  color: #17292b;
+  font: 650 clamp(36px, 5vw, 52px)/1.16 var(--cz-serif, "Songti SC", serif);
+  letter-spacing: -.035em;
+}
+
+.atlas-topic-question {
+  max-width: 780px;
+  margin: 0;
+  color: #314846;
+  font: 600 19px/1.7 var(--cz-serif, "Songti SC", serif);
+}
+
+.atlas-topic-summary {
+  max-width: 760px;
+  margin: 13px 0 0;
+  color: #657370;
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+.atlas-topic-essay {
+  width: min(900px, calc(100% - 48px));
+  margin: 0 auto;
+  padding: 0 62px 90px;
+  background: #fffefa;
+}
+
+.atlas-topic-essay > section,
+.atlas-topic-essay > nav {
+  padding: 42px 0;
+  border-bottom: 1px solid #e0e1dc;
+}
+
+.atlas-topic-essay h2 {
+  margin: 0 0 18px;
+  color: #1c3031;
+  font: 650 25px/1.4 var(--cz-serif, "Songti SC", serif);
+  letter-spacing: -.015em;
+}
+
+.atlas-topic-essay h3 {
+  margin: 0;
+  color: #263b3a;
+  font: 650 18px/1.5 var(--cz-serif, "Songti SC", serif);
+}
+
+.atlas-topic-essay p {
+  margin: 0 0 15px;
+  color: #40504f;
+  font-size: 16px;
+  line-height: 1.95;
+}
+
+.atlas-topic-concepts {
+  margin-top: 27px;
+  border-top: 2px solid #344d49;
+}
+
+.atlas-topic-concepts > section {
+  padding: 22px 0;
+  border-bottom: 1px solid #e0e1dc;
+}
+
+.atlas-topic-concepts header {
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  gap: 12px;
+  align-items: start;
+}
+
+.atlas-topic-concepts header > span {
+  padding-top: 4px;
+  color: #8a6a36;
+  font: 600 11px/1.5 Georgia, serif;
+}
+
+.atlas-topic-concepts small {
+  color: #7b8582;
+  font: 11px/1.5 Georgia, "Times New Roman", serif;
+}
+
+.atlas-topic-concepts p {
+  margin: 10px 0 0 56px;
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.atlas-topic-concepts a {
+  display: inline-block;
+  margin: 8px 0 0 56px;
+  color: #37665d;
+  font-size: 13px;
+}
+
+.atlas-topic-back { border-bottom: 0 !important; }
+.atlas-topic-back a { color: #37665d; font-size: 13px; }
+
+body .discipline-topic-copy > p:nth-of-type(2) {
+  margin: -7px 0 18px;
+  color: #7b8582;
+  font-size: 12px !important;
+}
+
+body .discipline-topic-copy > a,
+body .discipline-topic-copy h2 a { color: #2f645b; }
+
+body .atlas-map-topic h3 a { color: #203635; }
+body .atlas-map-topic li > span {
+  padding: 8px 9px;
+  display: block;
+  border-bottom: 1px solid #e2e3de;
+}
+body .atlas-map-topic-read {
+  margin-top: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: #2f645b;
+  font-size: 12px;
+  font-weight: 650;
+}
+body .atlas-map-topic-read .action-arrow { width: 17px; height: 17px; }
+
+.atlas-legacy-redirect {
+  width: min(680px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 70px 0 100px;
+}
+
+.atlas-legacy-redirect > p:first-of-type { color: #7b8582; font-size: 12px; }
+.atlas-legacy-redirect > p:first-of-type span { margin: 0 8px; }
+.atlas-legacy-redirect h1 { margin: 32px 0 14px; font: 650 36px/1.25 var(--cz-serif, "Songti SC", serif); }
+.atlas-legacy-redirect p { color: #4c5b59; font-size: 15px; line-height: 1.85; }
+.atlas-legacy-redirect > a { color: #2f645b; font-weight: 650; }
+
+@media (max-width: 760px) {
+  body .site-chrome .primary-nav {
+    width: calc(100% + 28px) !important;
+    margin-left: -14px !important;
+    padding-inline: 8px !important;
+    display: grid !important;
+    grid-template-columns: .78fr 1fr 1.42fr 1.08fr;
+    gap: 0 !important;
+    overflow-x: hidden !important;
+    box-sizing: border-box;
+  }
+  body .site-chrome .primary-nav > a,
+  body .site-chrome .tool-nav-menu,
+  body .site-chrome .tool-nav-trigger {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    padding-inline: 3px !important;
+    flex: none !important;
+    gap: 4px !important;
+    font-size: 11px !important;
+    white-space: nowrap;
+  }
+  body .site-chrome .primary-nav-icon {
+    width: 14px !important;
+    height: 14px !important;
+    flex-basis: 14px !important;
+  }
+  body .site-chrome .search-entry > span { display: none !important; }
+  .knowledge-essay-header,
+  .knowledge-essay,
+  .atlas-topic-essay-header,
+  .atlas-topic-essay { width: 100%; }
+  .knowledge-essay-header,
+  .atlas-topic-essay-header { padding: 28px 20px 26px; }
+  .knowledge-essay,
+  .atlas-topic-essay { padding: 0 20px 60px; }
+  .knowledge-essay > section,
+  .knowledge-essay > nav,
+  .atlas-topic-essay > section,
+  .atlas-topic-essay > nav { padding: 34px 0; }
+  .knowledge-essay p,
+  .atlas-topic-essay p { font-size: 16px; line-height: 1.9; }
+  .knowledge-essay-formula { padding: 20px 17px; }
+  .knowledge-essay-formula dl > div,
+  .knowledge-essay-distinctions > div { grid-template-columns: 1fr; gap: 3px; }
+  .knowledge-essay-related > div { grid-template-columns: 1fr; }
+  .atlas-topic-concepts p,
+  .atlas-topic-concepts a { margin-left: 0; }
+}

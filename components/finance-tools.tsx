@@ -8,9 +8,9 @@ const initialValues: Record<string, number> = {
   rr: 6, ri: 2.5,
   cs: 10000, ce: 20000, cyears: 5,
   lp: 1000000, lr: 4.1, ly: 30,
-  ep: 200000, er: 4.1, ey: 10, eir: 5,
+  epb: 800000, ep: 200000, er: 4.1, emths: 240, eir: 3, efee: 0,
   sg: 500000, sc: 50000, sr: 5, sy: 8,
-  em: 8000, es: 2, ed: 1,
+  em: 8000, ecov: 6, eextra: 16000, eliquid: 25000,
   ra: 32, rt: 60, re: 10000, rinfl: 2.5, rexist: 200000, rret: 6, rw: 4,
   dfcf: 1000000, dg: 8, dr: 11, dy: 5, dtg: 3, dcash: 2000000, ddebt: 1000000,
   bf: 1000, bc: 3, by: 5, bret: 4,
@@ -32,6 +32,18 @@ function annuityFuture(principal: number, contribution: number, annualRate: numb
   const rate = annualRate / 100 / periods;
   const base = principal * Math.pow(1 + rate, count);
   return base + (rate === 0 ? contribution * count : contribution * ((Math.pow(1 + rate, count) - 1) / rate));
+}
+
+function installmentPayment(principal: number, annualRate: number, months: number) {
+  const count = Math.max(1, Math.round(months));
+  const rate = annualRate / 100 / 12;
+  if (principal <= 0) return 0;
+  return rate === 0 ? principal / count : principal * rate * Math.pow(1 + rate, count) / (Math.pow(1 + rate, count) - 1);
+}
+
+function futureValueOfPayments(payment: number, monthlyRate: number, months: number) {
+  const count = Math.max(1, Math.round(months));
+  return monthlyRate === 0 ? payment * count : payment * ((Math.pow(1 + monthlyRate, count) - 1) / monthlyRate);
 }
 
 type ToolContextValue = {
@@ -60,17 +72,29 @@ export function FinanceTools({ toolId }: { toolId: string }) {
   const realReturn = ((1 + n('rr') / 100) / (1 + n('ri') / 100) - 1) * 100;
   const cagr = n('cs') > 0 && n('cyears') > 0 ? (Math.pow(n('ce') / n('cs'), 1 / n('cyears')) - 1) * 100 : NaN;
   const loanMonths = Math.max(1, Math.round(n('ly') * 12));
-  const loanRate = n('lr') / 100 / 12;
-  const monthlyLoan = loanRate === 0 ? n('lp') / loanMonths : n('lp') * loanRate * Math.pow(1 + loanRate, loanMonths) / (Math.pow(1 + loanRate, loanMonths) - 1);
+  const monthlyLoan = installmentPayment(n('lp'), n('lr'), loanMonths);
   const totalLoanInterest = monthlyLoan * loanMonths - n('lp');
-  const repaySaving = n('ep') * (Math.pow(1 + n('er') / 100, n('ey')) - 1);
-  const investGain = n('ep') * (Math.pow(1 + n('eir') / 100, n('ey')) - 1);
+  const earlyBalance = Math.max(0, n('epb'));
+  const earlyMonths = Math.max(1, Math.round(n('emths')));
+  const earlyPayment = installmentPayment(earlyBalance, n('er'), earlyMonths);
+  const prepayment = Math.min(earlyBalance, Math.max(0, n('ep')));
+  const prepaymentFee = prepayment * Math.max(0, n('efee')) / 100;
+  const reducedBalance = earlyBalance - prepayment;
+  const reducedPayment = installmentPayment(reducedBalance, n('er'), earlyMonths);
+  const monthlyCashReleased = Math.max(0, earlyPayment - reducedPayment);
+  const grossInterestSaved = (earlyPayment * earlyMonths - earlyBalance) - (reducedPayment * earlyMonths - reducedBalance);
+  const feeAdjustedSaving = grossInterestSaved - prepaymentFee;
+  const alternativeMonthlyRate = n('eir') / 100 / 12;
+  const retainedFundsAtEnd = (prepayment + prepaymentFee) * Math.pow(1 + alternativeMonthlyRate, earlyMonths);
+  const prepaidFundsAtEnd = futureValueOfPayments(monthlyCashReleased, alternativeMonthlyRate, earlyMonths);
+  const earlyRepayDifference = Math.abs(retainedFundsAtEnd - prepaidFundsAtEnd);
   const goalMonths = Math.max(1, Math.round(n('sy') * 12));
   const goalRate = n('sr') / 100 / 12;
   const goalFutureCurrent = n('sc') * Math.pow(1 + goalRate, goalMonths);
   const monthlyGoal = Math.max(0, goalRate === 0 ? (n('sg') - n('sc')) / goalMonths : (n('sg') - goalFutureCurrent) * goalRate / (Math.pow(1 + goalRate, goalMonths) - 1));
-  const emergencyMonths = Math.min(12, Math.max(3, Math.round(3 + n('es') * 1.5 + n('ed'))));
-  const emergencyTarget = n('em') * emergencyMonths;
+  const emergencyMonths = Math.min(24, Math.max(0, Math.round(n('ecov'))));
+  const emergencyTarget = Math.max(0, n('em')) * emergencyMonths + Math.max(0, n('eextra'));
+  const emergencyShortfall = Math.max(0, emergencyTarget - Math.max(0, n('eliquid')));
   const retirementYears = Math.max(0, n('rt') - n('ra'));
   const retirementExpense = n('re') * Math.pow(1 + n('rinfl') / 100, retirementYears);
   const retirementTarget = n('rw') > 0 ? retirementExpense * 12 / (n('rw') / 100) : NaN;
@@ -107,11 +131,11 @@ export function FinanceTools({ toolId }: { toolId: string }) {
 
       {toolId === 'loan' && <article className="tool-calc"><CardTitle id="loan" /><div className="tool-fields"><Field id="lp" label="贷款本金" suffix="元" /><Field id="lr" label="年利率" suffix="%" /><Field id="ly" label="贷款期限" suffix="年" /></div><div className="tool-result coral"><span>等额本息月供</span><strong>{money(monthlyLoan)}</strong><p>总利息约 {money(totalLoanInterest)} · 总还款约 {money(monthlyLoan * loanMonths)}</p></div></article>}
 
-      {toolId === 'early-repay' && <article className="tool-calc"><CardTitle id="early-repay" /><div className="tool-fields"><Field id="ep" label="可提前还款金额" suffix="元" /><Field id="er" label="贷款年利率" suffix="%" /><Field id="eir" label="替代投资收益率" suffix="%" /><Field id="ey" label="比较年数" suffix="年" /></div><div className="tool-result"><span>{investGain > repaySaving ? '替代投资的估算增长更高' : '提前还贷的确定性节省更高'}</span><strong>{money(Math.abs(investGain - repaySaving))}</strong><p>还贷节省约 {money(repaySaving)}；投资增长约 {money(investGain)}。需另计税费、风险、违约金与流动性。</p></div></article>}
+      {toolId === 'early-repay' && <article className="tool-calc wide"><CardTitle id="early-repay" /><div className="tool-fields six"><Field id="epb" label="当前剩余本金" suffix="元" /><Field id="ep" label="本次提前还款" suffix="元" /><Field id="er" label="贷款年利率" suffix="%" /><Field id="emths" label="剩余期数" suffix="月" /><Field id="eir" label="替代投资年收益" suffix="%" /><Field id="efee" label="提前还款费用" suffix="%" /></div><div className="tool-result"><span>{prepayment === 0 ? '尚未计入提前还款' : earlyRepayDifference < 1 ? '两种情景的期末资产接近' : retainedFundsAtEnd > prepaidFundsAtEnd ? '保留资金情景的期末资产较高' : '提前还款情景的期末资产较高'}</span><strong>{money(earlyRepayDifference)}</strong><p>按剩余期限不变重算：月供约从 {money(earlyPayment)} 降至 {money(reducedPayment)}；{feeAdjustedSaving >= 0 ? <>扣除提前还款费用后，名义融资成本约节省 {money(feeAdjustedSaving)}</> : <>提前还款费用比名义利息节省高约 {money(Math.abs(feeAdjustedSaving))}</>}。比较假设把降低的月供逐月投资，并将投资收益视为扣税费后的固定情景值；实际收益存在风险。</p></div></article>}
 
       {toolId === 'saving-goal' && <article className="tool-calc"><CardTitle id="saving-goal" /><div className="tool-fields"><Field id="sg" label="目标金额" suffix="元" /><Field id="sc" label="已有资金" suffix="元" /><Field id="sr" label="年收益率" suffix="%" /><Field id="sy" label="目标年数" suffix="年" /></div><div className="tool-result green"><span>每月需要投入</span><strong>{money(monthlyGoal)}</strong><p>按月末投入估算。收益率越不确定，越应预留安全余量。</p></div></article>}
 
-      {toolId === 'emergency' && <article className="tool-calc"><CardTitle id="emergency" /><div className="tool-fields"><Field id="em" label="每月必要支出" suffix="元" /><Field id="es" label="收入波动等级 0—4" suffix="级" /><Field id="ed" label="家庭责任人数" suffix="人" /></div><div className="tool-result"><span>建议安全垫 · {emergencyMonths} 个月</span><strong>{money(emergencyTarget)}</strong><p>这是规划起点；保险、双收入家庭与可迅速削减的支出会改变需求。</p></div></article>}
+      {toolId === 'emergency' && <article className="tool-calc"><CardTitle id="emergency" /><div className="tool-fields"><Field id="em" label="每月必要支出" suffix="元" /><Field id="ecov" label="自定覆盖月数" suffix="月" /><Field id="eextra" label="额外应急支出" suffix="元" /><Field id="eliquid" label="现有安全储备" suffix="元" /></div><div className="tool-result"><span>目标储备 · {emergencyMonths} 个月必要支出加额外风险</span><strong>{money(emergencyTarget)}</strong><p>现有可立即动用的安全储备 {money(n('eliquid'))}，距离目标还差 {money(emergencyShortfall)}。覆盖月数由你根据收入恢复时间、家庭责任和保险选择，工具不使用任意评分替你下结论。</p></div></article>}
 
       {toolId === 'retirement' && <article className="tool-calc wide"><CardTitle id="retirement" /><div className="tool-fields six"><Field id="ra" label="当前年龄" suffix="岁" /><Field id="rt" label="退休年龄" suffix="岁" /><Field id="re" label="当前月支出" suffix="元" /><Field id="rinfl" label="长期通胀" suffix="%" /><Field id="rexist" label="已有养老资金" suffix="元" /><Field id="rret" label="积累期收益率" suffix="%" /><Field id="rw" label="计划提取率" suffix="%" /></div><div className="tool-result coral"><span>退休目标约 {money(retirementTarget)} · 缺口 {money(retirementGap)}</span><strong>每月需积累 {money(retirementMonthly)}</strong><p>{retirementYears} 年后月支出约 {money(retirementExpense)}。提取率只是规划假设，不是安全保证。</p></div></article>}
 

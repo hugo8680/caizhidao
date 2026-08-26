@@ -6,6 +6,7 @@ import './editorial-system.css';
 import './interface-policies-v5.css';
 import './interface-policies-v6.css';
 import './brand-lockup-v9.css';
+import './knowledge-article-v1.css';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://caizhidao.yrchr.com'),
