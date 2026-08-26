@@ -15,8 +15,8 @@ export const metadata: Metadata = {
   },
   description: '系统介绍经济学、金融学、会计和个人财务，收录知识地图、双语百科、课程、计算工具、图书与公开视频。',
   icons: {
-    icon: [{ url: '/favicon.svg', type: 'image/svg+xml' }],
-    shortcut: '/favicon.svg',
+    icon: [{ url: '/favicon.svg?v=2', type: 'image/svg+xml' }],
+    shortcut: '/favicon.svg?v=2',
   },
   openGraph: {
     title: '财知道 · 财经金融经济学科普知识库',

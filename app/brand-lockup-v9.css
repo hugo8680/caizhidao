@@ -1,4 +1,4 @@
-/* Desktop: one complete 财知道 wordmark with its original knowledge-base subtitle. */
+/* 财知道 brand system: knowledge-page mark, complete desktop wordmark, compact mobile mark. */
 
 body .site-chrome .platform-brand {
   width: max-content;
@@ -10,8 +10,9 @@ body .site-chrome .platform-brand {
 body .site-chrome .brand-desktop-lockup {
   width: auto;
   height: auto;
-  display: grid;
-  gap: 7px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
   overflow: visible;
   border: 0;
   border-radius: 0;
@@ -20,30 +21,56 @@ body .site-chrome .brand-desktop-lockup {
   transform: translateY(-1px);
 }
 
-body .site-chrome .brand-desktop-lockup > strong {
+body .site-chrome .brand-logo-mark {
+  width: 46px;
+  height: 46px;
+  flex: 0 0 46px;
   display: block;
-  color: #1c3430;
-  font: 760 27px/.82 var(--cz-serif);
-  letter-spacing: .12em;
+  border: 0;
+  border-radius: 11px;
+  background: url('/caizhidao-mark.svg') center / contain no-repeat;
+  box-shadow: none;
+}
+
+body .site-chrome .brand-lockup-divider {
+  width: 1px;
+  height: 34px;
+  flex: 0 0 1px;
+  display: block;
+  background: rgba(189, 134, 64, .72);
+}
+
+body .site-chrome .brand-lockup-copy {
+  width: auto;
+  height: auto;
+  display: grid;
+  gap: 6px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+body .site-chrome .brand-lockup-copy > strong {
+  display: block;
+  color: #10365f;
+  font: 760 26px/.84 var(--cz-serif);
+  letter-spacing: .09em;
   text-rendering: geometricPrecision;
   white-space: nowrap;
 }
 
-body .site-chrome .brand-desktop-lockup > strong::first-letter {
-  color: var(--cz-green-deep);
-}
-
-body .site-chrome .brand-desktop-lockup > small {
+body .site-chrome .brand-lockup-copy > small {
   display: flex;
   align-items: center;
   gap: 6px;
-  color: #6c7b77;
+  color: #697a80;
   font: 620 9px/1 var(--cz-sans);
-  letter-spacing: .055em;
+  letter-spacing: .04em;
   white-space: nowrap;
 }
 
-body .site-chrome .brand-desktop-lockup > small > i {
+body .site-chrome .brand-lockup-copy > small > i {
   width: 3px;
   height: 3px;
   flex: 0 0 3px;
@@ -60,16 +87,24 @@ body .site-chrome .platform-brand:hover .brand-desktop-lockup {
   transform: translateY(-1px);
 }
 
-body .site-chrome .platform-brand:hover .brand-desktop-lockup > strong {
-  color: var(--cz-green-deep);
+body .site-chrome .platform-brand:hover .brand-lockup-copy > strong {
+  color: #10365f;
 }
 
 body .site-chrome .brand-mobile-mark { display: none; }
 
 body .site-chrome .platform-brand:focus-visible {
-  outline: 2px solid rgba(23, 63, 54, .28);
+  outline: 2px solid rgba(16, 54, 95, .3);
   outline-offset: 6px;
-  border-radius: 3px;
+  border-radius: 8px;
+}
+
+@media (max-width: 760px) and (min-width: 641px) {
+  body .site-chrome .brand-desktop-lockup { gap: 8px; }
+  body .site-chrome .brand-logo-mark { width: 42px; height: 42px; flex-basis: 42px; border-radius: 10px; }
+  body .site-chrome .brand-lockup-divider { height: 30px; }
+  body .site-chrome .brand-lockup-copy > strong { font-size: 24px; }
+  body .site-chrome .brand-lockup-copy > small { font-size: 8px; gap: 5px; }
 }
 
 @media (max-width: 640px) {
@@ -84,27 +119,18 @@ body .site-chrome .platform-brand:focus-visible {
     width: 38px;
     height: 38px;
     flex: 0 0 38px;
-    display: grid;
-    place-items: center;
+    display: block;
     overflow: hidden;
     border: 0;
-    border-radius: 50%;
-    background: var(--cz-green-deep);
-    box-shadow: inset 0 0 0 1px rgba(229, 197, 124, .42);
-    color: #fffaf0;
-  }
-
-  body .site-chrome .brand-mobile-mark > i {
-    color: inherit;
-    font: normal 730 22px/1 var(--cz-serif);
-    letter-spacing: -.08em;
-    transform: translate(-1px, -1px);
+    border-radius: 9px;
+    background: url('/caizhidao-mark.svg') center / contain no-repeat;
+    box-shadow: none;
   }
 
   body .site-chrome .platform-brand.active .brand-mobile-mark,
   body .site-chrome .platform-brand:hover .brand-mobile-mark {
-    background: var(--cz-green-deep);
-    box-shadow: inset 0 0 0 1px rgba(229, 197, 124, .42);
+    background: url('/caizhidao-mark.svg') center / contain no-repeat;
+    box-shadow: none;
     transform: none;
   }
 }
