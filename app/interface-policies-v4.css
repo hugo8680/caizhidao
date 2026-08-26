@@ -1,0 +1,42 @@
+/* Versioned interface policies prevent stale immutable CSS from reviving retired decoration. */
+body .site-chrome .tool-nav-dropdown a,
+body .site-chrome .tool-nav-dropdown a:hover,
+body .site-chrome .tool-nav-dropdown a:focus,
+body .site-chrome .tool-nav-dropdown a.active {
+  border-bottom: 0 !important;
+  box-shadow: none !important;
+  text-decoration: none !important;
+}
+
+body .site-chrome .tool-nav-dropdown a::before,
+body .site-chrome .tool-nav-dropdown a::after {
+  content: none !important;
+  display: none !important;
+}
+
+/* Catalog introductions no longer reserve a dashboard column for vanity totals. */
+body .catalog-head,
+body .course-catalog-head,
+body .reference-index-head,
+body .atlas-reference-head,
+body .timeline-hero {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0;
+}
+
+/* Detail introductions remain content-led after redundant count panels are removed. */
+body .course-detail-hero,
+body .discipline-hero,
+body .atlas-concept-head,
+body .knowledge-category-hero {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+body .section-wide-link,
+body .dark-wide-link {
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+
+body .resource-layer-grid h3 {
+  margin-top: 28px;
+}

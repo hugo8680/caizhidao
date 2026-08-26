@@ -14,11 +14,10 @@ export default function VideosPage() {
       <section className="video-sections">
         <header className="catalog-head resource-catalog-head">
           <div><span>书与视频 / 视频</span><h1>视频课程</h1></div>
-          <dl><div><dt>课程</dt><dd>{videos.length} 个</dd></div><div><dt>免费</dt><dd>{videos.filter((item) => item.price.includes('免费')).length} 个</dd></div><div><dt>语言</dt><dd>3 种</dd></div></dl>
         </header>
         {languageOrder.map((language) => (
           <section className="video-section" key={language}>
-            <header><span>{language === '中文' ? '中文课程' : language === '英文' ? '英文课程' : '双语或带字幕'}</span><h2>{language}</h2><small>{videos.filter((video) => video.language === language).length} 个课程入口</small></header>
+            <header><span>{language === '中文' ? '中文课程' : language === '英文' ? '英文课程' : '双语或带字幕'}</span><h2>{language}</h2></header>
             <div className="video-grid">
               {videos.filter((video) => video.language === language).map((video, index) => (
                 <a href={`/videos/${video.id}/`} className="video-card" key={video.id}>

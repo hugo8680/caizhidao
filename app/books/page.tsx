@@ -12,11 +12,10 @@ export default function BooksPage() {
       <section className="book-shelves">
         <header className="catalog-head resource-catalog-head">
           <div><span>书与视频 / 图书</span><h1>财经图书</h1></div>
-          <dl><div><dt>精选</dt><dd>{books.length} 本</dd></div><div><dt>中文</dt><dd>{books.filter((book) => book.language === '中文').length} 本</dd></div><div><dt>英文</dt><dd>{books.filter((book) => book.language === '英文').length} 本</dd></div></dl>
         </header>
         {(['中文', '英文'] as const).map((language) => (
           <section className="book-shelf" key={language}>
-            <header><span>{language === '中文' ? '中文书' : '英文原版'}</span><h2>{language}精选</h2><small>{books.filter((book) => book.language === language).length} 本</small></header>
+            <header><span>{language === '中文' ? '中文书' : '英文原版'}</span><h2>{language}精选</h2></header>
             <div className="book-grid">
               {books.filter((book) => book.language === language).map((book, index) => (
                 <article className="book-card" key={book.id}>

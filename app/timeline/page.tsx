@@ -11,7 +11,6 @@ export default function TimelinePage() {
     <main>
       <section className="timeline-hero">
         <div><p>财经简史</p><h1>财经发展简史</h1><p>许多今天习以为常的制度，都经历过危机、争论和反复调整。沿着时间往回看，更容易理解它们为什么出现。</p></div>
-        <aside><span>1776</span><i /><span>2023</span><b>{timelineEvents.length} 个关键节点</b></aside>
       </section>
 
       <section className="timeline-layout timeline-content-only">

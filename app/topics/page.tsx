@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 export default function TopicsPage() {
   return (
     <main>
-      <header className="catalog-head standalone-catalog-head"><div><span>学习 / 专题</span><h1>专题学习路线</h1></div><dl><div><dt>路线</dt><dd>{learningRoutes.length} 条</dd></div><div><dt>步骤</dt><dd>{learningRoutes.reduce((sum, route) => sum + route.steps.length, 0)} 个</dd></div><div><dt>范围</dt><dd>跨学科</dd></div></dl></header>
+      <header className="catalog-head standalone-catalog-head"><div><span>学习 / 专题</span><h1>专题学习路线</h1></div></header>
       <section className="topics-index-grid">
         {learningRoutes.map((route) => (
           <a href={`/topics/${route.slug}/`} key={route.slug}>

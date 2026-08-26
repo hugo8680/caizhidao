@@ -13,7 +13,6 @@ export default function KnowledgePage() {
     <main>
       <section className="reference-index-head">
         <div><span>百科词条</span><h1>财经知识库</h1><p>按主题查找名词解释、英文释义、公式、例子和常见误区。</p></div>
-        <dl><div><dt>收录词条</dt><dd>{knowledgeTerms.length}</dd></div><div><dt>主题分类</dt><dd>{knowledgeCategories.length}</dd></div><div><dt>内容形态</dt><dd>中英双语</dd></div></dl>
       </section>
       <section className="knowledge-layout">
         <aside><span>主题分类</span>{knowledgeCategories.map((category) => {
@@ -23,7 +22,7 @@ export default function KnowledgePage() {
         <div className="knowledge-groups">
           {knowledgeCategories.map((category, categoryIndex) => (
             <section className="knowledge-group" key={category}>
-              <header><span>{String(categoryIndex + 1).padStart(2, '0')}</span><h2>{category}</h2><small>{knowledgeTerms.filter((term) => term.category === category).length} 个概念</small></header>
+              <header><span>{String(categoryIndex + 1).padStart(2, '0')}</span><h2>{category}</h2></header>
               <div className="knowledge-list">
                 {knowledgeTerms.filter((term) => term.category === category).map((term) => <a href={`/knowledge/${term.slug}/`} key={term.slug} className="knowledge-card">
                   <ConceptVisual type={term.visual} label={term.zh} />

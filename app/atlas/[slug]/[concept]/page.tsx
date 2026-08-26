@@ -37,7 +37,6 @@ export default async function AtlasConceptPage({ params }: AtlasConceptPageProps
       <section className="atlas-concept-head">
         <p><a href="/atlas/">财经知识地图</a><span>／</span><a href={`/atlas/${slug}/`}>{profile.disciplineName}</a><span>／</span>{profile.topicTitle}</p>
         <div><small>概念 {profile.disciplineNo}.{profile.topicIndex + 1}.{profile.conceptIndex + 1}</small><h1>{profile.name}</h1><h2>{profile.en}</h2><p>{profile.brief}</p></div>
-        <dl><div><dt>所属学科</dt><dd>{profile.disciplineName}</dd></div><div><dt>所属主题</dt><dd>{profile.topicTitle}</dd></div><div><dt>相邻概念</dt><dd>{profile.related.length}</dd></div></dl>
       </section>
 
       <section className="atlas-concept-layout">

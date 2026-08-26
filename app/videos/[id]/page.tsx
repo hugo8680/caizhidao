@@ -32,7 +32,7 @@ export default async function VideoDetailPage({ params }: VideoPageProps) {
 
   return (
     <main>
-      <section className="video-detail-hero"><p><a href="/videos/">视频课程专区</a><span>／</span>{video.language} · {video.level}</p><div className="video-detail-screen"><span>第 {index + 1} 个课程入口</span><i>▶</i><b>{video.platform}</b></div><div><small>{video.topic}</small><h1>{video.title}</h1>{video.titleEn && <h2>{video.titleEn}</h2>}<p>{video.description}</p></div></section>
+      <section className="video-detail-hero"><p><a href="/videos/">视频课程专区</a><span>／</span>{video.language} · {video.level}</p><div className="video-detail-screen"><span>{video.topic}</span><i>▶</i><b>{video.platform}</b></div><div><small>{video.topic}</small><h1>{video.title}</h1>{video.titleEn && <h2>{video.titleEn}</h2>}<p>{video.description}</p></div></section>
 
       <section className="video-detail-facts"><div><span>平台</span><b>{video.platform}</b></div><div><span>语言</span><b>{video.language}</b></div><div><span>难度</span><b>{video.level}</b></div><div><span>时长</span><b>{video.duration}</b></div><div><span>费用</span><b>{video.price}</b></div></section>
 

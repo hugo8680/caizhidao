@@ -32,7 +32,7 @@ export default async function TimelineEventPage({ params }: TimelineEventPagePro
 
   return (
     <main>
-      <section className="event-detail-hero"><p><a href="/timeline/">财经发展简史</a><span>／</span>{event.kind}</p><div><small>第 {index + 1} 个节点</small><strong>{event.year}</strong><h1>{event.title}</h1><p>{event.description}</p></div></section>
+      <section className="event-detail-hero"><p><a href="/timeline/">财经发展简史</a><span>／</span>{event.kind}</p><div><strong>{event.year}</strong><h1>{event.title}</h1><p>{event.description}</p></div></section>
 
       <section className="event-detail-layout">
         <article>
@@ -42,7 +42,7 @@ export default async function TimelineEventPage({ params }: TimelineEventPagePro
           <section><span>容易忽略</span><h2>不能只看表面</h2><p>{guide.caveat}</p></section>
           <section><span>当代影响</span><h2>对今天的影响</h2><p>{guide.today}</p></section>
         </article>
-        <aside><span>事件信息</span><dl><div><dt>年份</dt><dd>{event.year}</dd></div><div><dt>类型</dt><dd>{event.kind}</dd></div><div><dt>序号</dt><dd>{String(index + 1).padStart(2, '0')} / {timelineEvents.length}</dd></div></dl></aside>
+        <aside><span>事件信息</span><dl><div><dt>年份</dt><dd>{event.year}</dd></div><div><dt>类型</dt><dd>{event.kind}</dd></div></dl></aside>
       </section>
 
       <nav className="event-pagination" aria-label="历史事件翻页">{previous ? <a href={`/timeline/${previous.year}/`}><span>← 上一事件</span><b>{previous.year} · {previous.title}</b></a> : <a href="/timeline/"><span>← 返回</span><b>历史时间轴目录</b></a>}{next ? <a href={`/timeline/${next.year}/`}><span>下一事件 →</span><b>{next.year} · {next.title}</b></a> : <a href="/timeline/"><span>完成</span><b>返回历史时间轴目录</b></a>}</nav>

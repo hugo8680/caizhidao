@@ -7,7 +7,6 @@ export const metadata: Metadata = {
 };
 
 export default function CoursesPage() {
-  const lessonCount = courses.reduce((sum, course) => sum + course.lessons.length, 0);
   return (
     <main className="course-catalog-page">
       <section className="course-catalog-head">
@@ -16,11 +15,6 @@ export default function CoursesPage() {
           <h1>从基础认知，到独立判断</h1>
           <p>第一次来，可以从「金融通识入门」开始；如果已经有基础，直接选择自己关心的主题即可。</p>
         </div>
-        <dl>
-          <div><dt>课程</dt><dd>{courses.length}<small>套</small></dd></div>
-          <div><dt>课时</dt><dd>{lessonCount}<small>节</small></dd></div>
-          <div><dt>难度</dt><dd>3<small>级</small></dd></div>
-        </dl>
       </section>
       <section className="course-index-grid course-bento-grid">
         {courses.map((course, index) => (

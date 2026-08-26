@@ -32,7 +32,6 @@ export default async function TopicDetailPage({ params }: TopicPageProps) {
         <p><a href="/topics/">专题路线</a><span>／</span>路线 {route.no}</p>
         <div>
           <span>{route.en}</span><h1>{route.title}</h1><h2>{route.question}</h2><p>{route.description}</p>
-          <div><b>{route.minutes}</b><small>预计用时（分钟）</small><b>{route.steps.length}</b><small>个步骤</small></div>
         </div>
       </section>
 

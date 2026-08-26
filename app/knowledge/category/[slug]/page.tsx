@@ -31,7 +31,6 @@ export default async function KnowledgeCategoryPage({ params }: CategoryPageProp
       <section className="knowledge-category-hero">
         <p><a href="/knowledge/">科普百科</a><span>／</span>主题目录</p>
         <small>{category.en}</small><h1>{category.name}</h1><p>{category.overview}</p>
-        <div><b>{terms.length}</b><span>个百科词条</span></div>
       </section>
       <section className="knowledge-category-grid">
         {terms.map((term, index) => (

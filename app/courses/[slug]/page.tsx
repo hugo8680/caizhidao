@@ -27,7 +27,6 @@ export default async function CourseDetailPage({ params }: CoursePageProps) {
       <section className={`course-detail-hero accent-${course.accent}`}>
         <p><a href="/courses/">系统课程</a><span>／</span>{course.level}</p>
         <div><span>{course.category}</span><h1>{course.title}</h1><h2>{course.en}</h2><p>{course.description}</p></div>
-        <aside><b>{course.lessons.length}</b><span>节课<br />{course.duration}</span></aside>
       </section>
       <CoursePlayer course={course} />
     </main>

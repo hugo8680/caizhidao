@@ -1,21 +1,18 @@
 import { ConceptVisual } from '@/components/concept-visual';
 import { knowledgeTerms } from '@/lib/content';
-import { courses } from '@/lib/courses';
-import { books, toolCatalog, videos } from '@/lib/library';
 import {
   disciplines,
-  knowledgeNodeCount,
   learningRoutes,
   popularQuestions,
   timelineEvents,
 } from '@/lib/system';
 
 const resourceLayers = [
-  { no: '01', title: '百科词条', label: '查一个概念', metric: `${knowledgeTerms.length} 个`, text: '中英双语解释、概念图、公式、例子与相关知识。', href: '/knowledge/' },
-  { no: '02', title: '系统课程', label: '按顺序学习', metric: `${courses.length} 套`, text: '从零基础到报表、估值、宏观、组合与全球风险。', href: '/courses/' },
-  { no: '03', title: '金融小工具', label: '动手算一算', metric: `${toolCatalog.length} 个`, text: '把复利、贷款、退休、债券与估值变成可计算问题。', href: '/tools/compound/' },
-  { no: '04', title: '财经图书', label: '继续阅读', metric: `${books.length} 本`, text: '汇总中英文版本、作者、出版社、ISBN、价格与购买入口。', href: '/books/' },
-  { no: '05', title: '公开课程', label: '中文与英文', metric: `${videos.length} 组`, text: '连接国内高校、Yale、MIT、Coursera 与专业机构资源。', href: '/videos/' },
+  { no: '01', title: '百科词条', label: '查一个概念', text: '中英双语解释、概念图、公式、例子与相关知识。', href: '/knowledge/' },
+  { no: '02', title: '系统课程', label: '按顺序学习', text: '从零基础到报表、估值、宏观、组合与全球风险。', href: '/courses/' },
+  { no: '03', title: '金融小工具', label: '动手算一算', text: '把复利、贷款、退休、债券与估值变成可计算问题。', href: '/tools/compound/' },
+  { no: '04', title: '财经图书', label: '继续阅读', text: '汇总中英文版本、作者、出版社、ISBN、价格与购买入口。', href: '/books/' },
+  { no: '05', title: '公开课程', label: '中文与英文', text: '连接国内高校、Yale、MIT、Coursera 与专业机构资源。', href: '/videos/' },
 ];
 
 const featuredTimeline = timelineEvents.filter((event) => ['1776', '1929', '1944', '1971', '2008', '2020', '2022'].includes(event.year));
@@ -37,7 +34,6 @@ export default function Home() {
           <div className="discipline-grid">
             {disciplines.map((discipline) => <a href={`/atlas/${discipline.slug}/`} key={discipline.slug}><span>{discipline.no}</span><b>{discipline.name}</b><small>{discipline.en}</small></a>)}
           </div>
-          <footer><span><b>{disciplines.length}</b>个学科入口</span><span><b>{knowledgeNodeCount}</b>个体系节点</span><span><b>{knowledgeTerms.length}</b>个百科词条</span></footer>
         </aside>
       </section>
 
@@ -53,11 +49,11 @@ export default function Home() {
               <h3>{discipline.name}</h3>
               <b>{discipline.question}</b>
               <p>{discipline.summary}</p>
-              <footer><span>{discipline.topics.length} 个主题 · {discipline.topics.reduce((sum, topic) => sum + topic.concepts.length, 0)} 个节点</span><i>↗</i></footer>
+              <footer><span>查看学科索引</span><i>↗</i></footer>
             </a>
           ))}
         </div>
-        <a className="section-wide-link" href="/atlas/"><span>打开完整知识地图</span><b>12 学科 · 48 主题 · {knowledgeNodeCount} 节点</b><i>→</i></a>
+        <a className="section-wide-link" href="/atlas/"><span>打开完整知识地图</span><i>→</i></a>
       </section>
 
       <section className="question-lab">
@@ -90,7 +86,7 @@ export default function Home() {
             </a>
           ))}
         </div>
-        <a className="section-wide-link" href="/topics/"><span>浏览全部专题路线</span><b>40 个递进学习步骤</b><i>→</i></a>
+        <a className="section-wide-link" href="/topics/"><span>浏览全部专题路线</span><i>→</i></a>
       </section>
 
       <section className="history-preview">
@@ -101,7 +97,7 @@ export default function Home() {
         <div className="history-line">
           {featuredTimeline.map((event) => <a href={`/timeline/${event.year}/`} key={event.year}><span>{event.year}</span><i /><small>{event.kind}</small><h3>{event.title}</h3><p>{event.impact}</p></a>)}
         </div>
-        <a className="dark-wide-link" href="/timeline/"><span>打开财经发展简史</span><b>{timelineEvents.length} 个关键节点</b><i>→</i></a>
+        <a className="dark-wide-link" href="/timeline/"><span>打开财经发展简史</span><i>→</i></a>
       </section>
 
       <section className="resource-network">
@@ -110,7 +106,7 @@ export default function Home() {
           <p>想查名词可以看百科，想从头学可以选课程，遇到复利、贷款或估值问题可以直接打开计算器。书和视频放在后面，方便继续深入。</p>
         </div>
         <div className="resource-layer-grid">
-          {resourceLayers.map((layer) => <a href={layer.href} key={layer.no}><header><span>{layer.no}</span><small>{layer.label}</small></header><strong>{layer.metric}</strong><h3>{layer.title}</h3><p>{layer.text}</p><b>打开看看 →</b></a>)}
+          {resourceLayers.map((layer) => <a href={layer.href} key={layer.no}><header><span>{layer.no}</span><small>{layer.label}</small></header><h3>{layer.title}</h3><p>{layer.text}</p><b>打开看看 →</b></a>)}
         </div>
       </section>
 

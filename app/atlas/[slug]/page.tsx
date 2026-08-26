@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: DisciplinePageProps): Promise
   if (!discipline) return {};
   return {
     title: `${discipline.name}知识地图 · 财知道`,
-    description: `${discipline.summary} 包含 ${discipline.topics.length} 个主题和 ${discipline.topics.reduce((sum, topic) => sum + topic.concepts.length, 0)} 个概念节点。`,
+    description: discipline.summary,
     openGraph: { title: `${discipline.name} · ${discipline.en}`, description: discipline.summary, images: [] },
     twitter: { title: `${discipline.name} · ${discipline.en}`, description: discipline.summary, images: [] },
   };
@@ -34,7 +34,6 @@ export default async function DisciplinePage({ params }: DisciplinePageProps) {
       <section className={`discipline-hero tone-${discipline.tone}`}>
         <p><a href="/atlas/">财经知识地图</a><span>／</span>学科 {discipline.no}</p>
         <div><small>{discipline.en}</small><h1>{discipline.name}</h1><h2>{discipline.question}</h2><p>{discipline.summary}</p></div>
-        <aside><b>{discipline.topics.length}</b><span>个主题</span><b>{discipline.topics.reduce((sum, topic) => sum + topic.concepts.length, 0)}</b><span>个节点</span></aside>
       </section>
 
       <section className="discipline-topic-list">
