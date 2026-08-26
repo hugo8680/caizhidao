@@ -1,5 +1,7 @@
 <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <circle cx="31" cy="31" r="27" fill="#173F36"/>
-  <text x="31" y="42" fill="#FFF9EE" font-family="Songti SC, STSong, serif" font-size="30" font-weight="700" text-anchor="middle">财</text>
-  <circle cx="53" cy="52" r="6" fill="#C8954D"/>
+  <circle cx="32" cy="32" r="29" fill="#FAF9F5"/>
+  <path d="M49.6 14.6A24 24 0 1 1 15.5 16" stroke="#173F36" stroke-width="3" stroke-linecap="round"/>
+  <path d="M49.6 14.6A24 24 0 0 1 54.8 22" stroke="#C28D47" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="50" cy="13" r="4" fill="#C28D47" stroke="#FAF9F5" stroke-width="2"/>
+  <text x="31" y="42" fill="#173F36" font-family="Songti SC, STSong, serif" font-size="29" font-weight="700" text-anchor="middle">财</text>
 </svg>

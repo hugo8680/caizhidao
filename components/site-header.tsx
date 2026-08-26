@@ -106,7 +106,10 @@ export function SiteHeader() {
       <header className="platform-header">
         <a className={`platform-brand${isHome ? ' active' : ''}`} href="/" aria-label="财知道首页" aria-current={isHome ? 'page' : undefined}>
           <span className="brand-emblem" aria-hidden="true"><i>财</i></span>
-          <span className="brand-wordmark"><b>知道</b><small>财经 · 金融 · 经济学知识库</small></span>
+          <span className="brand-wordmark">
+            <b>知道</b>
+            <small><span>CAI ZHI DAO</span><i aria-hidden="true" /><span>财经知识库</span></small>
+          </span>
         </a>
 
         <nav className="primary-nav" aria-label="主要分区">
