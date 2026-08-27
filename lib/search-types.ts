@@ -1,4 +1,4 @@
-export type SearchKind = '知识' | '概念索引' | '学科' | '专题' | '课程' | '图书' | '视频' | '工具' | '历史';
+export type SearchKind = '知识' | '学科' | '专题' | '课程' | '图书' | '视频' | '工具' | '历史';
 
 export type SearchRecord = {
   id: string;

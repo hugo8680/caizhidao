@@ -5,7 +5,7 @@ import { searchContent } from '@/lib/search-ranking';
 import type { SearchKind } from '@/lib/search-types';
 import { useSearchIndex } from './use-search-index';
 
-const kinds: Array<SearchKind | '全部'> = ['全部', '知识', '课程', '专题', '学科', '概念索引', '工具', '图书', '视频', '历史'];
+const kinds: Array<SearchKind | '全部'> = ['全部', '知识', '课程', '专题', '学科', '工具', '图书', '视频', '历史'];
 const suggestions = ['供需', '货币', '经济周期', '现金流', 'ETF', '通胀', '退休', '估值'];
 
 export function SearchExperience() {

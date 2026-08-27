@@ -9,12 +9,14 @@ const bundled = await build({
       "export { getAtlasTopicProfiles } from './lib/atlas-content.ts';",
       "export { disciplines, learningRoutes, timelineEvents } from './lib/system.ts';",
       "export { routeGuides } from './lib/route-guides.ts';",
+      "export { routeEssays } from './lib/route-essays.ts';",
       "export { courses, plannedCourses } from './lib/courses.ts';",
       "export { books, videos, toolCatalog } from './lib/library.ts';",
-      "export { getBookGuide, getVideoGuide } from './lib/library-guides.ts';",
+      "export { getBookGuide } from './lib/library-guides.ts';",
+      "export { videoProfiles } from './lib/video-profiles.ts';",
       "export { toolGuides } from './lib/guides.ts';",
       "export { toolMethods } from './lib/tool-methods.ts';",
-      "export { historyGuides } from './lib/history-guides.ts';",
+      "export { historyEssays } from './lib/history-essays.ts';",
       "export { historyReferences } from './lib/history-references.ts';",
       "export { searchRecords } from './lib/search.ts';",
     ].join('\n'),
@@ -34,6 +36,13 @@ const moduleUrl = `data:text/javascript;base64,${Buffer.from(source).toString('b
 const data = await import(moduleUrl);
 const problems = [];
 
+function contentLength(value) {
+  if (typeof value === 'string') return Array.from(value.replace(/\s/g, '')).length;
+  if (Array.isArray(value)) return value.reduce((total, item) => total + contentLength(item), 0);
+  if (value && typeof value === 'object') return Object.values(value).reduce((total, item) => total + contentLength(item), 0);
+  return 0;
+}
+
 const expectedSlugs = new Set(data.knowledgeTerms.map((term) => term.slug));
 const actualSlugs = new Set(data.knowledgeArticleSlugs);
 for (const slug of expectedSlugs) if (!actualSlugs.has(slug)) problems.push(`百科词条缺少深度文章：${slug}`);
@@ -42,9 +51,9 @@ for (const slug of actualSlugs) if (!expectedSlugs.has(slug)) problems.push(`深
 for (const term of data.knowledgeTerms) {
   const article = data.getKnowledgeArticle(term.slug);
   if (!article) continue;
-  const articleText = JSON.stringify(article);
-  if (articleText.length < 900) problems.push(`百科文章内容过短：${term.slug}`);
+  if (contentLength(article) < 1400) problems.push(`百科文章内容过短：${term.slug}`);
   if (article.mechanism.length < 3) problems.push(`百科文章缺少机制：${term.slug}`);
+  if (article.analysis.length < 2 || article.analysis.some((section) => section.paragraphs.length < 2)) problems.push(`百科文章缺少独立长文分析：${term.slug}`);
   if (article.distinctions.length < 2) problems.push(`百科文章缺少概念辨析：${term.slug}`);
   if (article.checklist.length < 3) problems.push(`百科文章缺少分析检查项：${term.slug}`);
   if (article.sources.length < 2) problems.push(`百科文章缺少足够来源：${term.slug}`);
@@ -60,8 +69,9 @@ for (const discipline of data.disciplines) {
     if (!article) problems.push(`知识地图缺少主题文章：${key}`);
     else {
       const profiles = data.getAtlasTopicProfiles(discipline.slug, topicIndex);
-      const renderedInputs = `${JSON.stringify(article)}${topic.summary}${JSON.stringify(profiles.map((profile) => ({ brief: profile.brief, example: profile.example, references: profile.references })))}`;
-      if (renderedInputs.length < 900) problems.push(`知识地图主题内容过短：${key}`);
+      const renderedInputs = { article, topicSummary: topic.summary, profiles: profiles.map((profile) => ({ brief: profile.brief, example: profile.example, references: profile.references })) };
+      if (contentLength(renderedInputs) < 900) problems.push(`知识地图主题内容过短：${key}`);
+      if (article.analysis.length < 2 || article.analysis.some((section) => section.paragraphs.length < 2)) problems.push(`知识地图主题缺少独立长文分析：${key}`);
     }
     if (topic.concepts.length !== 5) problems.push(`主题不是五个核心概念：${key}`);
   });
@@ -110,23 +120,25 @@ for (const book of data.books) {
 }
 
 for (const video of data.videos) {
-  const guide = data.getVideoGuide(video);
-  if (guide.focus.length < 3 || guide.before.length < 25 || guide.after.length < 25 || guide.caution.length < 25) problems.push(`视频课程说明不完整：${video.id}`);
+  const profile = data.videoProfiles[video.id];
+  if (!profile || profile.topics.length < 3 || profile.overview.length < 45 || profile.context.length < 25) problems.push(`视频课程说明不完整：${video.id}`);
 }
 
 for (const event of data.timelineEvents) {
-  const guide = data.historyGuides[event.year];
+  const essay = data.historyEssays[event.year];
   const references = data.historyReferences[event.year];
-  if (!guide) problems.push(`财经简史缺少背景说明：${event.year}`);
-  else if ([guide.context, guide.mechanism, guide.caveat, guide.today].some((text) => text.length < 28)) problems.push(`财经简史解释过短：${event.year}`);
+  if (!essay) problems.push(`财经简史缺少背景说明：${event.year}`);
+  else if (contentLength(essay) < 680 || [essay.context, essay.transmission, essay.evidence, essay.debate, essay.legacy].some((section) => section.length < 2)) problems.push(`财经简史解释过短：${event.year}`);
   if (!references || references.length < 2 || references.some((source) => !source.title || !source.publisher || !source.url || source.note.length < 15)) problems.push(`财经简史缺少可追溯资料：${event.year}`);
 }
 
 for (const route of data.learningRoutes) {
   if (route.steps.length < 4 || route.steps.some((step) => step.explanation.length < 35 || step.example.length < 20)) problems.push(`专题路线不完整：${route.slug}`);
   const guide = data.routeGuides[route.slug];
+  const essay = data.routeEssays[route.slug];
   if (!guide) problems.push(`专题路线缺少长文说明：${route.slug}`);
   else if (guide.conclusion.length < 100 || guide.evidence.length < 4 || guide.caveats.length < 3 || guide.related.length < 3 || guide.sources.length < 3) problems.push(`专题路线缺少结论、证据、边界、关联知识或来源：${route.slug}`);
+  if (!essay || essay.length < 2 || essay.some((section) => section.paragraphs.length < 2) || contentLength({ route, guide, essay }) < 1600) problems.push(`专题路线正文过短：${route.slug}`);
 }
 
 if (data.courses.length !== 3 || lessonCount !== 24) problems.push(`已开放课程应为 3 门 24 节，当前为 ${data.courses.length} 门 ${lessonCount} 节`);
@@ -139,8 +151,8 @@ if (data.learningRoutes.length !== 8) problems.push(`专题路线应为 8 条，
 if (data.searchRecords.some((record) => /^\/atlas\/[^/]+\/\d{2}-\d{2}\/$/.test(record.href))) {
   problems.push('搜索索引仍指向旧的模板化概念页');
 }
-if (data.searchRecords.some((record) => record.id.startsWith('map-') && (record.kind !== '概念索引' || !record.description.includes('尚未单独成篇')))) {
-  problems.push('未展开概念必须明确标为概念索引，不能冒充完整知识文章');
+if (data.searchRecords.some((record) => record.id.startsWith('map-') && (record.kind !== '学科' || record.description.includes('尚未单独成篇')))) {
+  problems.push('学科概念搜索结果仍包含站方编写状态说明');
 }
 
 if (problems.length > 0) {

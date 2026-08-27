@@ -37,10 +37,10 @@ const mappedNodeRecords: SearchRecord[] = disciplines.flatMap((discipline) => di
   const profile = getAtlasConceptProfile(discipline.slug, `${String(topicIndex + 1).padStart(2, '0')}-${String(conceptIndex + 1).padStart(2, '0')}`);
   return [{
     id: `map-${discipline.slug}-${concept}`,
-    kind: '概念索引' as const,
+    kind: '学科' as const,
     title: concept,
     english: profile?.en ?? `${topic.en} · ${discipline.en}`,
-    description: `该概念尚未单独成篇，已放在“${topic.title}”主题中与相关概念一起解释。${profile?.brief ?? topic.summary}`,
+    description: profile?.brief ?? topic.summary,
     keywords: `${discipline.name} ${discipline.en} ${discipline.question} ${topic.title} ${topic.en} ${profile?.explanation ?? ''}`,
     href: `/atlas/${discipline.slug}/topic/${String(topicIndex + 1).padStart(2, '0')}/`,
     priority: 2,

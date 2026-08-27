@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { routeGuides } from '@/lib/route-guides';
+import { routeEssays } from '@/lib/route-essays';
 import { getLearningRoute, learningRoutes } from '@/lib/system';
 
 type TopicPageProps = { params: Promise<{ slug: string }> };
@@ -23,13 +24,14 @@ export async function generateMetadata({ params }: TopicPageProps): Promise<Meta
 export default async function TopicDetailPage({ params }: TopicPageProps) {
   const route = getLearningRoute((await params).slug);
   const guide = route ? routeGuides[route.slug] : undefined;
-  if (!route || !guide) notFound();
+  const essay = route ? routeEssays[route.slug] : undefined;
+  if (!route || !guide || !essay) notFound();
 
   return (
     <main className="knowledge-essay-page">
       <header className="knowledge-essay-header">
         <p className="knowledge-essay-breadcrumb"><a href="/topics/">专题路线</a><span>／</span>专题 {route.no}</p>
-        <p className="knowledge-essay-kicker">{route.en} · 预计阅读 {route.minutes} 分钟</p>
+        <p className="knowledge-essay-kicker">{route.en}</p>
         <h1>{route.title}</h1>
         <p className="knowledge-essay-question">{route.question}</p>
         <p className="knowledge-essay-deck">{route.description}</p>
@@ -55,9 +57,13 @@ export default async function TopicDetailPage({ params }: TopicPageProps) {
           </ol>
         </section>
 
+        {essay.map((section) => <section key={section.title}>
+          <h2>{section.title}</h2>
+          {section.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+        </section>)}
+
         <section>
           <h2>现实中怎样验证</h2>
-          <p>理论给出关系，证据决定它在具体时间、制度和人群中有多重要。实际分析时可以依次检查：</p>
           <ul className="knowledge-essay-checklist">{guide.evidence.map((item) => <li key={item}>{item}</li>)}</ul>
         </section>
 
@@ -68,7 +74,6 @@ export default async function TopicDetailPage({ params }: TopicPageProps) {
 
         <section className="knowledge-essay-sources">
           <h2>参考资料</h2>
-          <p>以下资料用于核对定义、统计框架和作用机制。涉及具体国家、市场或时期时，还需要补充当地制度和最新数据。</p>
           <ol>{guide.sources.map((source) => <li key={source.url}><a href={source.url} target="_blank" rel="noreferrer">{source.title}</a><span>{source.publisher}</span><p>{source.note}</p></li>)}</ol>
         </section>
 

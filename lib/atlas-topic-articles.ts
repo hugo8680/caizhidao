@@ -1,3 +1,5 @@
+import { atlasTopicEssays, type AtlasEssaySection } from './atlas-topic-essays';
+
 export type AtlasTopicArticle = {
   question: string;
   thesis: string;
@@ -6,9 +8,10 @@ export type AtlasTopicArticle = {
   boundary: string;
   misconceptions: string[];
   checklist: string[];
+  analysis: AtlasEssaySection[];
 };
 
-export const atlasTopicArticles: Record<string, AtlasTopicArticle> = {
+const atlasTopicCoreArticles: Record<string, Omit<AtlasTopicArticle, 'analysis'>> = {
   'microeconomics:01': {
     question: '资源有限时，人们怎样在备选方案之间作出选择？',
     thesis: '微观经济学从稀缺出发：时间、预算和生产要素不可能同时满足所有愿望。选择不是列愿望清单，而是在约束下比较可行方案；经济成本因此包含被放弃的最好机会。',
@@ -442,3 +445,11 @@ export const atlasTopicArticles: Record<string, AtlasTopicArticle> = {
     checklist: ['关键服务依赖哪些共同系统与供应商？', '失败能否隔离并在多长时间恢复？', '自动清算和保证金会否放大市场冲击？'],
   },
 };
+
+export const atlasTopicArticles: Record<string, AtlasTopicArticle> = Object.fromEntries(
+  Object.entries(atlasTopicCoreArticles).map(([key, article]) => {
+    const analysis = atlasTopicEssays[key];
+    if (!analysis) throw new Error(`Missing atlas topic essay: ${key}`);
+    return [key, { ...article, analysis }];
+  }),
+);

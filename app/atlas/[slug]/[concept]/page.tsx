@@ -27,8 +27,8 @@ export async function generateMetadata({ params }: AtlasConceptPageProps): Promi
   if (!entry) return {};
   const destination = `/atlas/${slug}/topic/${String(entry.topicIndex + 1).padStart(2, '0')}/`;
   return {
-    title: `${entry.name}已并入“${entry.topic.title}”主题 · 财知道`,
-    description: `“${entry.name}”现已放回“${entry.topic.title}”的完整经济关系中解释。`,
+    title: `${entry.name} · ${entry.topic.title} · 财知道`,
+    description: entry.topic.summary,
     alternates: { canonical: destination },
     robots: { index: false, follow: true },
   };
@@ -45,8 +45,8 @@ export default async function AtlasConceptPage({ params }: AtlasConceptPageProps
       <script dangerouslySetInnerHTML={{ __html: `window.location.replace(${JSON.stringify(destination)});` }} />
       <p><a href="/atlas/">财经知识地图</a><span>／</span>{entry.discipline.name}</p>
       <h1>{entry.name}</h1>
-      <p>这个概念不再单独使用模板化页面，现已放回“{entry.topic.title}”主题中，与相关概念一起解释。</p>
-      <a href={destination}>进入“{entry.topic.title}”主题文章 →</a>
+      <p>{entry.topic.summary}</p>
+      <a href={destination}>{entry.topic.title} →</a>
     </main>
   );
 }

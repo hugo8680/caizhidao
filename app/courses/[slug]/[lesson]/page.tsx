@@ -103,8 +103,8 @@ export default async function LessonPage({ params }: LessonPageProps) {
           </section>
 
           <section className="lesson-checklist-section">
-            <span>实际决策</span>
-            <h2>遇到真实问题时，按这张清单检查</h2>
+            <span>分析框架</span>
+            <h2>关键检查项</h2>
             <ul>{lesson.checklist.map((item) => <li key={item}>{item}</li>)}</ul>
           </section>
 
@@ -117,7 +117,6 @@ export default async function LessonPage({ params }: LessonPageProps) {
           <section className="lesson-exercises-section">
             <span>检验理解</span>
             <h2>练习与答案</h2>
-            <p>先在纸上作答，再展开答案。重点是能解释推理，而不是只记结果。</p>
             {lesson.exercises.map((exercise, index) => (
               <details key={exercise.question}>
                 <summary><b>{String(index + 1).padStart(2, '0')}</b><span>{exercise.question}</span><i>展开答案</i></summary>
@@ -129,7 +128,6 @@ export default async function LessonPage({ params }: LessonPageProps) {
           <section className="lesson-sources-section">
             <span>资料依据</span>
             <h2>来源与延伸阅读</h2>
-            <p>正文根据下列教材、研究或官方资料整理。资料用于追溯概念，不代表对任何产品的推荐。</p>
             <ol>
               {lesson.sources.map((source) => (
                 <li key={`${source.publisher}-${source.title}`}>
@@ -152,7 +150,6 @@ export default async function LessonPage({ params }: LessonPageProps) {
           <p>{lesson.title}</p>
           <LessonCompletion courseSlug={course.slug} lessonId={lesson.id} lessonCount={course.lessons.length} />
           <a href={`/courses/${course.slug}/`}>查看八节课程目录</a>
-          <small>课程用于一般性教育，不构成针对个人情况的投资、信贷、保险或税务建议。</small>
         </aside>
       </div>
     </main>

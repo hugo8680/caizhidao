@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { historyGuides } from '@/lib/history-guides';
+import { historyEssays } from '@/lib/history-essays';
 import { historyReferences } from '@/lib/history-references';
 import { timelineEvents } from '@/lib/system';
 
@@ -25,9 +25,9 @@ export async function generateMetadata({ params }: TimelineEventPageProps): Prom
 export default async function TimelineEventPage({ params }: TimelineEventPageProps) {
   const year = (await params).year;
   const event = timelineEvents.find((item) => item.year === year);
-  const guide = historyGuides[year];
+  const essay = historyEssays[year];
   const sources = historyReferences[year];
-  if (!event || !guide || !sources) notFound();
+  if (!event || !essay || !sources) notFound();
 
   return (
     <main className="knowledge-essay-page">
@@ -36,34 +36,36 @@ export default async function TimelineEventPage({ params }: TimelineEventPagePro
         <p className="knowledge-essay-kicker">{event.year} · Economic and Financial History</p>
         <h1>{event.title}</h1>
         <p className="knowledge-essay-question">{event.description}</p>
-        <p className="knowledge-essay-deck">历史事件不是孤立日期。理解它，需要同时看到当时的制度、资产负债表、政策选择和冲击传播。</p>
       </header>
 
       <article className="knowledge-essay">
         <section>
           <h2>当时的背景</h2>
-          <p>{guide.context}</p>
+          {essay.context.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
         </section>
 
         <section>
-          <h2>变化是怎样传开的</h2>
-          <p>{event.description} {guide.mechanism}</p>
-          <p className="knowledge-essay-thesis">{event.impact}</p>
+          <h2>冲击与变化如何传播</h2>
+          {essay.transmission.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
         </section>
 
         <section>
-          <h2>容易被简化的地方</h2>
-          <p>{guide.caveat}</p>
+          <h2>关键事实</h2>
+          {essay.evidence.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
         </section>
 
         <section>
-          <h2>为什么今天仍值得理解</h2>
-          <p>{guide.today}</p>
+          <h2>主要争论</h2>
+          {essay.debate.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+        </section>
+
+        <section>
+          <h2>留下的制度与知识遗产</h2>
+          {essay.legacy.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
         </section>
 
         <section className="knowledge-essay-sources">
           <h2>史料与参考资料</h2>
-          <p>历史解释可能存在争论。这里优先列出原始文本、官方调查、国际机构和中央银行资料，便于核对事实与不同解释。</p>
           <ol>{sources.map((source) => <li key={source.url}><a href={source.url} target="_blank" rel="noreferrer">{source.title}</a><span>{source.publisher}</span><p>{source.note}</p></li>)}</ol>
         </section>
 

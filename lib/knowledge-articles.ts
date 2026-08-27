@@ -1,4 +1,5 @@
 import { knowledgeArticleDetails } from './knowledge-article-details';
+import { knowledgeArticleEssays, type KnowledgeEssaySection } from './knowledge-article-essays';
 import { knowledgeTerms } from './content';
 
 export type KnowledgeArticleSource = {
@@ -13,6 +14,7 @@ export type KnowledgeArticle = {
   takeaway: string;
   introduction: string[];
   mechanism: Array<{ title: string; text: string }>;
+  analysis: KnowledgeEssaySection[];
   formulas?: Array<{
     expression: string;
     explanation: string;
@@ -104,6 +106,7 @@ const curatedArticles: Record<string, KnowledgeArticle> = {
       { title: '用波动率把共同变化标准化', text: '协方差受计量尺度影响。除以两项资产的标准差后，相关系数才可以在不同资产组合之间比较。' },
       { title: '把相关性放回组合风险', text: '组合风险不仅取决于每项资产自身的波动，还取决于它们是否在同一时间一起波动。相关性越低，其他条件相同时，分散风险的空间通常越大。' },
     ],
+    analysis: knowledgeArticleEssays.correlation,
     formulas: [
       {
         expression: 'ρ₍X,Y₎ = Cov(Rₓ, Rᵧ) ÷ (σₓ · σᵧ)',
@@ -168,6 +171,8 @@ const curatedArticles: Record<string, KnowledgeArticle> = {
 const generatedArticles = Object.fromEntries(Object.entries(knowledgeArticleDetails).map(([slug, detail]) => {
   const term = knowledgeTerms.find((item) => item.slug === slug);
   if (!term) throw new Error(`Unknown knowledge article slug: ${slug}`);
+  const analysis = knowledgeArticleEssays[slug];
+  if (!analysis) throw new Error(`Missing knowledge essay sections: ${slug}`);
   const formula = term.formula && formulaNotes[slug]
     ? [{ expression: term.formula, ...formulaNotes[slug] }]
     : undefined;
@@ -177,6 +182,7 @@ const generatedArticles = Object.fromEntries(Object.entries(knowledgeArticleDeta
     takeaway: detail.takeaway,
     introduction: [`${term.why}${detail.context}`],
     mechanism: detail.mechanism.map(([title, text]) => ({ title, text })),
+    analysis,
     formulas: formula,
     example: {
       title: detail.exampleTitle,

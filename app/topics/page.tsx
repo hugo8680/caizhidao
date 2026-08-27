@@ -13,7 +13,7 @@ export default function TopicsPage() {
       <section className="topics-index-grid">
         {learningRoutes.map((route) => (
           <a href={`/topics/${route.slug}/`} key={route.slug}>
-            <header><span>{route.no}</span><small>约 {route.minutes} 分钟 · {route.steps.length} 个步骤</small></header>
+            <header><span>{route.no}</span></header>
             <h2>{route.title}</h2><h3>{route.en}</h3><strong>{route.question}</strong><p>{route.description}</p>
             <ol>{route.steps.map((step, index) => <li key={step.title}><span>{String(index + 1).padStart(2, '0')}</span>{step.title}<small>{step.note}</small></li>)}</ol>
             <footer><b>进入专题</b><i>→</i></footer>

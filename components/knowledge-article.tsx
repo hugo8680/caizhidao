@@ -38,9 +38,13 @@ export function KnowledgeArticlePage({
           </ol>
         </section>
 
+        {article.analysis.map((section) => <section key={section.title}>
+          <h2>{section.title}</h2>
+          {section.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+        </section>)}
+
         {article.formulas && article.formulas.length > 0 && <section>
           <h2>公式表达了什么</h2>
-          <p>公式是关系的简写，只有先明确统计定义、时间单位和前提条件，计算结果才有意义。</p>
           {article.formulas.map((formula) => <div className="knowledge-essay-formula" key={formula.expression}>
             <strong>{formula.expression}</strong>
             <p>{formula.explanation}</p>
@@ -84,7 +88,6 @@ export function KnowledgeArticlePage({
 
         <section className="knowledge-essay-sources">
           <h2>参考资料</h2>
-          <p>本页采用教材和机构资料中的通行定义。统计方法、产品规则和制度规定会更新，实际引用应回到原始资料。</p>
           <ol>{article.sources.map((source) => <li key={source.url}><a href={source.url} target="_blank" rel="noreferrer">{source.title}</a><span>{source.publisher}</span><p>{source.note}</p></li>)}</ol>
         </section>
 

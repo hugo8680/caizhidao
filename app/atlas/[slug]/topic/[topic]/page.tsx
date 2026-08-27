@@ -76,6 +76,11 @@ export default async function AtlasTopicPage({ params }: AtlasTopicPageProps) {
           </div>
         </section>
 
+        {article.analysis.map((section) => <section key={section.title}>
+          <h2>{section.title}</h2>
+          {section.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+        </section>)}
+
         <section>
           <h2>怎样用证据判断</h2>
           <p>{article.evidence}</p>
@@ -90,7 +95,6 @@ export default async function AtlasTopicPage({ params }: AtlasTopicPageProps) {
 
         {references.length > 0 && <section className="knowledge-essay-sources">
           <h2>参考资料</h2>
-          <p>主题解释采用教材与机构资料中的通行框架。统计定义、制度与规则可能更新，实际使用应回到原始资料。</p>
           <ol>{references.map((source) => <li key={source.url}><a href={source.url} target="_blank" rel="noreferrer">{source.title}</a><span>{source.publisher}</span><p>{source.note}</p></li>)}</ol>
         </section>}
 
