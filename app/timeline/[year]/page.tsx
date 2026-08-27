@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { historyGuides } from '@/lib/history-guides';
+import { historyReferences } from '@/lib/history-references';
 import { timelineEvents } from '@/lib/system';
 
 type TimelineEventPageProps = { params: Promise<{ year: string }> };
@@ -25,27 +26,49 @@ export default async function TimelineEventPage({ params }: TimelineEventPagePro
   const year = (await params).year;
   const event = timelineEvents.find((item) => item.year === year);
   const guide = historyGuides[year];
-  if (!event || !guide) notFound();
-  const index = timelineEvents.findIndex((item) => item.year === year);
-  const previous = index > 0 ? timelineEvents[index - 1] : undefined;
-  const next = index < timelineEvents.length - 1 ? timelineEvents[index + 1] : undefined;
+  const sources = historyReferences[year];
+  if (!event || !guide || !sources) notFound();
 
   return (
-    <main>
-      <section className="event-detail-hero"><p><a href="/timeline/">财经发展简史</a><span>／</span>{event.kind}</p><div><strong>{event.year}</strong><h1>{event.title}</h1><p>{event.description}</p></div></section>
+    <main className="knowledge-essay-page">
+      <header className="knowledge-essay-header">
+        <p className="knowledge-essay-breadcrumb"><a href="/timeline/">财经发展简史</a><span>／</span>{event.kind}</p>
+        <p className="knowledge-essay-kicker">{event.year} · Economic and Financial History</p>
+        <h1>{event.title}</h1>
+        <p className="knowledge-essay-question">{event.description}</p>
+        <p className="knowledge-essay-deck">历史事件不是孤立日期。理解它，需要同时看到当时的制度、资产负债表、政策选择和冲击传播。</p>
+      </header>
 
-      <section className="event-detail-layout">
-        <article>
-          <section><span>背景</span><h2>当时发生了什么</h2><p>{guide.context}</p></section>
-          <section><span>过程</span><h2>变化是怎样传开的</h2><p>{event.description} {guide.mechanism}</p></section>
-          <section className="event-impact"><span>影响</span><h2>它带来了什么变化</h2><blockquote>{event.impact}</blockquote></section>
-          <section><span>容易忽略</span><h2>不能只看表面</h2><p>{guide.caveat}</p></section>
-          <section><span>当代影响</span><h2>对今天的影响</h2><p>{guide.today}</p></section>
-        </article>
-        <aside><span>事件信息</span><dl><div><dt>年份</dt><dd>{event.year}</dd></div><div><dt>类型</dt><dd>{event.kind}</dd></div></dl></aside>
-      </section>
+      <article className="knowledge-essay">
+        <section>
+          <h2>当时的背景</h2>
+          <p>{guide.context}</p>
+        </section>
 
-      <nav className="event-pagination" aria-label="历史事件翻页">{previous ? <a href={`/timeline/${previous.year}/`}><span>← 上一事件</span><b>{previous.year} · {previous.title}</b></a> : <a href="/timeline/"><span>← 返回</span><b>历史时间轴目录</b></a>}{next ? <a href={`/timeline/${next.year}/`}><span>下一事件 →</span><b>{next.year} · {next.title}</b></a> : <a href="/timeline/"><span>完成</span><b>返回历史时间轴目录</b></a>}</nav>
+        <section>
+          <h2>变化是怎样传开的</h2>
+          <p>{event.description} {guide.mechanism}</p>
+          <p className="knowledge-essay-thesis">{event.impact}</p>
+        </section>
+
+        <section>
+          <h2>容易被简化的地方</h2>
+          <p>{guide.caveat}</p>
+        </section>
+
+        <section>
+          <h2>为什么今天仍值得理解</h2>
+          <p>{guide.today}</p>
+        </section>
+
+        <section className="knowledge-essay-sources">
+          <h2>史料与参考资料</h2>
+          <p>历史解释可能存在争论。这里优先列出原始文本、官方调查、国际机构和中央银行资料，便于核对事实与不同解释。</p>
+          <ol>{sources.map((source) => <li key={source.url}><a href={source.url} target="_blank" rel="noreferrer">{source.title}</a><span>{source.publisher}</span><p>{source.note}</p></li>)}</ol>
+        </section>
+
+        <nav className="atlas-topic-back" aria-label="返回财经简史"><a href="/timeline/">← 返回财经发展简史</a></nav>
+      </article>
     </main>
   );
 }

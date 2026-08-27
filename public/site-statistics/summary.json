@@ -1,0 +1,19 @@
+{
+  "generatedAt": null,
+  "trackingSince": "2026-08-27",
+  "timezone": "Asia/Shanghai",
+  "periods": {
+    "today": { "pageViews": 0, "visitors": 0 },
+    "days7": { "pageViews": 0, "visitors": 0 },
+    "days30": { "pageViews": 0, "visitors": 0 }
+  },
+  "daily": [],
+  "topPages": [],
+  "referrers": [],
+  "devices": [],
+  "method": {
+    "cookies": false,
+    "botsExcluded": true,
+    "visitorDefinition": "同一统计期内，相同网络地址与浏览器标识的匿名组合估算为一位访客。"
+  }
+}

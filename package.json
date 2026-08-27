@@ -10,6 +10,7 @@
     "dev": "vinext dev",
     "build:search": "node scripts/build-search-index.mjs",
     "check:content": "node scripts/check-content.mjs",
+    "check:links": "node scripts/check-static-links.mjs",
     "prebuild": "npm run build:search",
     "build": "vinext build",
     "prebuild:static": "npm run build:search",

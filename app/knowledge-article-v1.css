@@ -177,7 +177,7 @@
 .knowledge-essay-sources span { display: block; margin-top: 3px; color: #7b8582; font-size: 12px; }
 .knowledge-essay-sources li p { margin: 7px 0 0; font-size: 13px; line-height: 1.7; }
 
-.knowledge-essay-related { border-top: 2px solid #344d49; border-bottom: 0 !important; }
+.knowledge-essay-related { display: block; border-top: 2px solid #344d49; border-bottom: 0 !important; }
 .knowledge-essay-related > div { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
 .knowledge-essay-related > div a { min-width: 0; }
 .knowledge-essay-related b { display: block; color: #203635; font: 650 16px/1.45 var(--cz-serif, "Songti SC", serif); }
@@ -293,7 +293,7 @@
   font-size: 13px;
 }
 
-.atlas-topic-back { border-bottom: 0 !important; }
+.atlas-topic-back { display: block; border-bottom: 0 !important; }
 .atlas-topic-back a { color: #37665d; font-size: 13px; }
 
 body .discipline-topic-copy > p:nth-of-type(2) {

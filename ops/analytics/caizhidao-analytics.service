@@ -1,0 +1,17 @@
+[Unit]
+Description=Build aggregate traffic statistics for caizhidao.yrchr.com
+After=nginx.service
+
+[Service]
+Type=oneshot
+User=root
+Group=root
+UMask=0022
+ExecStart=/usr/bin/python3 /opt/caizhidao/analytics/generate_report.py --log-dir /var/log/caizhidao --output /var/lib/caizhidao/site-statistics/summary.json --salt-file /var/lib/caizhidao/analytics-salt --site-root /var/www/caishi.yrchr.com/current --site-host caizhidao.yrchr.com --site-host caishi.yrchr.com --tracking-since 2026-08-27 --timezone Asia/Shanghai
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectHome=true
+ProtectSystem=strict
+ReadOnlyPaths=/var/log/caizhidao /opt/caizhidao/analytics /var/www/caishi.yrchr.com
+ReadWritePaths=/var/lib/caizhidao
+

@@ -1,8 +1,9 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { ConceptVisual } from '@/components/concept-visual';
 import { knowledgeTerms } from '@/lib/content';
 import { getKnowledgeCategoryPage, knowledgeCategoryPages } from '@/lib/guides';
+import { getKnowledgeArticle } from '@/lib/knowledge-articles';
+import styles from '../../knowledge-index.module.css';
 
 type CategoryPageProps = { params: Promise<{ slug: string }> };
 
@@ -27,22 +28,29 @@ export default async function KnowledgeCategoryPage({ params }: CategoryPageProp
   const terms = knowledgeTerms.filter((term) => term.category === category.name);
 
   return (
-    <main>
-      <section className="knowledge-category-hero">
-        <p><a href="/knowledge/">科普百科</a><span>／</span>主题目录</p>
-        <small>{category.en}</small><h1>{category.name}</h1><p>{category.overview}</p>
+    <main className={styles.page}>
+      <header className={styles.header}>
+        <p><a href="/knowledge/">财经知识库</a> ／ {category.en}</p>
+        <h1>{category.name}</h1>
+        <p>{category.overview}</p>
+        <dl><div><dt>完整词条</dt><dd>{terms.length} 篇</dd></div><div><dt>学习目标</dt><dd>{category.learningGoal}</dd></div></dl>
+      </header>
+      <section className={styles.categoryBody}>
+        <div className={styles.termList}>
+          {terms.map((term) => {
+            const article = getKnowledgeArticle(term.slug);
+            return (
+              <a href={`/knowledge/${term.slug}/`} key={term.slug}>
+                <div><h3>{term.zh}</h3><span>{term.en}{term.abbr ? ` · ${term.abbr}` : ''}</span></div>
+                <p>{term.summary}</p>
+                <small>完整词条 · {article?.sources.length ?? 0} 项资料{term.formula ? ' · 含公式' : ''}</small>
+                <b>阅读全文 →</b>
+              </a>
+            );
+          })}
+        </div>
+        <a className={styles.categoryBack} href="/knowledge/">← 返回财经知识库全部主题</a>
       </section>
-      <section className="knowledge-category-grid">
-        {terms.map((term, index) => (
-          <a href={`/knowledge/${term.slug}/`} key={term.slug}>
-            <ConceptVisual type={term.visual} label={term.zh} />
-            <div><span>{String(index + 1).padStart(2, '0')} · {term.en}</span><h2>{term.zh}</h2><p>{term.summary}</p><b>查看解释 →</b></div>
-          </a>
-        ))}
-      </section>
-      <nav className="category-pagination" aria-label="百科主题翻页">
-        {knowledgeCategoryPages.map((item) => <a className={item.slug === category.slug ? 'active' : ''} href={`/knowledge/category/${item.slug}/`} key={item.slug}>{item.name}</a>)}
-      </nav>
     </main>
   );
 }

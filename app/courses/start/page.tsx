@@ -3,7 +3,7 @@ import { courses, formatMinutes, getCourseMinutes } from '@/lib/courses';
 
 export const metadata: Metadata = {
   title: '新手入门 · 财知道',
-  description: '从金融通识、个人财务规划到投资产品的三阶段入门学习路径。',
+  description: `从金融通识、个人财务规划到投资产品的 ${courses.length} 阶段入门学习路径。`,
 };
 
 const reasons = [
@@ -14,17 +14,21 @@ const reasons = [
 
 export default function CourseStartPage() {
   const totalMinutes = courses.reduce((total, course) => total + getCourseMinutes(course), 0);
+  const totalLessons = courses.reduce((total, course) => total + course.lessons.length, 0);
+  const firstCourse = courses[0];
+  const firstLesson = firstCourse.lessons[0];
   return (
     <main className="course-start-page">
       <header className="course-start-intro">
         <p>新手入门</p>
         <h1>从第一门课开始，不需要先懂金融</h1>
-        <p>这条路径只安排已经完整编写的课程。按顺序学完 3 门、24 节，你应当能独立解释一项金融选择的目标、现金流、收益来源、主要风险和全部成本。</p>
+        <p>这条路径只安排已经完整编写的课程。按顺序学完 {courses.length} 门、{totalLessons} 节，你应当能独立解释一项金融选择的目标、现金流、收益来源、主要风险和全部成本。</p>
         <dl>
-          <div><dt>课程</dt><dd>3 门</dd></div>
-          <div><dt>课时</dt><dd>24 节</dd></div>
+          <div><dt>课程</dt><dd>{courses.length} 门</dd></div>
+          <div><dt>课时</dt><dd>{totalLessons} 节</dd></div>
           <div><dt>预计投入</dt><dd>{formatMinutes(totalMinutes)}</dd></div>
         </dl>
+        <a className="course-start-direct" href={`/courses/${firstCourse.slug}/${firstLesson.slug}/`}><span>现在开始：第 1 课《{firstLesson.title}》</span><b>→</b></a>
       </header>
 
       <section className="course-start-path" aria-label="入门课程顺序">

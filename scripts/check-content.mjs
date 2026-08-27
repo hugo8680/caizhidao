@@ -8,11 +8,14 @@ const bundled = await build({
       "export { atlasTopicArticles } from './lib/atlas-topic-articles.ts';",
       "export { getAtlasTopicProfiles } from './lib/atlas-content.ts';",
       "export { disciplines, learningRoutes, timelineEvents } from './lib/system.ts';",
+      "export { routeGuides } from './lib/route-guides.ts';",
       "export { courses, plannedCourses } from './lib/courses.ts';",
       "export { books, videos, toolCatalog } from './lib/library.ts';",
       "export { getBookGuide, getVideoGuide } from './lib/library-guides.ts';",
       "export { toolGuides } from './lib/guides.ts';",
+      "export { toolMethods } from './lib/tool-methods.ts';",
       "export { historyGuides } from './lib/history-guides.ts';",
+      "export { historyReferences } from './lib/history-references.ts';",
       "export { searchRecords } from './lib/search.ts';",
     ].join('\n'),
     resolveDir: process.cwd(),
@@ -94,8 +97,11 @@ if (data.plannedCourses.some((course) => 'lessons' in course || 'duration' in co
 
 for (const tool of data.toolCatalog) {
   const guide = data.toolGuides[tool.id];
+  const method = data.toolMethods[tool.id];
   if (!guide) problems.push(`金融小工具缺少说明：${tool.id}`);
   else if (guide.inputs.length < 2 || guide.limits.length < 3 || guide.reading.length < 25) problems.push(`金融小工具说明不完整：${tool.id}`);
+  if (!method) problems.push(`金融小工具缺少计算依据：${tool.id}`);
+  else if (method.formula.length < 12 || method.explanation.length < 50 || method.conditions.length < 3 || method.sources.length < 1 || method.related.length < 1) problems.push(`金融小工具计算依据不完整：${tool.id}`);
 }
 
 for (const book of data.books) {
@@ -110,12 +116,17 @@ for (const video of data.videos) {
 
 for (const event of data.timelineEvents) {
   const guide = data.historyGuides[event.year];
+  const references = data.historyReferences[event.year];
   if (!guide) problems.push(`财经简史缺少背景说明：${event.year}`);
   else if ([guide.context, guide.mechanism, guide.caveat, guide.today].some((text) => text.length < 28)) problems.push(`财经简史解释过短：${event.year}`);
+  if (!references || references.length < 2 || references.some((source) => !source.title || !source.publisher || !source.url || source.note.length < 15)) problems.push(`财经简史缺少可追溯资料：${event.year}`);
 }
 
 for (const route of data.learningRoutes) {
   if (route.steps.length < 4 || route.steps.some((step) => step.explanation.length < 35 || step.example.length < 20)) problems.push(`专题路线不完整：${route.slug}`);
+  const guide = data.routeGuides[route.slug];
+  if (!guide) problems.push(`专题路线缺少长文说明：${route.slug}`);
+  else if (guide.conclusion.length < 100 || guide.evidence.length < 4 || guide.caveats.length < 3 || guide.related.length < 3 || guide.sources.length < 3) problems.push(`专题路线缺少结论、证据、边界、关联知识或来源：${route.slug}`);
 }
 
 if (data.courses.length !== 3 || lessonCount !== 24) problems.push(`已开放课程应为 3 门 24 节，当前为 ${data.courses.length} 门 ${lessonCount} 节`);
@@ -127,6 +138,9 @@ if (data.timelineEvents.length !== 18) problems.push(`财经简史事件应为 1
 if (data.learningRoutes.length !== 8) problems.push(`专题路线应为 8 条，当前为 ${data.learningRoutes.length}`);
 if (data.searchRecords.some((record) => /^\/atlas\/[^/]+\/\d{2}-\d{2}\/$/.test(record.href))) {
   problems.push('搜索索引仍指向旧的模板化概念页');
+}
+if (data.searchRecords.some((record) => record.id.startsWith('map-') && (record.kind !== '概念索引' || !record.description.includes('尚未单独成篇')))) {
+  problems.push('未展开概念必须明确标为概念索引，不能冒充完整知识文章');
 }
 
 if (problems.length > 0) {
