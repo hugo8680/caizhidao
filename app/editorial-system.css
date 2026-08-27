@@ -47,7 +47,7 @@ body .site-chrome.group-resources {
   overflow: visible;
   border: 0;
   border-bottom: 1px solid rgba(29, 43, 42, .12);
-  background: rgba(250, 249, 245, .97);
+  background: #faf9f5;
   box-shadow: none;
   backdrop-filter: none;
 }

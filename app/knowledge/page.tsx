@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import { knowledgeCategories, knowledgeTerms } from '@/lib/content';
 import { getKnowledgeCategoryByName } from '@/lib/guides';
-import { getKnowledgeArticle } from '@/lib/knowledge-articles';
 import styles from './knowledge-index.module.css';
 
 export const metadata: Metadata = {
@@ -33,13 +32,11 @@ export default function KnowledgePage() {
                 <header><span>{String(categoryIndex + 1).padStart(2, '0')}</span><div><h2>{category}</h2>{categoryPage && <p>{categoryPage.overview}</p>}</div></header>
                 <div className={styles.termList}>
                   {terms.map((term) => {
-                    const article = getKnowledgeArticle(term.slug);
                     return (
                       <a href={`/knowledge/${term.slug}/`} key={term.slug}>
                         <div><h3>{term.zh}</h3><span>{term.en}{term.abbr ? ` · ${term.abbr}` : ''}</span></div>
                         <p>{term.summary}</p>
-                        <small>完整词条 · {article?.sources.length ?? 0} 项资料{term.formula ? ' · 含公式' : ''}</small>
-                        <b>阅读全文 →</b>
+                        <span className={styles.termArrow} aria-hidden="true">→</span>
                       </a>
                     );
                   })}

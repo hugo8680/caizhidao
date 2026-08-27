@@ -47,9 +47,9 @@ export default async function LessonPage({ params }: LessonPageProps) {
       <div className="lesson-layout">
         <article className="lesson-article">
           <section className="lesson-opening">
-            <div><span>本课核心命题</span><strong>{lesson.key}</strong></div>
+            <p className="lesson-key">{lesson.key}</p>
             <div className="lesson-objectives">
-              <h2>学完这一课，你应当能够</h2>
+              <h2>本课要点</h2>
               <ul>{lesson.objectives.map((objective) => <li key={objective}>{objective}</li>)}</ul>
               <p><b>前置知识：</b>{lesson.prerequisite}</p>
             </div>
@@ -64,8 +64,7 @@ export default async function LessonPage({ params }: LessonPageProps) {
           ))}
 
           <section className="lesson-mechanism-section">
-            <span>作用机制</span>
-            <h2>这件事是怎样发生的</h2>
+            <h2>作用机制</h2>
             <ol>
               {lesson.mechanism.map((step, index) => (
                 <li key={step.title}><b>{String(index + 1).padStart(2, '0')}</b><div><h3>{step.title}</h3><p>{step.explanation}</p></div></li>
@@ -75,7 +74,6 @@ export default async function LessonPage({ params }: LessonPageProps) {
 
           {lesson.formula && (
             <section className="lesson-formula-section">
-              <span>公式与条件</span>
               <h2>{lesson.formula.title}</h2>
               <div className="lesson-formula-expression">{lesson.formula.expression}</div>
               <p>{lesson.formula.explanation}</p>
@@ -87,7 +85,6 @@ export default async function LessonPage({ params }: LessonPageProps) {
           )}
 
           <section className="lesson-case-section">
-            <span>完整案例</span>
             <h2>{lesson.example.title}</h2>
             <p>{lesson.example.premise}</p>
             <ol>{lesson.example.steps.map((step, index) => <li key={step}><b>{index + 1}</b><p>{step}</p></li>)}</ol>
@@ -95,7 +92,6 @@ export default async function LessonPage({ params }: LessonPageProps) {
           </section>
 
           <section className="lesson-misconception-section">
-            <span>概念辨析</span>
             <h2>常见误解</h2>
             {lesson.misconceptions.map((item, index) => (
               <article key={item.claim}><b>{String(index + 1).padStart(2, '0')}</b><div><h3>{item.claim}</h3><p>{item.correction}</p></div></article>
@@ -103,19 +99,16 @@ export default async function LessonPage({ params }: LessonPageProps) {
           </section>
 
           <section className="lesson-checklist-section">
-            <span>分析框架</span>
-            <h2>关键检查项</h2>
+            <h2>分析时需要检查什么</h2>
             <ul>{lesson.checklist.map((item) => <li key={item}>{item}</li>)}</ul>
           </section>
 
           <section className="lesson-terms-section">
-            <span>中英术语</span>
             <h2>本课术语</h2>
             <dl>{lesson.terms.map((term) => <div key={term.en}><dt lang="en">{term.en}</dt><dd><b>{term.zh}</b><p>{term.definition}</p></dd></div>)}</dl>
           </section>
 
           <section className="lesson-exercises-section">
-            <span>检验理解</span>
             <h2>练习与答案</h2>
             {lesson.exercises.map((exercise, index) => (
               <details key={exercise.question}>
@@ -126,7 +119,6 @@ export default async function LessonPage({ params }: LessonPageProps) {
           </section>
 
           <section className="lesson-sources-section">
-            <span>资料依据</span>
             <h2>来源与延伸阅读</h2>
             <ol>
               {lesson.sources.map((source) => (
@@ -147,9 +139,8 @@ export default async function LessonPage({ params }: LessonPageProps) {
         <aside className="lesson-aside">
           <span>{course.title}</span>
           <strong>{String(lesson.id).padStart(2, '0')} / {String(course.lessons.length).padStart(2, '0')}</strong>
-          <p>{lesson.title}</p>
           <LessonCompletion courseSlug={course.slug} lessonId={lesson.id} lessonCount={course.lessons.length} />
-          <a href={`/courses/${course.slug}/`}>查看八节课程目录</a>
+          <a href={`/courses/${course.slug}/`}>查看课程目录</a>
         </aside>
       </div>
     </main>

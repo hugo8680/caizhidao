@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { knowledgeTerms } from '@/lib/content';
 import { getKnowledgeCategoryPage, knowledgeCategoryPages } from '@/lib/guides';
-import { getKnowledgeArticle } from '@/lib/knowledge-articles';
 import styles from '../../knowledge-index.module.css';
 
 type CategoryPageProps = { params: Promise<{ slug: string }> };
@@ -30,24 +29,20 @@ export default async function KnowledgeCategoryPage({ params }: CategoryPageProp
   return (
     <main className={styles.page}>
       <header className={styles.header}>
-        <p><a href="/knowledge/">财经知识库</a> ／ {category.en}</p>
+        <p className={styles.breadcrumb}><a href="/knowledge/">财经知识库</a><span>／</span>{category.name}</p>
+        <p className={styles.eyebrow}>{category.en}</p>
         <h1>{category.name}</h1>
-        <p>{category.overview}</p>
-        <dl><div><dt>完整词条</dt><dd>{terms.length} 篇</dd></div><div><dt>学习目标</dt><dd>{category.learningGoal}</dd></div></dl>
+        <p className={styles.intro}>{category.overview}</p>
       </header>
       <section className={styles.categoryBody}>
         <div className={styles.termList}>
-          {terms.map((term) => {
-            const article = getKnowledgeArticle(term.slug);
-            return (
-              <a href={`/knowledge/${term.slug}/`} key={term.slug}>
-                <div><h3>{term.zh}</h3><span>{term.en}{term.abbr ? ` · ${term.abbr}` : ''}</span></div>
-                <p>{term.summary}</p>
-                <small>完整词条 · {article?.sources.length ?? 0} 项资料{term.formula ? ' · 含公式' : ''}</small>
-                <b>阅读全文 →</b>
-              </a>
-            );
-          })}
+          {terms.map((term) => (
+            <a href={`/knowledge/${term.slug}/`} key={term.slug}>
+              <div><h3>{term.zh}</h3><span>{term.en}{term.abbr ? ` · ${term.abbr}` : ''}</span></div>
+              <p>{term.summary}</p>
+              <span className={styles.termArrow} aria-hidden="true">→</span>
+            </a>
+          ))}
         </div>
         <a className={styles.categoryBack} href="/knowledge/">← 返回财经知识库全部主题</a>
       </section>

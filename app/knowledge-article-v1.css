@@ -1,14 +1,18 @@
-/* Long-form knowledge articles: quiet, continuous and citation-led. */
-.knowledge-essay-page {
-  background: #f5f3ed;
-  color: #1d2b2d;
+/* Long-form reading: one continuous article, not a hero followed by cards. */
+.knowledge-essay-page { min-height: 70vh; background: #faf9f5; color: #1d2b2d; }
+
+.knowledge-essay {
+  width: min(760px, calc(100% - 48px));
+  margin: 0 auto;
+  padding: 0 0 104px;
 }
 
-.knowledge-essay-header {
-  width: min(900px, calc(100% - 48px));
+.knowledge-essay-page > .knowledge-essay-header {
+  width: min(760px, calc(100% - 48px));
   margin: 0 auto;
-  padding: 42px 0 34px;
 }
+
+.knowledge-essay-header { padding: 38px 0 32px; border-bottom: 1px solid #d9ddd7; }
 
 .knowledge-essay-breadcrumb,
 .knowledge-essay-kicker,
@@ -18,57 +22,50 @@
 .knowledge-essay-breadcrumb {
   color: #76817f;
   font-size: 12px;
+  line-height: 1.6;
 }
 
 .knowledge-essay-breadcrumb a { color: #37665d; }
 .knowledge-essay-breadcrumb span { margin: 0 8px; color: #a9afac; }
 
 .knowledge-essay-kicker {
-  margin-top: 34px;
+  margin-top: 25px;
   color: #596d68;
-  font: 500 14px/1.5 Georgia, "Times New Roman", serif;
+  font: 500 13px/1.5 Georgia, "Times New Roman", serif;
 }
 
 .knowledge-essay-header h1 {
-  margin: 5px 0 15px;
+  margin: 6px 0 14px;
   color: #17292b;
-  font: 650 clamp(38px, 5vw, 54px)/1.14 var(--cz-serif, "Songti SC", serif);
-  letter-spacing: -.035em;
+  font: 650 clamp(38px, 4.6vw, 48px)/1.18 var(--cz-serif, "Songti SC", serif);
+  letter-spacing: -.03em;
 }
 
 .knowledge-essay-deck {
-  margin-top: 13px;
-  max-width: 760px;
+  margin-top: 11px;
   color: #657370;
-  font-size: 14px;
-  line-height: 1.75;
+  font-size: 15px;
+  line-height: 1.82;
 }
 
 .knowledge-essay-question {
-  max-width: 780px;
   color: #314846;
-  font: 600 19px/1.7 var(--cz-serif, "Songti SC", serif);
-}
-
-.knowledge-essay {
-  width: min(900px, calc(100% - 48px));
-  margin: 0 auto;
-  padding: 0 62px 90px;
-  background: #fffefa;
+  font: 600 20px/1.68 var(--cz-serif, "Songti SC", serif);
 }
 
 .knowledge-essay > section,
 .knowledge-essay > nav {
-  padding: 42px 0;
-  border-bottom: 1px solid #e0e1dc;
+  margin: 0 0 54px;
+  padding: 0;
+  border: 0;
 }
 
-.knowledge-essay > section:last-of-type { border-bottom: 0; }
+.knowledge-essay > section:first-of-type { padding-top: 38px; }
 
 .knowledge-essay h2 {
-  margin: 0 0 18px;
+  margin: 0 0 17px;
   color: #1c3031;
-  font: 650 25px/1.4 var(--cz-serif, "Songti SC", serif);
+  font: 650 27px/1.42 var(--cz-serif, "Songti SC", serif);
   letter-spacing: -.015em;
 }
 
@@ -79,18 +76,18 @@
 }
 
 .knowledge-essay p {
-  margin: 0 0 15px;
+  margin: 0 0 17px;
   color: #40504f;
-  font-size: 16px;
-  line-height: 1.95;
+  font-size: 17px;
+  line-height: 1.9;
 }
 
 .knowledge-essay-thesis {
-  margin: 25px 0 0;
-  padding-left: 20px;
+  margin: 26px 0 0;
+  padding: 2px 0 2px 21px;
   border-left: 3px solid #b48a43;
   color: #283c3a !important;
-  font: 600 16px/1.85 var(--cz-serif, "Songti SC", serif) !important;
+  font: 600 17px/1.85 var(--cz-serif, "Songti SC", serif) !important;
 }
 
 .knowledge-essay-sequence,
@@ -105,14 +102,17 @@
 .knowledge-essay-sequence > li,
 .knowledge-essay-calculation > li,
 .knowledge-essay-misconceptions > li {
-  padding: 17px 0 17px 48px;
-  border-top: 1px solid #e2e3de;
+  padding: 0 0 22px 46px;
   color: #40504f;
-  font-size: 15px;
+  font-size: 16px;
   line-height: 1.85;
   position: relative;
   counter-increment: essay-step;
 }
+
+.knowledge-essay-sequence > li:last-child,
+.knowledge-essay-calculation > li:last-child,
+.knowledge-essay-misconceptions > li:last-child { padding-bottom: 0; }
 
 .knowledge-essay-sequence > li::before,
 .knowledge-essay-calculation > li::before,
@@ -120,17 +120,17 @@
   content: counter(essay-step, decimal-leading-zero);
   position: absolute;
   left: 0;
-  top: 19px;
+  top: 4px;
   color: #8a6a36;
   font: 600 11px/1.4 Georgia, serif;
 }
 
-.knowledge-essay-sequence p { margin-bottom: 0; font-size: 15px; }
+.knowledge-essay-sequence p { margin-bottom: 0; font-size: 16px; }
 
 .knowledge-essay-formula {
-  margin-top: 25px;
-  padding: 24px 26px;
-  background: #f3f1ea;
+  margin-top: 24px;
+  padding: 27px 29px;
+  background: #f0eee7;
 }
 
 .knowledge-essay-formula > strong {
@@ -140,15 +140,15 @@
   font: 600 clamp(18px, 3vw, 24px)/1.55 Georgia, "Times New Roman", serif;
 }
 
-.knowledge-essay-formula > p { margin: 10px 0 15px; font-size: 14px; }
+.knowledge-essay-formula > p { margin: 11px 0 17px; font-size: 15px; }
 .knowledge-essay-formula dl { margin: 0; }
 .knowledge-essay-formula dl > div { padding: 8px 0; display: grid; grid-template-columns: 120px 1fr; border-top: 1px solid #d9dad4; }
 .knowledge-essay-formula dt { color: #2b4744; font: 600 13px/1.6 Georgia, serif; }
 .knowledge-essay-formula dd { margin: 0; color: #5d6a68; font-size: 13px; line-height: 1.7; }
 
 .knowledge-essay-conclusion {
-  margin-top: 23px !important;
-  padding: 16px 19px;
+  margin-top: 25px !important;
+  padding: 18px 20px;
   background: #edf2ee;
   color: #26443f !important;
   font-weight: 600;
@@ -160,8 +160,8 @@
 .knowledge-essay-distinctions dd { margin: 0; color: #4c5b59; font-size: 14px; line-height: 1.8; }
 
 .knowledge-essay-checklist { margin: 0; padding: 0; list-style: none; }
-.knowledge-essay-checklist li { padding: 12px 0 12px 28px; border-top: 1px solid #e2e3de; color: #40504f; font-size: 15px; line-height: 1.75; position: relative; }
-.knowledge-essay-checklist li::before { content: '—'; position: absolute; left: 2px; color: #8a6a36; }
+.knowledge-essay-checklist li { padding: 0 0 13px 26px; color: #40504f; font-size: 16px; line-height: 1.8; position: relative; }
+.knowledge-essay-checklist li::before { content: '—'; position: absolute; left: 1px; color: #8a6a36; }
 
 .knowledge-essay-english p {
   padding-left: 20px;
@@ -177,7 +177,7 @@
 .knowledge-essay-sources span { display: block; margin-top: 3px; color: #7b8582; font-size: 12px; }
 .knowledge-essay-sources li p { margin: 7px 0 0; font-size: 13px; line-height: 1.7; }
 
-.knowledge-essay-related { display: block; border-top: 2px solid #344d49; border-bottom: 0 !important; }
+.knowledge-essay-related { display: block; margin-top: 74px !important; padding-top: 34px !important; border-top: 2px solid #344d49 !important; }
 .knowledge-essay-related > div { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
 .knowledge-essay-related > div a { min-width: 0; }
 .knowledge-essay-related b { display: block; color: #203635; font: 650 16px/1.45 var(--cz-serif, "Songti SC", serif); }
@@ -187,55 +187,55 @@
 
 /* The knowledge map now explains five concepts as one economic relationship. */
 .atlas-topic-essay-page {
-  background: #f5f3ed;
+  min-height: 70vh;
+  background: #faf9f5;
   color: #1d2b2d;
 }
 
 .atlas-topic-essay-header {
-  width: min(900px, calc(100% - 48px));
+  width: min(760px, calc(100% - 48px));
   margin: 0 auto;
-  padding: 42px 0 34px;
+  padding: 38px 0 32px;
+  border-bottom: 1px solid #d9ddd7;
 }
 
 .atlas-topic-essay-header h1 {
   margin: 5px 0 13px;
   color: #17292b;
-  font: 650 clamp(36px, 5vw, 52px)/1.16 var(--cz-serif, "Songti SC", serif);
-  letter-spacing: -.035em;
+  font: 650 clamp(36px, 4.6vw, 48px)/1.18 var(--cz-serif, "Songti SC", serif);
+  letter-spacing: -.03em;
 }
 
 .atlas-topic-question {
-  max-width: 780px;
   margin: 0;
   color: #314846;
-  font: 600 19px/1.7 var(--cz-serif, "Songti SC", serif);
+  font: 600 20px/1.68 var(--cz-serif, "Songti SC", serif);
 }
 
 .atlas-topic-summary {
-  max-width: 760px;
-  margin: 13px 0 0;
+  margin: 11px 0 0;
   color: #657370;
-  font-size: 14px;
-  line-height: 1.75;
+  font-size: 15px;
+  line-height: 1.82;
 }
 
 .atlas-topic-essay {
-  width: min(900px, calc(100% - 48px));
+  width: min(760px, calc(100% - 48px));
   margin: 0 auto;
-  padding: 0 62px 90px;
-  background: #fffefa;
+  padding: 38px 0 104px;
 }
 
 .atlas-topic-essay > section,
 .atlas-topic-essay > nav {
-  padding: 42px 0;
-  border-bottom: 1px solid #e0e1dc;
+  margin: 0 0 54px;
+  padding: 0;
+  border: 0;
 }
 
 .atlas-topic-essay h2 {
   margin: 0 0 18px;
   color: #1c3031;
-  font: 650 25px/1.4 var(--cz-serif, "Songti SC", serif);
+  font: 650 27px/1.42 var(--cz-serif, "Songti SC", serif);
   letter-spacing: -.015em;
 }
 
@@ -246,19 +246,16 @@
 }
 
 .atlas-topic-essay p {
-  margin: 0 0 15px;
+  margin: 0 0 17px;
   color: #40504f;
-  font-size: 16px;
-  line-height: 1.95;
+  font-size: 17px;
+  line-height: 1.9;
 }
 
-.atlas-topic-concepts {
-  margin-top: 27px;
-  border-top: 2px solid #344d49;
-}
+.atlas-topic-concepts { margin-top: 28px; border-top: 1px solid #bcc4bf; }
 
 .atlas-topic-concepts > section {
-  padding: 22px 0;
+  padding: 24px 0;
   border-bottom: 1px solid #e0e1dc;
 }
 
@@ -280,11 +277,7 @@
   font: 11px/1.5 Georgia, "Times New Roman", serif;
 }
 
-.atlas-topic-concepts p {
-  margin: 10px 0 0 56px;
-  font-size: 15px;
-  line-height: 1.8;
-}
+.atlas-topic-concepts p { margin: 10px 0 0 56px; font-size: 16px; line-height: 1.82; }
 
 .atlas-topic-concepts a {
   display: inline-block;
@@ -363,18 +356,22 @@ body .atlas-map-topic-read .action-arrow { width: 17px; height: 17px; }
     flex-basis: 14px !important;
   }
   body .site-chrome .search-entry > span { display: none !important; }
-  .knowledge-essay-header,
+  .knowledge-essay-page > .knowledge-essay-header,
   .knowledge-essay,
   .atlas-topic-essay-header,
-  .atlas-topic-essay { width: 100%; }
+  .atlas-topic-essay { width: calc(100% - 40px); }
   .knowledge-essay-header,
-  .atlas-topic-essay-header { padding: 28px 20px 26px; }
+  .atlas-topic-essay-header { padding: 28px 0 26px; }
   .knowledge-essay,
-  .atlas-topic-essay { padding: 0 20px 60px; }
+  .atlas-topic-essay { padding: 0 0 60px; }
+  .atlas-topic-essay { padding-top: 30px; }
   .knowledge-essay > section,
   .knowledge-essay > nav,
   .atlas-topic-essay > section,
-  .atlas-topic-essay > nav { padding: 34px 0; }
+  .atlas-topic-essay > nav { padding: 0; }
+  .knowledge-essay > section,
+  .knowledge-essay > nav { margin-bottom: 44px; }
+  .knowledge-essay > section:first-of-type { padding-top: 30px; }
   .knowledge-essay p,
   .atlas-topic-essay p { font-size: 16px; line-height: 1.9; }
   .knowledge-essay-formula { padding: 20px 17px; }

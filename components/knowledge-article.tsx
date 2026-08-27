@@ -16,16 +16,16 @@ export function KnowledgeArticlePage({
 }) {
   return (
     <main className="knowledge-essay-page">
-      <header className="knowledge-essay-header">
-        <p className="knowledge-essay-breadcrumb"><a href="/knowledge/">财经知识库</a><span>／</span><a href={categoryHref}>{term.category}</a></p>
-        <p className="knowledge-essay-kicker">{term.en}{term.abbr ? ` · ${term.abbr}` : ''}</p>
-        <h1>{term.zh}</h1>
-        <p className="knowledge-essay-question">{article.question}</p>
-        <p className="knowledge-essay-deck">{term.summary}</p>
-      </header>
-
       <article className="knowledge-essay">
-        <section>
+        <header className="knowledge-essay-header">
+          <p className="knowledge-essay-breadcrumb"><a href="/knowledge/">财经知识库</a><span>／</span><a href={categoryHref}>{term.category}</a></p>
+          <p className="knowledge-essay-kicker">{term.en}{term.abbr ? ` · ${term.abbr}` : ''}</p>
+          <h1>{term.zh}</h1>
+          <p className="knowledge-essay-question">{article.question}</p>
+          <p className="knowledge-essay-deck">{term.summary}</p>
+        </header>
+
+        <section className="knowledge-essay-opening">
           <h2>定义与边界</h2>
           {article.introduction.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
           <p className="knowledge-essay-thesis">{article.takeaway}</p>
