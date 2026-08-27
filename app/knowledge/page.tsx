@@ -12,13 +12,6 @@ export const metadata: Metadata = {
 export default function KnowledgePage() {
   return (
     <main className={styles.page}>
-      <header className={styles.header}>
-        <p>百科词条 · Reference</p>
-        <h1>财经知识库</h1>
-        <p>这里仅收录已经写成完整文章的词条。每篇至少包含定义、机制、案例、常见误解和资料来源；知识地图中尚未展开的概念不会在这里冒充百科文章。</p>
-        <dl><div><dt>完整词条</dt><dd>{knowledgeTerms.length} 篇</dd></div><div><dt>主题分类</dt><dd>{knowledgeCategories.length} 类</dd></div><div><dt>内容标准</dt><dd><a href="/editorial-policy/">查看说明</a></dd></div></dl>
-      </header>
-
       <div className={styles.layout}>
         <aside>
           <p>主题分类</p>

@@ -1,15 +1,5 @@
 .page { min-height: 70vh; background: #f5f3ed; color: #17292b; }
-.header { width: min(1120px, calc(100% - 48px)); margin: 0 auto; padding: 48px 0 38px; border-bottom: 1px solid #d5d9d3; }
-.header > p:first-child { margin: 0; color: #8f6b34; font-size: 11px; font-weight: 700; letter-spacing: .08em; }
-.header h1 { margin: 8px 0 14px; font: 650 clamp(38px, 5vw, 54px)/1.2 var(--cz-serif, "Songti SC", serif); letter-spacing: -.035em; }
-.header > p:nth-of-type(2) { max-width: 780px; margin: 0; color: #53625f; font-size: 15px; line-height: 1.85; }
-.header dl { margin: 27px 0 0; display: flex; gap: 42px; }
-.header dl div { min-width: 100px; }
-.header dt { color: #7b8683; font-size: 10px; }
-.header dd { margin: 4px 0 0; font-size: 13px; font-weight: 700; }
-.header dd a { color: #315f57; }
-
-.layout { width: min(1120px, calc(100% - 48px)); margin: 0 auto; padding: 45px 0 90px; display: grid; grid-template-columns: 190px minmax(0, 1fr); gap: 70px; }
+.layout { width: min(1120px, calc(100% - 48px)); margin: 0 auto; padding: 34px 0 90px; display: grid; grid-template-columns: 190px minmax(0, 1fr); gap: 70px; }
 .layout > aside { position: sticky; top: 130px; align-self: start; }
 .layout > aside > p { margin: 0 0 12px; color: #8f6b34; font-size: 10px; font-weight: 700; }
 .layout > aside nav { display: block; border-top: 1px solid #d5d9d3; }
@@ -46,12 +36,9 @@
 }
 
 @media (max-width: 620px) {
-  .header,
   .layout,
   .categoryBody { width: calc(100% - 30px); }
-  .header { padding-top: 34px; }
-  .header dl { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-  .layout { padding-top: 32px; }
+  .layout { padding-top: 24px; }
   .layout > aside nav { grid-template-columns: 1fr; }
   .groups > section > header { grid-template-columns: 30px minmax(0, 1fr); gap: 10px; }
   .termList > a { grid-template-columns: 1fr; gap: 9px; }
