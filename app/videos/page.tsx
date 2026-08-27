@@ -13,7 +13,7 @@ export default function VideosPage() {
     <main>
       <section className="video-sections">
         <header className="catalog-head resource-catalog-head">
-          <div><span>书与视频 / 视频</span><h1>视频课程</h1></div>
+          <div><span>公开课程资料</span><h1>视频课程</h1></div>
         </header>
         {languageOrder.map((language) => (
           <section className="video-section" key={language}>

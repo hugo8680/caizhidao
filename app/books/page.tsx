@@ -11,7 +11,7 @@ export default function BooksPage() {
     <main>
       <section className="book-shelves">
         <header className="catalog-head resource-catalog-head">
-          <div><span>书与视频 / 图书</span><h1>财经图书</h1></div>
+          <div><span>图书资料</span><h1>财经图书</h1></div>
         </header>
         {(['中文', '英文'] as const).map((language) => (
           <section className="book-shelf" key={language}>

@@ -37,9 +37,9 @@ export function SearchExperience() {
       <div className="search-tabs" role="tablist" aria-label="结果类型">
         {kinds.map((item) => <button type="button" role="tab" aria-selected={kind === item} className={kind === item ? 'active' : ''} onClick={() => setKind(item)} key={item}><span>{item}</span><b>{counts[item]}</b></button>)}
       </div>
-      <div className="search-results-head"><p>{query ? <>“{query}” 的搜索结果</> : <>浏览全部内容</>}<b>{results.length}</b></p><small>完整文章优先；“概念索引”表示该词目前在主题文章中解释</small></div>
+      <div className="search-results-head"><p>{query ? <>“{query}” 的搜索结果</> : <>浏览全部内容</>}<b>{results.length}</b></p></div>
       <div className="search-page-results">
-        {loading && <div className="search-page-empty"><b>正在载入知识索引…</b><p>搜索数据只在需要时载入，不再随每个页面下载。</p></div>}
+        {loading && <div className="search-page-empty"><b>正在载入知识索引…</b></div>}
         {failed && <div className="search-page-empty"><b>搜索索引暂时无法载入</b><p>请刷新页面后重试。</p></div>}
         {results.slice(0, query ? 80 : 36).map(({ record }) => (
           <a href={record.href} key={record.id}>

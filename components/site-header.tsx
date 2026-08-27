@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { toolCatalog } from '@/lib/tool-catalog';
 import { GlobalSearch } from './global-search';
-import { HeaderIcon, type HeaderIconName } from './header-icon';
 import { ActionArrow } from './action-arrow';
 
 type NavItem = {
@@ -16,7 +15,6 @@ type NavItem = {
 type NavGroup = {
   key: string;
   label: string;
-  icon: HeaderIconName;
   href: string;
   items: NavItem[];
 };
@@ -25,7 +23,7 @@ const beginnerHref = '/courses/start/';
 
 const navGroups: NavGroup[] = [
   {
-    key: 'learn', label: '学习', icon: 'learn', href: beginnerHref,
+    key: 'learn', label: '学习', href: beginnerHref,
     items: [
       { key: 'beginner', label: '新手入门', href: beginnerHref },
       { key: 'courses', label: '系统课程', href: '/courses/' },
@@ -33,7 +31,7 @@ const navGroups: NavGroup[] = [
     ],
   },
   {
-    key: 'reference', label: '查知识', icon: 'reference', href: '/knowledge/',
+    key: 'reference', label: '知识库', href: '/knowledge/',
     items: [
       { key: 'knowledge', label: '百科词条', href: '/knowledge/' },
       { key: 'atlas', label: '知识地图', href: '/atlas/' },
@@ -41,13 +39,13 @@ const navGroups: NavGroup[] = [
     ],
   },
   {
-    key: 'practice', label: '金融小工具', icon: 'practice', href: '/tools/',
+    key: 'practice', label: '金融小工具', href: '/tools/',
     items: [
       { key: 'tools', label: '金融小工具', href: '/tools/' },
     ],
   },
   {
-    key: 'resources', label: '书与视频', icon: 'resources', href: '/books/',
+    key: 'resources', label: '图书与视频', href: '/books/',
     items: [
       { key: 'books', label: '财经图书', href: '/books/' },
       { key: 'videos', label: '视频课程', href: '/videos/' },
@@ -136,7 +134,6 @@ export function SiteHeader() {
                     aria-controls="financial-tool-menu"
                     onClick={() => setToolMenuOpen((open) => !open)}
                   >
-                    <HeaderIcon name={group.icon} className="primary-nav-icon" />
                     <span>{group.label}</span>
                     <i className="tool-menu-chevron" aria-hidden="true" />
                   </button>
@@ -155,7 +152,7 @@ export function SiteHeader() {
                 </div>
               );
             }
-            return <a href={group.href} key={group.key} className={active ? 'active' : ''} aria-current={active ? 'page' : undefined}><HeaderIcon name={group.icon} className="primary-nav-icon" /><span>{group.label}</span></a>;
+            return <a href={group.href} key={group.key} className={active ? 'active' : ''} aria-current={active ? 'page' : undefined}><span>{group.label}</span></a>;
           })}
         </nav>
 

@@ -1,7 +1,7 @@
 export function SiteFooter() {
   return (
     <footer className="platform-footer">
-      <div className="footer-brand"><b>财知道</b><small>财经 · 金融 · 经济学</small><p>从一个概念开始，慢慢看懂钱、市场和经济。</p></div>
+      <div className="footer-brand"><b>财知道</b><small>财经 · 金融 · 经济学</small><p>面向非专业读者的财经知识库。</p></div>
       <div className="footer-link-groups">
         <section><b>建立体系</b><a href="/atlas/">知识地图</a><a href="/topics/">专题路线</a><a href="/timeline/">发展简史</a></section>
         <section><b>深入学习</b><a href="/courses/start/">新手入门</a><a href="/courses/">系统课程</a><a href="/knowledge/">双语百科</a><a href="/search/">全站检索</a></section>
