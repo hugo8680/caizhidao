@@ -1,4 +1,5 @@
 import { knowledgeArticleDetails } from './knowledge-article-details';
+import { knowledgeArticleDepth } from './knowledge-article-depth';
 import { knowledgeArticleEssays, type KnowledgeEssaySection } from './knowledge-article-essays';
 import { knowledgeTerms } from './content';
 
@@ -198,10 +199,18 @@ const generatedArticles = Object.fromEntries(Object.entries(knowledgeArticleDeta
   } satisfies KnowledgeArticle];
 }));
 
-const knowledgeArticles: Record<string, KnowledgeArticle> = {
+const baseKnowledgeArticles: Record<string, KnowledgeArticle> = {
   ...generatedArticles,
   ...curatedArticles,
 };
+
+const knowledgeArticles: Record<string, KnowledgeArticle> = Object.fromEntries(
+  Object.entries(baseKnowledgeArticles).map(([slug, article]) => {
+    const depth = knowledgeArticleDepth[slug];
+    if (!depth) throw new Error(`Missing knowledge article depth sections: ${slug}`);
+    return [slug, { ...article, analysis: [...article.analysis, ...depth] }];
+  }),
+);
 
 export function getKnowledgeArticle(slug: string) {
   return knowledgeArticles[slug];

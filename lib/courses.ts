@@ -1,5 +1,6 @@
 import { financeFoundationLessons } from './course-content/finance-foundations';
 import { investmentProductLessons } from './course-content/investment-products';
+import { enrichLessons } from './course-content/lesson-depth';
 import { personalFinanceLessons } from './course-content/personal-finance';
 import type { Course, PlannedCourse } from './course-types';
 
@@ -17,7 +18,7 @@ export const courses: Course[] = [
     prerequisite: '无专业前置要求；具备基础百分比和四则运算即可。',
     method: '按顺序阅读。每课先理解概念与机制，再完成数值案例、误区辨析和三道带答案练习。',
     outcomes: ['把不同时间点的现金流放到同一尺度比较', '区分名义收益、实际购买力和完整总回报', '从目标、期限、风险与成本出发分析金融选择'],
-    lessons: financeFoundationLessons,
+    lessons: enrichLessons('finance-foundations', financeFoundationLessons),
   },
   {
     slug: 'personal-finance',
@@ -30,7 +31,7 @@ export const courses: Course[] = [
     prerequisite: '建议先完成《金融通识入门》，至少应理解时间价值、实际收益和风险能力。',
     method: '准备近三个月流水和主要账户余额，边学边完成自己的资产负债表、预算、保障缺口与年度复盘。',
     outcomes: ['建立个人资产负债表与可持续预算', '确定应急金、偿债和保险保障的先后顺序', '对住房与养老目标进行多情景规划'],
-    lessons: personalFinanceLessons,
+    lessons: enrichLessons('personal-finance', personalFinanceLessons),
   },
   {
     slug: 'investment-products',
@@ -43,7 +44,7 @@ export const courses: Course[] = [
     prerequisite: '建议先完成《金融通识入门》；涉及个人资金安排时，建议同时完成《个人财务规划》。',
     method: '不做产品推荐。每课用同一套“主体—资产—现金流—费用—退出—最坏结果”框架进行拆解。',
     outcomes: ['辨认常见投资产品的法律性质与收益来源', '正确阅读利率、净值、收益率与折溢价', '独立完成产品尽调并识别高风险销售与骗局'],
-    lessons: investmentProductLessons,
+    lessons: enrichLessons('investment-products', investmentProductLessons),
   },
 ];
 

@@ -51,9 +51,10 @@ for (const slug of actualSlugs) if (!expectedSlugs.has(slug)) problems.push(`深
 for (const term of data.knowledgeTerms) {
   const article = data.getKnowledgeArticle(term.slug);
   if (!article) continue;
-  if (contentLength(article) < 1400) problems.push(`百科文章内容过短：${term.slug}`);
+  const analysisParagraphs = article.analysis.reduce((count, section) => count + section.paragraphs.length, 0);
+  if (contentLength(article) < 1900) problems.push(`百科文章内容过短：${term.slug}`);
   if (article.mechanism.length < 3) problems.push(`百科文章缺少机制：${term.slug}`);
-  if (article.analysis.length < 2 || article.analysis.some((section) => section.paragraphs.length < 2)) problems.push(`百科文章缺少独立长文分析：${term.slug}`);
+  if (article.analysis.length < 6 || analysisParagraphs < 12 || article.analysis.some((section) => section.paragraphs.length < 2)) problems.push(`百科文章缺少独立长文分析：${term.slug}`);
   if (article.distinctions.length < 2) problems.push(`百科文章缺少概念辨析：${term.slug}`);
   if (article.checklist.length < 3) problems.push(`百科文章缺少分析检查项：${term.slug}`);
   if (article.sources.length < 2) problems.push(`百科文章缺少足够来源：${term.slug}`);
@@ -69,9 +70,16 @@ for (const discipline of data.disciplines) {
     if (!article) problems.push(`知识地图缺少主题文章：${key}`);
     else {
       const profiles = data.getAtlasTopicProfiles(discipline.slug, topicIndex);
-      const renderedInputs = { article, topicSummary: topic.summary, profiles: profiles.map((profile) => ({ brief: profile.brief, example: profile.example, references: profile.references })) };
-      if (contentLength(renderedInputs) < 900) problems.push(`知识地图主题内容过短：${key}`);
-      if (article.analysis.length < 2 || article.analysis.some((section) => section.paragraphs.length < 2)) problems.push(`知识地图主题缺少独立长文分析：${key}`);
+      const renderedInputs = {
+        article,
+        topicSummary: topic.summary,
+        briefs: profiles.map((profile) => profile.brief),
+        example: profiles[0]?.example,
+        references: profiles[0]?.references ?? [],
+      };
+      const analysisParagraphs = article.analysis.reduce((count, section) => count + section.paragraphs.length, 0);
+      if (contentLength(renderedInputs) < 1250) problems.push(`知识地图主题内容过短：${key}`);
+      if (article.analysis.length < 3 || analysisParagraphs < 7 || article.analysis.some((section) => section.paragraphs.length < 2)) problems.push(`知识地图主题缺少独立长文分析：${key}`);
     }
     if (topic.concepts.length !== 5) problems.push(`主题不是五个核心概念：${key}`);
   });
@@ -91,8 +99,9 @@ for (const course of data.courses) {
     if (lesson.id !== lessonIndex + 1) problems.push(`课程课号不连续：${key}`);
     if (!lesson.slug || lessonSlugs.has(lesson.slug)) problems.push(`课程课时 slug 缺失或重复：${key}`);
     lessonSlugs.add(lesson.slug);
-    if (JSON.stringify(lesson).length < 2500) problems.push(`课程正文仍然过短：${key}`);
-    if (lesson.objectives.length < 3 || lesson.sections.length < 2) problems.push(`课程缺少目标或系统解释：${key}`);
+    const sectionParagraphs = lesson.sections.reduce((count, section) => count + section.paragraphs.length, 0);
+    if (contentLength(lesson) < 2500) problems.push(`课程正文仍然过短：${key}`);
+    if (lesson.objectives.length < 3 || lesson.sections.length < 4 || sectionParagraphs < 10) problems.push(`课程缺少目标或系统解释：${key}`);
     if (lesson.sections.some((section) => section.paragraphs.length < 2)) problems.push(`课程章节论述不足：${key}`);
     if (lesson.mechanism.length < 4) problems.push(`课程缺少完整作用机制：${key}`);
     if (!lesson.formula || lesson.formula.variables.length < 3 || lesson.formula.conditions.length < 3) problems.push(`课程缺少公式变量或使用条件：${key}`);

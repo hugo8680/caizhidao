@@ -1,4 +1,5 @@
 import { atlasTopicEssays, type AtlasEssaySection } from './atlas-topic-essays';
+import { atlasTopicDepth } from './atlas-topic-depth';
 
 export type AtlasTopicArticle = {
   question: string;
@@ -450,6 +451,8 @@ export const atlasTopicArticles: Record<string, AtlasTopicArticle> = Object.from
   Object.entries(atlasTopicCoreArticles).map(([key, article]) => {
     const analysis = atlasTopicEssays[key];
     if (!analysis) throw new Error(`Missing atlas topic essay: ${key}`);
-    return [key, { ...article, analysis }];
+    const depth = atlasTopicDepth[key];
+    if (!depth) throw new Error(`Missing atlas topic depth: ${key}`);
+    return [key, { ...article, analysis: [...analysis, ...depth] }];
   }),
 );
