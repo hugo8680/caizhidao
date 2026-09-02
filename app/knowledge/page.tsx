@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
+import { ActionArrow } from '@/components/action-arrow';
 import { knowledgeCategories, knowledgeTerms } from '@/lib/content';
 import { getKnowledgeCategoryByName } from '@/lib/guides';
-import styles from './knowledge-index.module.css';
 
 export const metadata: Metadata = {
   title: '财经知识库 · 财知道',
@@ -10,15 +10,11 @@ export const metadata: Metadata = {
 
 export default function KnowledgePage() {
   return (
-    <main className={styles.page}>
-      <header className={styles.indexHeader}>
-        <div><p>百科词条</p><h1>财经知识库</h1></div>
-        <p>收录 {knowledgeTerms.length} 个财经、金融与经济学概念，按学科分类查阅定义、机制、公式、案例与参考资料。</p>
-      </header>
-      <div className={styles.layout}>
-        <aside>
-          <p>主题分类</p>
-          <nav aria-label="百科主题目录">
+    <main className="encyclopedia-index-page">
+      <div className="encyclopedia-index-grid">
+        <aside className="encyclopedia-index-rail">
+          <header><p>百科词条</p><h1>财经知识库</h1><small>{knowledgeTerms.length} 篇完整词条</small></header>
+          <nav aria-label="百科分类目录">
             {knowledgeCategories.map((category) => {
               const page = getKnowledgeCategoryByName(category);
               const count = knowledgeTerms.filter((term) => term.category === category).length;
@@ -27,20 +23,20 @@ export default function KnowledgePage() {
           </nav>
         </aside>
 
-        <div className={styles.groups}>
+        <div className="encyclopedia-index-body">
           {knowledgeCategories.map((category, categoryIndex) => {
             const categoryPage = getKnowledgeCategoryByName(category);
             const terms = knowledgeTerms.filter((term) => term.category === category);
             return (
-              <section key={category}>
-                <header><span>{String(categoryIndex + 1).padStart(2, '0')}</span><div><h2>{category}</h2>{categoryPage && <p>{categoryPage.overview}</p>}</div></header>
-                <div className={styles.termList}>
+              <section className="encyclopedia-category-group" key={category}>
+                <header><span>{String(categoryIndex + 1).padStart(2, '0')}</span><div><h2>{category}</h2>{categoryPage && <p>{categoryPage.overview}</p>}</div>{categoryPage && <a href={`/knowledge/category/${categoryPage.slug}/`}>分类页 <ActionArrow /></a>}</header>
+                <div className="encyclopedia-term-list">
                   {terms.map((term) => {
                     return (
                       <a href={`/knowledge/${term.slug}/`} key={term.slug}>
                         <div><h3>{term.zh}</h3><span>{term.en}{term.abbr ? ` · ${term.abbr}` : ''}</span></div>
                         <p>{term.summary}</p>
-                        <span className={styles.termArrow} aria-hidden="true">→</span>
+                        <ActionArrow />
                       </a>
                     );
                   })}

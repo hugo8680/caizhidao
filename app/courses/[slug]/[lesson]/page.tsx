@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+import { ActionArrow } from '@/components/action-arrow';
 import { LessonCompletion } from '@/components/course-progress';
 import { courses, getCourse, getLesson } from '@/lib/courses';
 
@@ -137,15 +138,15 @@ export default async function LessonPage({ params }: LessonPageProps) {
               {lesson.sources.map((source) => (
                 <li key={`${source.publisher}-${source.title}`}>
                   <div><strong>{source.title}</strong><span>{source.publisher}</span><p>{source.note}</p></div>
-                  {source.url && <a href={source.url} target="_blank" rel="noreferrer">访问来源 ↗</a>}
+                  {source.url && <a href={source.url} target="_blank" rel="noreferrer">访问来源 <ActionArrow direction="external" /></a>}
                 </li>
               ))}
             </ol>
           </section>
 
           <nav className="lesson-page-navigation" aria-label="课程课时导航">
-            {previous ? <a href={`/courses/${course.slug}/${previous.slug}/`}><span>上一课</span><b>← {previous.title}</b></a> : <span />}
-            {next ? <a href={`/courses/${course.slug}/${next.slug}/`}><span>下一课</span><b>{next.title} →</b></a> : <a href={`/courses/${course.slug}/`}><span>课程完成</span><b>返回课程目录 →</b></a>}
+            {previous ? <a href={`/courses/${course.slug}/${previous.slug}/`}><span>上一课</span><b><ActionArrow direction="left" /> {previous.title}</b></a> : <span />}
+            {next ? <a href={`/courses/${course.slug}/${next.slug}/`}><span>下一课</span><b>{next.title} <ActionArrow /></b></a> : <a href={`/courses/${course.slug}/`}><span>课程完成</span><b>返回课程目录 <ActionArrow /></b></a>}
           </nav>
         </article>
 

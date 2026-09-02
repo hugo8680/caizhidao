@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+import { ActionArrow } from '@/components/action-arrow';
+import { getAtlasTopicProfiles } from '@/lib/atlas-content';
 import { disciplines } from '@/lib/system';
 
 type DisciplinePageProps = { params: Promise<{ slug: string }> };
@@ -24,30 +26,46 @@ export default async function DisciplinePage({ params }: DisciplinePageProps) {
   const { slug } = await params;
   const discipline = disciplines.find((item) => item.slug === slug);
   if (!discipline) notFound();
-  const index = disciplines.findIndex((item) => item.slug === discipline.slug);
-  const previous = index > 0 ? disciplines[index - 1] : undefined;
-  const next = index < disciplines.length - 1 ? disciplines[index + 1] : undefined;
 
   return (
-    <main>
-      <section className={`discipline-hero tone-${discipline.tone}`}>
-        <p><a href="/atlas/">财经知识地图</a><span>／</span>学科 {discipline.no}</p>
-        <div><small>{discipline.en}</small><h1>{discipline.name}</h1><h2>{discipline.question}</h2><p>{discipline.summary}</p></div>
-      </section>
+    <main className="atlas-index-page">
+      <div className="atlas-index-grid">
+        <aside className="atlas-index-rail">
+          <header><p>学科目录</p><h1>{discipline.name}</h1><small lang="en">{discipline.en}</small></header>
+          <nav aria-label="全部学科">
+            {disciplines.map((item) => <a className={item.slug === slug ? 'active' : ''} aria-current={item.slug === slug ? 'page' : undefined} href={`/atlas/${item.slug}/`} key={item.slug}><span>{item.no}</span><b>{item.name}</b></a>)}
+          </nav>
+          <a className="encyclopedia-rail-back" href="/atlas/">完整知识地图 <ActionArrow /></a>
+        </aside>
 
-      <section className="discipline-topic-list">
-        {discipline.topics.map((topic, topicIndex) => (
-          <article key={topic.title}>
-            <header><span>{discipline.no}.{topicIndex + 1}</span><small>{topic.en}</small></header>
-            <div className="discipline-topic-copy"><h2><a href={`/atlas/${discipline.slug}/topic/${String(topicIndex + 1).padStart(2, '0')}/`}>{topic.title}</a></h2><p>{topic.summary}</p><p>{topic.concepts.join(' · ')}</p><a href={`/atlas/${discipline.slug}/topic/${String(topicIndex + 1).padStart(2, '0')}/`}>阅读主题科普 →</a></div>
-          </article>
-        ))}
-      </section>
+        <section className="discipline-directory">
+          <header className="discipline-directory-intro">
+            <p><a href="/atlas/">财经知识地图</a><span>／</span>学科 {discipline.no}</p>
+            <small>{discipline.en}</small>
+            <h2>{discipline.name}</h2>
+            <strong>{discipline.question}</strong>
+            <p>{discipline.summary}</p>
+          </header>
 
-      <nav className="discipline-pagination" aria-label="相邻学科索引">
-        {previous ? <a href={`/atlas/${previous.slug}/`}><span>← 上一学科</span><b>{previous.name}</b></a> : <a href="/atlas/"><span>← 返回</span><b>全部学科索引</b></a>}
-        {next ? <a href={`/atlas/${next.slug}/`}><span>下一学科 →</span><b>{next.name}</b></a> : <a href="/atlas/"><span>返回</span><b>全部学科索引</b></a>}
-      </nav>
+          <div className="discipline-topic-list">
+            {discipline.topics.map((topic, topicIndex) => {
+              const topicId = String(topicIndex + 1).padStart(2, '0');
+              const concepts = getAtlasTopicProfiles(discipline.slug, topicIndex);
+              return (
+                <article key={topic.title}>
+                  <header><span>{discipline.no}.{topicIndex + 1}</span><small>{topic.en}</small></header>
+                  <div className="discipline-topic-copy">
+                    <h3><a href={`/atlas/${discipline.slug}/topic/${topicId}/`}>{topic.title}</a></h3>
+                    <p>{topic.summary}</p>
+                    <ul>{concepts.map((concept) => <li key={concept.id}><a href={`/atlas/${discipline.slug}/${concept.id}/`}>{concept.name}<small>{concept.en}</small></a></li>)}</ul>
+                    <a className="discipline-topic-read" href={`/atlas/${discipline.slug}/topic/${topicId}/`}>阅读主题文章 <ActionArrow /></a>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        </section>
+      </div>
     </main>
   );
 }

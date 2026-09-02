@@ -3,6 +3,8 @@
 import { useEffect, useMemo, useState } from 'react';
 import { searchContent } from '@/lib/search-ranking';
 import type { SearchKind } from '@/lib/search-types';
+import { ActionArrow } from './action-arrow';
+import { HeaderIcon } from './header-icon';
 import { useSearchIndex } from './use-search-index';
 
 const kinds: Array<SearchKind | '全部'> = ['全部', '知识', '课程', '专题', '学科', '工具', '图书', '视频', '历史'];
@@ -31,7 +33,7 @@ export function SearchExperience() {
   return (
     <section className="search-page-shell">
       <div className="search-page-box">
-        <label><span>⌕</span><input type="search" autoFocus value={query} onChange={(event) => setQuery(event.target.value)} placeholder="输入关键词、英文术语或 ISBN…" /><kbd>⌘ K</kbd></label>
+        <label><HeaderIcon name="search" /><input type="search" autoFocus value={query} onChange={(event) => setQuery(event.target.value)} placeholder="输入关键词、英文术语或 ISBN…" /><kbd>⌘ K</kbd></label>
         <div className="search-suggestions"><span>常用关键词</span>{suggestions.map((item) => <button type="button" onClick={() => setQuery(item)} key={item}>{item}</button>)}</div>
       </div>
       <div className="search-tabs" role="tablist" aria-label="结果类型">
@@ -43,7 +45,7 @@ export function SearchExperience() {
         {failed && <div className="search-page-empty"><b>搜索索引暂时无法载入</b><p>请刷新页面后重试。</p></div>}
         {results.slice(0, query ? 80 : 36).map(({ record }) => (
           <a href={record.href} key={record.id}>
-            <span>{record.kind}</span><div><h2>{record.title}</h2><h3>{record.english}</h3><p>{record.description}</p></div><i>→</i>
+            <span>{record.kind}</span><div><h2>{record.title}</h2><h3>{record.english}</h3><p>{record.description}</p></div><ActionArrow />
           </a>
         ))}
         {!loading && !failed && results.length === 0 && <div className="search-page-empty"><b>没有找到相关内容</b><p>可以换一个短一点的关键词，或者切回“全部”。</p><button type="button" onClick={() => { setQuery(''); setKind('全部'); }}>清除条件</button></div>}

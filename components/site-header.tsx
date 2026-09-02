@@ -5,7 +5,6 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { toolCatalog } from '@/lib/tool-catalog';
 import { GlobalSearch } from './global-search';
-import { ActionArrow } from './action-arrow';
 import { HeaderIcon, type HeaderIconName } from './header-icon';
 
 type NavItem = {
@@ -79,20 +78,10 @@ export function SiteHeader() {
   const isHome = pathname === '/';
   const isSearch = pathname.startsWith('/search/');
   const activeGroup = navGroups.find((group) => group.items.some((item) => itemIsActive(item, pathname)));
-  const activeItem = activeGroup?.items.find((item) => itemIsActive(item, pathname));
-  const subnavRef = useRef<HTMLElement>(null);
-  const activeItemRef = useRef<HTMLAnchorElement>(null);
   const toolMenuRef = useRef<HTMLDivElement>(null);
   const siteChromeRef = useRef<HTMLDivElement>(null);
   const [toolMenuOpen, setToolMenuOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  useEffect(() => {
-    const nav = subnavRef.current;
-    const item = activeItemRef.current;
-    if (!nav || !item || nav.scrollWidth <= nav.clientWidth) return;
-    nav.scrollTo({ left: Math.max(0, item.offsetLeft - (nav.clientWidth - item.offsetWidth) / 2), behavior: 'auto' });
-  }, [pathname]);
 
   useEffect(() => {
     function closeFromOutside(event: PointerEvent) {
@@ -171,7 +160,6 @@ export function SiteHeader() {
         </nav>
 
         <div className="header-actions">
-          <a className={`start-entry${pathname === beginnerHref ? ' active' : ''}`} href={beginnerHref}><span>从零开始</span><ActionArrow /></a>
           <GlobalSearch active={isSearch} />
           <button
             className="mobile-nav-toggle"
@@ -185,19 +173,6 @@ export function SiteHeader() {
           </button>
         </div>
       </header>
-
-      {activeGroup && activeGroup.items.length > 1 && (
-        <div className="section-nav">
-          <div className="section-nav-inner">
-            <nav aria-label={`${activeGroup.label}二级导航`} ref={subnavRef}>
-              {activeGroup.items.map((item) => {
-                const active = item.key === activeItem?.key;
-                return <a href={item.href} key={item.key} className={active ? 'active' : ''} aria-current={active ? 'page' : undefined} ref={active ? activeItemRef : undefined}>{item.label}</a>;
-              })}
-            </nav>
-          </div>
-        </div>
-      )}
 
       <nav className="mobile-bottom-nav" aria-label="移动端主要导航">
         {mobileNavItems.map((item) => {

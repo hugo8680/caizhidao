@@ -4,9 +4,10 @@ import { CalculatorIcon } from '@phosphor-icons/react/dist/ssr/Calculator';
 import { CaretDownIcon } from '@phosphor-icons/react/dist/ssr/CaretDown';
 import { ListIcon } from '@phosphor-icons/react/dist/ssr/List';
 import { MagnifyingGlassIcon } from '@phosphor-icons/react/dist/ssr/MagnifyingGlass';
+import { PlayIcon } from '@phosphor-icons/react/dist/ssr/Play';
 import { StudentIcon } from '@phosphor-icons/react/dist/ssr/Student';
 
-export type HeaderIconName = 'learn' | 'reference' | 'practice' | 'resources' | 'search' | 'menu' | 'caret';
+export type HeaderIconName = 'learn' | 'reference' | 'practice' | 'resources' | 'search' | 'menu' | 'caret' | 'play';
 
 type HeaderIconProps = {
   name: HeaderIconName;
@@ -21,5 +22,6 @@ export function HeaderIcon({ name, className }: HeaderIconProps) {
   if (name === 'resources') return <BooksIcon {...props} />;
   if (name === 'menu') return <ListIcon {...props} />;
   if (name === 'caret') return <CaretDownIcon {...props} />;
+  if (name === 'play') return <PlayIcon {...props} />;
   return <MagnifyingGlassIcon {...props} />;
 }

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { ActionArrow } from '@/components/action-arrow';
 import { learningRoutes } from '@/lib/system';
 
 export const metadata: Metadata = {
@@ -8,18 +9,28 @@ export const metadata: Metadata = {
 
 export default function TopicsPage() {
   return (
-    <main>
-      <header className="catalog-head standalone-catalog-head"><div><span>专题索引</span><h1>财经专题</h1></div></header>
-      <section className="topics-index-grid">
-        {learningRoutes.map((route) => (
-          <a href={`/topics/${route.slug}/`} key={route.slug}>
-            <header><span>{route.no}</span></header>
-            <h2>{route.title}</h2><h3>{route.en}</h3><strong>{route.question}</strong><p>{route.description}</p>
-            <ol>{route.steps.map((step, index) => <li key={step.title}><span>{String(index + 1).padStart(2, '0')}</span>{step.title}<small>{step.note}</small></li>)}</ol>
-            <footer><b>阅读专题</b><i>→</i></footer>
-          </a>
-        ))}
-      </section>
+    <main className="topic-index-page">
+      <div className="topic-index-grid">
+        <aside className="topic-index-rail">
+          <header><p>问题式阅读</p><h1>财经专题</h1><small>{learningRoutes.length} 个现实问题</small></header>
+          <nav aria-label="专题目录">{learningRoutes.map((route) => <a href={`/topics/${route.slug}/`} key={route.slug}><span>{route.no}</span><b>{route.title}</b></a>)}</nav>
+        </aside>
+        <section className="topic-index-body">
+          {learningRoutes.map((route) => (
+            <article className="topic-index-row" key={route.slug}>
+              <span>{route.no}</span>
+              <div>
+                <small>{route.en}</small>
+                <h2><a href={`/topics/${route.slug}/`}>{route.title}</a></h2>
+                <strong>{route.question}</strong>
+                <p>{route.description}</p>
+                <ol>{route.steps.map((step, index) => <li key={step.title}><span>{String(index + 1).padStart(2, '0')}</span><b>{step.title}</b><small>{step.note}</small></li>)}</ol>
+              </div>
+              <a className="topic-index-read" href={`/topics/${route.slug}/`}>阅读专题 <ActionArrow /></a>
+            </article>
+          ))}
+        </section>
+      </div>
     </main>
   );
 }

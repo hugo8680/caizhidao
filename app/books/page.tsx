@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { ActionArrow } from '@/components/action-arrow';
 import { books } from '@/lib/library';
 
 export const metadata: Metadata = {
@@ -23,7 +24,7 @@ export default function BooksPage() {
                   <div className="book-info">
                     <span>{book.language} · {book.level}</span><a className="book-title-link" href={`/books/${book.id}/`}><h3>{book.title}</h3>{book.originalTitle && <h4>{book.originalTitle}</h4>}</a><p>{book.intro}</p>
                     <dl><div><dt>作者</dt><dd>{book.author}</dd></div><div><dt>出版社</dt><dd>{book.publisher}</dd></div><div><dt>年份</dt><dd>{book.year}</dd></div><div><dt>ISBN</dt><dd>{book.isbn}</dd></div><div><dt>页数</dt><dd>{book.pages}</dd></div><div><dt>参考价</dt><dd>{book.price}</dd></div></dl>
-                    <footer><a href={`/books/${book.id}/`}>查看图书详情 →</a><a href={book.sourceUrl} target="_blank" rel="noreferrer">版本资料 ↗</a></footer>
+                    <footer><a href={`/books/${book.id}/`}>查看图书详情 <ActionArrow /></a><a href={book.sourceUrl} target="_blank" rel="noreferrer">版本资料 <ActionArrow direction="external" /></a></footer>
                   </div>
                 </article>
               ))}
