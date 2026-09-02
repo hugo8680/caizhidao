@@ -45,6 +45,19 @@ export default async function LessonPage({ params }: LessonPageProps) {
       </header>
 
       <div className="lesson-layout">
+        <aside className="lesson-course-toc" aria-label={`${course.title}章节目录`}>
+          <h2>章节目录</h2>
+          <ol>
+            {course.lessons.map((item, index) => (
+              <li key={item.slug} className={item.slug === lesson.slug ? 'active' : ''}>
+                <a href={`/courses/${course.slug}/${item.slug}/`} aria-current={item.slug === lesson.slug ? 'page' : undefined}>
+                  <span>{index + 1}.</span><b>{item.title}</b>
+                </a>
+              </li>
+            ))}
+          </ol>
+        </aside>
+
         <article className="lesson-article">
           <section className="lesson-opening">
             <p className="lesson-key">{lesson.key}</p>

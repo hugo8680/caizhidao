@@ -10,6 +10,7 @@
 
 # testing
 /coverage
+/.design-qa/
 
 # next.js
 /.next/

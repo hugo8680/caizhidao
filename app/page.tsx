@@ -1,117 +1,105 @@
 import { ActionArrow } from '@/components/action-arrow';
+import { HeaderIcon } from '@/components/header-icon';
 import { knowledgeTerms } from '@/lib/content';
 import { courses } from '@/lib/courses';
 import { disciplines, learningRoutes, popularQuestions } from '@/lib/system';
 
 const resourceLayers = [
-  { no: '01', title: '百科词条', label: '定义与机制', text: '查阅专业定义、作用机制、公式、案例、概念辨析和参考资料。', href: '/knowledge/' },
-  { no: '02', title: '系统课程', label: '基础课程', text: '依次学习金融通识、个人财务和投资产品三门完整入门课程。', href: '/courses/' },
-  { no: '03', title: '金融小工具', label: '计算与比较', text: '计算复利、贷款、实际收益、退休资金、债券价格和估值。', href: '/tools/compound/' },
-  { no: '04', title: '财经图书', label: '书目资料', text: '查阅中英文书名、作者、出版社、ISBN、版本和参考价格。', href: '/books/' },
-  { no: '05', title: '视频课程', label: '公开课程', text: '整理中文、英文和带字幕的高校与专业机构公开课程。', href: '/videos/' },
+  { title: '百科词条', detail: '51 篇完整词条', href: '/knowledge/' },
+  { title: '知识地图', detail: '12 个学科体系', href: '/atlas/' },
+  { title: '系统课程', detail: '3 门入门课程', href: '/courses/' },
+  { title: '金融小工具', detail: '12 个计算工具', href: '/tools/' },
+  { title: '图书与视频', detail: '28 项参考资料', href: '/books/' },
+];
+
+const leadCourse = courses[0];
+const starterLessons = leadCourse.lessons.slice(0, 5);
+const latestTerms = knowledgeTerms.slice(0, 6);
+const focusRoutes = [
+  ...courses.map((course) => ({ title: course.title, href: `/courses/${course.slug}/`, detail: `共 ${course.lessons.length} 课时` })),
+  ...learningRoutes.slice(0, 2).map((route) => ({ title: route.title, href: `/topics/${route.slug}/`, detail: `约 ${route.minutes} 分钟` })),
 ];
 
 export default function Home() {
   return (
-    <main className="library-home">
-      <section className="library-home-intro">
+    <main className="reference-home-page">
+      <header className="reference-mobile-brand">
+        <h1>财知道</h1>
+        <p>系统的财经知识与金融工具</p>
+        <a className="reference-mobile-search" href="/search/">
+          <span>搜索知识库、文章与工具</span>
+          <HeaderIcon name="search" />
+        </a>
+      </header>
+
+      <div className="reference-home-grid">
+        <aside className="reference-home-catalog">
+          <h2>知识库分类</h2>
+          <ol>
+            {disciplines.slice(0, 6).map((discipline) => (
+              <li key={discipline.slug}>
+                <a href={`/atlas/${discipline.slug}/`}><span>{discipline.no}</span><b>{discipline.name}</b></a>
+                <ul>{discipline.topics.slice(0, 3).map((topic) => <li key={topic.title}><a href={`/atlas/${discipline.slug}/`}>{topic.title}</a></li>)}</ul>
+              </li>
+            ))}
+          </ol>
+          <a className="reference-catalog-all" href="/atlas/">所有分类目录 <ActionArrow /></a>
+        </aside>
+
+        <div className="reference-home-main">
+          <section className="reference-home-start">
+            <h1>从零开始</h1>
+            <div className="reference-start-list">
+              {starterLessons.map((lesson, index) => (
+                <a href={`/courses/${leadCourse.slug}/${lesson.slug}/`} key={lesson.slug}>
+                  <span>{index + 1}</span>
+                  <div><b>{lesson.title}</b><small>{lesson.summary}</small></div>
+                </a>
+              ))}
+            </div>
+            <a className="reference-section-link" href="/courses/start/">查看完整入门路径 <ActionArrow /></a>
+          </section>
+
+          <section className="reference-home-latest">
+            <header><h2>最新与精选长文</h2></header>
+            <div className="reference-article-table" role="table" aria-label="精选财经文章">
+              <div role="row" className="reference-table-head"><span>标题</span><span>分类</span><span>内容</span></div>
+              {latestTerms.map((term, index) => (
+                <a href={`/knowledge/${term.slug}/`} role="row" key={term.slug}>
+                  <span><i>{index + 1}</i><b>{term.zh}</b><small>（{term.en}）</small></span>
+                  <span>{term.category}</span>
+                  <span>完整词条</span>
+                </a>
+              ))}
+            </div>
+            <a className="reference-section-link" href="/knowledge/">查看全部文章 <ActionArrow /></a>
+          </section>
+        </div>
+
+        <aside className="reference-home-routes">
+          <h2>重点学习路径</h2>
+          <ol>
+            {focusRoutes.map((route, index) => (
+              <li key={route.href}><a href={route.href}><span>{String(index + 1).padStart(2, '0')}</span><b>{route.title}</b><small>{route.detail}</small></a></li>
+            ))}
+          </ol>
+          <a className="reference-section-link" href="/courses/">查看全部学习路径 <ActionArrow /></a>
+        </aside>
+      </div>
+
+      <section className="reference-home-directory">
         <div>
-          <p>财经 · 金融 · 经济学知识库</p>
-          <h1>财经、金融与经济学</h1>
-          <p className="library-home-summary">系统介绍经济学原理、金融市场、公司财务、会计、个人财务与投资分析。每篇内容说明定义、机制、公式、案例、证据和适用边界。</p>
+          <header><h2>按学科查阅</h2><a href="/atlas/">完整知识地图 <ActionArrow /></a></header>
+          <nav>{disciplines.map((discipline) => <a href={`/atlas/${discipline.slug}/`} key={discipline.slug}><span>{discipline.no}</span><b>{discipline.name}</b><small>{discipline.en}</small></a>)}</nav>
         </div>
-        <div className="library-home-actions">
-          <a href="/courses/start/"><span>从零开始学习</span><ActionArrow /></a>
-          <a href="/search/"><span>搜索全部内容</span><ActionArrow /></a>
+        <div>
+          <header><h2>现实财经问题</h2></header>
+          <nav>{popularQuestions.slice(0, 6).map((item, index) => <a href={item.href} key={item.question}><span>{String(index + 1).padStart(2, '0')}</span><b>{item.question}</b></a>)}</nav>
         </div>
-      </section>
-
-      <div className="library-home-opening">
-        <section className="library-home-section library-start-section">
-          <header className="library-section-heading">
-            <div><p>学习入口</p><h2>从零开始</h2></div>
-            <a href="/courses/start/"><span>完整入门路径</span><ActionArrow /></a>
-          </header>
-          <div className="library-start-directory">
-            {courses.map((course, index) => (
-              <a href={`/courses/${course.slug}/`} key={course.slug}>
-                <span>{String(index + 1).padStart(2, '0')}</span>
-                <div><h3>{course.title}</h3><small>{course.en}</small><p>{course.lessons.length} 课 · {course.category}</p></div>
-                <ActionArrow />
-              </a>
-            ))}
-          </div>
-        </section>
-
-        <section className="library-home-section library-discipline-section">
-          <header className="library-section-heading">
-            <div><p>查阅入口</p><h2>按学科查阅</h2></div>
-            <a href="/atlas/"><span>完整知识地图</span><ActionArrow /></a>
-          </header>
-          <div className="library-discipline-directory">
-            {disciplines.map((discipline) => (
-              <a href={`/atlas/${discipline.slug}/`} key={discipline.slug}>
-                <span>{discipline.no}</span>
-                <div><h3>{discipline.name}</h3><small>{discipline.en}</small></div>
-                <ActionArrow />
-              </a>
-            ))}
-          </div>
-        </section>
-      </div>
-
-      <div className="library-home-split">
-        <section className="library-home-section">
-          <header className="library-section-heading"><div><p>问题索引</p><h2>从现实问题进入</h2></div></header>
-          <div className="library-question-directory">
-            {popularQuestions.map((item, index) => (
-              <a href={item.href} key={item.question}>
-                <span>{String(index + 1).padStart(2, '0')}</span>
-                <div><h3>{item.question}</h3><p>{item.answer}</p></div>
-                <ActionArrow />
-              </a>
-            ))}
-          </div>
-        </section>
-
-        <section className="library-home-section">
-          <header className="library-section-heading"><div><p>专题文章</p><h2>专题阅读</h2></div><a href="/topics/"><span>全部专题</span><ActionArrow /></a></header>
-          <div className="library-topic-directory">
-            {learningRoutes.map((route) => (
-              <a href={`/topics/${route.slug}/`} key={route.slug}>
-                <span>{route.no}</span>
-                <div><h3>{route.title}</h3><small>{route.en}</small><p>{route.question}</p></div>
-                <ActionArrow />
-              </a>
-            ))}
-          </div>
-        </section>
-      </div>
-
-      <section className="library-home-section">
-        <header className="library-section-heading"><div><p>资料与实践</p><h2>课程、工具、图书与视频</h2></div></header>
-        <div className="library-resource-directory">
-          {resourceLayers.map((layer) => (
-            <a href={layer.href} key={layer.no}>
-              <span>{layer.no}</span>
-              <div><small>{layer.label}</small><h3>{layer.title}</h3><p>{layer.text}</p></div>
-              <ActionArrow />
-            </a>
-          ))}
-        </div>
-      </section>
-
-      <section className="library-home-section library-home-terms">
-        <header className="library-section-heading"><div><p>百科词条</p><h2>词条选录</h2></div><a href="/knowledge/"><span>全部百科词条</span><ActionArrow /></a></header>
-        <div className="library-term-directory">
-          {knowledgeTerms.slice(0, 12).map((term) => (
-            <a href={`/knowledge/${term.slug}/`} key={term.slug}>
-              <div><h3>{term.zh}</h3><small>{term.en}{term.abbr ? ` · ${term.abbr}` : ''}</small></div>
-              <p>{term.summary}</p>
-              <ActionArrow />
-            </a>
-          ))}
-        </div>
+        <aside>
+          <header><h2>主要内容</h2></header>
+          <nav>{resourceLayers.map((item) => <a href={item.href} key={item.title}><b>{item.title}</b><small>{item.detail}</small><ActionArrow /></a>)}</nav>
+        </aside>
       </section>
     </main>
   );

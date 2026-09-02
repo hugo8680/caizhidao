@@ -1,10 +1,12 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { toolCatalog } from '@/lib/tool-catalog';
 import { GlobalSearch } from './global-search';
 import { ActionArrow } from './action-arrow';
+import { HeaderIcon, type HeaderIconName } from './header-icon';
 
 type NavItem = {
   key: string;
@@ -20,6 +22,14 @@ type NavGroup = {
 };
 
 const beginnerHref = '/courses/start/';
+
+const mobileNavItems: Array<{ label: string; href: string; icon: HeaderIconName; match: string }> = [
+  { label: '学习', href: beginnerHref, icon: 'learn', match: '/courses/' },
+  { label: '知识库', href: '/knowledge/', icon: 'reference', match: '/knowledge/' },
+  { label: '工具', href: '/tools/compound/', icon: 'practice', match: '/tools/' },
+  { label: '书架', href: '/books/', icon: 'resources', match: '/books/' },
+  { label: '搜索', href: '/search/', icon: 'search', match: '/search/' },
+];
 
 const navGroups: NavGroup[] = [
   {
@@ -110,14 +120,12 @@ export function SiteHeader() {
       <header className="platform-header">
         <a className={`platform-brand${isHome ? ' active' : ''}`} href="/" aria-label="财知道首页" aria-current={isHome ? 'page' : undefined}>
           <span className="brand-desktop-lockup" aria-hidden="true">
-            <span className="brand-logo-mark" />
-            <i className="brand-lockup-divider" />
             <span className="brand-lockup-copy">
               <strong>财知道</strong>
-              <small><span>财经</span><i /><span>金融</span><i /><span>经济学知识库</span></small>
+              <small>系统的财经知识与金融工具</small>
             </span>
           </span>
-          <span className="brand-mobile-mark" aria-hidden="true" />
+          <span className="brand-mobile-mark" aria-hidden="true"><Image src="/caizhidao-mark.svg" alt="" width={31} height={31} priority /></span>
         </a>
 
         <nav className={`primary-nav${mobileMenuOpen ? ' open' : ''}`} id="primary-site-navigation" aria-label="主要分区">
@@ -141,7 +149,7 @@ export function SiteHeader() {
                     onClick={() => setToolMenuOpen((open) => !open)}
                   >
                     <span>{group.label}</span>
-                    <i className="tool-menu-chevron" aria-hidden="true" />
+                    <HeaderIcon name="caret" className="tool-menu-chevron" />
                   </button>
                   <div className="tool-nav-dropdown" id="financial-tool-menu" aria-label="金融小工具">
                     {toolCatalog.map((tool) => {
@@ -173,7 +181,7 @@ export function SiteHeader() {
             aria-expanded={mobileMenuOpen}
             onClick={() => setMobileMenuOpen((open) => !open)}
           >
-            <i /><i /><i />
+            <HeaderIcon name="menu" />
           </button>
         </div>
       </header>
@@ -190,6 +198,13 @@ export function SiteHeader() {
           </div>
         </div>
       )}
+
+      <nav className="mobile-bottom-nav" aria-label="移动端主要导航">
+        {mobileNavItems.map((item) => {
+          const active = pathname.startsWith(item.match);
+          return <a href={item.href} key={item.label} className={active ? 'active' : ''} aria-current={active ? 'page' : undefined}><HeaderIcon name={item.icon} /><span>{item.label}</span></a>;
+        })}
+      </nav>
     </div>
   );
 }

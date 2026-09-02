@@ -57,7 +57,7 @@ export function GlobalSearch({ active = false }: { active?: boolean }) {
   return (
     <>
       <button ref={triggerRef} className={`search-entry${active ? ' active' : ''}`} type="button" onClick={() => setOpen(true)} aria-label="打开搜索" aria-current={active ? 'page' : undefined} aria-haspopup="dialog" aria-expanded={open} aria-controls="site-search-dialog">
-        <HeaderIcon name="search" className="search-entry-icon" /><span>搜索</span><kbd>⌘ K</kbd>
+        <span className="search-entry-placeholder">搜索知识库、文章与工具</span><HeaderIcon name="search" className="search-entry-icon" /><kbd>⌘ K</kbd>
       </button>
       {open && (
         <div className="search-overlay" role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget) setOpen(false); }}>

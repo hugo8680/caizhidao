@@ -14,19 +14,38 @@ export function KnowledgeArticlePage({
   categoryHref: string;
   related: RelatedTerm[];
 }) {
+  const contents = [
+    '定义与边界',
+    '它是怎样运作的',
+    ...article.analysis.map((section) => section.title),
+    ...(article.formulas && article.formulas.length > 0 ? ['公式表达了什么'] : []),
+    article.example.title,
+    '现实中怎样观察和使用',
+    '不要与这些概念混淆',
+    '常见误解',
+    '英文定义',
+    '参考资料',
+  ];
+
   return (
     <main className="knowledge-essay-page">
-      <article className="knowledge-essay">
+      <div className="knowledge-essay-shell">
+        <aside className="knowledge-essay-toc" aria-label="文章目录">
+          <h2>文章目录</h2>
+          <ol>{contents.map((title, index) => <li key={`${title}-${index}`}><span>{index + 1}.</span><b>{title}</b></li>)}</ol>
+        </aside>
+
+        <article className="knowledge-essay">
         <header className="knowledge-essay-header">
           <p className="knowledge-essay-breadcrumb"><a href="/knowledge/">财经知识库</a><span>／</span><a href={categoryHref}>{term.category}</a></p>
-          <p className="knowledge-essay-kicker">{term.en}{term.abbr ? ` · ${term.abbr}` : ''}</p>
-          <h1>{term.zh}</h1>
-          <p className="knowledge-essay-question">{article.question}</p>
-          <p className="knowledge-essay-deck">{term.summary}</p>
+          <h1>{term.zh}<small>（{term.en}{term.abbr ? ` · ${term.abbr}` : ''}）</small></h1>
+          <p className="knowledge-essay-meta">分类：{term.category}<span>完整百科词条</span></p>
         </header>
 
         <section className="knowledge-essay-opening">
           <h2>定义与边界</h2>
+          <p className="knowledge-essay-question">{article.question}</p>
+          <p className="knowledge-essay-deck">{term.summary}</p>
           {article.introduction.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
           <p className="knowledge-essay-thesis">{article.takeaway}</p>
         </section>
@@ -96,7 +115,18 @@ export function KnowledgeArticlePage({
           <div>{related.map((item) => <a href={`/knowledge/${item.slug}/`} key={item.slug}><b>{item.zh}</b><span>{item.en}</span><p>{item.summary}</p></a>)}</div>
           <a className="knowledge-essay-back" href={categoryHref}>返回{term.category}目录</a>
         </nav>}
-      </article>
+        </article>
+
+        <aside className="knowledge-essay-support">
+          <section><h2>本文内容</h2><ul>{contents.slice(0, 8).map((title) => <li key={title}>{title}</li>)}</ul></section>
+          {related.length > 0 && <section><h2>延伸阅读</h2><ul>{related.slice(0, 5).map((item) => <li key={item.slug}><a href={`/knowledge/${item.slug}/`}>{item.zh}<small>{item.en}</small></a></li>)}</ul></section>}
+          <section><h2>参考资料</h2><ol>{article.sources.slice(0, 3).map((source, index) => (
+            <li key={`${source.title}-${index}`}>
+              {source.url ? <a href={source.url} target="_blank" rel="noreferrer">[{index + 1}] {source.title}</a> : <span>[{index + 1}] {source.title}</span>}
+            </li>
+          ))}</ol></section>
+        </aside>
+      </div>
     </main>
   );
 }

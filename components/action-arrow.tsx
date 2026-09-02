@@ -1,7 +1,9 @@
+import { ArrowRightIcon } from '@phosphor-icons/react/dist/ssr/ArrowRight';
+
 type ActionArrowProps = {
   className?: string;
 };
 
 export function ActionArrow({ className = '' }: ActionArrowProps) {
-  return <span className={`action-arrow${className ? ` ${className}` : ''}`} aria-hidden="true" />;
+  return <ArrowRightIcon className={`action-arrow${className ? ` ${className}` : ''}`} size={18} weight="regular" aria-hidden="true" />;
 }

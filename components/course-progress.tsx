@@ -50,6 +50,8 @@ export function LessonCompletion({ courseSlug, lessonId, lessonCount }: LessonCo
   }, [courseSlug]);
 
   const done = completed.includes(lessonId);
+  const validCompleted = completed.filter((id) => id >= 1 && id <= lessonCount);
+  const progress = Math.round((validCompleted.length / lessonCount) * 100);
   const toggle = () => {
     const next = done ? completed.filter((id) => id !== lessonId) : [...completed, lessonId].sort((a, b) => a - b);
     setCompleted(next);
@@ -61,7 +63,8 @@ export function LessonCompletion({ courseSlug, lessonId, lessonCount }: LessonCo
       <button type="button" className={done ? 'done' : ''} onClick={toggle} aria-pressed={done}>
         {done ? '✓ 已完成本课' : '标记本课完成'}
       </button>
-      <span>{completed.filter((id) => id >= 1 && id <= lessonCount).length} / {lessonCount} 课完成</span>
+      <span>{validCompleted.length} / {lessonCount} 课完成</span>
+      <i className="lesson-completion-track" aria-hidden="true"><span style={{ width: `${progress}%` }} /></i>
     </div>
   );
 }
