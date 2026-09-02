@@ -1,14 +1,7 @@
 import type { Metadata } from 'next';
 import { SiteFooter } from '@/components/site-footer';
 import { SiteHeader } from '@/components/site-header';
-import './globals.css';
-import './editorial-system.css';
-import './interface-policies-v5.css';
-import './interface-policies-v6.css';
-import './brand-lockup-v9.css';
-import './knowledge-article-v1.css';
-import './course-learning-v1.css';
-import './professional-library-v1.css';
+import './site-design-v2.css';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://caizhidao.yrchr.com'),

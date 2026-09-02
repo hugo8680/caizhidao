@@ -61,7 +61,7 @@ function Field({ id, label, suffix }: { id: string; label: string; suffix?: stri
 }
 
 function CardTitle({ id }: { id: string }) {
-  return <header className="tool-card-title"><span>{String(toolCatalog.findIndex((item) => item.id === id) + 1).padStart(2, '0')}</span><div><small>{cards[id].category}</small><h2>{cards[id].title}</h2><p>{cards[id].description}</p></div></header>;
+  return <header className="tool-card-title"><span>{String(toolCatalog.findIndex((item) => item.id === id) + 1).padStart(2, '0')}</span><div><small>{cards[id].category}</small><h1>{cards[id].title}</h1><p>{cards[id].description}</p></div></header>;
 }
 
 export function FinanceTools({ toolId }: { toolId: string }) {

@@ -11,6 +11,10 @@ export const metadata: Metadata = {
 export default function KnowledgePage() {
   return (
     <main className={styles.page}>
+      <header className={styles.indexHeader}>
+        <div><p>百科词条</p><h1>财经知识库</h1></div>
+        <p>收录 {knowledgeTerms.length} 个财经、金融与经济学概念，按学科分类查阅定义、机制、公式、案例与参考资料。</p>
+      </header>
       <div className={styles.layout}>
         <aside>
           <p>主题分类</p>

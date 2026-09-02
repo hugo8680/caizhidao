@@ -73,7 +73,9 @@ export function SiteHeader() {
   const subnavRef = useRef<HTMLElement>(null);
   const activeItemRef = useRef<HTMLAnchorElement>(null);
   const toolMenuRef = useRef<HTMLDivElement>(null);
+  const siteChromeRef = useRef<HTMLDivElement>(null);
   const [toolMenuOpen, setToolMenuOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const nav = subnavRef.current;
@@ -85,10 +87,14 @@ export function SiteHeader() {
   useEffect(() => {
     function closeFromOutside(event: PointerEvent) {
       if (!toolMenuRef.current?.contains(event.target as Node)) setToolMenuOpen(false);
+      if (!siteChromeRef.current?.contains(event.target as Node)) setMobileMenuOpen(false);
     }
 
     function closeFromKeyboard(event: KeyboardEvent) {
-      if (event.key === 'Escape') setToolMenuOpen(false);
+      if (event.key === 'Escape') {
+        setToolMenuOpen(false);
+        setMobileMenuOpen(false);
+      }
     }
 
     document.addEventListener('pointerdown', closeFromOutside);
@@ -100,7 +106,7 @@ export function SiteHeader() {
   }, []);
 
   return (
-    <div className={`site-chrome${isHome || isSearch ? ' compact' : ''}${activeGroup ? ` group-${activeGroup.key}` : ''}`}>
+    <div ref={siteChromeRef} className={`site-chrome${isHome || isSearch ? ' compact' : ''}${activeGroup ? ` group-${activeGroup.key}` : ''}${mobileMenuOpen ? ' mobile-open' : ''}`}>
       <header className="platform-header">
         <a className={`platform-brand${isHome ? ' active' : ''}`} href="/" aria-label="财知道首页" aria-current={isHome ? 'page' : undefined}>
           <span className="brand-desktop-lockup" aria-hidden="true">
@@ -114,7 +120,7 @@ export function SiteHeader() {
           <span className="brand-mobile-mark" aria-hidden="true" />
         </a>
 
-        <nav className="primary-nav" aria-label="主要分区">
+        <nav className={`primary-nav${mobileMenuOpen ? ' open' : ''}`} id="primary-site-navigation" aria-label="主要分区">
           {navGroups.map((group) => {
             const active = group.key === activeGroup?.key;
             if (group.key === 'practice') {
@@ -159,6 +165,16 @@ export function SiteHeader() {
         <div className="header-actions">
           <a className={`start-entry${pathname === beginnerHref ? ' active' : ''}`} href={beginnerHref}><span>从零开始</span><ActionArrow /></a>
           <GlobalSearch active={isSearch} />
+          <button
+            className="mobile-nav-toggle"
+            type="button"
+            aria-label={mobileMenuOpen ? '关闭导航' : '打开导航'}
+            aria-controls="primary-site-navigation"
+            aria-expanded={mobileMenuOpen}
+            onClick={() => setMobileMenuOpen((open) => !open)}
+          >
+            <i /><i /><i />
+          </button>
         </div>
       </header>
 

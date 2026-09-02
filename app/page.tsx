@@ -1,5 +1,6 @@
 import { ActionArrow } from '@/components/action-arrow';
 import { knowledgeTerms } from '@/lib/content';
+import { courses } from '@/lib/courses';
 import { disciplines, learningRoutes, popularQuestions } from '@/lib/system';
 
 const resourceLayers = [
@@ -14,35 +15,54 @@ export default function Home() {
   return (
     <main className="library-home">
       <section className="library-home-intro">
-        <p>财经 · 金融 · 经济学</p>
-        <h1>财知道</h1>
-        <h2>专业、系统的财经知识库</h2>
-        <p className="library-home-summary">从经济学原理、金融市场和公司财务，到个人理财、会计与投资分析，准确解释概念、机制、公式及其现实边界。</p>
+        <div>
+          <p>财经 · 金融 · 经济学知识库</p>
+          <h1>财经、金融与经济学</h1>
+          <p className="library-home-summary">系统介绍经济学原理、金融市场、公司财务、会计、个人财务与投资分析。每篇内容说明定义、机制、公式、案例、证据和适用边界。</p>
+        </div>
         <div className="library-home-actions">
-          <a href="/search/"><span>搜索知识</span><ActionArrow /></a>
-          <a href="/courses/start/"><span>新手入门</span><ActionArrow /></a>
+          <a href="/courses/start/"><span>从零开始学习</span><ActionArrow /></a>
+          <a href="/search/"><span>搜索全部内容</span><ActionArrow /></a>
         </div>
       </section>
 
-      <section className="library-home-section">
-        <header className="library-section-heading">
-          <div><p>学科索引</p><h2>经济、金融与商业知识体系</h2></div>
-          <a href="/atlas/"><span>完整知识地图</span><ActionArrow /></a>
-        </header>
-        <div className="library-discipline-directory">
-          {disciplines.map((discipline) => (
-            <a href={`/atlas/${discipline.slug}/`} key={discipline.slug}>
-              <span>{discipline.no}</span>
-              <div><h3>{discipline.name}</h3><small>{discipline.en}</small><p>{discipline.question}</p></div>
-              <ActionArrow />
-            </a>
-          ))}
-        </div>
-      </section>
+      <div className="library-home-opening">
+        <section className="library-home-section library-start-section">
+          <header className="library-section-heading">
+            <div><p>学习入口</p><h2>从零开始</h2></div>
+            <a href="/courses/start/"><span>完整入门路径</span><ActionArrow /></a>
+          </header>
+          <div className="library-start-directory">
+            {courses.map((course, index) => (
+              <a href={`/courses/${course.slug}/`} key={course.slug}>
+                <span>{String(index + 1).padStart(2, '0')}</span>
+                <div><h3>{course.title}</h3><small>{course.en}</small><p>{course.lessons.length} 课 · {course.category}</p></div>
+                <ActionArrow />
+              </a>
+            ))}
+          </div>
+        </section>
+
+        <section className="library-home-section library-discipline-section">
+          <header className="library-section-heading">
+            <div><p>查阅入口</p><h2>按学科查阅</h2></div>
+            <a href="/atlas/"><span>完整知识地图</span><ActionArrow /></a>
+          </header>
+          <div className="library-discipline-directory">
+            {disciplines.map((discipline) => (
+              <a href={`/atlas/${discipline.slug}/`} key={discipline.slug}>
+                <span>{discipline.no}</span>
+                <div><h3>{discipline.name}</h3><small>{discipline.en}</small></div>
+                <ActionArrow />
+              </a>
+            ))}
+          </div>
+        </section>
+      </div>
 
       <div className="library-home-split">
         <section className="library-home-section">
-          <header className="library-section-heading"><div><p>问题索引</p><h2>常见财经问题</h2></div></header>
+          <header className="library-section-heading"><div><p>问题索引</p><h2>从现实问题进入</h2></div></header>
           <div className="library-question-directory">
             {popularQuestions.map((item, index) => (
               <a href={item.href} key={item.question}>
@@ -55,7 +75,7 @@ export default function Home() {
         </section>
 
         <section className="library-home-section">
-          <header className="library-section-heading"><div><p>专题文章</p><h2>围绕问题系统阅读</h2></div><a href="/topics/"><span>全部专题</span><ActionArrow /></a></header>
+          <header className="library-section-heading"><div><p>专题文章</p><h2>专题阅读</h2></div><a href="/topics/"><span>全部专题</span><ActionArrow /></a></header>
           <div className="library-topic-directory">
             {learningRoutes.map((route) => (
               <a href={`/topics/${route.slug}/`} key={route.slug}>
@@ -69,7 +89,7 @@ export default function Home() {
       </div>
 
       <section className="library-home-section">
-        <header className="library-section-heading"><div><p>主要内容</p><h2>课程、工具与参考资料</h2></div></header>
+        <header className="library-section-heading"><div><p>资料与实践</p><h2>课程、工具、图书与视频</h2></div></header>
         <div className="library-resource-directory">
           {resourceLayers.map((layer) => (
             <a href={layer.href} key={layer.no}>
